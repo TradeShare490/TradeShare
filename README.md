@@ -1,9 +1,8 @@
 # tradeshare
 
-## Project setup
-```
-npm install
-```
+## Install dependencies
+
+`npm ci` | Only run `npm install` if `npm ci` fails to run because it will re-initialize the `package-lock.json`
 
 ### Compiles and hot-reloads for development
 ```
@@ -22,3 +21,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
