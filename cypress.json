@@ -1,0 +1,8 @@
+{
+	"baseUrl": "http://localhost:8081",
+	"video": false,
+	"component": {
+		"componentFolder": "src",
+		"testFiles": "**/*.spec.js"
+	}
+}
