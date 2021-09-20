@@ -4,12 +4,14 @@
 	"private": true,
 	"scripts": {
 		"serve": "vue-cli-service serve",
+		"start-ci":"vue-cli-service serve --port 8081",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint",
-		"cy:ci-open": "cypress open",
-		"test-ci": "cypress run",
-		"cy:ct": "cypress open-ct",
-		"test-component": "cypress run-ct"
+		"cy:open": "cypress open",
+		"cy:run": "cypress run",
+		"cy:open-ct": "cypress open-ct",
+		"cy:run-ct": "cypress run-ct",
+		"test":"start-server-and-test start-ci http://localhost:8081 cy:run"
 	},
 	"dependencies": {
 		"core-js": "^3.6.5",
@@ -27,6 +29,7 @@
 		"cypress": "^8.4.1",
 		"eslint": "^6.7.2",
 		"eslint-plugin-vue": "^7.0.0",
+		"start-server-and-test": "^1.14.0",
 		"webpack-dev-server": "^4.2.1"
 	},
 	"eslintConfig": {
