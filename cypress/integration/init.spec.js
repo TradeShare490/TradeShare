@@ -1,7 +1,7 @@
 describe('Demo test can', () => {
 	it('load homepage', () => {
 		cy.fixture('url').then((jsonFile) => {
-			cy.visit(jsonFile.HOMEPAGE);
+			cy.visit(`${jsonFile.HOMEPAGE}:${process.env.PORT||8081}`);
 		});
 	});
 
