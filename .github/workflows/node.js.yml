@@ -31,4 +31,4 @@ jobs:
     - name: Build
       run: npm run build --if-present
     - name: Run component tests
-      run: npm run test-component
+      run: npm run test-ci

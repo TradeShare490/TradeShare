@@ -1,0 +1,4 @@
+{
+	"HOMEPAGE": "http://localhost:8081",
+	"HOSTED_BACKEND_URL": "https://ancient-waters-32375.herokuapp.com/api/check"
+}
