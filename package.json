@@ -11,7 +11,7 @@
 		"cy:run": "cypress run",
 		"cy:open-ct": "cypress open-ct",
 		"cy:run-ct": "cypress run-ct",
-		"test":"start-server-and-test start-ci http://localhost:8081 cy:run"
+		"test-ci":"start-server-and-test start-ci http://localhost:8081 cy:run"
 	},
 	"dependencies": {
 		"core-js": "^3.6.5",
