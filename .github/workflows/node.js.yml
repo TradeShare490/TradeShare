@@ -5,7 +5,7 @@ name: Front-end Component Test on Pull Request
 
 on:
   push:
-    branches: [ /* ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
