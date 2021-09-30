@@ -23,3 +23,5 @@ pnpm-debug.log*
 *.sw?
 cypress/videos
 cypress/screenshots
+
+package-lock.json

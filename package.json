@@ -4,14 +4,14 @@
 	"private": true,
 	"scripts": {
 		"serve": "vue-cli-service serve",
-		"start-ci":"vue-cli-service serve --port 8081",
+		"start-ci": "vue-cli-service serve --port 8081",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint",
 		"cy:open": "cypress open",
 		"cy:run": "cypress run",
 		"cy:open-ct": "cypress open-ct",
 		"cy:run-ct": "cypress run-ct",
-		"test-ci":"start-server-and-test start-ci http://localhost:8081 cy:run"
+		"test-ci": "start-server-and-test start-ci http://localhost:8081 cy:run"
 	},
 	"dependencies": {
 		"core-js": "^3.6.5",
@@ -19,6 +19,7 @@
 		"vue": "^3.0.0"
 	},
 	"devDependencies": {
+		"@beyonk/google-fonts-webpack-plugin": "^1.7.0",
 		"@cypress/vue": "^3.0.3",
 		"@cypress/webpack-dev-server": "^1.6.0",
 		"@vue/cli-plugin-babel": "~4.5.0",
@@ -26,7 +27,7 @@
 		"@vue/cli-service": "~4.5.0",
 		"@vue/compiler-sfc": "^3.0.0",
 		"babel-eslint": "^10.1.0",
-		"cypress": "^8.4.1",
+		"cypress": "^8.5.0",
 		"eslint": "^6.7.2",
 		"eslint-plugin-vue": "^7.0.0",
 		"start-server-and-test": "^1.14.0",
