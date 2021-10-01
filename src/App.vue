@@ -1,16 +1,19 @@
 <template>
-  <BrokerageSignUp/>
+  <BrokerageSignUp />
+  <Login />
 </template>
 
 <script>
-import BrokerageSignUp from './components/Brokerage/BrokerageSignUp.vue'
+import BrokerageSignUp from "./components/Brokerage/BrokerageSignUp.vue";
+import Login from "./components/Login/Login.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    BrokerageSignUp
-  }
-}
+    BrokerageSignUp,
+    Login,
+  },
+};
 </script>
 
 <style>
@@ -20,7 +23,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
-
 </style>
