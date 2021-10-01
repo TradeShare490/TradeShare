@@ -1,17 +1,20 @@
 <template>
-  <BrokerageSignUp />
-  <Login />
+  <!-- <Brokerage /> --> <!--uncomment to see brokerage page --> 
+  <!-- <Login /> --> <!--uncomment to see login page --> 
+  <SignUp />
 </template>
 
 <script>
-import BrokerageSignUp from "./components/Brokerage/BrokerageSignUp.vue";
-import Login from "./components/Login/Login.vue";
+//import Brokerage from "./pages/BrokerageSignUp/App.vue" //uncomment to see brokerage page
+//import Login from "./pages/Login/App.vue" //uncomment to see login page
+import SignUp from "./pages/SignUp/App.vue"
 
 export default {
   name: "App",
   components: {
-    BrokerageSignUp,
-    Login,
+    //Brokerage, //uncomment to see brokerage page
+    //Login //uncomment to see login page
+    SignUp
   },
 };
 </script>
