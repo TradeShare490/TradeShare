@@ -5,9 +5,7 @@ name: Front-end Component Test on Pull Request
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   build:
