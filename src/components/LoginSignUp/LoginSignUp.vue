@@ -1,5 +1,5 @@
 <template>
-  <div class="login_page_left">
+  <div class="page_left">
     <div class="text">
       <p class="company_name">TradeShare</p>
       <p class="catch_phrase">Catchy description of platform.</p>
@@ -9,10 +9,10 @@
     <div class="color_overlay"></div>
     <img class="image" src="../../assets/Login_SignUp_Picture.jpg" alt="Business Picture"/>
   </div>
-  <div class="login_page_right">
+  <div class="page_right">
       <img class="logo" src="../../assets/TradeShare.png" alt="TradeShare Logo" />
       <div class="form">Form</div>
-      <p>Don't have an account? <a href="">Sign up </a></p>
+      <slot></slot>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 
-.login_page_left {
+.page_left {
   width: 50%;
   height: 100%;
   display: flex;
@@ -73,7 +73,7 @@ export default {
   filter: contrast(175%) grayscale(100%) brightness(80%);
 }
 
-.login_page_right {
+.page_right {
   display: flex;
   flex-direction: column;
   align-items: center;
