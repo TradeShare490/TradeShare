@@ -4,26 +4,43 @@
       <p class="company_name">TradeShare</p>
       <p class="catch_phrase">Catchy description of platform.</p>
       <p class="catch_phrase">Maybe more than.</p>
-      <p class="catch_phrase">One line.</p> 
+      <p class="catch_phrase">One line.</p>
     </div>
     <div class="color_overlay"></div>
-    <img class="image" src="../../assets/Login_SignUp_Picture.jpg" alt="Business Picture"/>
+    <img
+      class="image"
+      src="../../assets/Login_SignUp_Picture.jpg"
+      alt="Business Picture"
+    />
   </div>
   <div class="page_right">
-      <img class="logo" src="../../assets/TradeShare.png" alt="TradeShare Logo" />
-      <div class="form">Form</div>
-      <slot></slot>
+    <img class="logo" src="../../assets/TradeShare.png" alt="TradeShare Logo" />
+    <div>
+      <Login v-if="isLogin" />
+      <SignUp v-else />
+    </div>
   </div>
 </template>
 
 <script>
+import Login from "../../components/Login/Login.vue";
+import SignUp from "../../components/SignUp/SignUp.vue";
+
 export default {
-  name: "Login",
+  name: "App",
+  components: {
+    Login,
+    SignUp,
+  },
+  computed: {
+    isLogin() {
+      return this.$route.name === "Login";
+    },
+  },
 };
 </script>
 
-<style scoped>
-
+<style>
 .page_left {
   width: 50%;
   height: 100%;
@@ -32,7 +49,7 @@ export default {
   overflow: hidden;
 }
 
-.text{
+.text {
   position: absolute;
   padding: 60px;
   z-index: 20;
@@ -77,7 +94,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  float: right;  
+  float: right;
   width: 50%;
   margin: 0;
   position: absolute;
@@ -91,12 +108,5 @@ export default {
   width: auto;
   height: 15vh;
 }
-
-.form {
-  margin: 5% 10%;
-  border: 2px solid;
-  width: 80%;
-  height: 50vh;
-}
-
 </style>
+
