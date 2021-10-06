@@ -1,5 +1,4 @@
 <template>
-<div>
   <div class="brokerage_page">
     <img src="../../assets/TradeShare.png" alt="TradeShare Logo" />
     <p id="brokerage_desc_text">
@@ -11,7 +10,6 @@
       Don’t have a brokerage service? No problem! You can still use TradeShare,
       you’ll just need to manually add your activity
     </p>
-  </div>
   </div>
 </template>
 
