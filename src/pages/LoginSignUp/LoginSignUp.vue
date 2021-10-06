@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="page_left">
     <div class="text">
       <p class="company_name">TradeShare</p>
@@ -20,6 +21,7 @@
       <SignUp v-else />
     </div>
   </div>
+</div>
 </template>
 
 <script>

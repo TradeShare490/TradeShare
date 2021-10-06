@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="brokerage_page">
     <img src="../../assets/TradeShare.png" alt="TradeShare Logo" />
     <p id="brokerage_desc_text">
@@ -11,12 +12,11 @@
       you’ll just need to manually add your activity
     </p>
   </div>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "BrokerageSignUp",
-};
+export default {};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
