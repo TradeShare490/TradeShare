@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import { createRouter, createWebHistory } from 'vue-router'
 import LoginSignUp from '../pages/LoginSignUp/LoginSignUp.vue'
 import BrokerageSignUp from '../pages/BrokerageSignUp/BrokerageSignUp.vue'
 
@@ -30,7 +29,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  // history: createWebHistory(process.env.BASE_URL),
+  mode: 'history',
   routes
 })
 
