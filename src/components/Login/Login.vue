@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <div class="form">Form</div>
     <p>Don't have an account? <router-link to="./signup">Sign up</router-link></p>
-  </div>
+  </v-container>
 </template>
 
 <script>
