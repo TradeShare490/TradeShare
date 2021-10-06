@@ -11,5 +11,8 @@ export default new Vuetify({
         primary: colors.indigo,
       }
     }
+  },
+  icons: {
+    iconfont: 'mdi',
   }
 });

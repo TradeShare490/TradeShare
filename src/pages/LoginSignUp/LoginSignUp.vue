@@ -53,14 +53,14 @@ export default {
 .text {
   position: absolute;
   padding-top: 60px;
-  padding-left: 4vh;
+  padding-left: 1%;
   z-index: 20;
   color: white;
 }
 
 .catch_phrase {
   position: relative;
-  left: 3vh;
+  left: 2vh;
   font-size: 2.5vh;
   font-weight: bold;
 }
