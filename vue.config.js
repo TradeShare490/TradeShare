@@ -2,8 +2,9 @@ const GoogleFontsPlugin = require("@beyonk/google-fonts-webpack-plugin")
 
 // vue.config.js
 module.exports = {
-	publicPath: '/',
+    publicPath: '/',
     devServer: { port: process.env.PORT || 8081 },
+
     configureWebpack: {
         plugins: [
             new GoogleFontsPlugin({
@@ -12,5 +13,9 @@ module.exports = {
                 ]
             })
         ]
-    }
+    },
+
+    transpileDependencies: [
+      'vuetify'
+    ]
 };

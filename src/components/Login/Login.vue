@@ -1,6 +1,8 @@
 <template>
-  <div class="form">Form</div>
-  <p>Don't have an account? <router-link to="signup">Sign up</router-link></p>
+  <div>
+    <div class="form">Form</div>
+    <p>Don't have an account? <router-link to="./signup">Sign up</router-link></p>
+  </div>
 </template>
 
 <script>

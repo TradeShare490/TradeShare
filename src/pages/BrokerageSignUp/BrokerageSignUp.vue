@@ -6,7 +6,7 @@
 import Brokerage from "../../components/Brokerage/BrokerageSignUp.vue"
 
 export default {
-  name: "App",
+  name: "BrokerageSignUp",
   components: {
     Brokerage,
   },
