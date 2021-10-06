@@ -8,8 +8,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: LoginSignUp
+    redirect: '/login'
   },
   {
     path: '/signup',
@@ -25,6 +24,10 @@ const routes = [
     path:'/brokerage-signup',
     name: 'BrokerageSignUp',
     component: BrokerageSignUp
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/'
   }
 ]
 
