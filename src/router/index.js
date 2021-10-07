@@ -2,9 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import LoginSignUp from '../pages/LoginSignUp/LoginSignUp.vue'
 import BrokerageSignUp from '../pages/BrokerageSignUp/BrokerageSignUp.vue'
-import Dashboard from '../pages/Dashboard/Dashboard.vue'
-import Followers from '../pages/Followers/Followers.vue'
-import Following from '../pages/Following/Following.vue'
 
 Vue.use(VueRouter);
 
@@ -24,19 +21,36 @@ const routes = [
     component: LoginSignUp
   },
   {
+    path: '/news-feed',
+    name: 'NewsFeed',
+  },
+  {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
   },
   {
     path: '/following',
     name: 'Following',
-    component: Following
   },
   {
     path: '/followers',
     name: 'Followers',
-    component: Followers
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+  },
+  {
+    path: '/preferences',
+    name: 'Preferences',
+  },
+  {
+    path: '/icons-and-images',
+    name: 'IconsAndImages',
+  },
+  {
+    path: '/support',
+    name: 'Support',
   },
   {
     path:'/brokerage-signup',
