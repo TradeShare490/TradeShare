@@ -14,7 +14,7 @@
 
       <v-text-field
         v-model="password"
-        :value="myPassword"
+        :value="password"
         label="Password"
         color="primary"
         :append-icon="value ? 'visibility_off' : 'visibility'" 
@@ -36,6 +36,7 @@
 export default {
   name: "Login",
   data: () => ({
+    valid: '',
     user_id: '',
     value: String,
     password: '',
