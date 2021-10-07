@@ -10,6 +10,7 @@
         label="Email or Username"
         color="primary"
         :rules="rules_id"
+        @keyup.enter="submit"
       ></v-text-field>
 
       <v-text-field
@@ -21,6 +22,7 @@
         @click:append="() => (value = !value)"
         :type="value ? 'password' : 'text'"
         :rules="rules_pass"
+        @keyup.enter="submit"
       ></v-text-field>
 
       <p left class="text-body-2 text-right"><router-link to="">Forgot Password</router-link></p>
@@ -49,7 +51,9 @@ export default {
   }),
   methods: {
     submit () {
-      console.log(this.user_id, this.password)
+      if(this.$refs.form.validate()) {
+        console.log(this.user_id, this.password)
+      }
     }
   }
 };
