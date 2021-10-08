@@ -6,7 +6,7 @@
           v-model="user_id"
           label="Email or Username"
           color="primary"
-          :rules="[rules.required, rulesUsername.min]"
+          :rules="[rules.required]"
           @keyup.enter="submit"
         ></v-text-field>
 
@@ -18,7 +18,7 @@
           :append-icon="value ? 'visibility_off' : 'visibility'"
           @click:append="() => (value = !value)"
           :type="value ? 'password' : 'text'"
-          :rules="[rules.required, rulesPassword.min]"
+          :rules="[rules.required]"
           @keyup.enter="submit"
         ></v-text-field>
 
@@ -52,12 +52,6 @@
       password: "",
       rules: {
         required: (v) => !!v || "Required",
-      },
-      rulesUsername: {
-        min: (v) => v.length >= 4 || "Min 4 characters",
-      },
-      rulesPassword: {
-        min: (v) => v.length >= 8 || "Min 8 characters",
       },
     }),
     methods: {
