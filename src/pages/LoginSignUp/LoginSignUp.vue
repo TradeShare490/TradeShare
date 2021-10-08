@@ -15,16 +15,16 @@
           alt="Business Picture"
         ></v-img>
       </v-flex>
-      <v-flex>
-        <v-img 
+      <v-flex class="mt-4">
+        <v-img
           class="mx-auto"
           max-width="15vh"
           contain
-          src="../../assets/TradeShare.png" 
+          src="../../assets/TradeShare.png"
           alt="TradeShare Logo">
         </v-img>
-          <Login v-if="isLogin" />
-          <SignUp v-else />
+        <Login v-if="isLogin" />
+        <SignUp v-else />
       </v-flex>
     </v-layout>
   </v-container>
@@ -49,7 +49,6 @@ export default {
 </script>
 
 <style>
-
 .text {
   position: absolute;
   padding-top: 60px;
@@ -68,6 +67,4 @@ export default {
 .img {
   height: 100vh;
 }
-
 </style>
-

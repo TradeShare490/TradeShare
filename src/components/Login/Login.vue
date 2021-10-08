@@ -2,14 +2,14 @@
   <v-container class="pt-16">
     <v-card class="mx-auto" max-width="250" elevation="0">
     <v-form
-      ref="form"
+      ref="formLogin"
       v-model="valid"
     >
       <v-text-field
         v-model="user_id"
         label="Email or Username"
         color="primary"
-        :rules="rules_id"
+        :rules="[rules.required, rulesUsername.min]"
         @keyup.enter="submit"
       ></v-text-field>
 
@@ -21,7 +21,7 @@
         :append-icon="value ? 'visibility_off' : 'visibility'" 
         @click:append="() => (value = !value)"
         :type="value ? 'password' : 'text'"
-        :rules="rules_pass"
+        :rules="[rules.required, rulesPassword.min]"
         @keyup.enter="submit"
       ></v-text-field>
 
@@ -42,16 +42,19 @@ export default {
     user_id: '',
     value: String,
     password: '',
-    rules_id: [
-      v => !!v || 'Email or username is required',
-    ],
-    rules_pass: [
-      v => !!v || 'Password is required',
-    ],
+    rules: {
+      required: v => !!v || 'Required',
+    },
+    rulesUsername: {
+      min: v => v.length >= 4 || 'Min 4 characters'
+    },
+    rulesPassword: {
+      min: v => v.length >= 8 || 'Min 8 characters',
+    }
   }),
   methods: {
     submit () {
-      if(this.$refs.form.validate()) {
+      if(this.$refs.formLogin.validate()) {
         console.log(this.user_id, this.password)
       }
     }
