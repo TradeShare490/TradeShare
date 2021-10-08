@@ -21,6 +21,38 @@ const routes = [
     component: LoginSignUp
   },
   {
+    path: '/news-feed',
+    name: 'NewsFeed',
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+  },
+  {
+    path: '/following',
+    name: 'Following',
+  },
+  {
+    path: '/followers',
+    name: 'Followers',
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+  },
+  {
+    path: '/preferences',
+    name: 'Preferences',
+  },
+  {
+    path: '/icons-and-images',
+    name: 'IconsAndImages',
+  },
+  {
+    path: '/support',
+    name: 'Support',
+  },
+  {
     path:'/brokerage-signup',
     name: 'BrokerageSignUp',
     component: BrokerageSignUp
