@@ -12,13 +12,18 @@ import SideMenu from "./components/SideMenu/SideMenu.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      noSideMenu: ["Login", "SignUp", "BrokerageSignUp"],
+    };
+  },
   components: {
     SideMenu,
   },
   computed: {
     loggedIn() {
       //temporary solution
-      return !(this.$route.name === "Login" || this.$route.name === "SignUp");
+      return !this.noSideMenu.includes(this.$route.name);
     },
   },
 };
