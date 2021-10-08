@@ -21,7 +21,8 @@
           max-width="15vh"
           contain
           src="../../assets/TradeShare.png"
-          alt="TradeShare Logo">
+          alt="TradeShare Logo"
+        >
         </v-img>
         <Login v-if="isLogin" />
         <SignUp v-else />
@@ -31,40 +32,40 @@
 </template>
 
 <script>
-import Login from "../../components/Login/Login.vue";
-import SignUp from "../../components/SignUp/SignUp.vue";
+  import Login from "../../components/Login/Login.vue";
+  import SignUp from "../../components/SignUp/SignUp.vue";
 
-export default {
-  name: "App",
-  components: {
-    Login,
-    SignUp,
-  },
-  computed: {
-    isLogin() {
-      return this.$route.name === "Login";
+  export default {
+    name: "App",
+    components: {
+      Login,
+      SignUp,
     },
-  },
-};
+    computed: {
+      isLogin() {
+        return this.$route.name === "Login";
+      },
+    },
+  };
 </script>
 
 <style>
-.text {
-  position: absolute;
-  padding-top: 60px;
-  padding-left: 1%;
-  z-index: 20;
-  color: white;
-}
+  .text {
+    position: absolute;
+    padding-top: 60px;
+    padding-left: 1%;
+    z-index: 20;
+    color: white;
+  }
 
-.catch_phrase {
-  position: relative;
-  left: 2vh;
-  font-size: 2.5vh;
-  font-weight: bold;
-}
+  .catch_phrase {
+    position: relative;
+    left: 2vh;
+    font-size: 2.5vh;
+    font-weight: bold;
+  }
 
-.img {
-  height: 100vh;
-}
+  .img {
+    height: 100vh;
+  }
 </style>
