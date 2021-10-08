@@ -6,47 +6,51 @@
           <v-list-item-avatar class="avatar" size="40%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
           </v-list-item-avatar>
-          <v-list-item-title class="text-h8"> {{ name }} </v-list-item-title>
-          <v-list-item-subtitle>{{ since }}</v-list-item-subtitle>
+          <v-list-item-title class="mt-3"> {{ name }} </v-list-item-title>
+          <v-list-item-subtitle class="text-caption grey--text">{{ since }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
-      <v-divider></v-divider>
+      <v-divider class="my-3"></v-divider>
 
       <v-list dense nav>
-        <v-list-item
-          v-for="item in upperNav"
-          :key="item.title"
-          :to="item.route"
-          active-class="active"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+        <v-list-item-group v-model="selectedItem" color="primary">
+          <v-list-item
+            v-for="item in upperNav"
+            :key="item.title"
+            :to="item.route"
+            active-class="active"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
 
-      <v-divider></v-divider>
+      <v-divider class="my-3"></v-divider>
 
       <v-list dense nav>
-        <v-list-item
-          v-for="item in lowerNav"
-          :key="item.title"
-          :to="item.route"
-          active-class="active"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+        <v-list-item-group v-model="selectedItem" color="primary">
+          <v-list-item
+            v-for="item in lowerNav"
+            :key="item.title"
+            :to="item.route"
+            active-class="active"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
   </v-container>
@@ -108,7 +112,6 @@ export default {
   flex-direction: column;
 }
 .active {
-  border-left-color: blue;
   border-width: 0px;
   border-left-width: 3px;
   border-style: solid;
