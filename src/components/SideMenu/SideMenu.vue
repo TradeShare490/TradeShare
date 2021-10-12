@@ -60,6 +60,7 @@
   export default {
     data() {
       return {
+        selectedItem: '',
         upperNav: [
           {
             title: "Home",
