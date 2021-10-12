@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-navigation-drawer app permanent>
-      <v-list-item>
+    <v-navigation-drawer app permanent :mini-variant="mini">
+      <v-list-item class="hidden-sm-and-down">
         <v-list-item-content>
           <v-list-item-avatar class="avatar" size="40%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
@@ -11,7 +11,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-divider class="my-3"></v-divider>
+      <v-divider class="my-3 hidden-sm-and-down"></v-divider>
 
       <v-list dense nav>
         <v-list-item-group v-model="selectedItem" color="primary">
@@ -57,63 +57,68 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      upperNav: [
-        {
-          title: "Home",
-          icon: "mdi-home",
-          route: "/news-feed",
-        },
-        {
-          title: "Dashboard",
-          icon: "mdi-view-dashboard",
-          route: "/dashboard",
-        },
-        {
-          title: "Followers",
-          icon: "mdi-account-multiple-outline",
-          route: "/followers",
-        },
-        {
-          title: "Following",
-          icon: "mdi-account-supervisor-circle-outline ",
-          route: "/following",
-        },
-        { title: "Messages", icon: "mdi-forum", route: "/messages" },
-        {
-          title: "Preferences",
-          icon: "mdi-lock-open-outline ",
-          route: "/preferences",
-        },
-        {
-          title: "Icons & Images",
-          icon: "mdi-image-outline ",
-          route: "/icons-and-images",
-        },
-      ],
-      lowerNav: [
-        {
-          title: "Support",
-          icon: "mdi-help-circle-outline",
-          route: "/support",
-        },
-      ],
-      name: "Roman Kutepov",
-      since: "Member since 2021",
-    };
-  },
-};
+  export default {
+    data() {
+      return {
+        upperNav: [
+          {
+            title: "Home",
+            icon: "mdi-home",
+            route: "/news-feed",
+          },
+          {
+            title: "Dashboard",
+            icon: "mdi-view-dashboard",
+            route: "/dashboard",
+          },
+          {
+            title: "Followers",
+            icon: "mdi-account-multiple-outline",
+            route: "/followers",
+          },
+          {
+            title: "Following",
+            icon: "mdi-account-supervisor-circle-outline ",
+            route: "/following",
+          },
+          { title: "Messages", icon: "mdi-forum", route: "/messages" },
+          {
+            title: "Preferences",
+            icon: "mdi-lock-open-outline ",
+            route: "/preferences",
+          },
+          {
+            title: "Icons & Images",
+            icon: "mdi-image-outline ",
+            route: "/icons-and-images",
+          },
+        ],
+        lowerNav: [
+          {
+            title: "Support",
+            icon: "mdi-help-circle-outline",
+            route: "/support",
+          },
+        ],
+        name: "Roman Kutepov",
+        since: "Member since 2021",
+      };
+    },
+    computed: {
+      mini() {
+        return this.$vuetify.breakpoint.smAndDown;
+      }
+    },
+  };
 </script>
 
 <style>
-.avatar {
-  flex-direction: column;
-}
-.active {
-  border-width: 0px;
-  border-left-width: 3px;
-  border-style: solid;
-}
+  .avatar {
+    flex-direction: column;
+  }
+  .active {
+    border-width: 0px;
+    border-left-width: 3px;
+    border-style: solid;
+  }
 </style>
