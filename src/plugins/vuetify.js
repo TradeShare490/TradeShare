@@ -9,6 +9,11 @@ export default new Vuetify({
     themes: {
       light: {
         primary: colors.indigo,
+        untagged: "#5E4D79",
+        friend: "#00A99F",
+        work: "#C4C825",
+        purchased: "#008D49",
+        sold: "#BF0E08",
       },
     },
   },
