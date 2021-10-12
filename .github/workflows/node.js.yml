@@ -1,11 +1,10 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Front-end Component Test on Pull Request
+name: Front-end Test on Push
 
 on:
   push:
-  pull_request:
 
 jobs:
   build:
@@ -24,9 +23,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Install dependencies 
-      run: npm ci
-    - name: Build
-      run: npm run build --if-present
-    - name: Run component tests
-      run: npm run test-ci
+    
+    - name: Cypress run
+        uses: cypress-io/github-action@v2
+        env: CI=""
+        with:
+          build: npm run build
+          start: npm run serve
