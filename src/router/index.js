@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import LoginSignUp from '../pages/LoginSignUp/LoginSignUp.vue'
 import BrokerageSignUp from '../pages/BrokerageSignUp/BrokerageSignUp.vue'
+import Dashboard from "../pages/Dashboard/Dashboard.vue"
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,7 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
+    component: Dashboard
   },
   {
     path: '/following',
