@@ -75,7 +75,7 @@
         search: null,
         select: null,
         isLoading: false,
-        values: null,
+        values: [],
         items: ["Friend", "Family", "Work", "Expert", "Untagged"],
         users: [],
         listUsers: [
