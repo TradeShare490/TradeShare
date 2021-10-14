@@ -22,6 +22,7 @@
           small-chips
           label="Select label"
           solo
+          multiple
           return-object
         ></v-autocomplete>
       </v-col>
