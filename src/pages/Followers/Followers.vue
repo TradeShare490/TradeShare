@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SearchViewBy />
     <UserBlock
       :currentlyFollowing="true"
       currentLabelColor="friend"
@@ -19,11 +20,13 @@
 
 <script>
   import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
+  import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
 
   export default {
     name: "Followers",
     components: {
       UserBlock,
+      SearchViewBy
     },
   };
 </script>

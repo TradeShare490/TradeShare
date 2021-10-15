@@ -1,10 +1,10 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import LoginSignUp from "../pages/LoginSignUp/LoginSignUp.vue";
-import BrokerageSignUp from "../pages/BrokerageSignUp/BrokerageSignUp.vue";
-import Dashboard from "../pages/Dashboard/Dashboard.vue";
-import Following from "../pages/Following/Following.vue";
-import Followers from "../pages/Followers/Followers.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import LoginSignUp from '../pages/LoginSignUp/LoginSignUp.vue'
+import BrokerageSignUp from '../pages/BrokerageSignUp/BrokerageSignUp.vue'
+import Dashboard from "../pages/Dashboard/Dashboard.vue"
+import Followers from "../pages/Followers/Followers.vue"
+import Following from "../pages/Following/Following.vue"
 
 Vue.use(VueRouter);
 
@@ -33,13 +33,13 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/following",
-    name: "Following",
+    path: '/following',
+    name: 'Following',
     component: Following,
   },
   {
-    path: "/followers",
-    name: "Followers",
+    path: '/followers',
+    name: 'Followers',
     component: Followers,
   },
   {
