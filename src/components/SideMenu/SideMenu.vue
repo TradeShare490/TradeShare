@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-navigation-drawer app permanent :mini-variant="mini">
+    <v-navigation-drawer app clipped permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down">
         <v-list-item-content>
           <v-list-item-avatar class="avatar" size="40%">
