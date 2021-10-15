@@ -19,7 +19,7 @@
             </v-col>
             
             <v-col>
-                {{name}} has now followed you
+                {{message}}
             </v-col>
             
             <v-col>
