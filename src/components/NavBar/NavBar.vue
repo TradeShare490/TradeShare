@@ -6,7 +6,7 @@
       app
       clipped-left
     >
-      <v-toolbar-title>Place Logo Here</v-toolbar-title>
+      <v-toolbar-title>Logo Here</v-toolbar-title>
 
       <v-spacer></v-spacer>
       
