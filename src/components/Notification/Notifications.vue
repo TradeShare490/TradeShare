@@ -12,7 +12,7 @@
         <v-row align='center'>
             <v-col>
                 <v-img 
-                 src="{{profilePic}}"
+                 src="../assets/TradeShare.png"
                  max-height="100"
                  max-width="100">  
                 </v-img>    
@@ -25,7 +25,7 @@
             <v-col>
                 <v-btn color="blue" @click="follow()">Follow Back</v-btn>
             </v-col>
-        <v-row>
+        </v-row>
 
     </v-alert>
 </template>
