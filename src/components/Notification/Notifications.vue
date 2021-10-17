@@ -29,3 +29,31 @@
 
     </v-alert>
 </template>
+
+<script>
+export default {
+    name: "UserBlock",
+    props: {
+      currentlyFollowing: Boolean,
+      currentLabelText: String,
+      currentLabelColor: String,
+      name: String,
+      image: String,
+    },
+    data() {
+      return {
+        following: this.currentlyFollowing,
+        labelText: this.currentLabelText,
+        labelColor: this.currentLabelColor,
+      };
+    },
+    methods: {
+      follow() {
+        this.following = true;
+        this.labelText = "untagged";
+        this.labelColor = "untagged";
+        console.log("following...");
+      }
+}
+}
+</script>

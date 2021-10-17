@@ -9,18 +9,24 @@
     ><v-col>
       <PortfolioAnalyticsTemplate title="Goal Progress" value="75%" progress="75" color="blue" icon="mdi-progress-clock"/>
     </v-col>
+    <v-col>
+      <follow></follow>
+    </v-col>
   </v-row>
 </template>
 
 <script>
 // import Profile from "../../components/Dashboard/Profile.vue"
+// Adding follow function to script
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
+import follow from "../../components/Notification/Notifications.vue";
 
 export default {
   name: "Dashboard",
   components: {
     // Profile,
     PortfolioAnalyticsTemplate,
+    follow
   },
 };
 </script>
