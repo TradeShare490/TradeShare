@@ -9,7 +9,16 @@
     transition="fade-transition"
     icon=false>
         <v-row align='center'>
-            <v-col>
+            <v-col
+             align-self="center"
+             class="px-0 py-5"
+             cols="2"
+             sm="2"
+             md="1"
+             lg="1"
+             xl="1"
+      >
+              
               <v-avatar class="profile" size="50">
                 <v-img 
                  :src="image"
@@ -17,15 +26,14 @@
                  max-width="75">  
                 </v-img> 
               </v-avatar>
-   
             </v-col>
             
             <v-col>
                 {{this.message}}
             </v-col>
             
-            <v-col>
-                <v-btn idth="250" height="45" color="primary" @click="follow()">Follow Back</v-btn>
+            <v-col sm="3" md="2" lg="2" xl="2" align-self="center">
+                <v-btn width="250" height="45" color="primary" @click="follow()">Follow Back</v-btn>
             </v-col>
         </v-row>
 

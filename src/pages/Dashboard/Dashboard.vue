@@ -16,7 +16,6 @@
       currentLabelText="friend"
       image="https://randomuser.me/api/portraits/men/52.jpg"
       message="John Molson has followed you :)"
-      icon="../assets/exclamationPoint.jpg"
       >
 
       </FollowNotif>
