@@ -6,30 +6,40 @@
       app
       clipped-left
     >
-      <v-toolbar-title>Logo Here</v-toolbar-title>
+    <v-row>
+      <v-col>
+        <v-img
+          src="../../assets/TS_Full_Logo_White.png"
+          alt="TradeShare Logo"
+          contain
+          height="60px"
+          position="left"
+        ></v-img>
+      </v-col>
+      <v-col class="d-flex justify-space-around">
+        <v-autocomplete
+          label="Search"
+          append-icon="mdi-magnify"
+          class="shrink pt-2"
+          rounded
+          solo
+          dense
+          light
+          hide-details
+          hide-no-data
+        >
+        </v-autocomplete>
+      </v-col>
+      <v-col class="d-flex justify-end">
+        <v-btn icon class="mt-1">
+          <v-icon>mdi-bell</v-icon>
+        </v-btn>
 
-      <v-spacer></v-spacer>
-      
-      <v-text-field
-        label="Search"
-        append-icon="mdi-magnify"
-        class="shrink"
-        rounded
-        solo
-        light
-      >
-      </v-text-field>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-logout</v-icon>
-      </v-btn>
-      
+        <v-btn icon href="/" class="mt-1">
+         <v-icon>mdi-logout</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
     </v-app-bar>
   </div>
 </template>
@@ -40,10 +50,3 @@ export default {
     data: () => ({}),
 };
 </script>
-
-<style>
-  .v-text-field {
-    align-items: center !important;
-    padding-top: 25px !important;
-  }
-</style>
