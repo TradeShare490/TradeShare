@@ -1,21 +1,23 @@
 <template>
     <v-alert 
-    prominent
+    type="info"
     dismissible
-    v-model="alert"
-    color="cyan"
+    color="primary"
     border="left"
     elevation="2"
     colored-border
     transition="fade-transition"
-    icon="../assets/TradeShare.png"> <!-- Eventually here we're going to have to find a way to make it so that the icon is the users profile pic -->
+    icon=false>
         <v-row align='center'>
             <v-col>
+              <v-avatar class="profile" size="50">
                 <v-img 
                  :src="image"
-                 max-height="100"
-                 max-width="100">  
-                </v-img>    
+                 max-height="75"
+                 max-width="75">  
+                </v-img> 
+              </v-avatar>
+   
             </v-col>
             
             <v-col>
@@ -23,7 +25,7 @@
             </v-col>
             
             <v-col>
-                <v-btn color="blue" @click="follow()">Follow Back</v-btn>
+                <v-btn idth="250" height="45" color="primary" @click="follow()">Follow Back</v-btn>
             </v-col>
         </v-row>
 
@@ -38,7 +40,8 @@ export default {
       currentLabelText: String,
       currentLabelColor: String,
       image: String,
-      message: String
+      message: String,
+      icon: String
     },
     data() {
       return {
