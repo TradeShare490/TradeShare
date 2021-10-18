@@ -22,7 +22,7 @@ export default {
   name: "Dashboard",
   components: {
     // Profile,
-    PortfolioAnalyticsTemplate,
+    PortfolioAnalyticsTemplate
   },
 };
 </script>
