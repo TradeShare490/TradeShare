@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    name: "UserBlock",
+    name: "FollowNotif",
     props: {
       currentlyFollowing: Boolean,
       currentLabelText: String,
@@ -53,7 +53,7 @@ export default {
         this.labelText = "untagged";
         this.labelColor = "untagged";
         console.log("following...");
-      }
-}
-}
+      },
+    },
+  } 
 </script>
