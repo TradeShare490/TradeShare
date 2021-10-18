@@ -18,7 +18,6 @@
              lg="1"
              xl="1"
       >
-              
               <v-avatar class="profile" size="50">
                 <v-img 
                  :src="image"
