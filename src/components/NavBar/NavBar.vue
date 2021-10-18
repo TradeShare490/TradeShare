@@ -50,3 +50,7 @@ export default {
     data: () => ({}),
 };
 </script>
+
+<style lang="scss">
+  @import "~../../scss/variables.scss";
+</style>
