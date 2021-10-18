@@ -5,6 +5,7 @@ import BrokerageSignUp from '../pages/BrokerageSignUp/BrokerageSignUp.vue'
 import Dashboard from "../pages/Dashboard/Dashboard.vue"
 import Followers from "../pages/Followers/Followers.vue"
 import Following from "../pages/Following/Following.vue"
+import NewsFeed from "../pages/NewsFeed/NewsFeed.vue"
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,7 @@ const routes = [
   {
     path: "/news-feed",
     name: "NewsFeed",
+    component: NewsFeed,
   },
   {
     path: "/dashboard",

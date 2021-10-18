@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <v-navigation-drawer app permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down">
         <v-list-item-content>
