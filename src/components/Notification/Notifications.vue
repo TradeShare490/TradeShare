@@ -8,18 +8,18 @@
     elevation="2"
     colored-border
     transition="fade-transition"
-    icon="../assets/logo.png"> <!-- Eventually here we're going to have to find a way to make it so that the icon is the users profile pic -->
+    icon="../assets/TradeShare.png"> <!-- Eventually here we're going to have to find a way to make it so that the icon is the users profile pic -->
         <v-row align='center'>
             <v-col>
                 <v-img 
-                 src="../assets/TradeShare.png"
+                 :src="image"
                  max-height="100"
                  max-width="100">  
                 </v-img>    
             </v-col>
             
             <v-col>
-                {{message}}
+                {{this.message}}
             </v-col>
             
             <v-col>
@@ -37,8 +37,8 @@ export default {
       currentlyFollowing: Boolean,
       currentLabelText: String,
       currentLabelColor: String,
-      name: String,
       image: String,
+      message: String
     },
     data() {
       return {

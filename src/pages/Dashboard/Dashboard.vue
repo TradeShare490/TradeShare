@@ -10,7 +10,15 @@
       <PortfolioAnalyticsTemplate title="Goal Progress" value="75%" progress="75" color="blue" icon="mdi-progress-clock"/>
     </v-col>
     <v-col>
-      <follow><follow>
+      <FollowNotif
+      :currentlyFollowing="false"
+      currentLabelColor="friend"
+      currentLabelText="friend"
+      image="https://randomuser.me/api/portraits/men/52.jpg"
+      message="John Molson has followed you :)"
+      >
+
+      </FollowNotif>
     </v-col>
   </v-row>
 </template>
