@@ -10,7 +10,7 @@
         lg="1"
         xl="1"
       >
-        <v-icon large color="blue">
+        <v-icon large color="primary">
           mdi-exclamation
         </v-icon>
         <v-avatar class="profile" size="50">
