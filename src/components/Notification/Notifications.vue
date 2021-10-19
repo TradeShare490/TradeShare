@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="0" class="px-10">
+  <v-card class="px-10">
     <v-row no-gutters>
       <v-col
         align-self="center"
