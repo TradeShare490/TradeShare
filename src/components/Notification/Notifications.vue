@@ -1,32 +1,47 @@
 <template>
-  <v-card class="px-10">
+  <v-card elevation = 0 class="px-10">
     <v-row no-gutters>
-      <v-col
-        align-self="center"
+      <v-col  align-self="left"
         class="px-0 py-5"
-        cols="2"
-        sm="2"
-        md="1"
-        lg="1"
-        xl="1"
-      >
+        cols="auto"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto">
         <v-icon large color="primary">
           mdi-exclamation
         </v-icon>
+      </v-col>
+
+      <v-col
+        align-self="left"
+        class="px-0 py-5"
+        cols="auto"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto"
+      >
         <v-avatar class="profile" size="50">
           <v-img :src="image"></v-img>
         </v-avatar>
       </v-col>
       <v-col
         align-self="center"
-        cols="6"
-        sm="3"
-        md="3"
-        lg="3"
-        xl="3"
+        cols="auto"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto"
         class="text-left mx-0 px-0 mt-3 py-0"
       >
-       {{this.message}}
+              <v-list-item color="black">
+          <v-list-item-content class="py-1">
+            <v-list-item-title
+              class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
+              >{{ message }}</v-list-item-title>
+          </v-list-item-content>
+              </v-list-item>
       </v-col>
       
       <v-spacer></v-spacer>
@@ -49,7 +64,7 @@
           elevation="0"
           color="primary"
           v-if="following == false"
-          @click="follow"
+          @click="follow()"
           class="my-3 caption"
         >
           Follow
@@ -84,6 +99,10 @@ export default {
         this.labelText = "untagged";
         this.labelColor = "untagged";
         console.log("following...");
+      },
+      unfollow(){
+        this.following = false;
+        console.log("unfollowing");
       },
     },
       computed: {
