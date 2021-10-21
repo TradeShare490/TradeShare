@@ -4,6 +4,7 @@
     :items="stocks"
     sort-by="date"
     class="elevation-1"
+    mobile-breakpoint="825"
   >
     <template v-slot:top>
       <v-toolbar flat>
@@ -26,31 +27,31 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.symbol"
+                      v-model="editedStock.symbol"
                       label="Symbol"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.positionSize"
+                      v-model="editedStock.positionSize"
                       label="Position Size"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.date"
+                      v-model="editedStock.date"
                       label="Execution Date"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.profitLoss"
+                      v-model="editedStock.profitLoss"
                       label="P/L"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedItem.verified"
+                      v-model="editedStock.verified"
                       label=""
                     ></v-text-field>
                   </v-col>
@@ -79,7 +80,7 @@
               <v-btn color="blue darken-1" text @click="closeDelete"
                 >Cancel</v-btn
               >
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+              <v-btn color="blue darken-1" text @click="deleteStockConfirm"
                 >OK</v-btn
               >
               <v-spacer></v-spacer>
@@ -90,18 +91,30 @@
     </template>
     <template v-slot:[`item.verified`]="{ item }">
         <v-chip
-            label="Verified"
-            class="text-uppercase white--text px-1"
+            label
+            class="text-uppercase white--text px-3"
             :color="item.verified ? 'green' : 'blue'"
         >{{ item.verified ? "VERIFIED" : "MANUAL" }}</v-chip>  
     </template>
+    <template v-slot:[`item.profitLoss`]="{ item }">
+        <v-card min-width='80' flat>
+          <v-icon x-small left :color="item.profitLoss > 0 ? 'green' : 'red'">
+            mdi-circle
+          </v-icon>
+          {{ getDisplayNumber(Number(item.profitLoss)) }}%
+        </v-card>
+    </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
+      <v-icon small class="mr-2" @click="editStock(item)">
         mdi-pencil
       </v-icon>
-      <v-icon small @click="deleteItem(item)">
+      <v-icon small class="mr-2" @click="deleteStock(item)">
         mdi-delete
       </v-icon>
+      <v-icon small @click="shareStock(item)">
+        mdi-share
+      </v-icon>
+      
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">
@@ -132,14 +145,14 @@ export default {
             ],
             stocks: [],
             editedIndex: -1,
-            editedItem: {
+            editedStock: {
                 symbol: '',
                 positionSize: 0,
                 date: new Date(),
                 profitLoss: 0,
                 verified: false,
             },
-            defaultItem: {
+            defaultStock: {
                 symbol: '',
                 positionSize: 0,
                 date: new Date(),
@@ -195,19 +208,19 @@ export default {
             ]
         },
 
-        editItem (item) {
-        this.editedIndex = this.stocks.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        editStock (stock) {
+        this.editedIndex = this.stocks.indexOf(stock)
+        this.editedStock = Object.assign({}, stock)
         this.dialog = true
         },
 
-        deleteItem (item) {
-        this.editedIndex = this.stocks.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        deleteStock (stock) {
+        this.editedIndex = this.stocks.indexOf(stock)
+        this.editedStock = Object.assign({}, stock)
         this.dialogDelete = true
         },
 
-        deleteItemConfirm () {
+        deleteStockConfirm () {
         this.stocks.splice(this.editedIndex, 1)
         this.closeDelete()
         },
@@ -215,7 +228,7 @@ export default {
         close () {
         this.dialog = false
         this.$nextTick(() => {
-            this.editedItem = Object.assign({}, this.defaultItem)
+            this.editedStock = Object.assign({}, this.defaultStock)
             this.editedIndex = -1
         })
         },
@@ -223,19 +236,31 @@ export default {
         closeDelete () {
         this.dialogDelete = false
         this.$nextTick(() => {
-            this.editedItem = Object.assign({}, this.defaultItem)
+            this.editedStock = Object.assign({}, this.defaultStock)
             this.editedIndex = -1
         })
         },
 
         save () {
         if (this.editedIndex > -1) {
-            Object.assign(this.stocks[this.editedIndex], this.editedItem)
+            Object.assign(this.stocks[this.editedIndex], this.editedStock)
         } else {
-            this.stocks.push(this.editedItem)
+            this.stocks.push(this.editedStock)
         }
         this.close()
         },
+
+        getDisplayNumber(number) {
+          if(Math.abs(number) >= 0 && Math.abs(number) < 10) {
+            return number.toFixed(3)
+          } else if(Math.abs(number) >= 10 && Math.abs(number) < 100) {
+            return number.toFixed(2)
+          } else if(Math.abs(number) >= 100 && Math.abs(number) < 1000) {
+            return number.toFixed(1)
+          } else {
+            return number.toFixed(0)
+          }
+        }
     },
 };
 </script>
