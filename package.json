@@ -14,7 +14,7 @@
     "test-ci": "start-server-and-test start-ci http://localhost:8081 cy:run"
   },
   "dependencies": {
-    "chart.js": "^3.6.0",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "eslint-plugin-cypress": "^2.12.1",
     "material-design-icons-iconfont": "^6.1.0",
