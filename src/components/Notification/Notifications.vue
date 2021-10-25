@@ -1,8 +1,8 @@
 <template>
   <v-card elevation = 0 class="px-10">
     <v-row no-gutters>
-      <v-col  align-self="left"
-        class="px-0 py-5"
+      <v-col  align-self="start"
+        class="px-0 py-7"
         cols="auto"
         sm="auto"
         md="auto"
@@ -14,7 +14,7 @@
       </v-col>
 
       <v-col
-        align-self="left"
+        align-self="baseline"
         class="px-0 py-5"
         cols="auto"
         sm="auto"
@@ -29,19 +29,18 @@
       <v-col
         align-self="center"
         cols="auto"
-        sm="auto"
-        md="auto"
-        lg="auto"
-        xl="auto"
-        class="text-left mx-0 px-0 mt-3 py-0"
+        sm="4"
+        md="4"
+        lg="4"
+        xl="5"
+        class="text-center mx-3 px-0 mt-3 py-1"
       >
-              <v-list-item color="black">
-          <v-list-item-content class="py-1">
-            <v-list-item-title
-              class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
-              >{{ message }}</v-list-item-title>
-          </v-list-item-content>
-              </v-list-item>
+      <p    
+        align-self="center"
+
+        class="text-left mx-3 px-0 mt-3 py-1">
+        {{message}}
+        </p>
       </v-col>
       
       <v-spacer></v-spacer>
