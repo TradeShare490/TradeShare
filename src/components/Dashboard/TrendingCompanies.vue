@@ -37,20 +37,11 @@
     </v-row>
     <v-list disabled>
       <div v-for="company in companies" :key="company.title">
-        <v-list-item>
-          <v-list-item-avatar class="avatar" tile>
-            <v-img src="../../assets/TradeShare.png"></v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content class="text-left ml-3">
-            <v-list-item-title>{{ company.title }}</v-list-item-title>
-            <v-list-item-subtitle>{{ company.subtitle }}</v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-icon>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-list-item-icon>
-        </v-list-item>
+        <CompanyCard
+          :title="company.title"
+          :subtitle="company.subtitle"
+          :imgsrc="company.imageSource"
+        />
 
         <v-divider class="my-3"></v-divider>
       </div>
@@ -66,7 +57,9 @@
 </template>
 
 <script>
+import CompanyCard from "./CompanyCard.vue";
 export default {
+  components: { CompanyCard },
   name: "TrendingCompanies",
   data() {
     return {
@@ -80,25 +73,25 @@ export default {
         },
         {
           title: "Medium Corporation",
-          subtitle: "sold recently by Dave",
+          subtitle: "bought recently by Dave",
 
           imageSource: "../../assets/TradeShare.png",
         },
         {
           title: "Github",
-          subtitle: "sold recently by Dave",
+          subtitle: "sold recently by Fred",
 
           imageSource: "../../assets/TradeShare.png",
         },
         {
           title: "Slack",
-          subtitle: "sold recently by Dave",
+          subtitle: "bought recently by Fred",
 
           imageSource: "../../assets/TradeShare.png",
         },
         {
           title: "Twitter",
-          subtitle: "sold recently by Dave",
+          subtitle: "sold recently by you",
 
           imageSource: "../../assets/TradeShare.png",
         },
