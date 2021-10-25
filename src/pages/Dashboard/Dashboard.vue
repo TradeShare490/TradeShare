@@ -12,19 +12,81 @@
     </v-col>
   </v-row>
    -->
-   <Positions/>
+   <div>
+     <div class="ma-5">
+       <Positions/>
+     </div>
+
+    <div class="ma-5">
+      <v-card
+        elevation="1"
+        outlined
+        max-width="23vw"
+      >
+      <v-card-title class="pb-0">
+        <span class="blue--text">Recent Activity</span>
+      </v-card-title>
+        <Recents
+            image="https://randomuser.me/api/portraits/men/35.jpg"
+            name="Ash Britain"
+            company="Dropbox"
+            :purchased="true"
+            when="Today"
+            :today="true"
+        ></Recents>
+        <Recents
+            image="https://randomuser.me/api/portraits/men/52.jpg"
+            name="Tim Robenman"
+            company="NVIDIA"
+            :purchased="false"
+            when="Today"
+            :today="true"
+        ></Recents>
+        <Recents
+            image="https://randomuser.me/api/portraits/men/86.jpg"
+            name="Mac Kafe"
+            company="Twitter"
+            :purchased="true"
+            when="Yesterday"
+            :today="false"
+        ></Recents>
+        <Recents
+            image="https://randomuser.me/api/portraits/men/52.jpg"
+            name="Tim Robenman"
+            company="Voyager"
+            :purchased="false"
+            when="Today"
+            :today="true"
+        ></Recents>
+        <!-- Temporary href until the page is available -->
+        <a
+          href="/"
+          class="d-flex justify-end"
+          style="text-decoration: none; font-size: 12px"
+        >
+          View all
+          <v-icon color="primary" dense>
+            mdi-menu-right
+          </v-icon>
+        </a>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
 // import Profile from "../../components/Dashboard/Profile.vue"
 // import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import Positions from "../../components/Portfolio/Positions.vue"
+import Recents from "../../components/RecentActivity/Recents.vue"
+
 export default {
   name: "Dashboard",
   components: {
     // Profile,
     // PortfolioAnalyticsTemplate,
-    Positions
+    Positions,
+    Recents
   },
 };
 </script>
