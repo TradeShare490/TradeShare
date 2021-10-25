@@ -1,6 +1,5 @@
 <template>
   <!-- <Profile/> -->
-<!--   
   <v-row>
  <!--  <v-col>
       <PortfolioAnalyticsTemplate title="Portfolio Value" value="$24,000" :percentChange="-20" icon="mdi-domain"/>
@@ -14,33 +13,21 @@
       <BarChartContainer/> 
     </v-col>
   </v-row>
-  
-  <!-- <Positions/>  -->
 
 </template>
 
 <script>
 // import Profile from "../../components/Dashboard/Profile.vue"
-
 // Adding follow function to script
 //import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
-
-
-// import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
-//import Positions from "../../components/Portfolio/Positions.vue"
 
 export default {
   name: "Dashboard",
   components: {
     // Profile,
-
     //PortfolioAnalyticsTemplate,
     BarChartContainer
-
-    // PortfolioAnalyticsTemplate,
-    //Positions
-
   },
 };
 </script>
