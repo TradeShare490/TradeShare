@@ -17,7 +17,7 @@
        <Positions/>
      </div>
 
-    <div class="ma-5">
+    <div class="ma-5 d-flex justify-end">
       <v-card
         elevation="1"
         outlined
