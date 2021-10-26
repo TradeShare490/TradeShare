@@ -27,18 +27,18 @@
         <span class="blue--text">Recent Activity</span>
       </v-card-title>
         <Recents
-            v-for="activity in recentActivities"
-            :key="activity.id"
-            :image=activity.image
-            :name="activity.name"
-            :company="activity.company"
-            :purchased="activity.purchased"
-            :when="activity.when"
-            :today="activity.today"
+          v-for="activity in recentActivities"
+          :key="activity.id"
+          :image=activity.image
+          :name="activity.name"
+          :company="activity.company"
+          :purchased="activity.purchased"
+          :when="activity.when"
+          :today="activity.today"
         ></Recents>
         <!-- Temporary href until the page is available -->
         <a
-          href="/"
+          href="/news-feed"
           class="d-flex justify-end"
           style="text-decoration: none; font-size: 12px"
         >

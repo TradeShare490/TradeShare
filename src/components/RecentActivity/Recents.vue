@@ -1,8 +1,8 @@
 <template>
     <v-container>      
         <v-row no-gutters justify="space-between" align="center">
-            <v-col xs="3" xl="3">
-                <v-list-item>
+            <v-col xs="12" sm="12" lg="3" xl="3">
+                <v-list-item class="px-0">
                     <v-list-item-content>
                         <v-list-item-avatar>
                             <v-avatar size="40">
@@ -15,16 +15,16 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="4" xl="4" class="text-left">
-                <v-list-item>
-                    <v-list-item-content>
+            <v-col xs="12" sm="12" lg="5" xl="5">
+                <v-list-item class="px-0">
+                    <v-list-item-content >
                         <v-list-item-title class="text-caption text-wrap">
                             {{ this.company }}
                         </v-list-item-title>
-                        <v-list-item class="px-0">
+                        <v-list-item class="d-flex justify-center px-0">
                             <v-chip
                                 label
-                                :class="this.purchased ? 'white--text' : 'white--text px-9'"
+                                :class="this.purchased ? 'white--text px-1' : 'white--text px-6'"
                                 :color="this.purchased ? 'green darken-2' : 'red darken-2'"
                             >
                                 {{ this.purchased ? "PURCHASED" : "SOLD" }}
@@ -33,13 +33,13 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="4" xl="4" class="text-left">
-                <v-list-item>
+            <v-col xs="12" sm="6" lg="3" xl="3">
+                <v-list-item class="px-0">
                     <v-list-item-content class="text-caption text-wrap">
                         <v-list-item-title style="font-size: 12px">
                             {{ this.when }}
                         </v-list-item-title>
-                        <v-list-item-icon>
+                        <v-list-item-icon class="d-flex justify-center mx-0">
                             <v-icon
                                 :color="this.today ? 'primary' : 'grey'"
                             >
@@ -49,7 +49,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col class="d-flex justify-end" xs="1">
+            <v-col xs="12" sm="6" lg="1" xl="1">
                 <v-btn
                     icon
                 >
