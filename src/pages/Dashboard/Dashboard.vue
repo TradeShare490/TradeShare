@@ -1,18 +1,22 @@
 <template>
   <!-- <Profile/> -->
-<!--   
-  <v-row>
-    <v-col>
-      <PortfolioAnalyticsTemplate title="Portfolio Value" value="$24,000" :percentChange="-20" icon="mdi-domain"/>
-    </v-col>
-    <v-col>
-      <PortfolioAnalyticsTemplate title="Daily Change" value="+2.12%" :percentChange="16" icon="mdi-calendar-today"/> </v-col
-    ><v-col>
-      <PortfolioAnalyticsTemplate title="Goal Progress" value="75%" progress="75" color="blue" icon="mdi-progress-clock"/>
-    </v-col>
-  </v-row>
-   -->
-   <div>
+  <div>
+    <div class="ma-5">
+      <v-row>
+        <v-col>
+          <PortfolioAnalyticsTemplate title="Portfolio Value" value="$24,000" :percentChange="-20" icon="mdi-domain"/>
+        </v-col>
+        <v-col>
+          <PortfolioAnalyticsTemplate title="Daily Change" value="+2.12%" :percentChange="16" icon="mdi-calendar-today"/> </v-col
+        ><v-col>
+          <PortfolioAnalyticsTemplate title="Goal Progress" value="75%" progress="75" color="blue" icon="mdi-progress-clock"/>
+        </v-col> 
+        <v-col>
+          <BarChartContainer/> 
+        </v-col>
+      </v-row>
+    </div>
+
      <div class="ma-5">
        <Positions/>
      </div>
@@ -36,7 +40,6 @@
           :when="activity.when"
           :today="activity.today"
         ></Recents>
-        <!-- Temporary href until the page is available -->
         <a
           href="/news-feed"
           class="d-flex justify-end"
@@ -57,6 +60,9 @@
 // import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import Positions from "../../components/Portfolio/Positions.vue"
 import Recents from "../../components/RecentActivity/Recents.vue"
+// Adding follow function to script
+import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
+import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
 
 export default {
   name: "Dashboard",
@@ -106,7 +112,9 @@ export default {
     // Profile,
     // PortfolioAnalyticsTemplate,
     Positions,
-    Recents
+    Recents,
+    PortfolioAnalyticsTemplate,
+    BarChartContainer
   },
 };
 </script>
