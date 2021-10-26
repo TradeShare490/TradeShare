@@ -27,36 +27,14 @@
         <span class="blue--text">Recent Activity</span>
       </v-card-title>
         <Recents
-            image="https://randomuser.me/api/portraits/men/35.jpg"
-            name="Ash Britain"
-            company="Dropbox"
-            :purchased="true"
-            when="Today"
-            :today="true"
-        ></Recents>
-        <Recents
-            image="https://randomuser.me/api/portraits/men/52.jpg"
-            name="Tim Robenman"
-            company="NVIDIA"
-            :purchased="false"
-            when="Today"
-            :today="true"
-        ></Recents>
-        <Recents
-            image="https://randomuser.me/api/portraits/men/86.jpg"
-            name="Mac Kafe"
-            company="Twitter"
-            :purchased="true"
-            when="Yesterday"
-            :today="false"
-        ></Recents>
-        <Recents
-            image="https://randomuser.me/api/portraits/men/52.jpg"
-            name="Tim Robenman"
-            company="Voyager"
-            :purchased="false"
-            when="Today"
-            :today="true"
+            v-for="activity in recentActivities"
+            :key="activity.id"
+            :image=activity.image
+            :name="activity.name"
+            :company="activity.company"
+            :purchased="activity.purchased"
+            :when="activity.when"
+            :today="activity.today"
         ></Recents>
         <!-- Temporary href until the page is available -->
         <a
@@ -82,6 +60,48 @@ import Recents from "../../components/RecentActivity/Recents.vue"
 
 export default {
   name: "Dashboard",
+  data() {
+        return {
+            recentActivities: [
+                {
+                    id: 1,
+                    image:"https://randomuser.me/api/portraits/men/35.jpg",
+                    name:"Ash Britain",
+                    company:"Dropbox",
+                    purchased:"true",
+                    when:"Today",
+                    today:"true",
+                },
+                {
+                    id: 2,
+                    image:"https://randomuser.me/api/portraits/men/52.jpg",
+                    name:"Tim Robenman",
+                    company:"NVIDIA",
+                    purchased:"false",
+                    when:"Today",
+                    today:"true",
+                },
+                {   
+                    id: 3,
+                    image:"https://randomuser.me/api/portraits/men/86.jpg",
+                    name:"Mac Kafe",
+                    company:"Twitter",
+                    purchased:"true",
+                    when:"Yesterday",
+                    today:"false",
+                },
+                {
+                    id: 4,
+                    image:"https://randomuser.me/api/portraits/men/52.jpg",
+                    name:"Tim Robenman",
+                    company:"Voyager",
+                    purchased:"false",
+                    when:"Today",
+                    today:"true",
+                },
+            ]
+        }
+    },
   components: {
     // Profile,
     // PortfolioAnalyticsTemplate,
