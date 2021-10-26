@@ -27,7 +27,7 @@
         outlined
         max-width="23vw"
       >
-      <v-card-title class="pb-0">
+      <v-card-title class="pb-0" style="word-break: normal">
         <span class="blue--text">Recent Activity</span>
       </v-card-title>
         <Recents
