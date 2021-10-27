@@ -15,20 +15,15 @@
         <v-divider></v-divider>
         
         <v-card-text style="height: 210px;" class="pb-0">
-          <!-- <div v-for="(group) in groups" :key="group.index">
-            <v-btn style="width: 180px;" :color="group.color" dark class="my-1">{{ group.name }}</v-btn>
-          </div> -->
-          <v-radio-group v-model="index" column>
+          <v-radio-group v-model="select" column>
             <!-- loop render group list -->
-            <div v-for="(group, index) in groups.slice(0,-1)" :key="group.index">
-              <!-- <div v-if="group.name==='default'">AAAAAAAAAAA</div> -->
-              <!-- <div v-else> -->
+            <div v-for="(group, select) in groups" :key="group.select">
               <v-radio class="px-auto pb-1"> 
                 <template v-slot:label >
-                  <div v-bind:style="{ color: group.color }"> {{group.name}} </div>
+                  <div v-bind:style="{ color: group.color }">  {{group.name}} </div>
                   &nbsp; 
                   <!-- btn for edit pane -->
-                  <v-icon @click="openEdit(index)">mdi-pencil-box-outline</v-icon>
+                  <v-icon @click="openEdit(select)">mdi-pencil-box-outline</v-icon>
                 </template>
               </v-radio>
               <!-- </div> -->
@@ -36,7 +31,7 @@
           </v-radio-group>
         </v-card-text>
 
-        <!-- <h6>Selected Radios: {{index}} {{groups[index].name}}</h6> -->
+        <!-- <h6>Selected Radios: {{select}} {{groups[select].name}}</h6> -->
         <v-btn elevation="0"  block @click="openCreate()" class="my-2">
           <v-icon>mdi-account-plus</v-icon>&nbsp;new group
         </v-btn>
@@ -55,7 +50,7 @@
           <v-text-field v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field>
         </v-card-title>
         <v-card-actions class="d-flex justify-center">
-          <v-btn color="success" style="width: 180px;" @click="editGroup(index)">
+          <v-btn color="success" style="width: 180px;" @click="editGroup(select)">
             <v-icon>mdi-check</v-icon>&nbsp;confirm
           </v-btn>
           <v-btn color="error"  outlined  @click="dialog3= !dialog3">
@@ -68,13 +63,13 @@
     <!-- DIALOG #3 GROUP DEL CONFIRMATION -->
     <v-dialog v-model="dialog3" persistent max-width="370">
       <v-card>
-        <v-card-title class="text-h5"> Delete group {{ groups[index].name}} ? </v-card-title>
+        <v-card-title class="text-h5"> Delete group {{ groups[select].name}} ? </v-card-title>
         <v-card-text>All User belongs to the group will be set to default.</v-card-text>
         <v-card-actions class="d-flex justify-center pt-0">
           <v-btn color="primary" outlined style="width: 130px;" @click="dialog3 = false">
             <v-icon>mdi-cancel</v-icon>&nbsp;cancel
           </v-btn>
-          <v-btn color="error" style="width: 190px;" @click="delGroup(index)" class="mr-1">
+          <v-btn color="error" style="width: 190px;" @click="delGroup(select)" class="mr-1">
             <v-icon>mdi-account-remove</v-icon>&nbsp; delete group
           </v-btn>
         </v-card-actions>
@@ -90,7 +85,7 @@
           <v-btn color="primary" outlined style="width: 120px;" @click="dialog4 = false">
             <v-icon>mdi-cancel</v-icon>&nbsp;cancel
           </v-btn>
-          <v-btn color="success" style="width: 190px;" @click="addGroup()" class="mr-1">
+          <v-btn color="success" style="width: 190px;" @click="createGroup()" class="mr-1">
             <v-icon>mdi-account-plus</v-icon>&nbsp;create group
           </v-btn>
         </v-card-actions>
@@ -112,33 +107,34 @@
 <script>
   export default {
     data: () => ({
-        index: 0,
-        group: "",
-        groupNameInput: "",
-        groups: [
-          { name: "Family", color: "#3B7600"},
-          { name: "School",  color: "#007652"},
-          { name: "Friend",  color: "#430086"},
-          { name: "a", color: ""},
-        ],
-        dialog: false,
-        dialog2: false,
-        dialog3: false,
-        dialog4: false,
-        rules: {
-          required: (v) => !!v || "",
-        },
-        rulesGroupName: {
-          max: (v) => v.length <= 10 || "Max 10 characters",
-        },
-        // snack bar
-        snackbar: false,
-        snackbarText: "",
-        snackbarColor: "primary",
-        snackbarTimeout: 2000,
-        // for color picker
-        hex: '#FF0000',
-        type: 'hex',
+      // states
+      select: 0,
+      group: "",
+      groupNameInput: "",
+      // data
+      groups: [
+        { name: 'Family', color: '#3B7600', id: '6076cb9a-66ed-49e9-9466-6a5da0f3179f'},
+        { name: 'School',  color: '#007652', id: '643136f7-7c93-4bbb-a894-c4936b00dae2'},
+        { name: 'Friend',  color: '#430086', id: '156801fb-0ecb-4649-b115-f11dbac06ae7'},
+      ],
+      dialog: false,
+      dialog2: false,
+      dialog3: false,
+      dialog4: false,
+      rules: {
+        required: (v) => !!v || "",
+      },
+      rulesGroupName: {
+        max: (v) => v.length <= 10 || "Max 10 characters",
+      },
+      // snack bar
+      snackbar: false,
+      snackbarText: "",
+      snackbarColor: "primary",
+      snackbarTimeout: 2000,
+      // for color picker
+      hex: '#FF0000',
+      type: 'hex',
     }),
 
     // color picker component
@@ -158,7 +154,7 @@
 
     methods: {
       renderList() {
-        console.log("renderList()");
+        console.log("=========renderList(" + this.select + ")=========");
         for(let i = 0; i < this.groups.length; i++)
             console.log("#" + i + " [" + this.groups[i].name + ", " + this.groups[i].color + "]");
       },
@@ -166,63 +162,24 @@
         this.dialog4 = true;
         this.groupNameInput = "";
       },
-      openEdit(index) {
-        console.log("openEdit(" + index + ")");
-        this.hex = this.groups[index].color;
-        this.groupNameInput = this.groups[index].name;
-        this.dialog2 = true;
-      },
-      delGroup(index) {
-        console.log("delGroup(" + index + ")");
-        console.log(this.groups[index].name);
-        if(this.groups.length==2) {
-          this.snackbarText = "Keep at least one group";
-          this.snackbarColor = "error";
-        } else {
-          // console.log("splice("+index+",1)");
-          this.groups.splice(index, 1); 
-          this.snackbarText = "User deleted";
-          this.snackbarColor = "success";
-        }
-        this.snackbar = true;
-        this.dialog3 = false;
-        this.dialog2 = false;
-        this.renderList();
-      },
-      editGroup(index) {
-        console.log("editGroup(" + index + ")");
+      createGroup() {
+        // this.renderList();
+        // console.log(this.groupNameInput);
         const name = this.groupNameInput.trim();
-        var item = this.groups[this.index];
-        if(name==""){
-          this.snackbarText = "Empty group name";
-          this.snackbarColor = "error";
-        } else if (this.isDuplicateGrp(name,1)) {
-          this.snackbarText = name + " existed";
-          this.snackbarColor = "error";
-        } else {
-          item.name = name;
-          this.groups[this.index].color = this.color;
-          this.dialog2 = false;
-          this.snackbarText = "Group updated";
-          this.snackbarColor = "success";
-        }
-        this.snackbar = true;
-        this.groupNameInput="";
-      },
-      addGroup() {
-        console.log(this.groupNameInput);
-        const name = this.groupNameInput.trim();
+        // console.log(name);
         if(name=="") {
           this.snackbarText = "Empty group name";
           this.snackbarColor = "error";
         } else if (this.isDuplicateGrp(name,0)) {
-          this.snackbarText = name + " existed";
+          this.snackbarText = name + " already existed";
           this.snackbarColor = "error";
         } else {
-            this.groups.push({
+          this.groups.push({
             // name: (Math.random() + 1).toString(36).substring(7),
             name: name,
             color: "#" + Math.floor(Math.random()*16777215).toString(16),
+            id: ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+              (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16))
           });
           this.groupNameInput="";
           this.dialog4 = false;
@@ -230,16 +187,63 @@
           this.snackbarColor = "success";
         }
         this.snackbar = true;
+        this.renderList();
+      },
+      openEdit(select) {
+        console.log("openEdit(" + select + ")");
+        this.hex = this.groups[select].color;
+        this.groupNameInput = this.groups[select].name;
+        this.dialog2 = true;
+      },
+      delGroup(select) {
+        console.log("delGroup(" + select + ")");
+        // console.log(select + ", " + this.groups[select].name);
+        this.renderList();
+        if(this.groups.length==1) {
+          this.snackbarText = "Keep at least one group";
+          this.snackbarColor = "error";
+        } else {
+          const name = this.groups[select].name;
+          this.select = this.select-1 < 0 ? 0 : this.select-1;
+          this.groups.splice(select, 1); 
+          this.snackbarText = name + " group deleted";
+          this.snackbarColor = "success";
+        }
+        this.snackbar = true;
+        this.dialog3 = false;
+        this.dialog2 = false;
+        this.renderList();
+      },
+      editGroup(select) {
+        console.log("editGroup(" + select + ")");
+        const name = this.groupNameInput.trim();
+        var item = this.groups[this.select];
+        if(name==""){
+          this.snackbarText = "Empty group name";
+          this.snackbarColor = "error";
+        } else if (this.isDuplicateGrp(name,1)) {
+          this.snackbarText = name + " already existed";
+          this.snackbarColor = "error";
+        } else {
+          item.name = name;
+          this.groups[this.select].color = this.color;
+          this.dialog2 = false;
+          this.groupNameInput="";
+          this.snackbarText = "Group updated";
+          this.snackbarColor = "success";
+        }
+        this.snackbar = true;
+        
       },
       submit() {
         console.log("submit()");
-        console.log("index#:" + this.index + ":" + this.groups[this.index].name);
+        console.log("select#:" + this.select + ":" + this.groups[this.select].name);
       },
-      isDuplicateGrp(name, mode){
+      isDuplicateGrp(name, mode){ // mode=1 for edit, mode=0 for new
         // console.log("isDuplicateGrp");
         for(let i = 0; i < this.groups.length; i++)
           if(mode==1){
-            if(i!=this.index) 
+            if(i!=this.select) 
               if(this.groups[i].name.toUpperCase() == name.toUpperCase()) 
                 return true;
           } else {
