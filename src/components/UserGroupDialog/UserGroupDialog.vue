@@ -171,7 +171,7 @@
           this.snackbarText = "Empty group name";
           this.snackbarColor = "error";
         } else if (this.isDuplicateGrp(name,0)) {
-          this.snackbarText = name + " already existed";
+          this.snackbarText = name + " already exists";
           this.snackbarColor = "error";
         } else {
           this.groups.push({
