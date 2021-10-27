@@ -15,24 +15,30 @@
         <v-divider></v-divider>
         
         <v-card-text style="height: 210px;" class="pb-0">
+          <!-- <div v-for="(group) in groups" :key="group.index">
+            <v-btn style="width: 180px;" :color="group.color" dark class="my-1">{{ group.name }}</v-btn>
+          </div> -->
           <v-radio-group v-model="index" column>
             <!-- loop render group list -->
-            <div v-for="(group, index) in groups" :key="group.index">
+            <div v-for="(group, index) in groups.slice(0,-1)" :key="group.index">
+              <!-- <div v-if="group.name==='default'">AAAAAAAAAAA</div> -->
+              <!-- <div v-else> -->
               <v-radio class="px-auto pb-1"> 
                 <template v-slot:label >
                   <div v-bind:style="{ color: group.color }"> {{group.name}} </div>
-                  &nbsp;
+                  &nbsp; 
                   <!-- btn for edit pane -->
                   <v-icon @click="openEdit(index)">mdi-pencil-box-outline</v-icon>
                 </template>
               </v-radio>
+              <!-- </div> -->
             </div>
           </v-radio-group>
         </v-card-text>
 
         <!-- <h6>Selected Radios: {{index}} {{groups[index].name}}</h6> -->
-        <v-btn elevation="0"  block v-on:click="addGroup()" class="my-2">
-          <v-icon>mdi-account-plus</v-icon>
+        <v-btn elevation="0"  block @click="openCreate()" class="my-2">
+          <v-icon>mdi-account-plus</v-icon>&nbsp;new group
         </v-btn>
         <v-btn elevation="0" color="success" block v-on:click="submit()" @click="dialog = false">
           Save
@@ -49,27 +55,43 @@
           <v-text-field v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field>
         </v-card-title>
         <v-card-actions class="d-flex justify-center">
-          <v-btn color="success" style="width: 230px;" @click="editGroup(index)">
-            <v-icon>mdi-check</v-icon>
+          <v-btn color="success" style="width: 180px;" @click="editGroup(index)">
+            <v-icon>mdi-check</v-icon>&nbsp;confirm
           </v-btn>
           <v-btn color="error"  outlined  @click="dialog3= !dialog3">
-            <v-icon>mdi-account-remove</v-icon>
+            <v-icon>mdi-account-remove</v-icon>&nbsp;delete
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
-    <!-- DIALOG #2 GROUP DEL CONFIRMATION -->
+    <!-- DIALOG #3 GROUP DEL CONFIRMATION -->
     <v-dialog v-model="dialog3" persistent max-width="370">
       <v-card>
-        <v-card-title class="text-h5"> Delete Group [{{ groups[index].name}}] ? </v-card-title>
+        <v-card-title class="text-h5"> Delete group {{ groups[index].name}} ? </v-card-title>
         <v-card-text>All User belongs to the group will be set to default.</v-card-text>
         <v-card-actions class="d-flex justify-center pt-0">
-          <v-btn color="secondary" outlined style="width: 130px;" @click="dialog3 = false">
-            <v-icon>mdi-cancel</v-icon>
+          <v-btn color="primary" outlined style="width: 130px;" @click="dialog3 = false">
+            <v-icon>mdi-cancel</v-icon>&nbsp;cancel
           </v-btn>
           <v-btn color="error" style="width: 190px;" @click="delGroup(index)" class="mr-1">
-            <v-icon>mdi-account-remove</v-icon>
+            <v-icon>mdi-account-remove</v-icon>&nbsp; delete group
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- DIALOG #4 GROUP CREATION -->
+    <v-dialog v-model="dialog4" max-width="370">
+      <v-card>
+        <v-card-title class="text-h5 pb-0"> Create new group </v-card-title>
+        <v-card-text class="pt-0 pb-0"><v-text-field v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field></v-card-text>
+        <v-card-actions class=" justify-center pt-0">
+          <v-btn color="primary" outlined style="width: 120px;" @click="dialog4 = false">
+            <v-icon>mdi-cancel</v-icon>&nbsp;cancel
+          </v-btn>
+          <v-btn color="success" style="width: 190px;" @click="addGroup()" class="mr-1">
+            <v-icon>mdi-account-plus</v-icon>&nbsp;create group
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -89,7 +111,6 @@
 
 <script>
   export default {
-    
     data: () => ({
         index: 0,
         group: "",
@@ -98,12 +119,14 @@
           { name: "Family", color: "#3B7600"},
           { name: "School",  color: "#007652"},
           { name: "Friend",  color: "#430086"},
+          { name: "a", color: ""},
         ],
         dialog: false,
         dialog2: false,
         dialog3: false,
+        dialog4: false,
         rules: {
-          required: (v) => !!v || "Required",
+          required: (v) => !!v || "",
         },
         rulesGroupName: {
           max: (v) => v.length <= 10 || "Max 10 characters",
@@ -112,7 +135,7 @@
         snackbar: false,
         snackbarText: "",
         snackbarColor: "primary",
-        snackbarTimeout: 3000,
+        snackbarTimeout: 2000,
         // for color picker
         hex: '#FF0000',
         type: 'hex',
@@ -139,6 +162,10 @@
         for(let i = 0; i < this.groups.length; i++)
             console.log("#" + i + " [" + this.groups[i].name + ", " + this.groups[i].color + "]");
       },
+      openCreate(){
+        this.dialog4 = true;
+        this.groupNameInput = "";
+      },
       openEdit(index) {
         console.log("openEdit(" + index + ")");
         this.hex = this.groups[index].color;
@@ -148,57 +175,79 @@
       delGroup(index) {
         console.log("delGroup(" + index + ")");
         console.log(this.groups[index].name);
-        if(this.groups.length==1) {
+        if(this.groups.length==2) {
           this.snackbarText = "Keep at least one group";
           this.snackbarColor = "error";
         } else {
-          console.log("splice("+index+",1)");
+          // console.log("splice("+index+",1)");
           this.groups.splice(index, 1); 
           this.snackbarText = "User deleted";
           this.snackbarColor = "success";
         }
         this.snackbar = true;
         this.dialog3 = false;
-        setTimeout(() => {  this.dialog2 = false; }, 100);
+        this.dialog2 = false;
         this.renderList();
       },
       editGroup(index) {
         console.log("editGroup(" + index + ")");
-        const newName = this.groupNameInput.trim();
+        const name = this.groupNameInput.trim();
         var item = this.groups[this.index];
-        var dupBoolean = 0;
-        for(let i = 0; i < this.groups.length; i++){
-          if(i!=this.index) {
-            var element = this.groups[i];
-            if(element.name.toUpperCase() == newName.toUpperCase()) {
-              dupBoolean = 1;
-              break;
-            }
-          }
-        }
-        if(newName !== "" && dupBoolean == 0){
-          item.name = newName;
+        if(name==""){
+          this.snackbarText = "Empty group name";
+          this.snackbarColor = "error";
+        } else if (this.isDuplicateGrp(name,1)) {
+          this.snackbarText = name + " existed";
+          this.snackbarColor = "error";
+        } else {
+          item.name = name;
           this.groups[this.index].color = this.color;
           this.dialog2 = false;
-          this.snackbarText = "User updated";
+          this.snackbarText = "Group updated";
           this.snackbarColor = "success";
-        } else {
-          this.snackbarText = "User update failed";
-          this.snackbarColor = "error";
         }
         this.snackbar = true;
+        this.groupNameInput="";
       },
       addGroup() {
-          this.groups.push({
-            name: (Math.random() + 1).toString(36).substring(7),
+        console.log(this.groupNameInput);
+        const name = this.groupNameInput.trim();
+        if(name=="") {
+          this.snackbarText = "Empty group name";
+          this.snackbarColor = "error";
+        } else if (this.isDuplicateGrp(name,0)) {
+          this.snackbarText = name + " existed";
+          this.snackbarColor = "error";
+        } else {
+            this.groups.push({
+            // name: (Math.random() + 1).toString(36).substring(7),
+            name: name,
             color: "#" + Math.floor(Math.random()*16777215).toString(16),
           });
-        this.group = "";
+          this.groupNameInput="";
+          this.dialog4 = false;
+          this.snackbarText = "Group Created";
+          this.snackbarColor = "success";
+        }
+        this.snackbar = true;
       },
       submit() {
         console.log("submit()");
         console.log("index#:" + this.index + ":" + this.groups[this.index].name);
       },
+      isDuplicateGrp(name, mode){
+        // console.log("isDuplicateGrp");
+        for(let i = 0; i < this.groups.length; i++)
+          if(mode==1){
+            if(i!=this.index) 
+              if(this.groups[i].name.toUpperCase() == name.toUpperCase()) 
+                return true;
+          } else {
+            if(this.groups[i].name.toUpperCase() == name.toUpperCase()) 
+                return true;
+          }
+        return false;
+      }
   },
 }
 </script>
