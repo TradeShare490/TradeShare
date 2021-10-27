@@ -222,7 +222,7 @@
           this.snackbarText = "Empty group name";
           this.snackbarColor = "error";
         } else if (this.isDuplicateGrp(name,1)) {
-          this.snackbarText = name + " already existed";
+          this.snackbarText = name + " already exists";
           this.snackbarColor = "error";
         } else {
           item.name = name;
