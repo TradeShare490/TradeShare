@@ -1,10 +1,10 @@
 <template>
-    <v-container>      
+    <v-container class="pa-0">      
         <v-row no-gutters justify="space-between" align="center">
             <v-col xs="12" sm="12" md="2" lg="2" xl="2">
                 <v-list-item class="px-0">
                     <v-list-item-content>
-                        <v-list-item-avatar>
+                        <v-list-item-avatar class="mr-0">
                             <v-avatar size="40">
                                 <img :src="image">
                             </v-avatar>
@@ -24,9 +24,9 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <!-- FIX THIS LATER -->
-            <v-divider vertical class="mb-3 mt-n3"></v-divider>
-            <v-col xs="12" sm="12" md="3" lg="3" xl="3">
+            <!-- FIX THE DIVIDER LATER -->
+            <v-divider vertical class="my-5"></v-divider>
+            <v-col xs="12" sm="12" md="2" lg="2" xl="2">
                 <v-list-item class="px-0">
                     <v-list-item-content>
                         <v-list-item-title class="text-h6 text-wrap font-weight-medium ml-2">
@@ -38,24 +38,24 @@
                                 class="white--text px-2"
                                 color="primary"
                             >
-                                {{ this.purchased }}
+                                {{ this.tag }}
                             </v-chip>
                         </v-list-item>
                         <v-list-item>
-                            <v-container>
+                            <v-container class="px-0">
                                 <v-row no-gutters>
                                     <v-col class="d-flex justify-start">
-                                        <span class="text-caption font-weight-bold">Position Size: {{ this.company }} </span>
+                                        <span class="text-caption font-weight-bold">Position Size: <span class="text-caption font-weight-medium">{{ this.size }} </span></span>
                                     </v-col>
                                 </v-row>
                                 <v-row no-gutters>
                                     <v-col class="d-flex justify-start">
-                                        <span class="text-caption font-weight-bold">Execution Date: {{ this.company }} </span>
+                                        <span class="text-caption font-weight-bold">Execution Date: <span class="text-caption font-weight-medium">{{ this.when }} </span></span>
                                     </v-col>
                                 </v-row>
                                 <v-row no-gutters>
                                     <v-col class="d-flex justify-start">
-                                        <span class="text-caption font-weight-bold">Verified: {{ this.purchased }} </span>
+                                        <span class="text-caption font-weight-bold">Verified: <span class="text-caption font-weight-medium">{{ this.verified ? "Yes" : "No" }}</span></span>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -72,20 +72,20 @@
                         <v-list-item>
                             <v-row>
                                 <v-col>
-                                    <span class="font-weight-bold">300</span>
+                                    <span class="font-weight-bold">{{ this.stock1 }}</span>
                                 </v-col>
                                 <v-col>
-                                    <span class="green--text font-weight-bold">+0.52%</span>
+                                    <span class="green--text font-weight-bold">{{ this.stock2 }}</span>
                                 </v-col>
                             </v-row>
                         </v-list-item> 
                         <v-list-item>
                             <v-row>
                                 <v-col>
-                                    <span class="grey--text font-weight-bold">311</span>
+                                    <span class="grey--text font-weight-bold">{{ this.stock3 }}</span>
                                 </v-col>
                                 <v-col>
-                                    <span class="grey--text font-weight-bold">Post+0.16%</span>
+                                    <span class="grey--text font-weight-bold">{{ this.stock4 }}</span>
                                 </v-col>
                             </v-row>
                         </v-list-item>
@@ -153,11 +153,28 @@ export default {
     props: {
         image: String,
         name: String,
-        company: String,
         purchased: Boolean,
+        company: String,
+        tag: String,
+        size: Number,
         when: String,
-        today: Boolean,
+        verified: Boolean,
+        stock1: Number,
+        stock2: String,
+        stock3: Number,
+        stock4: String,
     },
     data: () => ({}),
 };
 </script>
+<style scoped>
+    .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot:hover{
+        border-width: 8px;
+        border-style: solid;
+        border-color: #6fbd44;
+    }
+    .v-text-field{
+      border-color: pink;
+    }
+
+</style>
