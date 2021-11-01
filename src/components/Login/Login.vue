@@ -4,7 +4,7 @@
       <v-form ref="formLogin" v-model="valid">
         <v-text-field
           v-model="email"
-          label="Email or Username"
+          label="Email"
           color="primary"
           :rules="[rules.required]"
           @keyup.enter="submit"
