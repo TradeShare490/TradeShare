@@ -3,8 +3,8 @@
     <v-card class="mx-auto" max-width="250" elevation="0">
       <v-form ref="formLogin" v-model="valid">
         <v-text-field
-          v-model="user_id"
-          label="Email or Username"
+          v-model="email"
+          label="Email"
           color="primary"
           :rules="[rules.required]"
           @keyup.enter="submit"
@@ -34,7 +34,9 @@
           >Log In</v-btn
         >
       </v-form>
-
+      <v-alert dense text v-if="error" type="error">
+        {{ error }}
+      </v-alert>
       <p class="text-body-2 pt-4">
         Don't have an account? <router-link to="./signup">Sign up</router-link>
       </p>
@@ -43,23 +45,34 @@
 </template>
 
 <script>
-  export default {
-    name: "Login",
-    data: () => ({
-      valid: "",
-      user_id: "",
-      value: String,
-      password: "",
-      rules: {
-        required: (v) => !!v || "Required",
-      },
-    }),
-    methods: {
-      submit() {
-        if (this.$refs.formLogin.validate()) {
-          console.log(this.user_id, this.password);
-        }
-      },
+export default {
+  name: "Login",
+  data: () => ({
+    valid: "",
+    email: "",
+    value: String,
+    password: "",
+    rules: {
+      required: (v) => !!v || "Required",
     },
-  };
+    error: false,
+  }),
+  methods: {
+    submit() {
+      if (this.$refs.formLogin.validate()) {
+        this.$store
+          .dispatch("login", {
+            email: this.email,
+            password: this.password,
+          })
+          .then(() => {
+            this.$router.push({ name: "Dashboard" });
+          })
+          .catch((err) => {
+            this.error = err.response.data.message;
+          });
+      }
+    },
+  },
+};
 </script>
