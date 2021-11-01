@@ -79,6 +79,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: "SignUp",
     data: () => ({
@@ -110,25 +111,29 @@
       submit() {
         // add check to see if contents are undefined
         if (this.$refs.formSignUp.validate()) {
-          console.log(
-            "First Name: ",
-            this.firstName,
-            "\n",
-            "Last Name: ",
-            this.lastName,
-            "\n",
-            "Username: ",
-            this.username,
-            "\n",
-            "Email: ",
-            this.email,
-            "\n",
-            "Password: ",
-            this.password,
-            "\n",
-            "Confirm Password: ",
-            this.passwordConfirm
-          );
+          let credentials = {
+            email: this.email,
+            password: this.password,
+            passwordConfirmation: this.passwordConfirm,
+            firstname: this.firstName,
+            lastname: this.lastName, 
+            username: this.username,
+          }
+          axios.post('//localhost:5000/api/v1/user', credentials)
+          .then( (response) => {
+            console.log(response)
+            this.$store.dispatch('login', {
+                email: this.email, 
+                password: this.password
+              })
+            .then( () => {
+              this.$router.push({name :'Dashboard'})
+            })
+            .catch(err => {
+              this.error = err.response.data.message
+            })
+          }
+          )
         }
       },
     },
