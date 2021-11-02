@@ -6,6 +6,7 @@ import Dashboard from "../pages/Dashboard/Dashboard.vue"
 import Followers from "../pages/Followers/Followers.vue"
 import Following from "../pages/Following/Following.vue"
 import UserGroupDialog from "../components/UserGroupDialog/UserGroupDialog.vue"
+import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
 
 Vue.use(VueRouter);
 
@@ -68,6 +69,11 @@ const routes = [
     path: "/brokerage-signup",
     name: "BrokerageSignUp",
     component: BrokerageSignUp,
+  },
+  {
+    path: "/other-dashboard",
+    name: "OtherDashboard",
+    component: OtherDashboard
   },
   {
     path: "/:catchAll(.*)",
