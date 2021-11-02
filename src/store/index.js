@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
+import axios from "../axios/axios.v1"
 
 Vue.use(Vuex);
 
@@ -21,10 +21,14 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		login({ commit }, credentials) {
-			return axios.post("//localhost:5000/api/v1/session", credentials).then(({ data }) => {
-				commit("setUserData", data);
-			});
+		async login({ commit }, credentials) {
+			try {
+				const { data } = await axios.post("/session", credentials);
+				commit("setUserData", data);	
+			} catch (error) {
+				// fail to authenticate due to incorrect credentials
+				console.log(error.message)
+			}
 		},
 		logout({ commit }) {
 			commit("logOut");

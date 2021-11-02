@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import UserService from "../../services/User.service";
 export default {
   name: "SignUp",
   data: () => ({
@@ -111,7 +111,7 @@ export default {
     error: false,
   }),
   methods: {
-    submit() {
+    async submit() {
       // add check to see if contents are undefined
       if (this.$refs.formSignUp.validate()) {
         let credentials = {
@@ -122,22 +122,20 @@ export default {
           lastname: this.lastName,
           username: this.username,
         };
-        axios
-          .post("//localhost:5000/api/v1/user", credentials)
-          .then((response) => {
-            console.log(response);
-            this.$store
-              .dispatch("login", {
-                email: this.email,
-                password: this.password,
-              })
-              .then(() => {
-                this.$router.push({ name: "Dashboard" });
-              });
-          })
-          .catch((err) => {
-            this.error = err.response.data.message;
-          });
+
+        const response = await UserService.signup(credentials);
+        if (response.success) {
+          this.$store
+            .dispatch("login", {
+              email: this.email,
+              password: this.password,
+            })
+            .then(() => {
+              this.$router.push({ name: "Dashboard" });
+            });
+        } else {
+          this.error = response.message;
+        }
       }
     },
   },
