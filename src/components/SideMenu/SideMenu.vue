@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-navigation-drawer app clipped permanent :mini-variant="mini">
-      <v-list-item class="hidden-sm-and-down">
+      <v-list-item class="hidden-sm-and-down" data-cy="profile">
         <v-list-item-content>
           <v-list-item-avatar class="avatar" size="40%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>

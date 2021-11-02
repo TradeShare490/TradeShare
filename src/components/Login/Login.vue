@@ -3,6 +3,7 @@
     <v-card class="mx-auto" max-width="250" elevation="0">
       <v-form ref="formLogin" v-model="valid">
         <v-text-field
+          data-cy="email"
           v-model="email"
           label="Email"
           color="primary"
@@ -11,6 +12,7 @@
         ></v-text-field>
 
         <v-text-field
+          data-cy="password"
           v-model="password"
           :value="password"
           label="Password"
@@ -26,6 +28,7 @@
           <router-link to="">Forgot Password</router-link>
         </p>
         <v-btn
+          data-cy="login-button"
           width="250"
           height="45"
           color="primary"
