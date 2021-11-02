@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-4" max-width="500">
+  <v-card class="mx-4" max-width="300">
     <v-row class="py-2 px-5">
       <v-col cols="10" class="pt-0">
         <v-list-item class="px-0">
@@ -28,32 +28,31 @@
     </v-row>
     <v-row>
       <v-spacer />
-      <v-col cols="2"> Equities </v-col>
-      <v-col cols="2"> Cash </v-col>
-      <v-col cols="2"> Options </v-col>
+      <v-col cols="4" sm="3" md="3"> Equities </v-col>
+      <v-col cols="4" sm="3" md="3"> Cash </v-col>
+      <v-col cols="4" sm="3" md="3"> Options </v-col>
       <v-spacer />
     </v-row>
     <v-row>
       <v-spacer />
-      <v-col cols="2"> {{ equities }} </v-col>
-      <v-col cols="2"> {{ cash }} </v-col>
-      <v-col cols="2"> {{ options }} </v-col>
+      <v-col cols="4" sm="3" md="3"> {{ equities }} </v-col>
+      <v-col cols="4" sm="3" md="3"> {{ cash }} </v-col>
+      <v-col cols="4" sm="3" md="3"> {{ options }} </v-col>
       <v-spacer />
     </v-row>
     <v-row>
-      <v-col cols="3" class="d-flex align-center">
-        <v-list-item>
+      <v-col cols="6" class="d-flex align-center pl-10">
+        <v-list-item class="px-0">
           <v-list-item-content>
-            <v-list-item-title class="text-subtitle-2 text-right"
+            <v-list-item-title class="text-subtitle-2 text-left"
               >Last 7 days</v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>
         <v-icon>arrow_right</v-icon>
       </v-col>
-      <v-col cols="4" sm="6"></v-col>
-      <v-col cols="3" class="d-flex align-center">
-        <v-list-item>
+      <v-col cols="6" class="d-flex align-center pr-10">
+        <v-list-item class="px-0">
           <v-list-item-content>
             <v-list-item-title class="text-subtitle-2 text-right"
               >Breakdown</v-list-item-title
@@ -62,7 +61,6 @@
         </v-list-item>
         <v-icon>arrow_right</v-icon>
       </v-col>
-      <v-col cols="1"></v-col>
     </v-row>
   </v-card>
 </template>
