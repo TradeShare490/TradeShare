@@ -53,6 +53,7 @@
           v-if="following == true"
           @click="unfollow"
           class="my-3 caption"
+          data-cy="following"
         >
           Following
         </v-btn>
@@ -64,6 +65,7 @@
           v-if="following == false"
           @click="follow"
           class="my-3 caption"
+          data-cy="follow"
         >
           Follow
         </v-btn>
