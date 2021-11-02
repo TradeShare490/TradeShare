@@ -6,7 +6,7 @@
           <v-list-item-avatar class="avatar" size="40%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
           </v-list-item-avatar>
-          <v-list-item-title class="mt-3">
+          <v-list-item-title class="mt-3" data-cy="user-name">
             {{ user.firstname + " " + user.lastname }}
           </v-list-item-title>
           <v-list-item-subtitle class="text-caption grey--text">{{
