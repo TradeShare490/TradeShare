@@ -37,6 +37,8 @@
       <Positions />
     </div>
 
+    <Holdings />
+
     <div class="ma-5 d-flex justify-end">
       <v-card elevation="1" outlined max-width="23vw">
         <v-card-title class="pb-0" style="word-break: normal">
@@ -73,6 +75,7 @@ import Recents from "../../components/RecentActivity/Recents.vue";
 // Adding follow function to script
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue";
+import Holdings from "../../components/Dashboard/Holdings.vue";
 
 export default {
   name: "Dashboard",
@@ -125,6 +128,7 @@ export default {
     Recents,
     PortfolioAnalyticsTemplate,
     BarChartContainer,
+    Holdings,
   },
 };
 </script>

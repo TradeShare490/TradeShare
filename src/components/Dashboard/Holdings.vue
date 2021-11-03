@@ -35,9 +35,15 @@
     </v-row>
     <v-row>
       <v-spacer />
-      <v-col cols="4" sm="3" md="3"> {{ equities }} </v-col>
-      <v-col cols="4" sm="3" md="3"> {{ cash }} </v-col>
-      <v-col cols="4" sm="3" md="3"> {{ options }} </v-col>
+      <v-col cols="4" sm="3" md="3" class="pa-0">
+        <div class="text-h5 blue--text text--darken-2">{{ equities }}</div>
+      </v-col>
+      <v-col cols="4" sm="3" md="3" class="pa-0">
+        <div class="text-h5 green--text text--darken-3">{{ cash }}</div>
+      </v-col>
+      <v-col cols="4" sm="3" md="3" class="pa-0">
+        <div class="text-h5 black--text">{{ options }}</div>
+      </v-col>
       <v-spacer />
     </v-row>
     <v-row>
