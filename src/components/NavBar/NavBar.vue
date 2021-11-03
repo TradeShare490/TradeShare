@@ -16,7 +16,7 @@
       <v-autocomplete
         label="Search"
         append-icon="mdi-magnify"
-        class="shrink"
+        class="shrink mr-3"
         rounded
         solo
         dense
