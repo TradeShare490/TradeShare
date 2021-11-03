@@ -42,13 +42,7 @@
     </v-row>
     <v-row>
       <v-col cols="6" class="d-flex align-center pl-10">
-        <v-list-item class="px-0">
-          <v-list-item-content>
-            <v-list-item-title class="text-subtitle-2 text-left"
-              >Last 7 days</v-list-item-title
-            >
-          </v-list-item-content>
-        </v-list-item>
+        <p class="text-subtitle-2 align-center ma-0">Last 7 days</p>
         <v-icon>arrow_right</v-icon>
       </v-col>
       <v-col cols="6" class="d-flex align-center pr-10">
