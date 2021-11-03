@@ -5,6 +5,7 @@
         <v-layout row wrap justify-center class="pb-3">
           <v-flex xs5>
             <v-text-field
+              data-cy="firstName"
               v-model="firstName"
               label="First Name"
               color="primary"
@@ -17,6 +18,7 @@
 
           <v-flex xs5>
             <v-text-field
+              data-cy="lastName"
               v-model="lastName"
               label="Last Name"
               color="primary"
@@ -27,6 +29,7 @@
         </v-layout>
 
         <v-text-field
+          data-cy="userName"
           v-model="username"
           label="Username"
           color="primary"
@@ -35,6 +38,7 @@
         ></v-text-field>
 
         <v-text-field
+          data-cy="email"
           v-model="email"
           label="Email"
           color="primary"
@@ -43,6 +47,7 @@
         ></v-text-field>
 
         <v-text-field
+          data-cy="password"
           v-model="password"
           label="Password"
           color="primary"
@@ -53,6 +58,7 @@
         ></v-text-field>
 
         <v-text-field
+          data-cy="passwordConfirm"
           v-model="passwordConfirm"
           label="Confirm Password"
           color="primary"
@@ -62,6 +68,7 @@
         ></v-text-field>
 
         <v-btn
+          data-cy="signup-button"
           width="250"
           height="45"
           color="primary"
@@ -81,7 +88,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import UserService from "../../services/User.service";
 export default {
   name: "SignUp",
   data: () => ({
@@ -111,7 +118,7 @@ export default {
     error: false,
   }),
   methods: {
-    submit() {
+    async submit() {
       // add check to see if contents are undefined
       if (this.$refs.formSignUp.validate()) {
         let credentials = {
@@ -122,22 +129,20 @@ export default {
           lastname: this.lastName,
           username: this.username,
         };
-        axios
-          .post("//localhost:5000/api/v1/user", credentials)
-          .then((response) => {
-            console.log(response);
-            this.$store
-              .dispatch("login", {
-                email: this.email,
-                password: this.password,
-              })
-              .then(() => {
-                this.$router.push({ name: "Dashboard" });
-              });
-          })
-          .catch((err) => {
-            this.error = err.response.data.message;
-          });
+
+        const response = await UserService.signup(credentials);
+        if (response.success) {
+          this.$store
+            .dispatch("login", {
+              email: this.email,
+              password: this.password,
+            })
+            .then(() => {
+              this.$router.push({ name: "Dashboard" });
+            });
+        } else {
+          this.error = response.message;
+        }
       }
     },
   },
