@@ -24,6 +24,7 @@
             :key="item.title"
             :to="item.route"
             active-class="active"
+            data-cy="menu"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
