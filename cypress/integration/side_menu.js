@@ -1,10 +1,12 @@
 describe('Side menu can', () => {	
 	it('navigate to Home (/news-feed)', () => {
+		cy.login();
+		cy.wait(5000);
 		cy.fixture('url').then((jsonFile) => {
     	cy.visit(`${jsonFile.HOMEPAGE}:${process.env.PORT||8081}${jsonFile.DASHBOARD}`)
 		});
 
-		cy.get('[data-cy=user-name]').should('contain', 'name-to-change')
+		cy.get('[data-cy=user-name]').should('contain', 'Jane Doe')
 
     cy.contains("Home").click()
 
