@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import Profile from "../../components/Dashboard/Profile.vue"
+  import Profile from "../../components/Profile/Profile.vue"
 
   export default {
     name: "OtherDashboard",

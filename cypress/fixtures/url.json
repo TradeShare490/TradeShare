@@ -1,4 +1,5 @@
 {
 	"HOMEPAGE": "http://localhost",
-	"HOSTED_BACKEND_URL": "https://ancient-waters-32375.herokuapp.com/api/check"
+	"HOSTED_BACKEND_URL": "https://ancient-waters-32375.herokuapp.com/api/check",
+	"OTHER_DASHBOARD": "/other-dashboard"
 }
