@@ -1,5 +1,4 @@
 <template>
-  <!-- <Profile/> -->
   <div>
     <div class="ma-5">
       <v-row>
@@ -56,7 +55,6 @@
 </template>
 
 <script>
-// import Profile from "../../components/Dashboard/Profile.vue"
 import Positions from "../../components/Portfolio/Positions.vue"
 import Recents from "../../components/RecentActivity/Recents.vue"
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
@@ -107,7 +105,6 @@ export default {
         }
     },
   components: {
-    // Profile,
     Positions,
     Recents,
     PortfolioAnalyticsTemplate,
