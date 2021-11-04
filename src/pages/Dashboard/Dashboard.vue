@@ -1,5 +1,4 @@
 <template>
-  <!-- <Profile/> -->
   <div>
     <div class="ma-5">
       <v-row>
@@ -68,11 +67,8 @@
 </template>
 
 <script>
-// import Profile from "../../components/Dashboard/Profile.vue"
-// import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import Positions from "../../components/Portfolio/Positions.vue";
 import Recents from "../../components/RecentActivity/Recents.vue";
-// Adding follow function to script
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue";
 import Holdings from "../../components/Dashboard/Holdings.vue";
@@ -122,8 +118,6 @@ export default {
     };
   },
   components: {
-    // Profile,
-    // PortfolioAnalyticsTemplate,
     Positions,
     Recents,
     PortfolioAnalyticsTemplate,
