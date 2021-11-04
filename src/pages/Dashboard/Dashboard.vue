@@ -28,13 +28,7 @@
       </v-col>
       <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
       <v-col lg="6" xl="3">
-        <PortfolioAnalyticsTemplate
-          title="Goal Progress"
-          value="75%"
-          progress="75"
-          color="blue"
-          icon="mdi-progress-clock"
-        />
+        <MonthlyProfitLoss title="Monthly Realized P/L" value="+$5,200.00" :percentChange="16"/>
       </v-col>
       <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
     </v-row>
@@ -89,8 +83,9 @@
 import Positions from "../../components/Portfolio/Positions.vue";
 import Recents from "../../components/RecentActivity/Recents.vue";
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
-import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue";
 import Holdings from "../../components/Dashboard/Holdings.vue";
+import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
+import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
 
 export default {
   name: "Dashboard",
@@ -142,6 +137,7 @@ export default {
     PortfolioAnalyticsTemplate,
     BarChartContainer,
     Holdings,
+    MonthlyProfitLoss
   },
 };
 </script>
