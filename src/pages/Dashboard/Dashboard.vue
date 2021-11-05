@@ -41,13 +41,12 @@
     </v-row>
     <!-- SECOND ROW => 2 COLUMNS -->
     <v-row>
-      <v-col xs="12" sm="12" md="12" lg="8" xl="9">
+      <v-col xs="12" lg="8" xl="9">
         <v-card min-width="350">
           <Positions /> 
         </v-card>
-        
       </v-col>
-      <v-col xs="12" sm="12" md="12" lg="4" xl="3">
+      <v-col xs="12" lg="4" xl="3">
         <div>
           <v-card elevation="1" outlined min-width="350">
             <v-card-title class="pb-0" style="word-break: normal">
@@ -77,11 +76,11 @@
     </v-row>
     <!-- THIRD ROW => 2 COLUMNS -->
     <v-row>
-      <v-col xs="12" sm="12" md="6" lg="4">
+      <v-col xs="12" md="6" lg="4">
         <Holdings />
       </v-col>
-      <v-col xs="12" sm="12" md="6" lg="8">
-        <v-card min-width="350">
+      <v-col xs="12" md="6" lg="8">
+        <v-card outlined min-width="350">
           <BarChartContainer />
         </v-card>
       </v-col>
