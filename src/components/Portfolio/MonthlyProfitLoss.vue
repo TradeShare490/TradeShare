@@ -1,6 +1,6 @@
 <template>
   <v-card min-width="363" min-height="164" max-height="164" class="pa-3 white--text" color="#3F51B5">
-    <v-row justify="space-between" align="start" class="mb-5">
+    <v-row justify="space-between" align="start" class="mb-6">
       <v-col cols="8" class="text-left">
         <!-- Card Title -->
         <div class="text-overline" data-cy='pl-title'>{{ title }}</div>
