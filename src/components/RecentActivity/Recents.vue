@@ -1,7 +1,7 @@
 <template>
     <v-container>      
         <v-row no-gutters justify="space-between" align="center">
-            <v-col xs="12" sm="12" lg="3" xl="3">
+            <v-col xs="12" sm="12" md="3" lg="3" xl="3">
                 <v-list-item class="px-0">
                     <v-list-item-content>
                         <v-list-item-avatar>
@@ -15,7 +15,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="12" lg="5" xl="5">
+            <v-col xs="12" sm="12" md="5" lg="5" xl="5">
                 <v-list-item class="px-0">
                     <v-list-item-content >
                         <v-list-item-title class="text-caption text-wrap">
@@ -33,7 +33,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="6" lg="3" xl="3">
+            <v-col xs="12" sm="6" md="3" lg="3" xl="3">
                 <v-list-item class="px-0">
                     <v-list-item-content class="text-caption text-wrap">
                         <v-list-item-title style="font-size: 12px">
@@ -49,7 +49,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="6" lg="1" xl="1">
+            <v-col xs="12" sm="6" md="1" lg="1" xl="1">
                 <v-btn
                     icon
                 >

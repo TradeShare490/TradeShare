@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-4" max-width="300">
+  <v-card >
     <v-row class="py-2 px-5">
       <v-col cols="10" class="pt-0">
         <v-list-item class="px-0">
