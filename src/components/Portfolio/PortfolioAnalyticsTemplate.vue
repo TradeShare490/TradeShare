@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="363" min-height="164">
+  <v-card min-width="350" min-height="164">
     <v-container class="d-flex flex-column justify-space-between" fluid>
       <v-row>
         <v-col cols="8" class="text-left">
