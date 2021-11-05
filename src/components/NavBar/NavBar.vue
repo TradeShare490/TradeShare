@@ -12,7 +12,7 @@
       <v-toolbar-title class="text-h6 mr-6 hidden-sm-and-down">
         TradeShare
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-autocomplete
         label="Search"
         append-icon="mdi-magnify"

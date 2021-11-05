@@ -42,11 +42,14 @@
     <!-- SECOND ROW => 2 COLUMNS -->
     <v-row>
       <v-col xs="12" sm="12" md="12" lg="8" xl="9">
-        <Positions />
+        <v-card min-width="350">
+          <Positions /> 
+        </v-card>
+        
       </v-col>
       <v-col xs="12" sm="12" md="12" lg="4" xl="3">
         <div>
-          <v-card elevation="1" outlined>
+          <v-card elevation="1" outlined min-width="350">
             <v-card-title class="pb-0" style="word-break: normal">
               <span class="blue--text">Recent Activity</span>
             </v-card-title>
@@ -78,7 +81,9 @@
         <Holdings />
       </v-col>
       <v-col xs="12" sm="12" md="6" lg="8">
-        <BarChartContainer />
+        <v-card min-width="350">
+          <BarChartContainer />
+        </v-card>
       </v-col>
     </v-row>
   </v-container>

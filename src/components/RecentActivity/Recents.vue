@@ -1,5 +1,5 @@
 <template>
-    <v-container>      
+    <v-container>
         <v-row no-gutters justify="space-between" align="center">
             <v-col xs="12" sm="12" md="3" lg="3" xl="3">
                 <v-list-item class="px-0">

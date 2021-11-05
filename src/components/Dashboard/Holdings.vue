@@ -1,12 +1,12 @@
 <template>
-  <v-card >
+  <v-card min-width="350">
     <v-row class="py-2 px-5">
       <v-col cols="10" class="pt-0">
         <v-list-item class="px-0">
           <v-list-item-content>
-            <v-list-item-title class="text-h6 text-left"
-              >Holdings</v-list-item-title
-            >
+            <v-list-item-title class="text-h6 text-left">
+              Holdings
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-col>
