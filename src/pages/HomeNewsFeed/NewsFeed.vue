@@ -1,35 +1,45 @@
 <template>
-    <div>
-        <v-container class="mx-10">
-            <v-row>
-                <span class="text-h5 font-weight-medium mb-3">Latest Activity</span>
-            </v-row>
-            <v-row>
+    <v-container fluid>
+        <v-row>
+            <v-col xs="12" lg="9">
+                <span class="d-flex justify-start text-h4 font-weight-medium ml-1 mb-2">Latest Activity</span>
                 <v-alert 
                     outlined
                     color="grey lighten-2"
-                    class="pa-0"
+                    class="pa-0 ma-0"
                 >
-                    <Latest
-                        v-for="activity in latestActivities"
-                        :key="activity.id"
-                        :image=activity.image
-                        :name="activity.name"
-                        :purchased="activity.purchased"
-                        :company="activity.company"
-                        :tag="activity.tag"
-                        :size="activity.size"
-                        :when="activity.when"
-                        :verified="activity.verified"
-                        :stock1="activity.stock1"
-                        :stock2="activity.stock2"
-                        :stock3="activity.stock3"
-                        :stock4="activity.stock4"
-                    ></Latest>
+                <Latest
+                    v-for="activity in latestActivities"
+                    :key="activity.id"
+                    :image=activity.image
+                    :name="activity.name"
+                    :purchased="activity.purchased"
+                    :company="activity.company"
+                    :tag="activity.tag"
+                    :size="activity.size"
+                    :when="activity.when"
+                    :verified="activity.verified"
+                    :stock1="activity.stock1"
+                    :stock2="activity.stock2"
+                    :stock3="activity.stock3"
+                    :stock4="activity.stock4"
+                ></Latest>
                 </v-alert>
-            </v-row>
-        </v-container>
-    </div>
+            </v-col>
+        <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
+            <v-col xs="12" lg="3">
+                <span class="blue--text d-flex justify-start text-h4 font-weight-medium mb-3">Trending Companies</span>
+                <v-sheet
+                    color="grey darken-2"
+                    elevation="1"
+                    min-height="1000"
+                    min-width="175"
+                >
+                </v-sheet>
+            </v-col>
+        <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
+        </v-row>
+    </v-container>
 </template>
 <script>
 import Latest from "../../components/LatestActivity/Latest.vue"

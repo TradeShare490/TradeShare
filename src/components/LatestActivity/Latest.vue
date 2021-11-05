@@ -1,5 +1,5 @@
 <template>
-    <v-container class="pa-0">      
+    <v-container class="pa-0 ma-0">      
         <v-row no-gutters justify="space-between" align="center">
             <v-col xs="12" sm="12" md="2" lg="2" xl="2">
                 <v-list-item class="px-0">
@@ -9,7 +9,7 @@
                                 <img :src="image">
                             </v-avatar>
                         </v-list-item-avatar>
-                        <v-list-item-title class="text-wrap">
+                        <v-list-item-title class="text-wrap font-weight-bold">
                             {{ this.name }}
                         </v-list-item-title>
                         <v-list-item class="d-flex justify-center px-0">
@@ -24,12 +24,13 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <!-- FIX THE DIVIDER LATER -->
-            <v-divider vertical class="my-5"></v-divider>
+        <!-- FIX THE DIVIDER -->
+            <v-divider vertical class="my-5" />
+        <!-- FIX THE DIVIDER -->
             <v-col xs="12" sm="12" md="2" lg="2" xl="2">
                 <v-list-item class="px-0">
                     <v-list-item-content>
-                        <v-list-item-title class="text-h6 text-wrap font-weight-medium ml-2">
+                        <v-list-item-title class="text-h5 text-wrap font-weight-medium ml-3 d-flex justify-start">
                             {{ this.company }}
                         </v-list-item-title>
                         <v-list-item>
@@ -41,21 +42,21 @@
                                 {{ this.tag }}
                             </v-chip>
                         </v-list-item>
-                        <v-list-item>
+                        <v-list-item class="pr-0">
                             <v-container class="px-0">
                                 <v-row no-gutters>
-                                    <v-col class="d-flex justify-start">
-                                        <span class="text-caption font-weight-bold">Position Size: <span class="text-caption font-weight-medium">{{ this.size }} </span></span>
+                                    <v-col class="d-flex justify-start mb-1">
+                                        <span class="text-subtitle-2 font-weight-bold">Position Size: <span class="font-weight-medium">{{ this.size }} </span></span>
+                                    </v-col>
+                                </v-row>
+                                <v-row no-gutters>
+                                    <v-col class="d-flex justify-start mb-1">
+                                        <span class="text-subtitle-2 font-weight-bold">Execution Date: <span class="font-weight-medium">{{ this.when }} </span></span>
                                     </v-col>
                                 </v-row>
                                 <v-row no-gutters>
                                     <v-col class="d-flex justify-start">
-                                        <span class="text-caption font-weight-bold">Execution Date: <span class="text-caption font-weight-medium">{{ this.when }} </span></span>
-                                    </v-col>
-                                </v-row>
-                                <v-row no-gutters>
-                                    <v-col class="d-flex justify-start">
-                                        <span class="text-caption font-weight-bold">Verified: <span class="text-caption font-weight-medium">{{ this.verified ? "Yes" : "No" }}</span></span>
+                                        <span class="text-subtitle-2 font-weight-bold">Verified: <span class="font-weight-medium">{{ this.verified ? "Yes" : "No" }}</span></span>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -63,51 +64,61 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="12" md="3" lg="3" xl="3">
+            <v-col xs="12" sm="12" md="4" lg="3" xl="3">
                 <v-list-item class="px-0">
                     <v-list-item-content class="text-caption text-wrap">
-                        <v-list-item-title>
-                            <span class="font-weight-bold">INSERT GRAPH</span>
-                        </v-list-item-title>
+                            <StockGraph />
                         <v-list-item>
                             <v-row>
                                 <v-col>
-                                    <span class="font-weight-bold">{{ this.stock1 }}</span>
+                                    <span class="text-h6 font-weight-bold">{{ this.stock1.toFixed(2) }}</span>
                                 </v-col>
                                 <v-col>
-                                    <span class="green--text font-weight-bold">{{ this.stock2 }}</span>
+                                    <span class="text-h6 green--text font-weight-bold">{{ this.stock2 }}</span>
                                 </v-col>
                             </v-row>
                         </v-list-item> 
                         <v-list-item>
                             <v-row>
                                 <v-col>
-                                    <span class="grey--text font-weight-bold">{{ this.stock3 }}</span>
+                                    <span class="text-h6 grey--text">{{ this.stock3.toFixed(2) }}</span>
                                 </v-col>
                                 <v-col>
-                                    <span class="grey--text font-weight-bold">{{ this.stock4 }}</span>
+                                    <span class="text-h6 grey--text">{{ this.stock4 }}</span>
                                 </v-col>
                             </v-row>
                         </v-list-item>
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="12" md="3" lg="3" xl="3">
+            <v-col xs="12" sm="12" md="4" lg="5" xl="5">
                 <v-list-item class="px-0">
                     <v-list-item-content>
+                        <div class="d-flex justify-end" align-self="start">
+                            <v-btn
+                                icon
+                            >
+                                <v-icon>mdi-dots-vertical</v-icon>
+                            </v-btn>
+                        </div>
                         <v-list-item>
                             <v-alert
+                                class="pa-3"
                                 outlined
                                 color="grey lighten-2"
+                                width=100%
+                                height="100"
                             >
                                 <div class="black--text">
                                     <v-row>
-                                        <v-col>
+                                <!-- FETCH THESE FROM THE BACK-END -->
+                                        <v-col class="d-flex justify-start">
                                             Username
                                         </v-col>
-                                        <v-col>
-                                            Message
+                                        <v-col class="d-flex justify-start">
+                                            User's Message
                                         </v-col>
+                                <!-- FETCH THESE FROM THE BACK-END -->
                                     </v-row>
                                 </div>
                             </v-alert>
@@ -115,17 +126,15 @@
                         <v-list-item>
                             <v-text-field
                                 label="Comment"
-                                single-line
+                                flat
+                                solo
                                 outlined
-                                color="primary"
-                                v-model="input"
+                                type="input"
                             >
-                            <!-- FIX THIS LATER -->
-                                <template v-slot:append>
+                                <template #append>
                                     <v-btn
-                                        text
-                                        class="white--text"
-                                        style="background-color: #3F51B5"
+                                        color="primary"
+                                        type="submit"
                                         @click="submit"
                                     >
                                         Submit
@@ -136,19 +145,15 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="12" md="1" lg="1" xl="1">
-                <v-btn
-                    icon
-                >
-                    <v-icon>mdi-dots-vertical</v-icon>
-                </v-btn>
-            </v-col>
         </v-row>
         <v-divider></v-divider>
     </v-container>
 </template>
 <script>
+import StockGraph from "../../components/LatestActivity/StockGraph.vue"; 
+
 export default {
+  components: { StockGraph },
     name: "Latest",
     props: {
         image: String,
@@ -167,14 +172,3 @@ export default {
     data: () => ({}),
 };
 </script>
-<style scoped>
-    .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot:hover{
-        border-width: 8px;
-        border-style: solid;
-        border-color: #6fbd44;
-    }
-    .v-text-field{
-      border-color: pink;
-    }
-
-</style>
