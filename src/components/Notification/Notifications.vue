@@ -29,18 +29,15 @@
       <v-col
         align-self="center"
         cols="auto"
-        sm="4"
-        md="4"
-        lg="4"
-        xl="5"
-        class="text-center mx-3 px-0 mt-3 py-1"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto"
+        class="text-center mx-4 px-0 mt-3 py-1"
       >
-      <p    
-        align-self="center"
-
-        class="text-left mx-3 px-0 mt-3 py-1">
-        {{message}}
-        </p>
+        <v-list-item align-self ="center" class=" text-center text-sm-body-0 text-md-body-2 text-lg-body-4 text-xl-body-4 text-wrap">
+          {{message}}
+        </v-list-item>
       </v-col>
       
       <v-spacer></v-spacer>
