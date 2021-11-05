@@ -1,6 +1,5 @@
 <template>
   <v-container class="ma-0" fluid>
-    <!-- FIRST ROW => 4 COLUMNS -->
     <v-row>
       <v-col>
         <PortfolioAnalyticsTemplate
@@ -39,7 +38,6 @@
       </v-col>
       <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
     </v-row>
-    <!-- SECOND ROW => 2 COLUMNS -->
     <v-row>
       <v-col xs="12" lg="8" xl="9">
         <v-card min-width="350">
@@ -74,7 +72,6 @@
         </div>
       </v-col>
     </v-row>
-    <!-- THIRD ROW => 2 COLUMNS -->
     <v-row>
       <v-col xs="12" md="6" lg="4">
         <Holdings />
