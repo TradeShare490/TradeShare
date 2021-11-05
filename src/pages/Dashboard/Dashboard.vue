@@ -80,7 +80,7 @@
         <Holdings />
       </v-col>
       <v-col xs="12" md="6" lg="8">
-        <v-card outlined min-width="350">
+        <v-card elevation="1" outlined min-width="350">
           <BarChartContainer />
         </v-card>
       </v-col>
