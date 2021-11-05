@@ -1,7 +1,7 @@
 <template>
   <v-container class="ma-0" fluid>
     <v-row>
-      <v-col>
+      <v-col lg="6" xl="3">
         <PortfolioAnalyticsTemplate
           title="Portfolio Value"
           value="$24,000"
@@ -9,7 +9,7 @@
           icon="mdi-domain"
         />
       </v-col>
-      <v-col>
+      <v-col lg="6" xl="3">
         <PortfolioAnalyticsTemplate
           title="Daily Change"
           value="+2.12%"
@@ -17,7 +17,7 @@
           icon="mdi-calendar-today"
         /> 
       </v-col
-      ><v-col>
+      ><v-col lg="6" xl="3">
         <PortfolioAnalyticsTemplate
           title="Goal Progress"
           value="75%"
@@ -27,7 +27,7 @@
         />
       </v-col>
       <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
-      <v-col>
+      <v-col lg="6" xl="3">
         <PortfolioAnalyticsTemplate
           title="Goal Progress"
           value="75%"
