@@ -24,6 +24,7 @@
           solo
           multiple
           return-object
+          data-cy="sort-label"
         ></v-autocomplete>
       </v-col>
       <v-spacer></v-spacer>
@@ -60,6 +61,7 @@
           line
           height="10px"
           return-object
+          data-cy="search"
         ></v-autocomplete>
       </v-col>
     </v-row>
@@ -98,7 +100,6 @@
       querySelections(v) {
         this.isLoading = true;
         // Simulated ajax query
-        console.log()
         setTimeout(() => {
           this.users = this.listUsers.filter((e) => {
             return (

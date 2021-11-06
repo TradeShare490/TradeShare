@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <NavBar v-if="loggedIn" />
       <SideMenu v-if="loggedIn" />
       <router-view></router-view>
     </v-main>
@@ -9,6 +10,7 @@
 
 <script>
 import SideMenu from "./components/SideMenu/SideMenu.vue";
+import NavBar from "./components/NavBar/NavBar.vue";
 
 export default {
   name: "App",
@@ -18,6 +20,7 @@ export default {
     };
   },
   components: {
+    NavBar,
     SideMenu,
   },
   computed: {
