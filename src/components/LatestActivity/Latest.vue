@@ -152,7 +152,7 @@
                                     <v-btn
                                         color="primary"
                                         type="submit"
-                                        @click="submit"
+                                        
                                     >
                                         Submit
                                     </v-btn>
