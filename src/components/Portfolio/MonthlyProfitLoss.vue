@@ -16,10 +16,6 @@
         <v-list-item-title class="float-left pr-2 subtitle-2" data-cy='pl-percent-change'>{{ percentChange }}%</v-list-item-title>
         <v-list-item-title class=" float-left subtitle-2">Since last month</v-list-item-title>
       </v-col>
-      <v-col>
-        <v-icon class="float-right pr-1" size="20" color="white">mdi-arrow-right</v-icon>
-        <v-list-item-title class="float-right subtitle-2 pr-2" >Change Audience</v-list-item-title>
-      </v-col>
     </v-row>
     <!-- TODO Implement privacy functionality to change the lock and message -->
 
