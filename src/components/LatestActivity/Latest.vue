@@ -1,5 +1,12 @@
 <template>
-    <v-container class="pa-0 ma-0">      
+    <v-container class="pa-0 ma-0">
+        <div class="d-flex justify-end mb-n3">
+            <v-btn
+                icon
+            >
+                <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+        </div>
         <v-row no-gutters justify="space-between" align="center">
             <v-col xs="12" sm="12" md="6" lg="2" xl="2">
                 <v-list-item class="px-0">
@@ -28,37 +35,56 @@
             <v-col xs="12" sm="12" md="6" lg="3" xl="2">
                 <v-list-item class="px-0">
                     <v-list-item-content>
-                        <v-list-item-title class="text-h5 font-weight-medium ml-3 d-flex justify-start">
-                            {{ this.company }}
-                        </v-list-item-title>
-                        <v-list-item>
-                            <v-chip
-                                label
-                                class="white--text px-2"
-                                color="primary"
-                            >
-                                {{ this.tag }}
-                            </v-chip>
-                        </v-list-item>
-                        <v-list-item class="pr-0">
-                            <v-container class="px-0">
-                                <v-row no-gutters>
-                                    <v-col class="d-flex justify-start mb-1">
-                                        <span class="text-subtitle-2 font-weight-bold">Position Size: <span class="font-weight-medium">{{ this.size }} </span></span>
-                                    </v-col>
-                                </v-row>
-                                <v-row no-gutters>
-                                    <v-col class="d-flex justify-start mb-1 text-no-wrap">
-                                        <span class="text-subtitle-2 font-weight-bold">Execution Date: <span class="font-weight-medium">{{ this.when }} </span></span>
-                                    </v-col>
-                                </v-row>
-                                <v-row no-gutters>
-                                    <v-col class="d-flex justify-start">
-                                        <span class="text-subtitle-2 font-weight-bold">Verified: <span class="font-weight-medium">{{ this.verified ? "Yes" : "No" }}</span></span>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-list-item>
+                        <v-col xs="6" sm="6" md="6" lg="12"> 
+                            <v-list-item-title class="text-h6 font-weight-medium d-flex justify-start ml-3">
+                                {{ this.company }}
+                            </v-list-item-title>
+                            <v-list-item>
+                                <v-chip
+                                    label
+                                    class="white--text px-2"
+                                    color="primary"
+                                >
+                                    {{ this.tag }}
+                                </v-chip>
+                            </v-list-item>
+                        </v-col>
+                        <v-col xs="6" sm="6" md="6" lg="12">
+                            <v-list-item class="pr-0">
+                                <v-container class="px-0">
+                                    <v-row no-gutters>
+                                        <v-col class="d-flex justify-start mb-1">
+                                            <span class="text-subtitle-2 font-weight-bold">
+                                                Position Size: 
+                                                    <span class="font-weight-medium">
+                                                        {{ this.size }} 
+                                                    </span>
+                                            </span>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row no-gutters>
+                                        <v-col class="d-flex justify-start mb-1 text-no-wrap">
+                                            <span class="text-subtitle-2 font-weight-bold">
+                                                Execution Date: 
+                                                    <span class="font-weight-medium">
+                                                        {{ this.when }}
+                                                    </span>
+                                            </span>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row no-gutters>
+                                        <v-col class="d-flex justify-start">
+                                            <span class="text-subtitle-2 font-weight-bold">
+                                                Verified: 
+                                                    <span class="font-weight-medium">
+                                                        {{ this.verified ? "Yes" : "No" }}
+                                                    </span>
+                                            </span>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-list-item> 
+                        </v-col>
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
@@ -92,13 +118,6 @@
             <v-col xs="12" sm="12" md="6" lg="4" xl="5">
                 <v-list-item class="px-0">
                     <v-list-item-content>
-                        <div class="d-flex justify-end" align-self="start">
-                            <v-btn
-                                icon
-                            >
-                                <v-icon>mdi-dots-vertical</v-icon>
-                            </v-btn>
-                        </div>
                         <v-list-item>
                             <v-alert
                                 class="pa-3"
