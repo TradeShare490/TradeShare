@@ -26,7 +26,7 @@
     name: "StockGraph",
     data: () => ({
       fill: false,
-      selectedGradient: gradients[4],
+      selectedGradient: gradients[3],
       gradients,
       padding: 2,
       radius: 0,

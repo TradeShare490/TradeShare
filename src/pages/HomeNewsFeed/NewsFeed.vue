@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
         <v-row>
-            <v-col xs="12" lg="9">
+            <v-col xs="12" sm="12" md="12" lg="9">
                 <span class="d-flex justify-start text-h4 font-weight-medium ml-1 mb-2">Latest Activity</span>
                 <v-alert 
                     outlined
@@ -27,7 +27,7 @@
                 </v-alert>
             </v-col>
         <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
-            <v-col xs="12" lg="3">
+            <v-col xs="12" sm="12" md="12" lg="3">
                 <span class="blue--text d-flex justify-start text-h4 font-weight-medium mb-3">Trending Companies</span>
                 <v-sheet
                     color="grey darken-2"

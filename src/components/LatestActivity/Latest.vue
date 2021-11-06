@@ -1,7 +1,7 @@
 <template>
     <v-container class="pa-0 ma-0">      
         <v-row no-gutters justify="space-between" align="center">
-            <v-col xs="12" sm="12" md="2" lg="2" xl="2">
+            <v-col xs="12" sm="12" md="6" lg="2" xl="2">
                 <v-list-item class="px-0">
                     <v-list-item-content>
                         <v-list-item-avatar class="mr-0">
@@ -24,13 +24,11 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-        <!-- FIX THE DIVIDER -->
-            <v-divider vertical class="my-5" />
-        <!-- FIX THE DIVIDER -->
-            <v-col xs="12" sm="12" md="2" lg="2" xl="2">
+            <v-divider vertical class="my-5 hidden-md-and-down" />
+            <v-col xs="12" sm="12" md="6" lg="3" xl="2">
                 <v-list-item class="px-0">
                     <v-list-item-content>
-                        <v-list-item-title class="text-h5 text-wrap font-weight-medium ml-3 d-flex justify-start">
+                        <v-list-item-title class="text-h5 font-weight-medium ml-3 d-flex justify-start">
                             {{ this.company }}
                         </v-list-item-title>
                         <v-list-item>
@@ -50,7 +48,7 @@
                                     </v-col>
                                 </v-row>
                                 <v-row no-gutters>
-                                    <v-col class="d-flex justify-start mb-1">
+                                    <v-col class="d-flex justify-start mb-1 text-no-wrap">
                                         <span class="text-subtitle-2 font-weight-bold">Execution Date: <span class="font-weight-medium">{{ this.when }} </span></span>
                                     </v-col>
                                 </v-row>
@@ -64,7 +62,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="12" md="4" lg="3" xl="3">
+            <v-col xs="12" sm="12" md="6" lg="3" xl="3">
                 <v-list-item class="px-0">
                     <v-list-item-content class="text-caption text-wrap">
                             <StockGraph />
@@ -81,17 +79,17 @@
                         <v-list-item>
                             <v-row>
                                 <v-col>
-                                    <span class="text-h6 grey--text">{{ this.stock3.toFixed(2) }}</span>
+                                    <span class="text-subtitle-1 grey--text font-weight-light">{{ this.stock3.toFixed(2) }}</span>
                                 </v-col>
                                 <v-col>
-                                    <span class="text-h6 grey--text">{{ this.stock4 }}</span>
+                                    <span class="text-subtitle-1 grey--text font-weight-light">{{ this.stock4 }}</span>
                                 </v-col>
                             </v-row>
                         </v-list-item>
                     </v-list-item-content>
                 </v-list-item>
             </v-col>
-            <v-col xs="12" sm="12" md="4" lg="5" xl="5">
+            <v-col xs="12" sm="12" md="6" lg="4" xl="5">
                 <v-list-item class="px-0">
                     <v-list-item-content>
                         <div class="d-flex justify-end" align-self="start">
