@@ -36,7 +36,7 @@
                 <v-list-item class="px-0">
                     <v-list-item-content>
                         <v-col xs="6" sm="6" md="6" lg="12"> 
-                            <v-list-item-title class="text-h6 font-weight-medium d-flex justify-start ml-3">
+                            <v-list-item-title class="text-h6 text-wrap text-left font-weight-medium d-flex justify-start ml-3">
                                 {{ this.company }}
                             </v-list-item-title>
                             <v-list-item>
@@ -54,7 +54,7 @@
                                 <v-container class="px-0">
                                     <v-row no-gutters>
                                         <v-col class="d-flex justify-start mb-1">
-                                            <span class="text-subtitle-2 font-weight-bold">
+                                            <span class="text-subtitle-2 text-left font-weight-bold">
                                                 Position Size: 
                                                     <span class="font-weight-medium">
                                                         {{ this.size }} 
@@ -63,7 +63,7 @@
                                         </v-col>
                                     </v-row>
                                     <v-row no-gutters>
-                                        <v-col class="d-flex justify-start mb-1 text-no-wrap">
+                                        <v-col class="d-flex justify-start mb-1 text-no-wrap text-left">
                                             <span class="text-subtitle-2 font-weight-bold">
                                                 Execution Date: 
                                                     <span class="font-weight-medium">
@@ -74,7 +74,7 @@
                                     </v-row>
                                     <v-row no-gutters>
                                         <v-col class="d-flex justify-start">
-                                            <span class="text-subtitle-2 font-weight-bold">
+                                            <span class="text-subtitle-2 text-left font-weight-bold">
                                                 Verified: 
                                                     <span class="font-weight-medium">
                                                         {{ this.verified ? "Yes" : "No" }}
