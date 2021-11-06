@@ -1,69 +1,88 @@
 <template>
-  <div>
-    <div class="ma-5">
-      <v-row>
-        <v-col>
-          <PortfolioAnalyticsTemplate
-            title="Portfolio Value"
-            value="$24,000"
-            :percentChange="-20"
-            icon="mdi-domain"
-          />
-        </v-col>
-        <v-col>
-          <PortfolioAnalyticsTemplate
-            title="Daily Change"
-            value="+2.12%"
-            :percentChange="16"
-            icon="mdi-calendar-today"
-          /> </v-col
-        ><v-col>
-          <PortfolioAnalyticsTemplate
-            title="Goal Progress"
-            value="75%"
-            progress="75"
-            color="blue"
-            icon="mdi-progress-clock"
-          />
-        </v-col>
-        <v-col>
+  <v-container class="ma-0" fluid>
+    <v-row>
+      <v-col lg="6" xl="3">
+        <PortfolioAnalyticsTemplate
+          title="Portfolio Value"
+          value="$24,000"
+          :percentChange="-20"
+          icon="mdi-domain"
+        />
+      </v-col>
+      <v-col lg="6" xl="3">
+        <PortfolioAnalyticsTemplate
+          title="Daily Change"
+          value="+2.12%"
+          :percentChange="16"
+          icon="mdi-calendar-today"
+        /> 
+      </v-col
+      ><v-col lg="6" xl="3">
+        <PortfolioAnalyticsTemplate
+          title="Goal Progress"
+          value="75%"
+          progress="75"
+          color="blue"
+          icon="mdi-progress-clock"
+        />
+      </v-col>
+      <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
+      <v-col lg="6" xl="3">
+        <PortfolioAnalyticsTemplate
+          title="Goal Progress"
+          value="75%"
+          progress="75"
+          color="blue"
+          icon="mdi-progress-clock"
+        />
+      </v-col>
+      <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
+    </v-row>
+    <v-row>
+      <v-col xs="12" lg="8" xl="9">
+        <v-card min-width="350">
+          <Positions /> 
+        </v-card>
+      </v-col>
+      <v-col xs="12" lg="4" xl="3">
+        <div>
+          <v-card elevation="1" outlined min-width="350">
+            <v-card-title class="pb-0" style="word-break: normal">
+              <span class="blue--text">Recent Activity</span>
+            </v-card-title>
+            <Recents
+              v-for="activity in recentActivities"
+              :key="activity.id"
+              :image="activity.image"
+              :name="activity.name"
+              :company="activity.company"
+              :purchased="activity.purchased"
+              :when="activity.when"
+              :today="activity.today"
+            ></Recents>
+            <a
+              href="/news-feed"
+              class="d-flex justify-end"
+              style="text-decoration: none; font-size: 12px"
+            >
+              View all
+              <v-icon color="primary" dense> mdi-menu-right </v-icon>
+            </a>
+          </v-card>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col xs="12" md="6" lg="4">
+        <Holdings />
+      </v-col>
+      <v-col xs="12" md="6" lg="8">
+        <v-card elevation="1" outlined min-width="350">
           <BarChartContainer />
-        </v-col>
-      </v-row>
-    </div>
-
-    <div class="ma-5">
-      <Positions />
-    </div>
-
-    <Holdings />
-
-    <div class="ma-5 d-flex justify-end">
-      <v-card elevation="1" outlined max-width="23vw">
-        <v-card-title class="pb-0" style="word-break: normal">
-          <span class="blue--text">Recent Activity</span>
-        </v-card-title>
-        <Recents
-          v-for="activity in recentActivities"
-          :key="activity.id"
-          :image="activity.image"
-          :name="activity.name"
-          :company="activity.company"
-          :purchased="activity.purchased"
-          :when="activity.when"
-          :today="activity.today"
-        ></Recents>
-        <a
-          href="/news-feed"
-          class="d-flex justify-end"
-          style="text-decoration: none; font-size: 12px"
-        >
-          View all
-          <v-icon color="primary" dense> mdi-menu-right </v-icon>
-        </a>
-      </v-card>
-    </div>
-  </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

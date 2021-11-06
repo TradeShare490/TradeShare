@@ -1,12 +1,12 @@
 <template>
-  <v-container>
+  <v-card>
     <v-navigation-drawer app clipped permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down" data-cy="profile">
         <v-list-item-content>
           <v-list-item-avatar class="avatar" size="40%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
           </v-list-item-avatar>
-          <v-list-item-title class="mt-3">
+          <v-list-item-title class="mt-3" data-cy="user-name">
             {{ user.firstname + " " + user.lastname }}
           </v-list-item-title>
           <v-list-item-subtitle class="text-caption grey--text">{{
@@ -24,6 +24,7 @@
             :key="item.title"
             :to="item.route"
             active-class="active"
+            data-cy="menu"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -57,7 +58,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-  </v-container>
+  </v-card>
 </template>
 
 <script>

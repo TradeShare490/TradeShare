@@ -30,9 +30,9 @@
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
               >{{ name }}</v-list-item-title
             >
-            <v-list-item-subtitle class="text-subtitle-1">AKA {{
-              nickname
-            }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-subtitle-1"
+              >AKA {{ nickname }}</v-list-item-subtitle
+            >
             <v-list-item class="px-0">
               <v-chip
                 label
@@ -40,6 +40,7 @@
                 class="text-uppercase white--text px-1"
                 :color="labelColor"
                 v-if="this.following"
+                data-cy="label"
                 >{{ labelText }}</v-chip
               >
             </v-list-item>
@@ -92,6 +93,7 @@
               v-if="following == true"
               @click="unfollow"
               class="my-3 caption"
+              data-cy="following"
             >
               Following
             </v-btn>
@@ -103,6 +105,7 @@
               v-if="following == false"
               @click="follow"
               class="my-3 caption"
+              data-cy="follow"
             >
               Follow
             </v-btn>
@@ -120,11 +123,18 @@
               class="my-3 caption text-wrap"
               :disabled="!this.following"
               @click="label"
+              data-cy="setLabel"
             >
               Set Label
             </v-btn>
           </v-col>
-          <v-btn block small elevation="0" color="primary" @click="message"
+          <v-btn
+            block
+            small
+            elevation="0"
+            color="primary"
+            @click="message"
+            data-cy="message"
             >Send a Message</v-btn
           >
         </v-row>
@@ -167,7 +177,7 @@
       },
       message() {
         console.log("sending a message...");
-      }
+      },
     },
   };
 </script>
