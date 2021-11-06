@@ -35,9 +35,9 @@
         xl="auto"
         class="text-center mx-4 px-0 mt-3 py-1"
       >
-        <v-list-item align-self ="center" class=" text-center text-sm-body-0 text-md-body-2 text-lg-body-4 text-xl-body-4 text-wrap">
+        <p align-self ="center" class=" text-center text-sm-body-1 text-md-body-1 text-lg-body-1 text-xl-body-1 text-wrap text-caption">
           {{message}}
-        </v-list-item>
+        </p>
       </v-col>
       
       <v-spacer></v-spacer>
