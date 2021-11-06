@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-card>
     <v-navigation-drawer app clipped permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down" data-cy="profile">
         <v-list-item-content>
@@ -58,7 +58,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-  </v-container>
+  </v-card>
 </template>
 
 <script>
