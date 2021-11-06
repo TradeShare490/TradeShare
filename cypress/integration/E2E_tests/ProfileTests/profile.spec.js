@@ -47,11 +47,10 @@ describe("Profile component can ", () => {
   it("set a label", () => {
     cy.get("body").then(($body) => {
       if ($body.find("[data-cy=following]").length > 0) {
-        cy.get("[data-cy=setLabel]").should('not.be.disabled'); // checking that if a user is following the user, can set label
+        cy.get("[data-cy=setLabel]").should("not.be.disabled"); // checking that if a user is following the user, can set label
         cy.get("[data-cy=setLabel]").click();
-      }
-      else {
-        cy.get("[data-cy=setLabel]").should('be.disabled'); // checking that if user is not following user, can't set label
+      } else {
+        cy.get("[data-cy=setLabel]").should("be.disabled"); // checking that if user is not following user, can't set label
       }
     });
   });
