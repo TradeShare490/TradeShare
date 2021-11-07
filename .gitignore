@@ -23,3 +23,5 @@ pnpm-debug.log*
 *.sw?
 cypress/videos
 cypress/screenshots
+.nyc_output
+coverage
