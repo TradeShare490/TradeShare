@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.17.0-chrome88-ff89
-    needs: install
+    needs: install-and-verify-syntax
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
