@@ -58,9 +58,11 @@ jobs:
           wait-on: "http://localhost:8081"
           wait-on-timeout: 500
           record: true
+          browser: chrome
           parallel: true
         env:
           CYPRESS_RECORD_KEY: "ca3f404b-1d73-4ff2-8b09-8a931fb57358"
+          VUE_APP_BACKEND_HOST: "https://ancient-waters-32375.herokuapp.com/api/v1"
           CI: ""
 
       - name: Show coverage report
