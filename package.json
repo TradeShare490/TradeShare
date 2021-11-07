@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "cy:open": "cypress open",
     "cy:open-ct": "cypress open-ct",
-    "cy:run": "cypress run --record --key ca3f404b-1d73-4ff2-8b09-8a931fb57358",
+    "cy:run": "cypress run --record --key ca3f404b-1d73-4ff2-8b09-8a931fb57358 --parallel",
     "cy:run-ct": "cypress run-ct",
     "start-ci": "vue-cli-service serve --port 8081",
     "test-ci": "start-server-and-test start-ci http://localhost:8081 cy:run",
