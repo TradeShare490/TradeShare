@@ -2,8 +2,10 @@
 	"projectId": "pxb3fj",
 	"baseUrl": "http://localhost:8081",
 	"video": true,
+	"reporter": "spec",
 	"component": {
 		"componentFolder": "src",
 		"testFiles": "**/*.spec.js"
-	}
+	},
+	"defaultCommandTimeout": 10000
 }
