@@ -29,7 +29,9 @@ jobs:
       with:
         build: npm run build
         start: npm run start-ci
+        record: true
         wait-on: 'http://localhost:8081'
         wait-on-timeout: 300
       env: 
-        {'CI':''}
+        CYPRESS_RECORD_KEY: 'ca3f404b-1d73-4ff2-8b09-8a931fb57358'
+        CI: ''
