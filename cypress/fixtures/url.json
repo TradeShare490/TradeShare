@@ -9,5 +9,6 @@
 	"MESSAGES": "/messages",
 	"PREFERENCES": "/preferences",
 	"ICONS_AND_IMAGES": "/icons-and-images",
-	"SUPPORT": "/support"
+	"SUPPORT": "/support",
+	"USER_GROUP_DIALOG_TEMP": "/user-group-dialog"
 }

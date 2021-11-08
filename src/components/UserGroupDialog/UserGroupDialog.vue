@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-row justify="center">
-    <v-btn color="primary" class="ma-2" dark @click="dialog = true">
+    <v-btn data-cy="user-grp-dialog-main-btn" color="primary" class="ma-2" dark @click="dialog = true">
       Open Dialog 1
     </v-btn>
     
@@ -14,16 +14,16 @@
         </v-card-title>
         <v-divider></v-divider>
         
-        <v-card-text style="height: 210px;" class="pb-0">
-          <v-radio-group v-model="select" column>
+        <v-card-text data-cy="user-grp-list" style="height: 210px;" class="pb-0">
+          <v-radio-group  v-model="select" column>
             <!-- loop render group list -->
             <div v-for="(group, select) in groups" :key="group.select">
               <v-radio class="px-auto pb-1"> 
                 <template v-slot:label >
-                  <div v-bind:style="{ color: group.color }">  {{group.name}} </div>
+                  <div v-bind:data-cy="`${group.name.replace(/\s+/g, '-')}-label`" v-bind:style="{ color: group.color }">  {{group.name}} </div>
                   &nbsp; 
                   <!-- btn for edit pane -->
-                  <v-icon @click="openEdit(select)">mdi-pencil-box-outline</v-icon>
+                  <v-icon v-bind:data-cy="`${group.name.replace(/\s+/g, '-')}-edit`" @click="openEdit(select)">mdi-pencil-box-outline</v-icon>
                 </template>
               </v-radio>
               <!-- </div> -->
@@ -32,7 +32,7 @@
         </v-card-text>
 
         <!-- <h6>Selected Radios: {{select}} {{groups[select].name}}</h6> -->
-        <v-btn elevation="0"  block @click="openCreate()" class="my-2">
+        <v-btn data-cy="create-grp-btn" elevation="0"  block @click="openCreate()" class="my-2">
           <v-icon>mdi-account-plus</v-icon>&nbsp;new group
         </v-btn>
         <v-btn elevation="0" color="success" block v-on:click="submit()" @click="dialog = false">
@@ -46,14 +46,14 @@
     <v-dialog v-model="dialog2" max-width="350px">
       <v-card>
         <v-card-title class="d-flex justify-center">
-          <v-color-picker flat v-model="color" hide-inputs swatches-max-height="200" hide-mode-switch :show-swatches="false"></v-color-picker>
-          <v-text-field v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field>
+          <v-color-picker data-cy="user-grp-edit-picker" flat v-model="color" hide-inputs swatches-max-height="200" hide-mode-switch :show-swatches="false"></v-color-picker>
+          <v-text-field  data-cy="user-grp-edit-tf" v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field>
         </v-card-title>
         <v-card-actions class="d-flex justify-center">
-          <v-btn color="success" style="width: 180px;" @click="editGroup(select)">
+          <v-btn  data-cy="user-grp-edit-submit" color="success" style="width: 180px;" @click="editGroup(select)">
             <v-icon>mdi-check</v-icon>&nbsp;confirm
           </v-btn>
-          <v-btn color="error"  outlined  @click="dialog3= !dialog3">
+          <v-btn data-cy="user-grp-edit-delete"  color="error"  outlined  @click="dialog3= !dialog3">
             <v-icon>mdi-account-remove</v-icon>&nbsp;delete
           </v-btn>
         </v-card-actions>
@@ -66,10 +66,10 @@
         <v-card-title class="text-h5"> Delete group {{ groups[select].name}} ? </v-card-title>
         <v-card-text>All User belongs to the group will be set to default.</v-card-text>
         <v-card-actions class="d-flex justify-center pt-0">
-          <v-btn color="primary" outlined style="width: 130px;" @click="dialog3 = false">
+          <v-btn  data-cy="user-grp-edit-delete-cancel" color="primary" outlined style="width: 130px;" @click="dialog3 = false">
             <v-icon>mdi-cancel</v-icon>&nbsp;cancel
           </v-btn>
-          <v-btn color="error" style="width: 190px;" @click="delGroup(select)" class="mr-1">
+          <v-btn  data-cy="user-grp-edit-delete-delete" color="error" style="width: 190px;" @click="delGroup(select)" class="mr-1">
             <v-icon>mdi-account-remove</v-icon>&nbsp; delete group
           </v-btn>
         </v-card-actions>
@@ -80,12 +80,12 @@
     <v-dialog v-model="dialog4" max-width="370">
       <v-card>
         <v-card-title class="text-h5 pb-0"> Create new group </v-card-title>
-        <v-card-text class="pt-0 pb-0"><v-text-field v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field></v-card-text>
+        <v-card-text class="pt-0 pb-0"><v-text-field data-cy="create-grp-tf" v-model="groupNameInput" :rules="[rules.required, rulesGroupName.max]" maxlength="10" placeholder="Group Name"></v-text-field></v-card-text>
         <v-card-actions class=" justify-center pt-0">
-          <v-btn color="primary" outlined style="width: 120px;" @click="dialog4 = false">
+          <v-btn data-cy="create-grp-cancel" color="primary" outlined style="width: 120px;" @click="dialog4 = false">
             <v-icon>mdi-cancel</v-icon>&nbsp;cancel
           </v-btn>
-          <v-btn color="success" style="width: 190px;" @click="createGroup()" class="mr-1">
+          <v-btn data-cy="create-grp-submit" color="success" style="width: 190px;" @click="createGroup()" class="mr-1">
             <v-icon>mdi-account-plus</v-icon>&nbsp;create group
           </v-btn>
         </v-card-actions>
@@ -93,7 +93,7 @@
     </v-dialog>
 
     <!-- DYNAMIC SNACKBAR (NOTIFICATION) -->
-    <v-snackbar v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
+    <v-snackbar data-cy="user-grp-snackbar" v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
       {{snackbarText}}
       <template v-slot:action="{ attrs }">
         <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
