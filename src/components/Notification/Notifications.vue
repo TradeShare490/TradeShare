@@ -1,14 +1,26 @@
 <template>
-  <v-card elevation="0" class="px-10">
+  <v-card elevation = 0 class="px-10">
     <v-row no-gutters>
+      <v-col  align-self="start"
+        class="px-0 py-7"
+        cols="auto"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto">
+        <v-icon large color="primary">
+          mdi-exclamation
+        </v-icon>
+      </v-col>
+
       <v-col
-        align-self="center"
+        align-self="baseline"
         class="px-0 py-5"
-        cols="2"
-        sm="2"
-        md="1"
-        lg="1"
-        xl="1"
+        cols="auto"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto"
       >
         <v-avatar class="profile" size="50">
           <v-img :src="image"></v-img>
@@ -16,33 +28,18 @@
       </v-col>
       <v-col
         align-self="center"
-        cols="6"
-        sm="3"
-        md="3"
-        lg="3"
-        xl="3"
-        class="text-left mx-0 px-0 mt-3 py-0"
+        cols="auto"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        xl="auto"
+        class="text-center mx-4 px-0 mt-3 py-1"
       >
-        <v-list-item color="black">
-          <v-list-item-content class="py-1">
-            <v-list-item-title
-              class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
-              >{{ this.name }}</v-list-item-title
-            >
-            <v-list-item class="px-0">
-              <v-chip
-                label
-                v-bind="size"
-                class="text-uppercase white--text px-1"
-                :color="this.labelColor"
-                v-if="this.following"
-                data-cy="label"
-                >{{ this.labelText }}</v-chip
-              >
-            </v-list-item>
-          </v-list-item-content>
-        </v-list-item>
+        <p align-self ="center" class=" text-center text-sm-body-1 text-md-body-1 text-lg-body-1 text-xl-body-1 text-wrap text-caption">
+          {{message}}
+        </p>
       </v-col>
+      
       <v-spacer></v-spacer>
       <v-col cols="4" sm="3" md="2" lg="2" xl="2" align-self="center">
         <v-btn
@@ -54,7 +51,6 @@
           v-if="following == true"
           @click="unfollow"
           class="my-3 caption"
-          data-cy="following"
         >
           Following
         </v-btn>
@@ -64,9 +60,8 @@
           elevation="0"
           color="primary"
           v-if="following == false"
-          @click="follow"
+          @click="follow()"
           class="my-3 caption"
-          data-cy="follow"
         >
           Follow
         </v-btn>
@@ -77,14 +72,15 @@
 </template>
 
 <script>
-  export default {
-    name: "UserBlock",
+export default {
+    name: "FollowNotif",
     props: {
       currentlyFollowing: Boolean,
       currentLabelText: String,
       currentLabelColor: String,
-      name: String,
       image: String,
+      message: String,
+      icon: String
     },
     data() {
       return {
@@ -100,12 +96,12 @@
         this.labelColor = "untagged";
         console.log("following...");
       },
-      unfollow() {
+      unfollow(){
         this.following = false;
-        console.log("unfollowing...");
+        console.log("unfollowing");
       },
     },
-    computed: {
+      computed: {
       size() {
         const size = {
           xs: "x-small",
@@ -117,5 +113,5 @@
         return size ? { [size]: true } : {};
       },
     },
-  };
+  } 
 </script>
