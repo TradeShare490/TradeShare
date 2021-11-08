@@ -81,7 +81,7 @@
         {{ error }}
       </v-alert>
       <p class="text-body-2 pt-4">
-        Already have an account? <router-link to="./login">Log In</router-link>
+        Already have an account? <router-link to="./login" exact>Log In</router-link>
       </p>
     </v-card>
   </v-container>

@@ -37,7 +37,7 @@
             >Next</v-btn
           >
           <p left class="text-body-2 text-right pt-3">
-            <router-link to="">Skip for now</router-link>
+            <router-link to="" exact>Skip for now</router-link>
           </p>
         </v-form>
       </v-card>
