@@ -1,63 +1,61 @@
 <template>
-  <v-container>
-    <v-navigation-drawer app clipped permanent :mini-variant="mini">
-      <v-list-item class="hidden-sm-and-down" data-cy="profile">
-        <v-list-item-content>
-          <v-list-item-avatar class="avatar" size="40%">
-            <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
-          </v-list-item-avatar>
-          <v-list-item-title class="mt-3">
-            {{ user.firstname + " " + user.lastname }}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-caption grey--text">{{
-            since
-          }}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+  <v-navigation-drawer app clipped permanent :mini-variant="mini">
+    <v-list-item class="hidden-sm-and-down" data-cy="profile">
+      <v-list-item-content>
+        <v-list-item-avatar class="avatar" size="40%">
+          <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
+        </v-list-item-avatar>
+        <v-list-item-title class="mt-3">
+          {{ user.firstname + " " + user.lastname }}
+        </v-list-item-title>
+        <v-list-item-subtitle class="text-caption grey--text">{{
+          since
+        }}</v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
 
-      <v-divider class="my-3 hidden-sm-and-down"></v-divider>
+    <v-divider class="my-3 hidden-sm-and-down"></v-divider>
 
-      <v-list dense nav>
-        <v-list-item-group v-model="selectedItem" color="primary">
-          <v-list-item
-            v-for="item in upperNav"
-            :key="item.title"
-            :to="item.route"
-            active-class="active"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
+    <v-list dense nav>
+      <v-list-item-group v-model="selectedItem" color="primary">
+        <v-list-item
+          v-for="item in upperNav"
+          :key="item.title"
+          :to="item.route"
+          active-class="active"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
 
-      <v-divider class="my-3"></v-divider>
+    <v-divider class="my-3"></v-divider>
 
-      <v-list dense nav>
-        <v-list-item-group v-model="selectedItem" color="primary">
-          <v-list-item
-            v-for="item in lowerNav"
-            :key="item.title"
-            :to="item.route"
-            active-class="active"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
+    <v-list dense nav>
+      <v-list-item-group v-model="selectedItem" color="primary">
+        <v-list-item
+          v-for="item in lowerNav"
+          :key="item.title"
+          :to="item.route"
+          active-class="active"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-  </v-container>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>

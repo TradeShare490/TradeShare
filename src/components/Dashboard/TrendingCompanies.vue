@@ -46,13 +46,14 @@
         <v-divider class="my-3"></v-divider>
       </div>
     </v-list>
-    <v-list-item>
-      <v-list-item-content class="text-right">
-        <v-list-item-title
-          >View all <v-icon>mdi-chevron-right</v-icon></v-list-item-title
-        >
-      </v-list-item-content>
-    </v-list-item>
+    <a
+      href="/news-feed"
+      class="d-flex justify-end"
+      style="text-decoration: none; font-size: 12px"
+    >
+      View all
+      <v-icon color="primary" dense> mdi-menu-right </v-icon>
+    </a>
   </v-card>
 </template>
 
