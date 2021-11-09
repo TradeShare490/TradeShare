@@ -1,5 +1,5 @@
 <template>
-  <v-card class="sticky-card float-right mt-0">
+  <v-card class="sticky-card mt-3">
     <v-row class="mb-5">
       <v-col>
         <v-list-item>
@@ -20,7 +20,8 @@
           @update:search-input="(val) => (search = val)"
           class="mt-4 mx-3"
           flat
-          append-icon="null"
+          append-icon="mdi-magnify"
+          rounded
           hide-no-data
           hide-details
           label="Search"

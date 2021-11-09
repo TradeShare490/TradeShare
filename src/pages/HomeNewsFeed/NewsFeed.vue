@@ -26,7 +26,7 @@
       </v-col>
       <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
       <v-col xs="12" sm="12" md="12" lg="3">
-        <trending-companies />
+        <TrendingCompanies />
       </v-col>
       <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
     </v-row>
