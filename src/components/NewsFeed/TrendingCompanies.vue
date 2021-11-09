@@ -1,14 +1,10 @@
 <template>
-  <v-card
-    class="sticky-card hidden-sm-and-down float-right mt-0"
-    height="100%"
-    width="35%"
-  >
+  <v-card class="sticky-card float-right mt-0">
     <v-row class="mb-5">
       <v-col>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title
+            <v-list-item-title class="text-h6 text-centre mt-3"
               >Trending Companies<v-icon
                 >mdi-trending-up</v-icon
               ></v-list-item-title
@@ -22,7 +18,7 @@
           v-model="searchCriteria"
           :search-input="search"
           @update:search-input="(val) => (search = val)"
-          class="mt-4"
+          class="mt-4 mx-3"
           flat
           append-icon="null"
           hide-no-data
@@ -58,7 +54,7 @@
 </template>
 
 <script>
-import CompanyCard from "./CompanyCard.vue";
+import CompanyCard from "../Dashboard/CompanyCard.vue";
 export default {
   components: { CompanyCard },
   name: "TrendingCompanies",

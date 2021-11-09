@@ -34,7 +34,7 @@
 </template>
 <script>
 import Latest from "../../components/LatestActivity/Latest.vue";
-import TrendingCompanies from "../../components/Dashboard/TrendingCompanies.vue";
+import TrendingCompanies from "../../components/NewsFeed/TrendingCompanies.vue";
 
 export default {
   name: "NewsFeed",
