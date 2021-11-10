@@ -6,7 +6,9 @@
 
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>{{ title }}</v-list-item-title>
-      <v-list-item-subtitle>{{ subtitle }}</v-list-item-subtitle>
+      <v-list-item-subtitle :class="this.sold ? 'red--text' : 'black--text'">{{
+        subtitle
+      }}</v-list-item-subtitle>
     </v-list-item-content>
 
     <v-list-item-icon>
@@ -17,7 +19,7 @@
 
 <script>
 export default {
-  props: ["title", "subtitle", "imgsrc"],
+  props: ["title", "subtitle", "imgsrc", "sold"],
 };
 </script>
 

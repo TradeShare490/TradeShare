@@ -4,7 +4,7 @@
       <v-col>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6 text-centre mt-3"
+            <v-list-item-title class="text-h6 text-left"
               >Trending Companies<v-icon
                 >mdi-trending-up</v-icon
               ></v-list-item-title
@@ -18,8 +18,9 @@
           v-model="searchCriteria"
           :search-input="search"
           @update:search-input="(val) => (search = val)"
-          class="mt-4 mx-3"
+          class="mt-2 mx-10"
           flat
+          solo
           append-icon="mdi-magnify"
           rounded
           hide-no-data
@@ -38,6 +39,7 @@
           :title="company.title"
           :subtitle="company.subtitle"
           :imgsrc="company.imageSource"
+          :sold="company.sold"
         />
 
         <v-divider class="my-3"></v-divider>
@@ -68,30 +70,31 @@ export default {
           title: "Dropbox",
           subtitle: "sold recently by Dave",
           imageSource: "../../assets/TradeShare.png",
+          sold: true,
         },
         {
           title: "Medium Corporation",
           subtitle: "bought recently by Dave",
-
           imageSource: "../../assets/TradeShare.png",
+          sold: false,
         },
         {
           title: "Github",
           subtitle: "sold recently by Fred",
-
           imageSource: "../../assets/TradeShare.png",
+          sold: true,
         },
         {
           title: "Slack",
           subtitle: "bought recently by Fred",
-
           imageSource: "../../assets/TradeShare.png",
+          sold: false,
         },
         {
           title: "Twitter",
           subtitle: "sold recently by you",
-
           imageSource: "../../assets/TradeShare.png",
+          sold: true,
         },
       ],
     };
