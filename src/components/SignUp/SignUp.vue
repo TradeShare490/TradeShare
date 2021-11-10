@@ -29,15 +29,6 @@
         </v-layout>
 
         <v-text-field
-          data-cy="userName"
-          v-model="username"
-          label="Username"
-          color="primary"
-          :rules="[rules.required, rulesUsername.min]"
-          @keyup.enter="submit"
-        ></v-text-field>
-
-        <v-text-field
           data-cy="email"
           v-model="email"
           label="Email"
@@ -95,16 +86,12 @@ export default {
     valid: "",
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
     value: String,
     password: "",
     passwordConfirm: "",
     rules: {
       required: (v) => !!v || "Required",
-    },
-    rulesUsername: {
-      min: (v) => v.length >= 4 || "Min 4 characters",
     },
     rulesEmail: {
       format: (v) =>
@@ -127,7 +114,6 @@ export default {
           passwordConfirmation: this.passwordConfirm,
           firstname: this.firstName,
           lastname: this.lastName,
-          username: this.username,
         };
 
         const response = await UserService.signup(credentials);
