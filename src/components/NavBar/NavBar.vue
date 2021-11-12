@@ -28,10 +28,8 @@
       <v-btn icon class="mt-1">
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn icon @click="logOut" class="mt-1">
-        <v-icon>
-          mdi-logout
-        </v-icon>
+      <v-btn icon @click="logOut" class="mt-1" data-cy="logout-btn">
+        <v-icon> mdi-logout </v-icon>
       </v-btn>
     </v-app-bar>
   </div>
@@ -52,5 +50,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "~../../scss/variables.scss";
+@import "~../../scss/variables.scss";
 </style>

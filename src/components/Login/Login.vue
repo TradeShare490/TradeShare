@@ -1,7 +1,7 @@
 <template>
   <v-container class="pt-16">
     <v-card class="mx-auto" max-width="250" elevation="0">
-      <v-form ref="formLogin" v-model="valid">
+      <v-form ref="formLogin" v-model="valid" data-cy="login-form">
         <v-text-field
           data-cy="email"
           v-model="email"
