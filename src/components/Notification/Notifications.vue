@@ -1,62 +1,49 @@
 <template>
-  <v-card elevation = 0 class="px-10">
-    <v-row no-gutters>
-      <v-col  align-self="start"
-        class="px-0 py-7"
-        cols="auto"
-        sm="auto"
-        md="auto"
-        lg="auto"
-        xl="auto">
+  <v-alert dismissible elevation="1" min-width="300" color="#f8f8ff">
+    <v-row no-gutters class="mt-2">
+      <v-col  class = "mt-0" align-self="start"
+        xs="12"
+        sm="2"
+        md="2"
+        lg="1"
+        xl="1"
+        >
         <v-icon large color="primary">
           mdi-exclamation
         </v-icon>
-      </v-col>
-
-      <v-col
-        align-self="baseline"
-        class="px-0 py-5"
-        cols="auto"
-        sm="auto"
-        md="auto"
-        lg="auto"
-        xl="auto"
-      >
         <v-avatar class="profile" size="50">
           <v-img :src="image"></v-img>
         </v-avatar>
       </v-col>
+
       <v-col
-        align-self="center"
-        cols="auto"
-        sm="auto"
-        md="auto"
-        lg="auto"
-        xl="auto"
-        class="text-center mx-4 px-0 mt-3 py-1"
+        xs="12"
+        sm="4"
+        md="4"
+        lg="5"
+        xl="5"
+        class="text-left mt-3 py-1 ml-2"
       >
-        <p align-self ="center" class=" text-center text-sm-body-1 text-md-body-1 text-lg-body-1 text-xl-body-1 text-wrap text-caption">
+        <p class="text-no-wrap font-weight-bold">
           {{message}}
         </p>
       </v-col>
+      <v-spacer/>
       
-      <v-spacer></v-spacer>
-      <v-col cols="4" sm="3" md="2" lg="2" xl="2" align-self="center">
+      <v-col xs="12" sm="5" md="5" lg="5" xl="5" class="d-flex justify-end mr-5">
         <v-btn
-          block
-          v-bind="size"
           elevation="0"
           outlined
           color="primary"
           v-if="following == true"
           @click="unfollow"
           class="my-3 caption"
+          small
         >
           Following
         </v-btn>
         <v-btn
-          block
-          v-bind="size"
+          small
           elevation="0"
           color="primary"
           v-if="following == false"
@@ -68,7 +55,7 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-  </v-card>
+  </v-alert>
 </template>
 
 <script>
@@ -99,18 +86,6 @@ export default {
       unfollow(){
         this.following = false;
         console.log("unfollowing");
-      },
-    },
-      computed: {
-      size() {
-        const size = {
-          xs: "x-small",
-          sm: "small",
-          md: "small",
-          lg: "small",
-          xl: "small",
-        }[this.$vuetify.breakpoint.name];
-        return size ? { [size]: true } : {};
       },
     },
   } 
