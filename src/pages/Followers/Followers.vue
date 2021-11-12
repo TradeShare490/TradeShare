@@ -1,5 +1,19 @@
 <template>
   <div>
+    <div>
+      <v-col>
+      <FollowNotif
+      :currentlyFollowing="false"
+      currentLabelColor="friend"
+      currentLabelText="friend"
+      image="https://randomuser.me/api/portraits/men/52.jpg"
+      message="John Molson has followed you."
+      >
+      </FollowNotif>
+    </v-col>
+    </div>
+
+    <div>
     <SearchViewBy />
     <UserBlock
       :currentlyFollowing="true"
@@ -15,18 +29,9 @@
       name="Mary Winchester"
       image="https://randomuser.me/api/portraits/women/79.jpg"
     ></UserBlock>
-            <v-col>
-      <FollowNotif
-      :currentlyFollowing="false"
-      currentLabelColor="friend"
-      currentLabelText="friend"
-      image="https://randomuser.me/api/portraits/men/52.jpg"
-      message="John Molson wants to follow you"
-      icon="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/96/heavy-exclamation-mark-symbol_2757.png"
-      >
-      </FollowNotif>
-    </v-col>
+    </div>
   </div>
+  
 </template>
 
 <script>
