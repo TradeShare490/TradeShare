@@ -1,19 +1,17 @@
 <template>
   <v-container fluid fill-height class="my-0 py-0">
     <v-layout row align-center justify-content-center>
-      <v-flex hidden-xs-only sm6 md6 lr6>
-        <div class="text">
-          <p class="text-p display-2 font-weight-bold">TradeShare</p>
-          <p class="catch_phrase">Catchy description of platform.</p>
-          <p class="catch_phrase">Maybe more than.</p>
-          <p class="catch_phrase">One line.</p>
-        </div>
+      <v-flex class="container" hidden-xs-only sm6 md6 lr6 relative>
         <v-img
           class="img"
           src="../../assets/Login_SignUp_Picture.jpg"
           gradient="rgb(63, 81, 181, 0.8), rgb(63, 81, 181, 0.8)"
           alt="Business Picture"
-        ></v-img>
+        ></v-img>        
+        <div class="text">
+          <p class="white--text display-2 font-weight-bold">TradeShare</p>
+          <p class="white--text text-h6 font-weight-bold my-0" v-for="item in items" :key="item.message">{{ item.message }}</p>
+        </div>
       </v-flex>
       <v-flex class="mt-4">
         <v-img
@@ -41,6 +39,15 @@
       Login,
       SignUp,
     },
+    data() {
+      return {
+        items: [
+          { message: "Catchy description of platform." },
+          { message: "Maybe more than." },
+          { message: "One line." }
+        ]
+      }
+    },
     computed: {
       isLogin() {
         return this.$route.name === "Login";
@@ -50,21 +57,16 @@
 </script>
 
 <style>
-  .text {
-    position: absolute;
-    padding-top: 60px;
-    padding-left: 1%;
-    z-index: 20;
-    color: white;
-  }
-
-  .catch_phrase {
+  .container{
     position: relative;
-    left: 2vh;
-    font-size: 2.5vh;
-    font-weight: bold;
+    padding:0;
   }
-
+  .text{ 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .img {
     height: 100vh;
   }
