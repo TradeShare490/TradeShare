@@ -56,7 +56,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   .container{
     position: relative;
     padding:0;
