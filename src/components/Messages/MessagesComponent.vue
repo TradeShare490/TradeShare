@@ -128,7 +128,6 @@
                 no-details
                 outlined
                 @keyup.enter="messages.push(messageForm)"
-                @click:append-outer="messages.push(messageForm)"
                 hide-details
                 single-line
               >
@@ -137,7 +136,7 @@
                 </template>
                 <template v-slot:append>
                   <v-icon class="px-2" @click="click" color="primary">image</v-icon>
-                  <v-icon @click="click" color="primary">send</v-icon>
+                  <v-icon @click="messages.push(messageForm)" color="primary">send</v-icon>
                 </template>
               </v-text-field>
             </v-card-text>
