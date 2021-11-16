@@ -11,7 +11,7 @@
         <v-icon large color="primary">
           mdi-exclamation
         </v-icon>
-        <v-avatar class="profile" size="50">
+        <v-avatar class="profile" size="40">
           <v-img :src="image"></v-img>
         </v-avatar>
       </v-col>
