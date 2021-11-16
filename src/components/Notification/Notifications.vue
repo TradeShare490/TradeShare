@@ -1,7 +1,7 @@
 <template>
   <v-alert dismissible elevation="0" min-width="300" color="#f5f5f5">
     <v-row no-gutters class="mt-2">
-      <v-col  class = "mt-0" align-self="start"
+      <v-col  class="mt-0 pb-3" align-self="center"
         cols="3"
         sm="2"
         md="2"
