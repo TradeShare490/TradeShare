@@ -17,7 +17,7 @@
       </v-col>
 
       <v-col
-        xs="12"
+        cols="4"
         sm="6"
         md="6"
         lg="5"
