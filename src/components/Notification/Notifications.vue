@@ -19,7 +19,7 @@
       <v-col
         xs="12"
         sm="4"
-        md="4"
+        md="6"
         lg="5"
         xl="5"
         class="text-left mt-3 pb-1 ml-2"
