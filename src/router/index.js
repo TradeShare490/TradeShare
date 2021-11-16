@@ -8,6 +8,7 @@ import Following from "../pages/Following/Following.vue"
 import UserGroupDialog from "../components/UserGroupDialog/UserGroupDialog.vue"
 import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
 import NewsFeed from "../pages/HomeNewsFeed/NewsFeed.vue"
+import Messages from "../pages/Messages/Messages.vue"
 
 Vue.use(VueRouter);
 
@@ -49,6 +50,7 @@ const routes = [
   {
     path: "/messages",
     name: "Messages",
+    component: Messages,
   },
   {
     path: "/preferences",
