@@ -30,7 +30,7 @@
       </v-col>
       <v-spacer/>
       
-      <v-col sm="2" md="2" lg="5" xl="5" class="d-flex justify-end mr-5 pb-1 align-self="center">
+      <v-col sm="2" md="2" lg="5" xl="5" class="d-flex justify-end mr-5 pb-1" align-self="center">
         <v-btn
           elevation="0"
           outlined
