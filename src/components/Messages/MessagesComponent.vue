@@ -154,7 +154,7 @@
       image: String,
     },
     data: () => ({
-      activeChat: 0,
+      activeChat: 1,
       users: [
         {
           id: 1,
