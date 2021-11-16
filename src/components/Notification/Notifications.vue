@@ -2,7 +2,7 @@
   <v-alert dismissible elevation="0" min-width="300" color="#f5f5f5">
     <v-row no-gutters class="mt-2">
       <v-col  class = "mt-0" align-self="start"
-        xs="12"
+        cols="3"
         sm="2"
         md="2"
         lg="1"
