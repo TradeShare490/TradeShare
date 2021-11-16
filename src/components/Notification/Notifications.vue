@@ -22,7 +22,7 @@
         md="4"
         lg="5"
         xl="5"
-        class="text-left mt-3 py-1 ml-2"
+        class="text-left mt-3 pb-1 ml-2"
       >
         <p class="text-wrap font-weight-bold text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption">
           {{message}}
