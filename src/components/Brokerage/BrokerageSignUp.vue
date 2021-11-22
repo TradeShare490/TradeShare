@@ -19,6 +19,7 @@
             :items="items"
             label="Select"
             return-object
+            data-cy="brokerage-dropdown"
           ></v-select>
 
           <v-text-field
@@ -59,8 +60,10 @@ export default {
     email: "",
     select: "Questrade",
     items: ["Questrade", "Interactive Brokers"],
-      intro_message: "The best way to use TradeShare is to link your brokerage account so that we take care of keeping your dashboard up to date automatically.",
-      no_brokerage_text: "Don’t have a brokerage service? No problem! You can still use TradeShare, you’ll just need to manually add your activity.",
+    intro_message:
+      "The best way to use TradeShare is to link your brokerage account so that we take care of keeping your dashboard up to date automatically.",
+    no_brokerage_text:
+      "Don’t have a brokerage service? No problem! You can still use TradeShare, you’ll just need to manually add your activity.",
     rules: {
       required: (v) => !!v || "Required",
     },
