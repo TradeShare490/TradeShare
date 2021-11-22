@@ -1,4 +1,4 @@
-# tradeshare
+# Tradeshare
 ![ci workflow](https://github.com/bowe99/TradeShare/actions/workflows/node.js.yml/badge.svg)
 
 ## Install dependencies
