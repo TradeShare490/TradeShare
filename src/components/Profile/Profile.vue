@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-4">
+  <v-card class="mx-4 mt-7 mb-5">
     <v-row class="py-5 justify-center">
       <v-col
         align-self="center"
@@ -10,8 +10,8 @@
         lg="2"
         xl="2"
       >
-        <v-avatar class="profile" color="grey" size="80%">
-          <v-img src="https://randomuser.me/api/portraits/men/8.jpg"></v-img>
+        <v-avatar class="profile" color="grey" size="60%">
+          <v-img src="https://randomuser.me/api/portraits/men/8.jpg" />
         </v-avatar>
       </v-col>
 
@@ -28,30 +28,20 @@
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
-              >{{ name }}</v-list-item-title
             >
-            <v-list-item-subtitle class="text-subtitle-1"
-              >AKA {{ nickname }}</v-list-item-subtitle
-            >
-            <v-list-item class="px-0">
-              <v-chip
-                label
-                small
-                class="text-uppercase white--text px-1"
-                :color="labelColor"
-                v-if="this.following"
-                data-cy="label"
-                >{{ labelText }}</v-chip
-              >
-            </v-list-item>
-            <v-list-item-subtitle class="text-wrap"
-              >Member since {{ date }}</v-list-item-subtitle
-            >
+              {{ name }}
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-subtitle-1">
+              AKA {{ nickname }}
+            </v-list-item-subtitle>
+            <v-list-item-subtitle class="text-wrap">
+              Member since {{ date }}
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-col>
 
-      <v-spacer class="hidden-sm-and-down"></v-spacer>
+      <v-spacer class="hidden-sm-and-down" />
       <v-col
         align-self="center"
         cols="12"
@@ -60,14 +50,14 @@
         xl="4"
         class="px-5 px-sm-0 px-md-0 px-lg-0 px-xl-0 mx-0"
       >
-        <v-list-item-title class="font-weight-bold text-xs-caption"
-          >Bio</v-list-item-title
-        >
-        <v-list-item-subtitle class="text-wrap text-xs-caption">{{
-          bio
-        }}</v-list-item-subtitle>
+        <v-list-item-title class="font-weight-bold text-xs-caption">
+          Bio
+        </v-list-item-title>
+        <v-list-item-subtitle class="text-wrap text-xs-caption">
+          {{ bio }}
+        </v-list-item-subtitle>
       </v-col>
-      <v-spacer class="hidden-sm-and-down"></v-spacer>
+      <v-spacer class="hidden-sm-and-down" />
 
       <v-col
         align-self="center"
@@ -80,10 +70,12 @@
       >
         <v-row>
           <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold">{{
-              numFollowers
-            }}</v-list-item-title>
-            <v-list-item-subtitle>Followers</v-list-item-subtitle>
+            <v-list-item-title class="font-weight-bold">
+              {{ numFollowers  }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              Followers
+            </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -111,32 +103,24 @@
             </v-btn>
           </v-col>
           <v-col cols="6" class="mx-0 px-0 pl-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold">{{
-              numFollowing
-            }}</v-list-item-title>
-            <v-list-item-subtitle>Following</v-list-item-subtitle>
+            <v-list-item-title class="font-weight-bold">
+              {{ numFollowing }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              Following
+            </v-list-item-subtitle>
             <v-btn
               block
               small
               elevation="0"
+              class="my-3 caption"
               color="primary"
-              class="my-3 caption text-wrap"
-              :disabled="!this.following"
-              @click="label"
-              data-cy="setLabel"
+              @click="message"
+              data-cy="message"
             >
-              Set Label
+              Send a Message
             </v-btn>
           </v-col>
-          <v-btn
-            block
-            small
-            elevation="0"
-            color="primary"
-            @click="message"
-            data-cy="message"
-            >Send a Message</v-btn
-          >
         </v-row>
       </v-col>
     </v-row>

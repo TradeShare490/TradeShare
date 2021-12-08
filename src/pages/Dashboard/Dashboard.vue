@@ -26,11 +26,9 @@
           icon="mdi-progress-clock"
         />
       </v-col>
-      <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
       <v-col lg="6" xl="3">
         <MonthlyProfitLoss title="Monthly Realized P/L" value="+$5,200.00" :percentChange="16"/>
       </v-col>
-      <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
@@ -67,10 +65,10 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col xs="12" md="6" lg="4">
+      <v-col xs="12" md="4" lg="3">
         <Holdings />
       </v-col>
-      <v-col xs="12" md="6" lg="8">
+      <v-col xs="12" md="8" lg="9">
         <v-card elevation="1" outlined min-width="350">
           <BarChartContainer />
         </v-card>
@@ -80,64 +78,64 @@
 </template>
 
 <script>
-import Positions from "../../components/Portfolio/Positions.vue";
-import Recents from "../../components/RecentActivity/Recents.vue";
-import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
-import Holdings from "../../components/Dashboard/Holdings.vue";
-import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
-import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
-
-export default {
-  name: "Dashboard",
-  data() {
-    return {
-      recentActivities: [
-        {
-          id: 1,
-          image: "https://randomuser.me/api/portraits/men/35.jpg",
-          name: "Ash Britain",
-          company: "Dropbox",
-          purchased: true,
-          when: "Today",
-          today: true,
-        },
-        {
-          id: 2,
-          image: "https://randomuser.me/api/portraits/men/52.jpg",
-          name: "Tim Robenman",
-          company: "NVIDIA",
-          purchased: false,
-          when: "Today",
-          today: true,
-        },
-        {
-          id: 3,
-          image: "https://randomuser.me/api/portraits/men/86.jpg",
-          name: "Mac Kafe",
-          company: "Twitter",
-          purchased: true,
-          when: "Yesterday",
-          today: false,
-        },
-        {
-          id: 4,
-          image: "https://randomuser.me/api/portraits/men/52.jpg",
-          name: "Tim Robenman",
-          company: "Voyager",
-          purchased: false,
-          when: "Today",
-          today: true,
-        },
-      ],
-    };
-  },
-  components: {
-    Positions,
-    Recents,
-    PortfolioAnalyticsTemplate,
-    BarChartContainer,
-    Holdings,
-    MonthlyProfitLoss
-  },
-};
+  import Positions from "../../components/Portfolio/Positions.vue";
+  import Recents from "../../components/RecentTrades/Recents.vue";
+  import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
+  import Holdings from "../../components/Dashboard/Holdings.vue";
+  import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
+  import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
+  
+  export default {
+    name: "Dashboard",
+    data() {
+      return {
+        recentActivities: [
+          {
+            id: 1,
+            image: "https://randomuser.me/api/portraits/men/35.jpg",
+            name: "Ash Britain",
+            company: "Dropbox",
+            purchased: true,
+            when: "Today",
+            today: true,
+          },
+          {
+            id: 2,
+            image: "https://randomuser.me/api/portraits/men/52.jpg",
+            name: "Tim Robenman",
+            company: "NVIDIA",
+            purchased: false,
+            when: "Today",
+            today: true,
+          },
+          {
+            id: 3,
+            image: "https://randomuser.me/api/portraits/men/86.jpg",
+            name: "Mac Kafe",
+            company: "Twitter",
+            purchased: true,
+            when: "Yesterday",
+            today: false,
+          },
+          {
+            id: 4,
+            image: "https://randomuser.me/api/portraits/men/52.jpg",
+            name: "Tim Robenman",
+            company: "Voyager",
+            purchased: false,
+            when: "Today",
+            today: true,
+          },
+        ],
+      };
+    },
+    components: {
+      Positions,
+      Recents,
+      PortfolioAnalyticsTemplate,
+      BarChartContainer,
+      Holdings,
+      MonthlyProfitLoss
+    },
+  };
 </script>
