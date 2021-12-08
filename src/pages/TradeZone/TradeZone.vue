@@ -6,22 +6,22 @@
           >Trade Zone</span
         >
         <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
-          <Zone
-            v-for="trade in zoneTrades"
-            :key="trade.id"
-            :image="trade.image"
-            :name="trade.name"
-            :purchased="trade.purchased"
-            :company="trade.company"
-            :tag="trade.tag"
-            :size="trade.size"
-            :when="trade.when"
-            :verified="trade.verified"
-            :stock1="trade.stock1"
-            :stock2="trade.stock2"
-            :stock3="trade.stock3"
-            :stock4="trade.stock4"
-          ></Zone>
+          <Feed
+            v-for="post in allPosts"
+            :key="post.id"
+            :image="post.image"
+            :name="post.name"
+            :purchased="post.purchased"
+            :company="post.company"
+            :tag="post.tag"
+            :size="post.size"
+            :when="post.when"
+            :verified="post.verified"
+            :stock1="post.stock1"
+            :stock2="post.stock2"
+            :stock3="post.stock3"
+            :stock4="post.stock4"
+          ></Feed>
         </v-alert>
       </v-col>
       <v-col xs="12" sm="12" md="12" lg="3">
@@ -31,14 +31,14 @@
   </v-container>
 </template>
 <script>
-import Zone from "../../components/TradeZone/Zone.vue";
+import Feed from "../../components/TradeZone/Feed.vue";
 import TrendingCompanies from "../../components/TrendingCompanies/TrendingCompanies.vue";
 
 export default {
   name: "TradeZone",
   data() {
     return {
-      zoneTrades: [
+      allPosts: [
         {
           id: 1,
           image: "https://randomuser.me/api/portraits/men/35.jpg",
@@ -118,7 +118,7 @@ export default {
     };
   },
   components: {
-    Zone,
+    Feed,
     TrendingCompanies,
   },
 };

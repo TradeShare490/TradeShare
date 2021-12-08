@@ -171,7 +171,7 @@ import StockGraph from "../../components/TradeZone/StockGraph.vue";
 
 export default {
   components: { StockGraph },
-    name: "Zone",
+    name: "Feed",
     props: {
         image: String,
         name: String,
