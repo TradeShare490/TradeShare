@@ -68,9 +68,9 @@ export default {
       selectedItem: "",
       upperNav: [
         {
-          title: "Home",
+          title: "Trade Zone",
           icon: "mdi-home",
-          route: "/news-feed",
+          route: "/tradezone",
         },
         {
           title: "Dashboard",

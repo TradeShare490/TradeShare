@@ -37,7 +37,7 @@ import Latest from "../../components/LatestActivity/Latest.vue";
 import TrendingCompanies from "../../components/NewsFeed/TrendingCompanies.vue";
 
 export default {
-  name: "NewsFeed",
+  name: "TradeZone",
   data() {
     return {
       latestActivities: [

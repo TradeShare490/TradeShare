@@ -7,7 +7,7 @@ import Followers from "../pages/Followers/Followers.vue"
 import Following from "../pages/Following/Following.vue"
 import UserGroupDialog from "../components/UserGroupDialog/UserGroupDialog.vue"
 import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
-import NewsFeed from "../pages/HomeNewsFeed/NewsFeed.vue"
+import TradeZone from "../pages/TradeZone/TradeZone.vue"
 import Messages from "../pages/Messages/Messages.vue"
 
 Vue.use(VueRouter);
@@ -28,9 +28,9 @@ const routes = [
     component: LoginSignUp,
   },
   {
-    path: "/news-feed",
-    name: "NewsFeed",
-    component: NewsFeed,
+    path: "/tradezone",
+    name: "TradeZone",
+    component: TradeZone,
   },
   {
     path: "/dashboard",
