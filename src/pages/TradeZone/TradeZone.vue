@@ -3,44 +3,42 @@
     <v-row>
       <v-col xs="12" sm="12" md="12" lg="9">
         <span class="d-flex justify-start text-h4 font-weight-medium ml-1 mb-2"
-          >Latest Activity</span
+          >Trade Zone</span
         >
         <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
-          <Latest
-            v-for="activity in latestActivities"
-            :key="activity.id"
-            :image="activity.image"
-            :name="activity.name"
-            :purchased="activity.purchased"
-            :company="activity.company"
-            :tag="activity.tag"
-            :size="activity.size"
-            :when="activity.when"
-            :verified="activity.verified"
-            :stock1="activity.stock1"
-            :stock2="activity.stock2"
-            :stock3="activity.stock3"
-            :stock4="activity.stock4"
-          ></Latest>
+          <Zone
+            v-for="trade in zoneTrades"
+            :key="trade.id"
+            :image="trade.image"
+            :name="trade.name"
+            :purchased="trade.purchased"
+            :company="trade.company"
+            :tag="trade.tag"
+            :size="trade.size"
+            :when="trade.when"
+            :verified="trade.verified"
+            :stock1="trade.stock1"
+            :stock2="trade.stock2"
+            :stock3="trade.stock3"
+            :stock4="trade.stock4"
+          ></Zone>
         </v-alert>
       </v-col>
-      <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
       <v-col xs="12" sm="12" md="12" lg="3">
         <TrendingCompanies />
       </v-col>
-      <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
     </v-row>
   </v-container>
 </template>
 <script>
-import Latest from "../../components/LatestActivity/Latest.vue";
-import TrendingCompanies from "../../components/NewsFeed/TrendingCompanies.vue";
+import Zone from "../../components/TradeZone/Zone.vue";
+import TrendingCompanies from "../../components/TrendingCompanies/TrendingCompanies.vue";
 
 export default {
   name: "TradeZone",
   data() {
     return {
-      latestActivities: [
+      zoneTrades: [
         {
           id: 1,
           image: "https://randomuser.me/api/portraits/men/35.jpg",
@@ -120,7 +118,7 @@ export default {
     };
   },
   components: {
-    Latest,
+    Zone,
     TrendingCompanies,
   },
 };

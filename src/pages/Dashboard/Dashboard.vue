@@ -40,7 +40,7 @@
         <div>
           <v-card elevation="1" outlined min-width="350">
             <v-card-title class="pb-0" style="word-break: normal">
-              <span class="blue--text">Recent Activity</span>
+              <span class="blue--text">Recent Trades</span>
             </v-card-title>
             <Recents
               v-for="activity in recentActivities"

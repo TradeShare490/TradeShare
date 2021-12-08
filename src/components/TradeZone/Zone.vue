@@ -167,11 +167,11 @@
     </v-container>
 </template>
 <script>
-import StockGraph from "../../components/LatestActivity/StockGraph.vue"; 
+import StockGraph from "../../components/TradeZone/StockGraph.vue"; 
 
 export default {
   components: { StockGraph },
-    name: "Latest",
+    name: "Zone",
     props: {
         image: String,
         name: String,
