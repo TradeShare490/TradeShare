@@ -38,47 +38,47 @@
 </template>
 
 <script>
-  import CompanyCard from "../Dashboard/CompanyCard.vue";
-  export default {
-    components: { CompanyCard },
-    name: "TrendingCompanies",
-    data() {
-      return {
-        searchCriteria: "",
-        search: null,
-        companies: [
-          {
-            title: "Dropbox",
-            subtitle: "sold recently by Dave",
-            imageSource: "../../assets/TradeShare.png",
-            sold: true,
-          },
-          {
-            title: "Medium Corporation",
-            subtitle: "bought recently by Dave",
-            imageSource: "../../assets/TradeShare.png",
-            sold: false,
-          },
-          {
-            title: "Github",
-            subtitle: "sold recently by Fred",
-            imageSource: "../../assets/TradeShare.png",
-            sold: true,
-          },
-          {
-            title: "Slack",
-            subtitle: "bought recently by Fred",
-            imageSource: "../../assets/TradeShare.png",
-            sold: false,
-          },
-          {
-            title: "Twitter",
-            subtitle: "sold recently by you",
-            imageSource: "../../assets/TradeShare.png",
-            sold: true,
-          },
-        ],
-      };
-    },
-  };
+import CompanyCard from "../Dashboard/CompanyCard.vue";
+export default {
+  components: { CompanyCard },
+  name: "TrendingCompanies",
+  data() {
+    return {
+      searchCriteria: "",
+      search: null,
+      companies: [
+        {
+          title: "Dropbox",
+          subtitle: "sold recently by Dave",
+          imageSource: "../../assets/TradeShare.png",
+          sold: true,
+        },
+        {
+          title: "Medium Corporation",
+          subtitle: "bought recently by Dave",
+          imageSource: "../../assets/TradeShare.png",
+          sold: false,
+        },
+        {
+          title: "Github",
+          subtitle: "sold recently by Fred",
+          imageSource: "../../assets/TradeShare.png",
+          sold: true,
+        },
+        {
+          title: "Slack",
+          subtitle: "bought recently by Fred",
+          imageSource: "../../assets/TradeShare.png",
+          sold: false,
+        },
+        {
+          title: "Twitter",
+          subtitle: "sold recently by you",
+          imageSource: "../../assets/TradeShare.png",
+          sold: true,
+        },
+      ],
+    };
+  },
+};
 </script>

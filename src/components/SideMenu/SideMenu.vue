@@ -127,54 +127,54 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        selectedItem: "",
-        upperNav: [
-          {
-            title: "Trade Zone",
-            icon: "mdi-home",
-            route: "/tradezone",
-          },
-          {
-            title: "Dashboard",
-            icon: "mdi-view-dashboard",
-            route: "/dashboard",
-          },
-          { title: "Messages", icon: "mdi-forum", route: "/messages" },
-          {
-            title: "Preferences",
-            icon: "mdi-lock-open-outline ",
-            route: "/preferences",
-          },
-          {
-            title: "Connected Apps",
-            icon: "mdi-dots-grid ",
-            route: "/icons-and-images",
-          },
-        ],
-        lowerNav: [
-          {
-            title: "Support",
-            icon: "mdi-help-circle-outline",
-            route: "/support",
-          },
-        ],
-        name: "Roman Kutepov",
-        since: "Member since 2021",
-      };
+export default {
+  data() {
+    return {
+      selectedItem: "",
+      upperNav: [
+        {
+          title: "Trade Zone",
+          icon: "mdi-home",
+          route: "/tradezone",
+        },
+        {
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          route: "/dashboard",
+        },
+        { title: "Messages", icon: "mdi-forum", route: "/messages" },
+        {
+          title: "Preferences",
+          icon: "mdi-lock-open-outline ",
+          route: "/preferences",
+        },
+        {
+          title: "Connected Apps",
+          icon: "mdi-dots-grid ",
+          route: "/icons-and-images",
+        },
+      ],
+      lowerNav: [
+        {
+          title: "Support",
+          icon: "mdi-help-circle-outline",
+          route: "/support",
+        },
+      ],
+      name: "Roman Kutepov",
+      since: "Member since 2021",
+    };
+  },
+  computed: {
+    mini() {
+      return this.$vuetify.breakpoint.smAndDown;
     },
-    computed: {
-      mini() {
-        return this.$vuetify.breakpoint.smAndDown;
-      },
-      user() {
-        let user = JSON.parse(localStorage.getItem("user"));
-        return user["userInfo"];
-      },
+    user() {
+      let user = JSON.parse(localStorage.getItem("user"));
+      return user["userInfo"];
     },
-  };
+  },
+};
 </script>
 
 <style>

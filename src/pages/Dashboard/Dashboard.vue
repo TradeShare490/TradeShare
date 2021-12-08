@@ -78,64 +78,64 @@
 </template>
 
 <script>
-  import Positions from "../../components/Portfolio/Positions.vue";
-  import Recents from "../../components/RecentTrades/Recents.vue";
-  import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
-  import Holdings from "../../components/Dashboard/Holdings.vue";
-  import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
-  import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
-  
-  export default {
-    name: "Dashboard",
-    data() {
-      return {
-        recentActivities: [
-          {
-            id: 1,
-            image: "https://randomuser.me/api/portraits/men/35.jpg",
-            name: "Ash Britain",
-            company: "Dropbox",
-            purchased: true,
-            when: "Today",
-            today: true,
-          },
-          {
-            id: 2,
-            image: "https://randomuser.me/api/portraits/men/52.jpg",
-            name: "Tim Robenman",
-            company: "NVIDIA",
-            purchased: false,
-            when: "Today",
-            today: true,
-          },
-          {
-            id: 3,
-            image: "https://randomuser.me/api/portraits/men/86.jpg",
-            name: "Mac Kafe",
-            company: "Twitter",
-            purchased: true,
-            when: "Yesterday",
-            today: false,
-          },
-          {
-            id: 4,
-            image: "https://randomuser.me/api/portraits/men/52.jpg",
-            name: "Tim Robenman",
-            company: "Voyager",
-            purchased: false,
-            when: "Today",
-            today: true,
-          },
-        ],
-      };
-    },
-    components: {
-      Positions,
-      Recents,
-      PortfolioAnalyticsTemplate,
-      BarChartContainer,
-      Holdings,
-      MonthlyProfitLoss
-    },
-  };
+import Positions from "../../components/Portfolio/Positions.vue";
+import Recents from "../../components/RecentTrades/Recents.vue";
+import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
+import Holdings from "../../components/Dashboard/Holdings.vue";
+import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
+import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
+
+export default {
+  name: "Dashboard",
+  data() {
+    return {
+      recentActivities: [
+        {
+          id: 1,
+          image: "https://randomuser.me/api/portraits/men/35.jpg",
+          name: "Ash Britain",
+          company: "Dropbox",
+          purchased: true,
+          when: "Today",
+          today: true,
+        },
+        {
+          id: 2,
+          image: "https://randomuser.me/api/portraits/men/52.jpg",
+          name: "Tim Robenman",
+          company: "NVIDIA",
+          purchased: false,
+          when: "Today",
+          today: true,
+        },
+        {
+          id: 3,
+          image: "https://randomuser.me/api/portraits/men/86.jpg",
+          name: "Mac Kafe",
+          company: "Twitter",
+          purchased: true,
+          when: "Yesterday",
+          today: false,
+        },
+        {
+          id: 4,
+          image: "https://randomuser.me/api/portraits/men/52.jpg",
+          name: "Tim Robenman",
+          company: "Voyager",
+          purchased: false,
+          when: "Today",
+          today: true,
+        },
+      ],
+    };
+  },
+  components: {
+    Positions,
+    Recents,
+    PortfolioAnalyticsTemplate,
+    BarChartContainer,
+    Holdings,
+    MonthlyProfitLoss
+  },
+};
 </script>
