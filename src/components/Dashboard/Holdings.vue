@@ -22,6 +22,7 @@
             :equities="this.equities"
             :cash="this.cash"
             :options="this.options"
+            data-cy="pie-chart"
           />
         </div>
       </v-col>
@@ -36,13 +37,19 @@
     <v-row>
       <v-spacer />
       <v-col cols="4" sm="3" md="3" class="pa-0">
-        <div class="text-h5 blue--text text--darken-2">{{ equities }}</div>
+        <div class="text-h5 blue--text text--darken-2" data-cy="equities-value">
+          {{ equities }}
+        </div>
       </v-col>
       <v-col cols="4" sm="3" md="3" class="pa-0">
-        <div class="text-h5 green--text text--darken-3">{{ cash }}</div>
+        <div class="text-h5 green--text text--darken-3" data-cy="cash-value">
+          {{ cash }}
+        </div>
       </v-col>
       <v-col cols="4" sm="3" md="3" class="pa-0">
-        <div class="text-h5 black--text">{{ options }}</div>
+        <div class="text-h5 black--text" data-cy="options-value">
+          {{ options }}
+        </div>
       </v-col>
       <v-spacer />
     </v-row>
