@@ -92,7 +92,7 @@
         <v-container>
           <v-row no-gutters>
             <v-col>
-              <!-- INSERT HREF HERE -->
+              <!-- INSERT REF HERE -->
               <router-link
                 to="/"
                 class="grey--text"
@@ -102,7 +102,7 @@
               </router-link>
             </v-col>
             <v-col>
-              <!-- INSERT HREF HERE -->
+              <!-- INSERT REF HERE -->
               <router-link
                 to="/"
                 class="grey--text"
