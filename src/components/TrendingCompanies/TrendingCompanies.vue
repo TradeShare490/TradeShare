@@ -1,6 +1,6 @@
 ﻿<template>
-  <v-card class="sticky-card mt-3">
-    <v-row>
+  <v-card class="sticky-card" height="100%">
+    <v-row no-gutters>
       <v-col>
         <v-list-item>
           <v-list-item-content>
@@ -9,8 +9,7 @@
               <v-icon>
                 mdi-trending-up
               </v-icon>
-            </v-list-item-title
-            >
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-col>
@@ -39,7 +38,7 @@
 </template>
 
 <script>
-import CompanyCard from "../Dashboard/CompanyCard.vue";
+import CompanyCard from "../TrendingCompanies/CompanyCard.vue";
 export default {
   components: { CompanyCard },
   name: "TrendingCompanies",

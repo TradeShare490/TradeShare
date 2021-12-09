@@ -1,30 +1,35 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col xs="12" sm="12" md="12" lg="9">
-        <span class="d-flex justify-start text-h4 font-weight-medium ml-1 mb-2"
-          >Trade Zone</span
-        >
-        <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
-          <Feed
-            v-for="post in allPosts"
-            :key="post.id"
-            :image="post.image"
-            :name="post.name"
-            :purchased="post.purchased"
-            :company="post.company"
-            :tag="post.tag"
-            :size="post.size"
-            :when="post.when"
-            :verified="post.verified"
-            :stock1="post.stock1"
-            :stock2="post.stock2"
-            :stock3="post.stock3"
-            :stock4="post.stock4"
-          ></Feed>
-        </v-alert>
+      <v-col xs="12" sm="12" md="12" lg="9" class="d-flex justify-center py-0">
+        <v-card width="1000" height="100%" class="mx-10">
+          <v-row no-gutters>
+            <span class="d-flex justify-start text-h4 font-weight-medium ml-5 my-3">
+              Trade Zone
+            </span>
+          </v-row>
+          <v-row no-gutters class="mx-5">
+            <Feed
+              v-for="post in allPosts"
+              :key="post.id"
+              :image="post.image"
+              :name="post.name"
+              :username="post.username"
+              :when="post.when"
+              :purchased="post.purchased"
+              :company="post.company"
+              :tag="post.tag"
+              :size="post.size"
+              :verified="post.verified"
+              :stock1="post.stock1"
+              :stock2="post.stock2"
+              :stock3="post.stock3"
+              :stock4="post.stock4"
+            />
+          </v-row>
+        </v-card>
       </v-col>
-      <v-col xs="12" sm="12" md="12" lg="3">
+      <v-col xs="12" sm="12" md="12" lg="3" class="py-0 px-0">
         <TrendingCompanies />
       </v-col>
     </v-row>
@@ -43,11 +48,12 @@ export default {
           id: 1,
           image: "https://randomuser.me/api/portraits/men/35.jpg",
           name: "Ash Britain",
+          username: "@ashcoin63",
+          when: "10min ago",
           purchased: true,
           company: "Twitter Inc.",
           tag: "TWTR",
           size: 50,
-          when: "Today",
           verified: false,
           stock1: 312.92,
           stock2: "+0.52%",
@@ -58,11 +64,12 @@ export default {
           id: 2,
           image: "https://randomuser.me/api/portraits/men/52.jpg",
           name: "Tim Robenman",
+          username: "@timthetatman",
+          when: "18h ago",
           purchased: false,
           company: "NVIDIA Corp.",
           tag: "NVDA",
           size: 150,
-          when: "Today",
           verified: true,
           stock1: 222.42,
           stock2: "+0.41%",
@@ -73,11 +80,12 @@ export default {
           id: 3,
           image: "https://randomuser.me/api/portraits/men/86.jpg",
           name: "Mac Kafe",
+          username: "@mcafeez",
+          when: "Dec 10",
           purchased: true,
           company: "Tesla Inc.",
           tag: "TSLA",
           size: 1000,
-          when: "Today",
           verified: true,
           stock1: 755.83,
           stock2: "+1.52%",
@@ -88,11 +96,12 @@ export default {
           id: 4,
           image: "https://randomuser.me/api/portraits/men/35.jpg",
           name: "Ash Britain",
+          username: "@ashcoin63",
+          when: "Dec 8",
           purchased: false,
           company: "Voyager Digital Ltd.",
           tag: "VYGR",
           size: 15,
-          when: "Yesterday",
           verified: false,
           stock1: 14.98,
           stock2: "-0.25%",
@@ -103,11 +112,12 @@ export default {
           id: 5,
           image: "https://randomuser.me/api/portraits/men/52.jpg",
           name: "Tim Robenman",
+          username: "@timthetatman",
+          when: "Nov 29",
           purchased: false,
           company: "NVIDIA Corp.",
           tag: "NVDA",
           size: 150,
-          when: "Yesterday",
           verified: true,
           stock1: 222.42,
           stock2: "+0.41%",
