@@ -15,22 +15,22 @@
           <v-container class="mb-0 pb-0 mx-0 px-0">
             <v-row no-gutters>
               <v-col>
-                <a 
-                  href="/following"
+                <router-link 
+                  to="/following"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  19 Following
-                </a>
+                  {{ numFollowing + " Following" }} 
+                </router-link>
               </v-col>
               <v-col>
-                <a
-                  href="/followers"
+                <router-link
+                  to="/followers"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  29 Followers
-                </a>
+                  {{ numFollowers + " Followers" }} 
+                </router-link>
               </v-col>
             </v-row>
           </v-container>
@@ -93,23 +93,23 @@
           <v-row no-gutters>
             <v-col>
               <!-- INSERT HREF HERE -->
-              <a
-                href="/"
+              <router-link
+                to="/"
                 class="grey--text"
                 style="text-decoration: none; font-size: 12px"
               >
                 Terms & Conditions
-              </a>
+              </router-link>
             </v-col>
             <v-col>
               <!-- INSERT HREF HERE -->
-              <a
-                href="/"
+              <router-link
+                to="/"
                 class="grey--text"
                 style="text-decoration: none; font-size: 12px"
               >
                 Privacy Policy
-              </a>
+              </router-link>
             </v-col>
           </v-row>
           <v-row no-gutters>
@@ -125,7 +125,7 @@
     </v-navigation-drawer>
   </v-card>
 </template>
-
+<!-- TradeZone icon could also be chart-areaspline-->
 <script>
 export default {
   data() {
@@ -134,7 +134,7 @@ export default {
       upperNav: [
         {
           title: "Trade Zone",
-          icon: "mdi-home",
+          icon: "mdi-target-variant",
           route: "/tradezone",
         },
         {
@@ -142,7 +142,10 @@ export default {
           icon: "mdi-view-dashboard",
           route: "/dashboard",
         },
-        { title: "Messages", icon: "mdi-forum", route: "/messages" },
+        { title: "Messages",
+          icon: "mdi-forum",
+          route: "/messages"
+        },
         {
           title: "Preferences",
           icon: "mdi-lock-open-outline ",
@@ -150,8 +153,8 @@ export default {
         },
         {
           title: "Connected Apps",
-          icon: "mdi-dots-grid ",
-          route: "/icons-and-images",
+          icon: "mdi-apps ",
+          route: "/connected-apps",
         },
       ],
       lowerNav: [
@@ -163,6 +166,8 @@ export default {
       ],
       name: "Roman Kutepov",
       since: "Member since 2021",
+      numFollowing: "190K",
+      numFollowers: "295K",
     };
   },
   computed: {

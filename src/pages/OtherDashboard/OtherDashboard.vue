@@ -34,14 +34,14 @@
                   :when="trade.when"
                   :today="trade.today"
               ></Recents>
-              <a
-                  href="/tradezone"
+              <router-link
+                  to="/tradezone"
                   class="d-flex justify-end"
                   style="text-decoration: none; font-size: 12px"
               >
                 View all
                 <v-icon color="primary" dense> mdi-menu-right </v-icon>
-              </a>
+              </router-link>
             </v-card>
           </div>
         </v-col>

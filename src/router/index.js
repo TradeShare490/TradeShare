@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/login",
+    redirect: "/tradezone",
   },
   {
     path: "/signup",
@@ -57,8 +57,8 @@ const routes = [
     name: "Preferences",
   },
   {
-    path: "/icons-and-images",
-    name: "IconsAndImages",
+    path: "/connected-apps",
+    name: "ConnectedApps",
   },
   {
     path: "/support",
@@ -88,6 +88,14 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    else {
+      return { x: 0, y: 0};
+    }
+  }
 });
 router.beforeEach((to, from, next) => {
   const publicPages = ['/','/login','/signup']

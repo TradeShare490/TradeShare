@@ -52,14 +52,14 @@
               :when="activity.when"
               :today="activity.today"
             ></Recents>
-            <a
-              href="/news-feed"
+            <router-link
+              to="/news-feed"
               class="d-flex justify-end"
               style="text-decoration: none; font-size: 12px"
             >
               View all
               <v-icon color="primary" dense> mdi-menu-right </v-icon>
-            </a>
+            </router-link>
           </v-card>
         </div>
       </v-col>
