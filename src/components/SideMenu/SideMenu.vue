@@ -89,7 +89,7 @@
       </v-list>
       
       <template v-slot:append>
-        <v-container>
+        <v-container class="hidden-sm-and-down">
           <v-row no-gutters>
             <v-col>
               <!-- INSERT REF HERE -->
