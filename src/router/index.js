@@ -7,7 +7,7 @@ import Followers from "../pages/Followers/Followers.vue"
 import Following from "../pages/Following/Following.vue"
 import UserGroupDialog from "../components/UserGroupDialog/UserGroupDialog.vue"
 import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
-import NewsFeed from "../pages/HomeNewsFeed/NewsFeed.vue"
+import TradeZone from "../pages/TradeZone/TradeZone.vue"
 import Messages from "../pages/Messages/Messages.vue"
 
 Vue.use(VueRouter);
@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/login",
+    redirect: "/tradezone",
   },
   {
     path: "/signup",
@@ -28,9 +28,9 @@ const routes = [
     component: LoginSignUp,
   },
   {
-    path: "/news-feed",
-    name: "NewsFeed",
-    component: NewsFeed,
+    path: "/tradezone",
+    name: "TradeZone",
+    component: TradeZone,
   },
   {
     path: "/dashboard",
@@ -57,8 +57,8 @@ const routes = [
     name: "Preferences",
   },
   {
-    path: "/icons-and-images",
-    name: "IconsAndImages",
+    path: "/connected-apps",
+    name: "ConnectedApps",
   },
   {
     path: "/support",
@@ -88,6 +88,14 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    else {
+      return { x: 0, y: 0};
+    }
+  }
 });
 router.beforeEach((to, from, next) => {
   const publicPages = ['/','/login','/signup']

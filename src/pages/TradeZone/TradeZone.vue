@@ -3,44 +3,42 @@
     <v-row>
       <v-col xs="12" sm="12" md="12" lg="9">
         <span class="d-flex justify-start text-h4 font-weight-medium ml-1 mb-2"
-          >Latest Activity</span
+          >Trade Zone</span
         >
         <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
-          <Latest
-            v-for="activity in latestActivities"
-            :key="activity.id"
-            :image="activity.image"
-            :name="activity.name"
-            :purchased="activity.purchased"
-            :company="activity.company"
-            :tag="activity.tag"
-            :size="activity.size"
-            :when="activity.when"
-            :verified="activity.verified"
-            :stock1="activity.stock1"
-            :stock2="activity.stock2"
-            :stock3="activity.stock3"
-            :stock4="activity.stock4"
-          ></Latest>
+          <Feed
+            v-for="post in allPosts"
+            :key="post.id"
+            :image="post.image"
+            :name="post.name"
+            :purchased="post.purchased"
+            :company="post.company"
+            :tag="post.tag"
+            :size="post.size"
+            :when="post.when"
+            :verified="post.verified"
+            :stock1="post.stock1"
+            :stock2="post.stock2"
+            :stock3="post.stock3"
+            :stock4="post.stock4"
+          ></Feed>
         </v-alert>
       </v-col>
-      <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
       <v-col xs="12" sm="12" md="12" lg="3">
         <TrendingCompanies />
       </v-col>
-      <!-- PLACEHOLDER FOR TRENDING COMPANIES -->
     </v-row>
   </v-container>
 </template>
 <script>
-import Latest from "../../components/LatestActivity/Latest.vue";
-import TrendingCompanies from "../../components/NewsFeed/TrendingCompanies.vue";
+import Feed from "../../components/TradeZone/Feed.vue";
+import TrendingCompanies from "../../components/TrendingCompanies/TrendingCompanies.vue";
 
 export default {
-  name: "NewsFeed",
+  name: "TradeZone",
   data() {
     return {
-      latestActivities: [
+      allPosts: [
         {
           id: 1,
           image: "https://randomuser.me/api/portraits/men/35.jpg",
@@ -120,7 +118,7 @@ export default {
     };
   },
   components: {
-    Latest,
+    Feed,
     TrendingCompanies,
   },
 };

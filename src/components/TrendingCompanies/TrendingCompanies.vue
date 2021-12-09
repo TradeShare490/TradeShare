@@ -1,58 +1,40 @@
-<template>
+﻿<template>
   <v-card class="sticky-card mt-3">
-    <v-row class="mb-5">
+    <v-row>
       <v-col>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6 text-left"
-              >Trending Companies<v-icon
-                >mdi-trending-up</v-icon
-              ></v-list-item-title
+            <v-list-item-title class="text-h6 text-left blue--text">
+              Trending Companies
+              <v-icon>
+                mdi-trending-up
+              </v-icon>
+            </v-list-item-title
             >
           </v-list-item-content>
         </v-list-item>
-      </v-col>
-      <v-col>
-        <v-autocomplete
-          dense
-          v-model="searchCriteria"
-          :search-input="search"
-          @update:search-input="(val) => (search = val)"
-          class="mt-2 mx-10"
-          flat
-          solo
-          append-icon="mdi-magnify"
-          rounded
-          hide-no-data
-          hide-details
-          label="Search"
-          outlined
-          color="primary"
-          height="10px"
-          return-object
-        ></v-autocomplete>
       </v-col>
     </v-row>
     <v-list disabled>
       <div v-for="company in companies" :key="company.title">
         <CompanyCard
-          :title="company.title"
-          :subtitle="company.subtitle"
-          :imgsrc="company.imageSource"
-          :sold="company.sold"
+            :title="company.title"
+            :subtitle="company.subtitle"
+            :imgsrc="company.imageSource"
+            :sold="company.sold"
         />
-
-        <v-divider class="my-3"></v-divider>
+        <v-divider class="my-3" />
       </div>
     </v-list>
-    <a
-      href="/news-feed"
-      class="d-flex justify-end"
-      style="text-decoration: none; font-size: 12px"
+    <!-- INSERT REF HERE -->
+    <router-link
+        to="/"
+        class="d-flex justify-end"
+        style="text-decoration: none; font-size: 12px"
     >
       View all
       <v-icon color="primary" dense> mdi-menu-right </v-icon>
-    </a>
+    </router-link>
   </v-card>
 </template>
 
