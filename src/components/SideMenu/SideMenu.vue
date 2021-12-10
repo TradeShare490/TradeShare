@@ -3,6 +3,8 @@
     <v-navigation-drawer app clipped permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down" data-cy="profile">
         <v-list-item-content class="mb-0 pb-0">
+          <v-list-item-avatar class="avatar" size="40%">
+        <v-list-item-content class="mb-0 pb-0">
           <v-list-item-avatar class="avatar" size="55%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
           </v-list-item-avatar>
@@ -90,6 +92,41 @@
       
       <template v-slot:append>
         <v-container>
+          <v-row no-gutters>
+            <v-col>
+              <!-- INSERT REF HERE -->
+              <router-link
+                to="/"
+                class="grey--text"
+                style="text-decoration: none; font-size: 12px"
+              >
+                Terms & Conditions
+              </router-link>
+            </v-col>
+            <v-col>
+              <!-- INSERT REF HERE -->
+              <router-link
+                to="/"
+                class="grey--text"
+                style="text-decoration: none; font-size: 12px"
+              >
+                Privacy Policy
+              </router-link>
+            </v-col>
+          </v-row>
+          <v-row no-gutters>
+            <v-col class="text-center text-caption">
+              <v-icon size="17">
+                mdi-copyright
+              </v-icon>
+              <span>TradeShare</span>
+            </v-col>
+          </v-row>
+        </v-container>
+      </template>
+      
+      <template v-slot:append>
+        <v-container class="hidden-sm-and-down">
           <v-row no-gutters>
             <v-col>
               <!-- INSERT REF HERE -->

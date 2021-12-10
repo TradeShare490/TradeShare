@@ -17,10 +17,10 @@
     <v-list disabled>
       <div v-for="company in companies" :key="company.title">
         <CompanyCard
-            :title="company.title"
-            :subtitle="company.subtitle"
-            :imgsrc="company.imageSource"
-            :sold="company.sold"
+          :title="company.title"
+          :subtitle="company.subtitle"
+          :imgsrc="company.imageSource"
+          :sold="company.sold"
         />
         <v-divider class="my-3" />
       </div>
