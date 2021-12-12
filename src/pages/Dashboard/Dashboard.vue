@@ -26,11 +26,9 @@
           icon="mdi-progress-clock"
         />
       </v-col>
-      <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
       <v-col lg="6" xl="3">
         <MonthlyProfitLoss title="Monthly Realized P/L" value="+$5,200.00" :percentChange="16"/>
       </v-col>
-      <!-- PLACEHOLDER COMPONENT UNTIL THE MONTHLY P/L IS DONE -->
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
@@ -42,7 +40,7 @@
         <div>
           <v-card elevation="1" outlined min-width="350">
             <v-card-title class="pb-0" style="word-break: normal">
-              <span class="blue--text">Recent Activity</span>
+              <span class="blue--text">Recent Trades</span>
             </v-card-title>
             <Recents
               v-for="activity in recentActivities"
@@ -54,23 +52,23 @@
               :when="activity.when"
               :today="activity.today"
             ></Recents>
-            <a
-              href="/news-feed"
+            <router-link
+              to="/news-feed"
               class="d-flex justify-end"
               style="text-decoration: none; font-size: 12px"
             >
               View all
               <v-icon color="primary" dense> mdi-menu-right </v-icon>
-            </a>
+            </router-link>
           </v-card>
         </div>
       </v-col>
     </v-row>
     <v-row>
-      <v-col xs="12" md="6" lg="4">
+      <v-col xs="12" md="4" lg="3">
         <Holdings />
       </v-col>
-      <v-col xs="12" md="6" lg="8">
+      <v-col xs="12" md="8" lg="9">
         <v-card elevation="1" outlined min-width="350">
           <BarChartContainer />
         </v-card>
@@ -81,7 +79,7 @@
 
 <script>
 import Positions from "../../components/Portfolio/Positions.vue";
-import Recents from "../../components/RecentActivity/Recents.vue";
+import Recents from "../../components/RecentTrades/Recents.vue";
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import Holdings from "../../components/Dashboard/Holdings.vue";
 import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
