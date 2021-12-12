@@ -22,20 +22,21 @@
             data-cy="brokerage-dropdown"
           ></v-select>
 
-          <v-text-field
-            v-model="email"
-            label="Email Address"
-            color="primary"
-            :rules="[rules.required, rulesEmail.format]"
-            @keyup.enter="submit"
-            data-cy="email-input"
-          ></v-text-field>
+<!--          <v-text-field-->
+<!--            v-model="email"-->
+<!--            label="Email Address"-->
+<!--            color="primary"-->
+<!--            :rules="[rules.required, rulesEmail.format]"-->
+<!--            @keyup.enter="submit"-->
+<!--            data-cy="email-input"-->
+<!--          ></v-text-field>-->
 
           <v-btn
             width="250"
             height="45"
             color="primary"
             class="my-3 text-button"
+            href="https://app.alpaca.markets/oauth/authorize?response_type=code&client_id=1b32c84697cc9bc9c95f646e487c02e7&redirect_uri=http://localhost:8081/confirm"
             >Next</v-btn
           >
           <p left class="text-body-2 text-right pt-3">
@@ -58,8 +59,8 @@ export default {
   data: () => ({
     valid: true,
     email: "",
-    select: "Questrade",
-    items: ["Questrade", "Interactive Brokers"],
+    select: "Alpaca",
+    items: ["Alpaca"],
     intro_message:
       "The best way to use TradeShare is to link your brokerage account so that we take care of keeping your dashboard up to date automatically.",
     no_brokerage_text:
@@ -72,6 +73,10 @@ export default {
         /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
         ) || "E-mail must be valid",
+    },
+    user() {
+      let user = JSON.parse(localStorage.getItem("user"));
+      return user["userInfo"];
     },
   }),
   methods: {
