@@ -30,7 +30,7 @@
       >
         <template v-slot:item="data">
           <v-list-tile-content>
-            <v-list-tile-title ><b>{{ data.item['symbol'] }}</b>: {{ data.item['name'] }}</v-list-tile-title>
+            <v-list-tile-title ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
           </v-list-tile-content>
         </template>
       </v-autocomplete>
