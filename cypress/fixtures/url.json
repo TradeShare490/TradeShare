@@ -11,5 +11,6 @@
 	"ICONS_AND_IMAGES": "/icons-and-images",
 	"SUPPORT": "/support",
 	"USER_GROUP_DIALOG_TEMP": "/user-group-dialog",
-	"BROKERAGE_SIGNUP": "/brokerage-signup"
+	"BROKERAGE_SIGNUP": "/brokerage-signup",
+	"TRADEZONE": "/tradezone"
 }
