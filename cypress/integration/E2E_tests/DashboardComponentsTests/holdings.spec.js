@@ -8,12 +8,50 @@ describe("On the dashbooard page, Holdings component can", () => {
       );
     });
   });
+  it("display account summary", () => {
+    cy.get("[data-cy=portfolio-value-card]").should("be.visible");
+    cy.get("[data-cy=portfolio-value-card]").contains("$24,000", { matchCase: true });
+    cy.get("[data-cy=daily-change-card]").should("be.visible");
+    cy.get("[data-cy=daily-change-card]").contains("+2.12%", { matchCase: true });
+    cy.get("[data-cy=goal-progress-card]").should("be.visible");
+    cy.get("[data-cy=goal-progress-card]").contains("75%", { matchCase: true });
+    cy.get("[data-cy=account-performance-card]").should("be.visible");
+    cy.get("[data-cy=account-performance-card]").contains("+$5,200.00", { matchCase: true });
+  });
+  it("display positions summary", () => {
+    cy.get("[data-cy=positions]").should("be.visible");
+    cy.get('[data-cy=positions-new-item-btn]').click();
+    cy.get('[data-cy=positions-new-item-symbol-tf]')
+      .clear()
+      .type('TEST_STOCK_SYMB')
+      .should('have.value', 'TEST_STOCK_SYMB');
+    cy.get('[data-cy=positions-new-item-position-size-tf]')
+      .clear()
+      .type('10')
+      .should('have.value', '10');
+    cy.get('[data-cy=positions-new-item-pl-tf]')
+      .clear()
+      .type('123')
+      .should('have.value', '123');
+    cy.get('[data-cy=positions-new-item-submit-btn]').click();
+  });
+  it("display recvent trades component", () => {
+    cy.get("[data-cy=recent-trades-card]").should("be.visible");
+  });
   it("display graph", () => {
     cy.get("[data-cy=pie-chart]").should("be.visible");
   });
+  it("display bar chart graph", () => {
+    cy.get("[data-cy=bar-char-container]").should("be.visible");
+  });
   it("display percentages", () => {
-    cy.get("[data-cy=equities-value]").should("be.visible");
-    cy.get("[data-cy=cash-value]").should("be.visible");
-    cy.get("[data-cy=options-value]").should("be.visible");
+    cy.get("[data-cy=holdings-equities-value]").should("be.visible");
+    cy.get("[data-cy=holdings-equities-value]").contains("63", { matchCase: true });
+    cy.get("[data-cy=holdings-cash-value]").should("be.visible");
+    cy.get("[data-cy=holdings-cash-value]").contains("15", { matchCase: true });
+    cy.get("[data-cy=holdings-options-value]").should("be.visible");
+    cy.get("[data-cy=holdings-options-value]").contains("22", { matchCase: true });
+    cy.get("[data-cy=holdings-last-7-days]").should("be.visible");
+    cy.get("[data-cy=holdings-breakdown]").should("be.visible");
   });
 });
