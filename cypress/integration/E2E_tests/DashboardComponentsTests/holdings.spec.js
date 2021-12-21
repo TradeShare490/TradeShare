@@ -35,7 +35,7 @@ describe("On the dashbooard page, Holdings component can", () => {
       .should('have.value', '123');
     cy.get('[data-cy=positions-new-item-submit-btn]').click();
   });
-  it("display recvent trades component", () => {
+  it("display recent trades component", () => {
     cy.get("[data-cy=recent-trades-card]").should("be.visible");
   });
   it("display graph", () => {
