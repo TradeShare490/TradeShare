@@ -13,32 +13,31 @@
         TradeShare
       </v-toolbar-title>
       <v-spacer />
-    
-      <v-autocomplete
-        label="Search"
-        append-icon="mdi-magnify"
-        class="shrink mr-3"
-        :items="stocks"
-        :loading="IsLoading"
-        :item-text="item => item['symbol'] +': '+ item['name']"
-        rounded
-        single-line
-        solo
-        dense
-        light
-        hide-details
-        hide-no-data
-        clearable
-        click:clear
-      >
-        <template v-slot:item="data">
-          <v-list-tile-content
-          v-on:click="redirect(data.item['symbol'])"
-          >
-            <v-list-tile-title ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
-          </v-list-tile-content>
-        </template>
-      </v-autocomplete>
+        <v-autocomplete
+          label="Search"
+          append-icon="mdi-magnify"
+          class="shrink mr-3"
+          :items="stocks"
+          :loading="IsLoading"
+          :item-text="item => item['symbol'] +': '+ item['name']"
+          rounded
+          single-line
+          solo
+          dense
+          light
+          hide-details
+          hide-no-data
+          clearable
+          click:clear
+        >
+          <template v-slot:item="data">
+            <v-list-tile-content
+            v-on:click="redirect(data.item['symbol'])"
+            >
+              <v-list-tile-title ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
+            </v-list-tile-content>
+          </template>
+        </v-autocomplete>
       <v-btn icon class="mt-1">
         <v-icon>mdi-bell</v-icon>
       </v-btn>
