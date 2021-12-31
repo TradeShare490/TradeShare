@@ -1,6 +1,8 @@
 {
 	"HOMEPAGE": "http://localhost",
 	"HOSTED_BACKEND_URL": "https://tradeshare-backend-for-test.herokuapp.com/api/check",
+	"SIGN_UP": "/signup",
+	"LOGIN": "/login",
 	"OTHER_DASHBOARD": "/other-dashboard",
 	"FEED": "/news-feed",
 	"DASHBOARD": "/dashboard",

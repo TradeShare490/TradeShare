@@ -13,7 +13,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
+            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on" data-cy="positions-new-item-btn">
               New Item
             </v-btn>
           </template>
@@ -28,13 +28,13 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.symbol"
-                      label="Symbol"
+                      label="Symbol" data-cy="positions-new-item-symbol-tf"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.positionSize"
-                      label="Position Size"
+                      label="Position Size" data-cy="positions-new-item-position-size-tf"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -46,7 +46,7 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.profitLoss"
-                      label="P/L"
+                      label="P/L" data-cy="positions-new-item-pl-tf"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -66,7 +66,7 @@
               <v-btn color="blue darken-1" text @click="close">
                 Cancel
               </v-btn>
-              <v-btn color="blue darken-1" text @click="save">
+              <v-btn color="blue darken-1" text @click="save" data-cy="positions-new-item-submit-btn" >
                 Save
               </v-btn>
             </v-card-actions>

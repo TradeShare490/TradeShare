@@ -49,7 +49,7 @@
         ></v-text-field>
 
         <v-text-field
-          data-cy="passwordConfirm"
+          data-cy="password-confirm"
           v-model="passwordConfirm"
           label="Confirm Password"
           color="primary"
@@ -68,11 +68,11 @@
           >Sign Up</v-btn
         >
       </v-form>
-      <v-alert dense text v-if="error" type="error">
+      <v-alert data-cy="error" dense text v-if="error" type="error">
         {{ error }}
       </v-alert>
       <p class="text-body-2 pt-4">
-        Already have an account? <router-link to="./login">Log In</router-link>
+        Already have an account? <router-link data-cy="login-link" to="./login">Log In</router-link>
       </p>
     </v-card>
   </v-container>
