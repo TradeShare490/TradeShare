@@ -25,19 +25,19 @@
                 <span class="blue--text">Recent Trades</span>
               </v-card-title>
               <Recents
-                  v-for="trade in recentTrades"
-                  :key="trade.id"
-                  :image="trade.image"
-                  :name="trade.name"
-                  :company="trade.company"
-                  :purchased="trade.purchased"
-                  :when="trade.when"
-                  :today="trade.today"
+                v-for="trade in recentTrades"
+                :key="trade.id"
+                :image="trade.image"
+                :name="trade.name"
+                :company="trade.company"
+                :purchased="trade.purchased"
+                :when="trade.when"
+                :today="trade.today"
               ></Recents>
               <router-link
-                  to="/tradezone"
-                  class="d-flex justify-end"
-                  style="text-decoration: none; font-size: 12px"
+                to="/tradezone"
+                class="d-flex justify-end"
+                style="text-decoration: none; font-size: 12px"
               >
                 View all
                 <v-icon color="primary" dense> mdi-menu-right </v-icon>
@@ -52,10 +52,11 @@
 
 <script>
 import Positions from "../../components/Portfolio/Positions.vue";
-import Profile from "../../components/Profile/Profile.vue"
+import Profile from "../../components/Profile/Profile.vue";
 import Recents from "@/components/RecentTrades/Recents";
 import BarChartContainer from "@/components/ReturnGraphs/ReturnGraphs";
 import Holdings from "@/components/Dashboard/Holdings";
+import axios from "../../axios/axios.v1";
 
 export default {
   name: "OtherDashboard",
@@ -107,6 +108,50 @@ export default {
     Recents,
     BarChartContainer,
     Holdings,
-  }
-}
+  },
+  methods: {
+    pullUserPortfolioData(uID) {
+      userPortfolioData = axios
+        .get("/positions/" + uID)
+        .then(function(res) {
+          console.log(res);
+        })
+        .catch(function(err) {
+          console.log(err);
+        })
+        .then(function() {
+          console.log("Reached then");
+        });
+      const { data } = userPortfolioData;
+      userPortfolioData = JSON.parse(data);
+      return userPortfolioData;
+    },
+    pullUserProfileData(uID) {
+      userProfileData = axios
+        .get("/userInfo/" + uID)
+        .then(function(res) {
+          console.log(res);
+        })
+        .catch(function(err) {
+          console.log(err);
+        })
+        .then(function() {
+          console.log("Reached then");
+        });
+      const {data} = userProfileData;
+      userProfileData = JSON.parse(data);
+      return userProfileData;
+    },
+    parseUserPortfolioData(userPortfolioData){
+      for (let index = 0; index < userPortfolioData.length; index++) {
+            //In here I parse the data and return it so that it can be displayed on the website
+      }
+    },
+    parseUserProfileData(userProfileData){
+      for (let index = 0; index < userProfileData.length; index++) {
+            //In here I parse the data and return it so that it can be displayed on the website
+      }
+    }
+  },
+};
 </script>
