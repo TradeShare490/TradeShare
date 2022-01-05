@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     pullUserPortfolioData(uID) {
-      userPortfolioData = axios
+     let userPortfolioData = axios
         .get("/positions/" + uID)
         .then(function(res) {
           console.log(res);
@@ -127,7 +127,7 @@ export default {
       return userPortfolioData;
     },
     pullUserProfileData(uID) {
-      userProfileData = axios
+     let userProfileData = axios
         .get("/userInfo/" + uID)
         .then(function(res) {
           console.log(res);
