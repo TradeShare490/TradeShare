@@ -17,10 +17,12 @@ class UserService {
 	}
 	
 	async pullUserPortfolioData(uID) {
-		let userPortfolioData = axios
+			let userPortfolioData=null;
+			await axios
 			.get("/positions/" + uID)
 			.then(function (res) {
 				console.log(res);
+				userPortfolioData=res;
 			})
 			.catch(function (err) {
 				console.log(err);
@@ -28,8 +30,6 @@ class UserService {
 			.then(function () {
 				console.log("Reached then");
 			});
-		const { data } = userPortfolioData;
-		userPortfolioData = JSON.parse(data);
 		return userPortfolioData;
 	}
 
@@ -45,8 +45,6 @@ class UserService {
 			.then(function () {
 				console.log("Reached then");
 			});
-		const { data } = userProfileData;
-		userProfileData = JSON.parse(data);
 		return userProfileData;
 	}
 }

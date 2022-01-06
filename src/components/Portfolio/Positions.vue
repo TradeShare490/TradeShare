@@ -127,8 +127,10 @@
 </template>
 
 <script>
+import UserService from "../../services/User.service"
 export default {
     name: "Positions",
+    props:['positions'],
     data() {
         return {
             dialog: false,
@@ -183,8 +185,22 @@ export default {
     },
 
     methods: {
-        initialize () {
-            this.stocks = [
+       async initialize () {
+            this.tempArray=[];
+            let a=await UserService.pullUserPortfolioData('6181c0d2e1707d7eac58940f');
+            for(let i = 0;i < a.data.positions.length;i++){
+              this.tempArray[i]={
+                symbol:a.data.positions[i].symbol,
+                positionSize:Number(a.data.positions[i].qty),
+                date: new Date().toLocaleString(),
+                profitLoss: a.data.positions[i].current_price - a.data.positions[i].lastday_price,
+                verified:true,
+              }
+              console.log(this.stocks[i]);
+            }
+            console.log(this.stocks);
+            this.stocks=this.tempArray;
+            /*this.stocks = [
                 {
                     symbol: 'MSFT',
                     positionSize: 1000,
@@ -207,7 +223,8 @@ export default {
                     verified: true,
                 },
                 
-            ]
+            ]*/
+          console.log(this.stocks);
         },
 
         editStock (stock) {
