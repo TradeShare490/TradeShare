@@ -56,7 +56,6 @@ import Profile from "../../components/Profile/Profile.vue";
 import Recents from "@/components/RecentTrades/Recents";
 import BarChartContainer from "@/components/ReturnGraphs/ReturnGraphs";
 import Holdings from "@/components/Dashboard/Holdings";
-import axios from "../../axios/axios.v1";
 
 export default {
   name: "OtherDashboard",
@@ -108,50 +107,6 @@ export default {
     Recents,
     BarChartContainer,
     Holdings,
-  },
-  methods: {
-    pullUserPortfolioData(uID) {
-     let userPortfolioData = axios
-        .get("/positions/" + uID)
-        .then(function(res) {
-          console.log(res);
-        })
-        .catch(function(err) {
-          console.log(err);
-        })
-        .then(function() {
-          console.log("Reached then");
-        });
-      const { data } = userPortfolioData;
-      userPortfolioData = JSON.parse(data);
-      return userPortfolioData;
-    },
-    pullUserProfileData(uID) {
-     let userProfileData = axios
-        .get("/userInfo/" + uID)
-        .then(function(res) {
-          console.log(res);
-        })
-        .catch(function(err) {
-          console.log(err);
-        })
-        .then(function() {
-          console.log("Reached then");
-        });
-      const {data} = userProfileData;
-      userProfileData = JSON.parse(data);
-      return userProfileData;
-    },
-    parseUserPortfolioData(userPortfolioData){
-      for (let index = 0; index < userPortfolioData.length; index++) {
-            //In here I parse the data and return it so that it can be displayed on the website
-      }
-    },
-    parseUserProfileData(userProfileData){
-      for (let index = 0; index < userProfileData.length; index++) {
-            //In here I parse the data and return it so that it can be displayed on the website
-      }
-    }
   },
 };
 </script>
