@@ -73,9 +73,7 @@
             <v-list-item-title class="font-weight-bold">
               {{ numFollowers }}
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Followers
-            </v-list-item-subtitle>
+            <v-list-item-subtitle> Followers </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -106,9 +104,7 @@
             <v-list-item-title class="font-weight-bold">
               {{ numFollowing }}
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Following
-            </v-list-item-subtitle>
+            <v-list-item-subtitle> Following </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -128,40 +124,72 @@
 </template>
 
 <script>
-  export default {
-    name: "Profile",
-    data() {
-      return {
-        name: "Benver Vloshki",
-        nickname: "Ben",
-        labelText: "untagged",
-        labelColor: "untagged",
-        date: "2021",
-        bio: "This section is available for a small bio. Optional.",
-        numFollowers: "11K",
-        numFollowing: "5K",
-        following: false,
-      };
+import UserService from "../../services/User.service";
+export default {
+  name: "Profile",
+  info: [],
+  data() {
+    return {
+      name: "Benver Vloshki",
+      nickname: "Ben",
+      labelText: "untagged",
+      labelColor: "untagged",
+      date: "2021",
+      bio: "This section is available for a small bio. Optional.",
+      numFollowers: "11K",
+      numFollowing: "5K",
+      following: false,
+    };
+  },
+  created() {
+    this.profileData("6181c0d2e1707d7eac58940f");
+    console.log("Created");
+    console.log(this.info);
+  },
+  methods: {
+    follow() {
+      this.following = true;
+      this.labelText = "untagged";
+      this.labelColor = "untagged";
+      console.log("following...");
     },
-    methods: {
-      follow() {
-        this.following = true;
-        this.labelText = "untagged";
-        this.labelColor = "untagged";
-        console.log("following...");
-      },
-      unfollow() {
-        this.following = false;
-        console.log("unfollowing...");
-      },
-      label() {
-        this.labelText = "friend";
-        this.labelColor = "friend";
-        console.log("assigning label...");
-      },
-      message() {
-        console.log("sending a message...");
-      },
+    unfollow() {
+      this.following = false;
+      console.log("unfollowing...");
     },
-  };
+    label() {
+      this.labelText = "friend";
+      this.labelColor = "friend";
+      console.log("assigning label...");
+    },
+    message() {
+      console.log("sending a message...");
+    },
+    //THIS METHOD WORKS, I JUST CAN'T FEED DISPLAY THE INFO ON THE PAGE
+    async profileData(UID) {
+      this.info = [];
+      let a = null;
+      try {
+        console.log("Profile data:");
+        a = await UserService.pullUserProfileData(UID);
+        this.info["name"] = a.data.firstname + " " + a.data.lastname;
+        this.info["nickname"] = a.data.username;
+        this.info["labelText"] = "untagged";
+        this.info["labelColor"] = "untagged";
+        this.info["date"] = "2021";
+        this.info["bio"] =
+          "This section is available for a small bio. Optional.";
+        this.info["numFollowers"] = a.data.followers.length;
+        this.info["numFollowing"] = a.data.following.length;
+        this.info["following"] = false;
+      } catch (err) {
+        console.log(err);
+        return;
+      }
+      console.log("info");
+      console.log(this.info);
+      return this.info;
+    },
+  },
+};
 </script>

@@ -15,17 +15,18 @@ class UserService {
 			return { success: false, message: err.response.data.message };
 		}
 	}
-	
+
 	async pullUserPortfolioData(uID) {
-			let userPortfolioData=null;
-			await axios
+		let userPortfolioData = null;
+		await axios
 			.get("/positions/" + uID)
 			.then(function (res) {
 				console.log(res);
-				userPortfolioData=res;
+				userPortfolioData = res;
 			})
 			.catch(function (err) {
 				console.log(err);
+				return null;
 			})
 			.then(function () {
 				console.log("Reached then");
@@ -34,13 +35,16 @@ class UserService {
 	}
 
 	async pullUserProfileData(uID) {
-		let userProfileData = axios
-			.get("/userInfo/" + uID)
+		let userProfileData = null;
+		await axios.get("/userInfo/" + uID)
 			.then(function (res) {
+				console.log("User info success");
 				console.log(res);
+				userProfileData = res;
 			})
 			.catch(function (err) {
 				console.log(err);
+				return null;
 			})
 			.then(function () {
 				console.log("Reached then");
