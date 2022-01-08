@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: null,
+    alpacaRedirectLink: process.env.VUE_APP_ALPACA_INTEGRATION_URL
   },
   mutations: {
     setUserData(state, userData) {

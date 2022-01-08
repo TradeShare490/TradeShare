@@ -1,18 +1,21 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" persistent width="800">
+    <v-dialog v-model="dialog" persistent width="1000">
       <v-card>
         <v-card-title class="text-h5 grey lighten-2">
-          Confirm
+          Click confirm to link your Alpaca account
         </v-card-title>
+        <v-row>
+          <v-col class="d-flex justify-center pa-5">
+            <v-img src="../../assets/TradeShare.png" height="100px"
+                   width="150px" contain></v-img>
+          </v-col>
+          <v-col class="d-flex justify-center pa-5">
+            <v-img src="../../assets/Alpaca_Logo.png" height="100px"
+                   width="100px" contain></v-img>
+          </v-col>
+        </v-row>
 
-        <v-card-text>
-          {{ code }}
-        </v-card-text>
-        <v-card-text>
-          {{ user.userId }}
-          {{ userInfo }}
-        </v-card-text>
         <v-divider></v-divider>
 
         <v-card-actions>

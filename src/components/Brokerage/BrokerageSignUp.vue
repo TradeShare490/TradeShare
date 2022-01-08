@@ -36,11 +36,11 @@
             height="45"
             color="primary"
             class="my-3 text-button"
-            href="https://app.alpaca.markets/oauth/authorize?response_type=code&client_id=1b32c84697cc9bc9c95f646e487c02e7&redirect_uri=http://localhost:8081/confirm"
+            :href= "alpacaURL"
             >Next</v-btn
           >
           <p left class="text-body-2 text-right pt-3">
-            <router-link to="">Skip for now</router-link>
+            <router-link to="/dashboard">Skip for now</router-link>
           </p>
         </v-form>
       </v-card>
@@ -87,6 +87,12 @@ export default {
       }
     },
   },
+  computed:{
+    alpacaURL(){
+      console.log(this.$store.state.alpacaRedirectLink)
+      return this.$store.state.alpacaRedirectLink
+    }
+  }
 };
 </script>
 

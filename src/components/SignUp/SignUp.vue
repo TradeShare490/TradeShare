@@ -79,7 +79,7 @@
 </template>
 
 <script>
-// import UserService from "../../services/User.service";
+import UserService from "../../services/User.service";
 export default {
   name: "SignUp",
   data: () => ({
@@ -106,31 +106,30 @@ export default {
   }),
   methods: {
     async submit() {
-      // add check to see if contents are undefined
-      // if (this.$refs.formSignUp.validate()) {
-      //   let credentials = {
-      //     email: this.email,
-      //     password: this.password,
-      //     passwordConfirmation: this.passwordConfirm,
-      //     firstname: this.firstName,
-      //     lastname: this.lastName,
-      //   };
-      //
-      //   const response = await UserService.signup(credentials);
-      //   if (response.success) {
-      //     this.$store
-      //       .dispatch("login", {
-      //         email: this.email,
-      //         password: this.password,
-      //       })
-      //       .then(() => {
-      //         this.$router.push({ name: "Dashboard" });
-      //       });
-      //   } else {
-      //     this.error = response.message;
-      //   }
-      // }
-      await this.$router.push({name: "BrokerageSignUp"})
+      //add check to see if contents are undefined
+      if (this.$refs.formSignUp.validate()) {
+        let credentials = {
+          email: this.email,
+          password: this.password,
+          passwordConfirmation: this.passwordConfirm,
+          firstname: this.firstName,
+          lastname: this.lastName,
+        };
+
+        const response = await UserService.signup(credentials);
+        if (response.success) {
+          this.$store
+            .dispatch("login", {
+              email: this.email,
+              password: this.password,
+            })
+            .then(() => {
+              this.$router.push({name: "BrokerageSignUp"});
+            });
+        } else {
+          this.error = response.message;
+        }
+      }
     },
   },
   computed: {
