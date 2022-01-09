@@ -5,7 +5,7 @@
         <v-layout row wrap justify-center class="pb-3">
           <v-flex xs5>
             <v-text-field
-              data-cy="firstName"
+              data-cy="first-name"
               v-model="firstName"
               label="First Name"
               color="primary"
@@ -18,7 +18,7 @@
 
           <v-flex xs5>
             <v-text-field
-              data-cy="lastName"
+              data-cy="last-name"
               v-model="lastName"
               label="Last Name"
               color="primary"
