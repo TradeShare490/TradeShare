@@ -143,8 +143,6 @@ export default {
   },
   created() {
     this.profileData("6181c0d2e1707d7eac58940f");
-    console.log("Created");
-    console.log(this.info);
   },
   methods: {
     follow() {
@@ -186,8 +184,6 @@ export default {
         console.log(err);
         return;
       }
-      console.log("info");
-      console.log(this.info);
       return this.info;
     },
   },
