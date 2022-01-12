@@ -73,7 +73,7 @@ export default {
     },
     redirect(symbol){
       const regex = /^\S*$/;
-      if(symb != "" || regex.test(symb) == false){
+      if(symbol != "" || regex.test(symbol) == false){
         window.open("https://finance.yahoo.com/quote/"+symbol);
         }
     }
