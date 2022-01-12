@@ -71,10 +71,10 @@ export default {
         this.$router.push({ name: "Login" });
       });
     },
-    redirect(symb){
-      var regex = /^\S*$/;
+    redirect(symbol){
+      const regex = /^\S*$/;
       if(symb != "" || regex.test(symb) == false){
-        window.open("https://finance.yahoo.com/quote/"+symb);
+        window.open("https://finance.yahoo.com/quote/"+symbol);
         }
     }
   },
