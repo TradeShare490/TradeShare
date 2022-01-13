@@ -72,8 +72,8 @@ export default {
       });
     },
     redirect(symbol){
-      const regex = /^\S*$/;
-      if(symbol != "" || regex.test(symbol) == false){
+      const regex = /^\S+$/;
+      if(regex.test(symbol)){
         window.open("https://finance.yahoo.com/quote/"+symbol);
         }
     }
