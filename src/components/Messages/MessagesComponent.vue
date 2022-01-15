@@ -30,10 +30,11 @@
               line
               return-object
               single-line
+              data-cy="search"
             ></v-autocomplete>
           </v-col>
           <v-col cols="12" class="px-7">
-            <v-btn small color="primary" width="100%">
+            <v-btn small color="primary" width="100%" data-cy="new-message">
               <v-icon left>
                 mdi-pencil
               </v-icon>
@@ -44,7 +45,7 @@
         <v-divider />
         <v-responsive class="overflow-y-auto fill-height" height="65vh">
           <v-list subheader>
-            <v-list-item-group v-model="activeChat">
+            <v-list-item-group v-model="activeChat" data-cy="chat">
               <div v-for="(user, index) in users" :key="user.id">
                 <v-list-item :key="`user${index}`" :value="user.id">
                   <v-avatar class="profile" size="40">
@@ -97,7 +98,7 @@
           class="overflow-y-hidden fill-height"
           height="80vh"
         >
-          <v-card flat class="d-flex flex-column fill-height">
+          <v-card flat class="d-flex flex-column fill-height" data-cy="messages-window">
             <v-card-text class="flex-grow-1 overflow-y-auto">
               <div
                 v-for="msg in messages"
@@ -130,13 +131,14 @@
                 @keyup.enter="messages.push(messageForm)"
                 hide-details
                 single-line
+                data-cy="send-message"
               >
                 <template v-slot:prepend-inner>
                   <v-icon @click="click" class="mr-2" color="primary">insert_emoticon</v-icon>
                 </template>
                 <template v-slot:append>
                   <v-icon class="px-2" @click="click" color="primary">image</v-icon>
-                  <v-icon @click="messages.push(messageForm)" color="primary">send</v-icon>
+                  <v-icon @click="messages.push(messageForm)" color="primary" data-cy="send-button">send</v-icon>
                 </template>
               </v-text-field>
             </v-card-text>
