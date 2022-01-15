@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import {useFollowMixin} from "../../mixins/useFollowMixin.js";
+import {useFollowMixin} from "../../hooks/useFollowMixin.js";
 export default {
   
   name: "UserBlock",

@@ -15,8 +15,7 @@
           value="+2.12%"
           :percentChange="16"
           icon="mdi-calendar-today"
-        /> 
-      </v-col
+        /> </v-col
       ><v-col lg="6" xl="3" data-cy="goal-progress-card">
         <PortfolioAnalyticsTemplate
           title="Goal Progress"
@@ -27,18 +26,26 @@
         />
       </v-col>
       <v-col lg="6" xl="3" data-cy="account-performance-card">
-        <MonthlyProfitLoss title="Monthly Realized P/L" value="+$5,200.00" :percentChange="16"/>
+        <MonthlyProfitLoss
+          title="Monthly Realized P/L"
+          value="+$5,200.00"
+          :percentChange="16"
+        />
       </v-col>
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
         <v-card min-width="350" data-cy="positions">
-          <Positions /> 
+          <Positions />
         </v-card>
       </v-col>
       <v-col xs="12" lg="4" xl="3">
-        <div>
-          <v-card elevation="1" outlined min-width="350" data-cy="recent-trades-card">
+          <v-card
+            elevation="1"
+            outlined
+            min-width="350"
+            data-cy="recent-trades-card"
+          >
             <v-card-title class="pb-0" style="word-break: normal">
               <span class="blue--text">Recent Trades</span>
             </v-card-title>
@@ -56,13 +63,11 @@
               to="/news-feed"
               class="d-flex justify-end"
               style="text-decoration: none; font-size: 12px"
-              
             >
               View all
               <v-icon color="primary" dense> mdi-menu-right </v-icon>
             </router-link>
           </v-card>
-        </div>
       </v-col>
     </v-row>
     <v-row>
@@ -70,7 +75,12 @@
         <Holdings />
       </v-col>
       <v-col xs="12" md="8" lg="9">
-        <v-card elevation="1" outlined min-width="350" data-cy="bar-char-container">
+        <v-card
+          elevation="1"
+          outlined
+          min-width="350"
+          data-cy="bar-char-container"
+        >
           <BarChartContainer />
         </v-card>
       </v-col>
@@ -84,7 +94,7 @@ import Recents from "../../components/RecentTrades/Recents.vue";
 import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnalyticsTemplate.vue";
 import Holdings from "../../components/Dashboard/Holdings.vue";
 import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
-import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue"
+import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue";
 
 export default {
   name: "Dashboard",
@@ -136,7 +146,7 @@ export default {
     PortfolioAnalyticsTemplate,
     BarChartContainer,
     Holdings,
-    MonthlyProfitLoss
+    MonthlyProfitLoss,
   },
 };
 </script>

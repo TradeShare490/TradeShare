@@ -19,14 +19,14 @@
 </template>
 
 <script>
-  import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
-  import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
+import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
+import SearchViewBy from "../../components/SearchViewBy/SearchViewBy.vue";
 
-  export default {
-    name: "Following",
-    components: {
-      UserBlock,
-      SearchViewBy
-    },
-  };
+export default {
+  name: "Following",
+  components: {
+    UserBlock,
+    SearchViewBy,
+  },
+};
 </script>
