@@ -2,14 +2,12 @@
   <div>
     <div>
       <v-col>
-      <FollowNotif
+      <Notifications
       :currentlyFollowing="false"
-      currentLabelColor="friend"
-      currentLabelText="friend"
       image="https://randomuser.me/api/portraits/men/52.jpg"
       message="John Molson has followed you."
       >
-      </FollowNotif>
+      </Notifications>
     </v-col>
     </div>
 
@@ -37,14 +35,14 @@
 <script>
   import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
   import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
-  import FollowNotif from "../../components/Notification/Notifications.vue";
+  import Notifications from "../../components/Notification/Notifications.vue";
 
   export default {
     name: "Followers",
     components: {
       UserBlock,
       SearchViewBy,
-      FollowNotif
+      Notifications
     },
   };
 </script>

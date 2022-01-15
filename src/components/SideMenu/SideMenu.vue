@@ -113,7 +113,7 @@
             </v-col>
           </v-row>
           <v-row no-gutters>
-            <v-col class="text-center text-caption">
+            <v-col class="text-center text-caption mt-1">
               <v-icon size="17">
                 mdi-copyright
               </v-icon>

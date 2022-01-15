@@ -54,7 +54,7 @@
 
 <script>
 export default {
-  name: "Brokerage",
+  name: "BrokerageSignUp",
   data: () => ({
     valid: true,
     email: "",

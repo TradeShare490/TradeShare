@@ -3,9 +3,22 @@ import { Doughnut } from "vue-chartjs";
 
 export default {
   extends: Doughnut,
-  props: ["equities", "cash", "options"],
+  props: {
+    equities: Number,
+    cash: Number,
+    options: Number,
+  },
+  data: () => ({
+    chartOptions: {
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: false,
+      },
+    },
+  }),
   computed: {
-    chartdata: function () {
+    chartdata: function() {
       return {
         datasets: [
           {
@@ -18,15 +31,6 @@ export default {
       };
     },
   },
-  data: () => ({
-    chartOptions: {
-      responsive: true,
-      maintainAspectRatio: true,
-      legend: {
-        display: false,
-      },
-    },
-  }),
   mounted() {
     this.renderChart(this.chartdata, this.chartOptions);
   },

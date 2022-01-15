@@ -1,7 +1,7 @@
 <template>
-  <v-card elevation="0" class="px-6 pb-0 pt-5">
+  <v-card elevation="0" class="px-6">
     <v-row>
-      <v-col
+      <!-- <v-col
         align-self="center"
         cols="12"
         sm="8"
@@ -26,7 +26,7 @@
           return-object
           data-cy="sort-label"
         ></v-autocomplete>
-      </v-col>
+      </v-col> -->
       <v-spacer></v-spacer>
       <v-col
         cols="12"
@@ -35,7 +35,7 @@
         lg="4"
         xl="4"
         align-self="center"
-        class="py-0 px-0"
+        class="pb-3 px-0"
         order="first"
         order-sm="2"
         order-md="2"

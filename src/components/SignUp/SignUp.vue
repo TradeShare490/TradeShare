@@ -29,6 +29,7 @@
         </v-layout>
 
         <v-text-field
+          class="my-5"
           data-cy="email"
           v-model="email"
           label="Email"
@@ -38,6 +39,7 @@
         ></v-text-field>
 
         <v-text-field
+          class="my-5"
           data-cy="password"
           v-model="password"
           label="Password"
@@ -46,9 +48,11 @@
           hint="At least 8 characters"
           :rules="[rules.required, rulesPassword.min]"
           @keyup.enter="submit"
+          autocomplete="new-password"
         ></v-text-field>
 
         <v-text-field
+          class="my-5"
           data-cy="password-confirm"
           v-model="passwordConfirm"
           label="Confirm Password"
