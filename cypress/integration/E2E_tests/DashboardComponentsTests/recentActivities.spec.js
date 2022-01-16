@@ -9,14 +9,14 @@ describe('Recent Activities component can', () => {
           });
     })
     it('display recent activity box', () => {
-        cy.get("[data-cy=recentTradesCard]").should("be.visible");
+        cy.get("[data-cy=recent-trades-card]").should("be.visible");
     });
     it('display recent activity information',()=>{
-        cy.get("[data-cy=traderName]").should("be.visible");
-        cy.get("[data-cy=companyName]").should("be.visible");
-        cy.get("[data-cy=tradeType]").should("be.visible");
-        cy.get("[data-cy=tradeDate]").should("be.visible");
-        cy.get("[data-cy=optionsButton]").should("be.visible");
-        cy.get("[data-cy=recentTradeViewAll]").should("be.visible");
+        cy.get("[data-cy=trader-name]").should("be.visible");
+        cy.get("[data-cy=company-name]").should("be.visible");
+        cy.get("[data-cy=trade-type]").should("be.visible");
+        cy.get("[data-cy=trade-date]").should("be.visible");
+        cy.get("[data-cy=options-button]").should("be.visible");
+        cy.get("[data-cy=recent-trade-view-all]").should("be.visible");
     });
 })
