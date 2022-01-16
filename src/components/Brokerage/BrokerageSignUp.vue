@@ -30,15 +30,15 @@
           <!--            @keyup.enter="submit"-->
           <!--            data-cy="email-input"-->
           <!--          ></v-text-field>-->
-          <a :href="alpacaURL">
+
             <v-btn
               width="250"
               height="45"
               color="primary"
               class="my-3 text-button"
+              @click="redirect"
               >Next</v-btn
-            ></a
-          >
+            >
           <p left class="text-body-2 text-right pt-3">
             <router-link to="/dashboard">Skip for now</router-link>
           </p>
@@ -77,7 +77,8 @@ export default {
     user() {
       let user = JSON.parse(localStorage.getItem("user"));
       return user["userInfo"];
-    }
+    },
+    alpacaURL: process.env.VUE_APP_ALPACA_INTEGRATION_URL
   }),
   methods: {
     submit() {
@@ -85,13 +86,11 @@ export default {
       if (this.$refs.formBrokerage.validate()) {
         console.log("Brokerage: ", this.select, "\n", "Email: ", this.email);
       }
+    },
+    redirect() {
+      window.open(this.alpacaURL, "_self")
     }
   },
-  computed: {
-    alpacaURL() {
-      return process.env.VUE_APP_ALPACA_INTEGRATION_URL;
-    }
-  }
 };
 </script>
 
