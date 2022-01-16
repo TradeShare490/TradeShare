@@ -38,7 +38,6 @@ export const logout = async (store, router) => {
   });
 }
 
-// export const brokerageSignUp = async (credentials, store, router) => {
 export const brokerageSignUp = async (credentials) => {
   console.log("hooks/useCredential.sj");
   console.log("Brokerage: ", credentials.select, "\n", "Email: ", credentials.email);
