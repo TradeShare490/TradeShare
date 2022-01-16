@@ -61,11 +61,8 @@ export default {
   },
   computed: {
     user() {
-      let user = JSON.parse(localStorage.getItem("user"));
-      return user;
+      return JSON.parse(localStorage.getItem("user"));
     }
   }
 };
 </script>
-
-<style scoped></style>

@@ -9,5 +9,3 @@ export default {
   components: { Confirm }
 };
 </script>
-
-<style scoped></style>

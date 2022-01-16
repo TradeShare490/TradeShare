@@ -175,8 +175,7 @@ export default {
       return this.$vuetify.breakpoint.smAndDown;
     },
     user() {
-      let user = JSON.parse(localStorage.getItem("user"));
-      return user;
+      return JSON.parse(localStorage.getItem("user"));
     },
   },
 };

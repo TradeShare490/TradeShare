@@ -22,23 +22,14 @@
             data-cy="brokerage-dropdown"
           ></v-select>
 
-          <!--          <v-text-field-->
-          <!--            v-model="email"-->
-          <!--            label="Email Address"-->
-          <!--            color="primary"-->
-          <!--            :rules="[rules.required, rulesEmail.format]"-->
-          <!--            @keyup.enter="submit"-->
-          <!--            data-cy="email-input"-->
-          <!--          ></v-text-field>-->
-
-            <v-btn
-              width="250"
-              height="45"
-              color="primary"
-              class="my-3 text-button"
-              @click="redirect"
-              >Next</v-btn
-            >
+          <v-btn
+            width="250"
+            height="45"
+            color="primary"
+            class="my-3 text-button"
+            @click="redirect"
+            >Next</v-btn
+          >
           <p left class="text-body-2 text-right pt-3">
             <router-link to="/dashboard">Skip for now</router-link>
           </p>
@@ -88,9 +79,9 @@ export default {
       }
     },
     redirect() {
-      window.open(this.alpacaURL, "_self")
+      window.open(this.alpacaURL, "_self");
     }
-  },
+  }
 };
 </script>
 
