@@ -9,6 +9,9 @@
           <v-list-item-title class="mt-3" data-cy="user-name">
             {{ user.firstname + " " + user.lastname }}
           </v-list-item-title>
+          <v-list-item-subtitle class="text-caption black--text ">
+            @{{ user.username }}
+          </v-list-item-subtitle>
           <v-list-item-subtitle class="text-caption grey--text">
             {{ since }}
           </v-list-item-subtitle>
@@ -164,7 +167,6 @@ export default {
           route: "/support",
         },
       ],
-      name: "Roman Kutepov",
       since: "Member since 2021",
       numFollowing: "190K",
       numFollowers: "295K",

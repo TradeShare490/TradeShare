@@ -4,8 +4,8 @@
       <v-form ref="formLogin" v-model="valid" data-cy="login-form">
         <v-text-field
           data-cy="email"
-          v-model="email"
-          label="Email"
+          v-model="field"
+          label="Email or username"
           color="primary"
           :rules="[rules.required]"
           @keyup.enter="submit"
@@ -52,30 +52,40 @@ export default {
   name: "Login",
   data: () => ({
     valid: "",
-    email: "",
+    field: "",
     value: String,
     password: "",
     rules: {
-      required: (v) => !!v || "Required",
+      required: v => !!v || "Required"
     },
-    error: false,
+    error: false
   }),
   methods: {
     submit() {
+      let payload = {};
       if (this.$refs.formLogin.validate()) {
+        if (this.field.includes("@")) {
+          payload = {
+            email: this.field,
+            password: this.password
+          };
+        } else {
+          payload = {
+            username: this.field,
+            password: this.password
+          };
+        }
         this.$store
-          .dispatch("login", {
-            email: this.email,
-            password: this.password,
-          })
+          .dispatch("login", payload)
           .then(() => {
             this.$router.push({ name: "Dashboard" });
           })
-          .catch((err) => {
+          .catch(err => {
+            console.log(err)
             this.error = err.response.data.message;
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>

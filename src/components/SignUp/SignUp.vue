@@ -29,6 +29,15 @@
         </v-layout>
 
         <v-text-field
+            data-cy="userName"
+            v-model="username"
+            label="Username"
+            color="primary"
+            :rules="[rules.required, rulesUsername.min, rulesUsername.format]"
+            @keyup.enter="submit"
+        ></v-text-field>
+
+        <v-text-field
           data-cy="email"
           v-model="email"
           label="Email"
@@ -86,6 +95,7 @@
       valid: "",
       firstName: "",
       lastName: "",
+      username: "",
       email: "",
       value: String,
       password: "",
@@ -98,6 +108,10 @@
           /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
             v
           ) || "E-mail must be valid",
+      },
+      rulesUsername: {
+        min: (v) => v.length >= 4 || "Min 4 characters",
+        format: (v) => /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(v) || "No special characters"
       },
       rulesPassword: {
         min: (v) => v.length >= 8 || "Min 8 characters",
@@ -114,6 +128,7 @@
             passwordConfirmation: this.passwordConfirm,
             firstname: this.firstName,
             lastname: this.lastName,
+            username: this.username,
           };
 
           const response = await UserService.signup(credentials);
