@@ -77,9 +77,7 @@ export default {
   }),
   methods: {
     submit() {
-      // add check to see if contents are undefined
       if (this.$refs.formBrokerage.validate()) {
-        // go to src/hooks/useCredential.js
         brokerageSignUp(
           { email: this.email, select: this.select },
           this.$store,
