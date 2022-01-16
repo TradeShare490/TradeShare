@@ -2,7 +2,7 @@
 	"HOMEPAGE": "http://localhost",
 	"HOSTED_BACKEND_URL": "https://tradeshare-backend-for-test.herokuapp.com/api/check",
 	"OTHER_DASHBOARD": "/other-dashboard",
-	"FEED": "/news-feed",
+	"FEED": "/tradezone",
 	"DASHBOARD": "/dashboard",
 	"FOLLOWERS": "/followers",
 	"FOLLOWING": "/following",
