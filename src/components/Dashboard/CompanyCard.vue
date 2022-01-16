@@ -1,5 +1,5 @@
 <template>
-  <v-list-item>
+  <v-list-item data-cy="company-card">
     <v-list-item-avatar class="avatar" tile>
       <v-img src="../../assets/TradeShare.png"></v-img>
     </v-list-item-avatar>
@@ -23,5 +23,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,7 +1,7 @@
 <template>
   <v-container class="ma-0" fluid>
     <v-row>
-      <v-col lg="6" xl="3">
+      <v-col lg="6" xl="3" data-cy="portfolio-value-card">
         <PortfolioAnalyticsTemplate
           title="Portfolio Value"
           value="$24,000"
@@ -9,7 +9,7 @@
           icon="mdi-domain"
         />
       </v-col>
-      <v-col lg="6" xl="3">
+      <v-col lg="6" xl="3" data-cy="daily-change-card">
         <PortfolioAnalyticsTemplate
           title="Daily Change"
           value="+2.12%"
@@ -17,7 +17,7 @@
           icon="mdi-calendar-today"
         /> 
       </v-col
-      ><v-col lg="6" xl="3">
+      ><v-col lg="6" xl="3" data-cy="goal-progress-card">
         <PortfolioAnalyticsTemplate
           title="Goal Progress"
           value="75%"
@@ -26,13 +26,13 @@
           icon="mdi-progress-clock"
         />
       </v-col>
-      <v-col lg="6" xl="3">
+      <v-col lg="6" xl="3" data-cy="account-performance-card">
         <MonthlyProfitLoss title="Monthly Realized P/L" value="+$5,200.00" :percentChange="16"/>
       </v-col>
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
-        <v-card min-width="350">
+        <v-card min-width="350" data-cy="positions">
           <Positions /> 
         </v-card>
       </v-col>
@@ -70,7 +70,7 @@
         <Holdings />
       </v-col>
       <v-col xs="12" md="8" lg="9">
-        <v-card elevation="1" outlined min-width="350">
+        <v-card elevation="1" outlined min-width="350" data-cy="bar-char-container">
           <BarChartContainer />
         </v-card>
       </v-col>
