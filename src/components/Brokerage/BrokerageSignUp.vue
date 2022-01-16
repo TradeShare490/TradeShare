@@ -22,22 +22,22 @@
             data-cy="brokerage-dropdown"
           ></v-select>
 
-<!--          <v-text-field-->
-<!--            v-model="email"-->
-<!--            label="Email Address"-->
-<!--            color="primary"-->
-<!--            :rules="[rules.required, rulesEmail.format]"-->
-<!--            @keyup.enter="submit"-->
-<!--            data-cy="email-input"-->
-<!--          ></v-text-field>-->
-
-          <v-btn
-            width="250"
-            height="45"
-            color="primary"
-            class="my-3 text-button"
-            :href= "alpacaURL"
-            >Next</v-btn
+          <!--          <v-text-field-->
+          <!--            v-model="email"-->
+          <!--            label="Email Address"-->
+          <!--            color="primary"-->
+          <!--            :rules="[rules.required, rulesEmail.format]"-->
+          <!--            @keyup.enter="submit"-->
+          <!--            data-cy="email-input"-->
+          <!--          ></v-text-field>-->
+          <a :href="alpacaURL">
+            <v-btn
+              width="250"
+              height="45"
+              color="primary"
+              class="my-3 text-button"
+              >Next</v-btn
+            ></a
           >
           <p left class="text-body-2 text-right pt-3">
             <router-link to="/dashboard">Skip for now</router-link>
@@ -66,18 +66,18 @@ export default {
     no_brokerage_text:
       "Don’t have a brokerage service? No problem! You can still use TradeShare, you’ll just need to manually add your activity.",
     rules: {
-      required: (v) => !!v || "Required",
+      required: v => !!v || "Required"
     },
     rulesEmail: {
-      format: (v) =>
+      format: v =>
         /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
-        ) || "E-mail must be valid",
+        ) || "E-mail must be valid"
     },
     user() {
       let user = JSON.parse(localStorage.getItem("user"));
       return user["userInfo"];
-    },
+    }
   }),
   methods: {
     submit() {
@@ -85,12 +85,11 @@ export default {
       if (this.$refs.formBrokerage.validate()) {
         console.log("Brokerage: ", this.select, "\n", "Email: ", this.email);
       }
-    },
+    }
   },
-  computed:{
-    alpacaURL(){
-      console.log(this.$store.state.alpacaRedirectLink)
-      return this.$store.state.alpacaRedirectLink
+  computed: {
+    alpacaURL() {
+      return process.env.VUE_APP_ALPACA_INTEGRATION_URL;
     }
   }
 };
