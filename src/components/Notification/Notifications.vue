@@ -8,7 +8,7 @@
   >
     <v-row no-gutters class="mt-2">
       <v-col
-        class="mt-0 pb-3"
+        class="mt-0 pb-0"
         align-self="center"
         cols="3"
         sm="2"

@@ -49,7 +49,7 @@
           :items="users"
           :search-input="search"
           @update:search-input="(val) => (search = val)"
-          class="mx-4"
+          class="mx-4 mt-0"
           flat
           hide-no-data
           hide-details
