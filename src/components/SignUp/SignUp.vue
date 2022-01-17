@@ -29,7 +29,7 @@
         </v-layout>
 
         <v-text-field
-            data-cy="userName"
+            data-cy="user-name"
             v-model="username"
             label="Username"
             color="primary"
