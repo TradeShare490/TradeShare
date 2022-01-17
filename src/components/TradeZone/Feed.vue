@@ -1,5 +1,5 @@
 <template>
-    <v-container class="pa-0 ma-0" data-cy="tradezoneFeed">
+    <v-container class="pa-0 ma-0" data-cy="trade-zone-feed">
         <div class="d-flex justify-end mb-n3">
             <v-btn
                 icon
