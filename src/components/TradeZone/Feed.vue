@@ -18,7 +18,7 @@
             {{ this.when }}
           </span>
           </div>
-          <div class="d-flex flex-column">
+          <div id="truncate" class="d-flex flex-column">
             <span class="font-weight-light text-subtitle-2 black--text">
               {{ this.username }}
             </span>
@@ -90,7 +90,7 @@
       </v-row>
       <v-row no-gutters class="mx-16 px-5 py-2">
         <v-col>
-          <div class="d-flex flex-column align-start mr-1">
+          <div class="d-flex flex-column align-xs-center align-sm-start mr-1">
             <span class="text-h6 font-weight-bold black--text">
               {{ this.stock1.toFixed(2) }}
             </span>
@@ -99,8 +99,8 @@
             </span>
           </div>
         </v-col>
-        <v-col class="d-flex justify-end">
-          <div class="d-flex flex-column align-end mr-1">
+        <v-col>
+          <div class="d-flex flex-column align-xs-center align-sm-end mr-1">
             <span class="text-h6 green--text font-weight-bold">
               {{ this.stock2 }}
             </span>
@@ -193,5 +193,11 @@ export default {
 }
 .v-btn:hover {
   color: #3F51B5;
+}
+#truncate {
+  max-width: 14vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

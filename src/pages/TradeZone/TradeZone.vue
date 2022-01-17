@@ -1,10 +1,13 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col xs="12" sm="12" md="12" lg="9" class="d-flex justify-center py-0">
-        <v-card width="1000" height="100%" class="mx-10">
+      <v-col xs="12" sm="12" md="12" lg="9" class="d-flex justify-center py-0 mb-2">
+        <v-card min-width="350" width="1000" height="100%" class="mx-10">
           <v-row no-gutters>
-            <span class="d-flex justify-start text-h4 font-weight-medium ml-5 my-3">
+            <span 
+                class="d-flex justify-start text-h4 font-weight-medium my-3"
+                :class="{'ml-12': $vuetify.breakpoint.xsOnly, 'ml-5': $vuetify.breakpoint.smAndUp}"
+            >
               Trade Zone
             </span>
           </v-row>
