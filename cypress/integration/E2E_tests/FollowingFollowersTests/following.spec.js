@@ -9,10 +9,6 @@ describe("On the following page, can", () => {
     });
     cy.get("body").then(($body) => {
       if ($body.find("[data-cy=following]").length > 0) {
-        assert.equal(
-          $body.find("[data-cy=label]").length,
-          $body.find("[data-cy=following]").length
-        );
         cy.get("[data-cy=following]").click({ multiple: true });
         cy.get("[data-cy=follow]");
       }
@@ -24,7 +20,6 @@ describe("On the following page, can", () => {
         assert.equal($body.find("[data-cy=label]").length, 0);
         cy.get("[data-cy=follow]").click({ multiple: true });
         cy.get("[data-cy=following]");
-        cy.get("[data-cy=label]").contains("Untagged", { matchCase: false });
       }
     });
   });
