@@ -29,18 +29,12 @@
               class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
               >{{ this.name }}</v-list-item-title
             >
-            <v-list-item class="px-0">
-              <v-chip
-                label
-                v-bind="size"
-                class="text-uppercase white--text px-1"
-                :color="this.labelColor"
-                v-if="this.following"
-                data-cy="label"
-                >{{ this.labelText }}</v-chip
-              >
-            </v-list-item>
+            <v-list-item-title
+                class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
+            >@{{this.username}}</v-list-item-title
+            >
           </v-list-item-content>
+
         </v-list-item>
       </v-col>
       <v-spacer></v-spacer>
@@ -85,6 +79,7 @@
       currentLabelColor: String,
       name: String,
       image: String,
+      username: String,
     },
     data() {
       return {
@@ -98,11 +93,9 @@
         this.following = true;
         this.labelText = "untagged";
         this.labelColor = "untagged";
-        console.log("following...");
       },
       unfollow() {
         this.following = false;
-        console.log("unfollowing...");
       },
     },
     computed: {

@@ -5,7 +5,7 @@
         <v-text-field
           data-cy="email"
           v-model="field"
-          label="Email or username"
+          label="Email or Username"
           color="primary"
           :rules="[rules.required]"
           @keyup.enter="submit"

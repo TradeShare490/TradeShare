@@ -7,6 +7,7 @@
       currentLabelText="friend"
       name="Tim Robenman"
       image="https://randomuser.me/api/portraits/men/52.jpg"
+      username="timrobenman"
     ></UserBlock>
     <UserBlock
       :currentlyFollowing="true"
@@ -14,6 +15,7 @@
       currentLabelText="work"
       name="John Winchester"
       image="https://randomuser.me/api/portraits/men/75.jpg"
+      username="johnwinchester"
     ></UserBlock>
   </div>
 </template>
