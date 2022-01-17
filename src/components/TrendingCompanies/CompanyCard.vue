@@ -1,5 +1,5 @@
 <template>
-  <v-list-item>
+  <v-list-item data-cy="company-card">
     <v-list-item-avatar class="avatar" tile>
       <v-img src="../../assets/TradeShare.png" />
     </v-list-item-avatar>
