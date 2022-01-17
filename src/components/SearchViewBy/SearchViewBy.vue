@@ -1,32 +1,6 @@
 <template>
   <v-card elevation="0" class="px-6">
     <v-row>
-      <!-- <v-col
-        align-self="center"
-        cols="12"
-        sm="8"
-        md="6"
-        lg="5"
-        xl="5"
-        class="py-0"
-      >
-        <p class="text-overline pt-2 float-left pr-5 mb-0 mt-5">
-          View by group
-        </p>
-        <v-autocomplete
-          class="mt-6"
-          v-model="values"
-          :items="items"
-          dense
-          chips
-          small-chips
-          label="Select label"
-          solo
-          multiple
-          return-object
-          data-cy="sort-label"
-        ></v-autocomplete>
-      </v-col> -->
       <v-spacer></v-spacer>
       <v-col
         cols="12"
