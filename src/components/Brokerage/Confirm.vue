@@ -1,38 +1,50 @@
 <template>
-  <div class="text-center">
-    <v-dialog v-model="dialog" persistent width="1000">
-      <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          Click confirm to link your Alpaca account
+  <v-row justify="center">
+    <v-dialog v-model="dialog" persistent max-width="470">
+      <v-card class="pt-5">
+        <v-card-title class="text-h6 justify-center">
+          Connect your {{ brokerageApp }} to TradeShare
         </v-card-title>
-        <v-row>
-          <v-col class="d-flex justify-center pa-5">
-            <v-img src="../../assets/TradeShare.png" height="100px"
-                   width="150px" contain></v-img>
-          </v-col>
-          <v-col class="d-flex justify-center pa-5">
-            <v-img src="../../assets/Alpaca_Logo.png" height="100px"
+        <v-container>
+        <v-row class="py-8">
+          <v-spacer></v-spacer>
+          <v-col class="d-flex justify-center py-5">
+            <v-img src="../../assets/Alpaca_Logo.png" height="110px"
                    width="100px" contain></v-img>
           </v-col>
-        </v-row>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
+          <v-col class="d-flex justify-center py-5">
+            <v-icon size="45" color="primary">
+              east
+            </v-icon>
+          </v-col>
+          <v-col class="d-flex justify-center py-5">
+            <v-img src="../../assets/TradeShare.png" height="110px"
+                   width="100px" contain></v-img>
+          </v-col>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="accept">
-            I accept
+        </v-row>
+        </v-container>
+        <v-card-actions class="pb-5">
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="cancel">
+            Cancel
+          </v-btn>
+          <v-btn color="primary" @click="accept">
+            Confirm
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
+  </v-row>
 </template>
 
 <script>
 import userService from "../../services/User.service";
 export default {
   name: "Confirm",
+  props: {
+    brokerageApp: String
+  },
   data() {
     return {
       code: this.$route.query.code,
