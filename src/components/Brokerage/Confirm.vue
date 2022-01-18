@@ -6,23 +6,31 @@
           Connect your {{ brokerageApp }} to TradeShare
         </v-card-title>
         <v-container>
-        <v-row class="py-8">
-          <v-spacer></v-spacer>
-          <v-col class="d-flex justify-center py-5">
-            <v-img src="../../assets/Alpaca_Logo.png" height="110px"
-                   width="100px" contain></v-img>
-          </v-col>
-          <v-col class="d-flex justify-center py-5">
-            <v-icon size="45" color="primary">
-              east
-            </v-icon>
-          </v-col>
-          <v-col class="d-flex justify-center py-5">
-            <v-img src="../../assets/TradeShare.png" height="110px"
-                   width="100px" contain></v-img>
-          </v-col>
-          <v-spacer></v-spacer>
-        </v-row>
+          <v-row class="py-8">
+            <v-spacer></v-spacer>
+            <v-col class="d-flex justify-center py-5">
+              <v-img
+                src="../../assets/Alpaca_Logo.png"
+                height="110px"
+                width="100px"
+                contain
+              ></v-img>
+            </v-col>
+            <v-col class="d-flex justify-center py-5">
+              <v-icon size="45" color="primary">
+                east
+              </v-icon>
+            </v-col>
+            <v-col class="d-flex justify-center py-5">
+              <v-img
+                src="../../assets/TradeShare.png"
+                height="110px"
+                width="100px"
+                contain
+              ></v-img>
+            </v-col>
+            <v-spacer></v-spacer>
+          </v-row>
         </v-container>
         <v-card-actions class="pb-5">
           <v-spacer></v-spacer>
@@ -69,6 +77,9 @@ export default {
         .catch(err => {
           this.error = err.response.data.message;
         });
+    },
+    async cancel() {
+      await this.$router.push({ name: "Dashboard" });
     }
   },
   computed: {
