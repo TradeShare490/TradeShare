@@ -29,12 +29,14 @@
           hide-no-data
           clearable
           click:clear
+          data-cy="autocomplete-search-bar"
         >
           <template v-slot:item="data">
             <v-list-tile-content
             v-on:click="redirect(data.item['symbol'])"
+            data-cy="autocomplete-list-content"
             >
-              <v-list-tile-title ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
+              <v-list-tile-title data-cy="autocomplete-list-item" ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
             </v-list-tile-content>
           </template>
         </v-autocomplete>
