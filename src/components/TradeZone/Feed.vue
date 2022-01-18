@@ -1,5 +1,4 @@
 <template>
-
   <v-container fluid data-cy="trade-zone-feed">
     <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
       <div class="d-flex justify-end mb-n3 mr-1">
