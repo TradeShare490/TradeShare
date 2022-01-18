@@ -3,7 +3,7 @@
     <v-navigation-drawer app clipped permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down" data-cy="profile">
         <v-list-item-content class="mb-0 pb-0">
-          <v-list-item-avatar class="avatar" size="40%">
+          <v-list-item-avatar class="avatar" size="55%">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
           </v-list-item-avatar>
           <v-list-item-title class="mt-3" data-cy="user-name">
@@ -184,7 +184,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .avatar {
   flex-direction: column;
 }
