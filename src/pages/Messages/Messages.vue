@@ -1,5 +1,7 @@
 <template>
-  <MessagesComponent/>
+  <v-card>
+    <MessagesComponent/>
+  </v-card>
 </template>
 
 <script>
