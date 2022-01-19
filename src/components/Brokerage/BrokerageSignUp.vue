@@ -53,8 +53,9 @@
 </template>
 
 <script>
+import { brokerageSignUp } from "../../hooks/useCredential.js";
 export default {
-  name: "Brokerage",
+  name: "BrokerageSignUp",
   data: () => ({
     valid: true,
     email: "",
@@ -76,9 +77,12 @@ export default {
   }),
   methods: {
     submit() {
-      // add check to see if contents are undefined
       if (this.$refs.formBrokerage.validate()) {
-        console.log("Brokerage: ", this.select, "\n", "Email: ", this.email);
+        brokerageSignUp(
+          { email: this.email, select: this.select },
+          this.$store,
+          this.$router
+        );
       }
     },
   },

@@ -3,7 +3,7 @@
     <v-navigation-drawer app clipped permanent :mini-variant="mini">
       <v-list-item class="hidden-sm-and-down" data-cy="profile">
         <v-list-item-content class="mb-0 pb-0">
-          <v-list-item-avatar class="avatar" size="55%">
+          <v-list-item-avatar size="55%" style="flex-direction: column;">
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
           </v-list-item-avatar>
           <v-list-item-title class="mt-3" data-cy="user-name">
@@ -71,7 +71,7 @@
             v-for="item in lowerNav"
             :key="item.title"
             :to="item.route"
-            active-class="active"
+            active-class="border-width: 0px; border-left-width: 3px; border-style: solid;"
           >
             <v-list-item-icon>
               <v-icon>
@@ -95,10 +95,10 @@
               <!-- INSERT REF HERE -->
               <router-link
                 to="/"
-                class="grey--text"
+                class="grey--text ml-1"
                 style="text-decoration: none; font-size: 12px"
               >
-                Terms & Conditions
+                Terms &amp; Conditions
               </router-link>
             </v-col>
             <v-col>
@@ -113,11 +113,11 @@
             </v-col>
           </v-row>
           <v-row no-gutters>
-            <v-col class="text-center text-caption">
-              <v-icon size="17">
+            <v-col class="text-center text-caption mt-1  grey--text ">
+              <v-icon size="17" >
                 mdi-copyright
               </v-icon>
-              <span>TradeShare</span>
+              <span class="grey--text text--darken-2 font-weight-bold">TradeShare</span>
             </v-col>
           </v-row>
         </v-container>
@@ -181,14 +181,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.avatar {
-  flex-direction: column;
-}
-.active {
-  border-width: 0px;
-  border-left-width: 3px;
-  border-style: solid;
-}
-</style>
