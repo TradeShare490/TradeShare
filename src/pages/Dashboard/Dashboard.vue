@@ -40,7 +40,6 @@
         </v-card>
       </v-col>
       <v-col xs="12" lg="4" xl="3">
-        <div>
           <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350">
             <v-card-title class="pb-0" style="word-break: normal">
               <span class="blue--text">Recent Trades</span>
