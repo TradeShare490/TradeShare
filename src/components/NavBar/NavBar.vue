@@ -40,11 +40,10 @@
             </v-list-tile-content>
           </template>
         </v-autocomplete>
-
       <v-btn icon class="mt-1">
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn icon @click="logOut" class="mt-1" data-cy="logout-btn">
+      <v-btn icon @click="submit" class="mt-1" data-cy="logout-btn">
         <v-icon> mdi-logout </v-icon>
       </v-btn>
     </v-app-bar>
@@ -52,32 +51,35 @@
 </template>
 
 <script>
+import { logout } from "../../hooks/useCredential.js";
 export default {
   name: "NavBar",
   data() {
     return {
       stocks: [
-        {"symbol": "AAPL", "name": "Apple Inc."}, {"symbol": "TSLA", "name": "Tesla Inc."}, {"symbol": "FSR", "name": "Fisker Inc."}, {"symbol": "SPI", "name": "Spi Energy Co Ltd"}
+        { symbol: "AAPL", name: "Apple Inc." },
+        { symbol: "TSLA", name: "Tesla Inc." },
+        { symbol: "FSR", name: "Fisker Inc." },
+        { symbol: "SPI", name: "Spi Energy Co Ltd" },
       ],
-      isLoading: false
+      isLoading: false,
     };
   },
-  computed: {
-    items () {
-      return null
-    }
-  },
   methods: {
-    logOut() {
-      this.$store.dispatch("logout").then(() => {
-        this.$router.push({ name: "Login" });
-      });
+    submit() {
+      logout(this.$store, this.$router);
+    },
+  },
+  computed: {
+    items() {
+      return null;
     },
     redirect(symbol){
       const regex = /^\S+$/;
       if(regex.test(symbol)){
         window.open("https://finance.yahoo.com/quote/"+symbol);
-        }
+      }
+      return true
     }
   },
 };

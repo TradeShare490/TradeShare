@@ -17,7 +17,7 @@
     <v-divider />
     <v-row class="py-5">
       <v-col class="d-flex justify-center">
-        <div class="piechart">
+        <div :style="pieChart">
           <HoldingsPieChart
             :equities="this.equities"
             :cash="this.cash"
@@ -37,12 +37,18 @@
     <v-row>
       <v-spacer />
       <v-col cols="4" sm="3" md="3" class="pa-0">
-        <div class="text-h5 blue--text text--darken-2" data-cy="holdings-equities-value">
+        <div
+          class="text-h5 blue--text text--darken-2"
+          data-cy="holdings-equities-value"
+        >
           {{ equities }}
         </div>
       </v-col>
       <v-col cols="4" sm="3" md="3" class="pa-0">
-        <div class="text-h5 green--text text--darken-3" data-cy="holdings-cash-value">
+        <div
+          class="text-h5 green--text text--darken-3"
+          data-cy="holdings-cash-value"
+        >
           {{ cash }}
         </div>
       </v-col>
@@ -54,11 +60,19 @@
       <v-spacer />
     </v-row>
     <v-row>
-      <v-col cols="6" class="d-flex align-center pl-10" data-cy="holdings-last-7-days">
+      <v-col
+        cols="6"
+        class="d-flex align-center pl-10"
+        data-cy="holdings-last-7-days"
+      >
         <p class="text-subtitle-2 align-center ma-0">Last 7 days</p>
         <v-icon>arrow_right</v-icon>
       </v-col>
-      <v-col cols="6" class="d-flex align-center pr-10" data-cy="holdings-breakdown">
+      <v-col
+        cols="6"
+        class="d-flex align-center pr-10"
+        data-cy="holdings-breakdown"
+      >
         <v-list-item class="px-0">
           <v-list-item-content>
             <v-list-item-title class="text-subtitle-2 text-right"
@@ -74,13 +88,15 @@
 
 <script>
 import HoldingsPieChart from "./HoldingsPieChart.vue";
-
 export default {
   data() {
     return {
       equities: 63,
       cash: 15,
       options: 22,
+      pieChart: {
+        width: "50%",
+      },
     };
   },
   components: {
@@ -88,9 +104,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.piechart {
-  width: 50%;
-}
-</style>

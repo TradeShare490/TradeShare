@@ -29,6 +29,7 @@
         </v-layout>
 
         <v-text-field
+          class="my-5"
           data-cy="email"
           v-model="email"
           label="Email"
@@ -38,6 +39,7 @@
         ></v-text-field>
 
         <v-text-field
+          class="my-5"
           data-cy="password"
           v-model="password"
           label="Password"
@@ -46,9 +48,11 @@
           hint="At least 8 characters"
           :rules="[rules.required, rulesPassword.min]"
           @keyup.enter="submit"
+          autocomplete="new-password"
         ></v-text-field>
 
         <v-text-field
+          class="my-5"
           data-cy="password-confirm"
           v-model="passwordConfirm"
           label="Confirm Password"
@@ -72,71 +76,59 @@
         {{ error }}
       </v-alert>
       <p class="text-body-2 pt-4">
-        Already have an account? <router-link data-cy="login-link" to="./login">Log In</router-link>
+        Already have an account?
+        <router-link data-cy="login-link" to="./login">Log In</router-link>
       </p>
     </v-card>
   </v-container>
 </template>
 
 <script>
-  import UserService from "../../services/User.service";
-  export default {
-    name: "SignUp",
-    data: () => ({
-      valid: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      value: String,
-      password: "",
-      passwordConfirm: "",
-      rules: {
-        required: (v) => !!v || "Required",
-      },
-      rulesEmail: {
-        format: (v) =>
-          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            v
-          ) || "E-mail must be valid",
-      },
-      rulesPassword: {
-        min: (v) => v.length >= 8 || "Min 8 characters",
-      },
-      error: false,
-    }),
-    methods: {
-      async submit() {
-        // add check to see if contents are undefined
-        if (this.$refs.formSignUp.validate()) {
-          let credentials = {
-            email: this.email,
-            password: this.password,
-            passwordConfirmation: this.passwordConfirm,
-            firstname: this.firstName,
-            lastname: this.lastName,
-          };
+import { signUp } from "../../hooks/useCredential.js";
 
-          const response = await UserService.signup(credentials);
-          if (response.success) {
-            this.$store
-              .dispatch("login", {
-                email: this.email,
-                password: this.password,
-              })
-              .then(() => {
-                this.$router.push({ name: "Dashboard" });
-              });
-          } else {
-            this.error = response.message;
-          }
-        }
-      },
+export default {
+  name: "SignUp",
+  data: () => ({
+    valid: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    value: String,
+    password: "",
+    passwordConfirm: "",
+    rules: {
+      required: (v) => !!v || "Required",
     },
-    computed: {
-      passwordConfirmation() {
-        return () =>
-          this.password === this.passwordConfirm || "Password must match";
-      },
+    rulesEmail: {
+      format: (v) =>
+        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     },
-  };
+    rulesPassword: {
+      min: (v) => v.length >= 8 || "Min 8 characters",
+    },
+    error: false,
+  }),
+  methods: {
+    submit() {
+      if (this.$refs.formSignUp.validate()) {
+        let credentials = {
+          email: this.email,
+          password: this.password,
+          passwordConfirmation: this.passwordConfirm,
+          firstname: this.firstName,
+          lastname: this.lastName,
+        };
+        return signUp(credentials, this.$store, this.$router);
+      }
+    },
+  },
+  computed: {
+    passwordConfirmation() {
+      return () =>
+        this.password === this.passwordConfirm || "Password must match";
+    },
+  },
+};
 </script>

@@ -21,6 +21,12 @@
 
 <script>
 export default {
-  props: ["title", "subtitle", "imgsrc", "sold"],
+  name: "CompanyCard",
+  props: {
+    title: String,
+    subtitle: String,
+    imgsrc: String,
+    sold: Boolean,
+  },
 };
 </script>

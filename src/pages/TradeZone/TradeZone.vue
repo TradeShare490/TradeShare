@@ -38,6 +38,7 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 import Feed from "../../components/TradeZone/Feed.vue";
 import TrendingCompanies from "../../components/TrendingCompanies/TrendingCompanies.vue";
