@@ -38,7 +38,7 @@
       </v-col>
       <v-col xs="12" lg="4" xl="3">
         <div>
-          <v-card elevation="1" outlined min-width="350" data-cy="recent-trades-card">
+          <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350">
             <v-card-title class="pb-0" style="word-break: normal">
               <span class="blue--text">Recent Trades</span>
             </v-card-title>
@@ -53,10 +53,10 @@
               :today="activity.today"
             ></Recents>
             <router-link
-              to="/news-feed"
+              to="/tradezone"
               class="d-flex justify-end"
               style="text-decoration: none; font-size: 12px"
-              
+              data-cy="recent-trade-view-all"
             >
               View all
               <v-icon color="primary" dense> mdi-menu-right </v-icon>

@@ -4,7 +4,7 @@
 	"SIGN_UP": "/signup",
 	"LOGIN": "/login",
 	"OTHER_DASHBOARD": "/other-dashboard",
-	"FEED": "/news-feed",
+	"FEED": "/tradezone",
 	"DASHBOARD": "/dashboard",
 	"FOLLOWERS": "/followers",
 	"FOLLOWING": "/following",
@@ -13,5 +13,6 @@
 	"ICONS_AND_IMAGES": "/icons-and-images",
 	"SUPPORT": "/support",
 	"USER_GROUP_DIALOG_TEMP": "/user-group-dialog",
-	"BROKERAGE_SIGNUP": "/brokerage-signup"
+	"BROKERAGE_SIGNUP": "/brokerage-signup",
+	"TRADEZONE": "/tradezone"
 }
