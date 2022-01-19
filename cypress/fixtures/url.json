@@ -4,7 +4,7 @@
 	"SIGN_UP": "/signup",
 	"LOGIN": "/login",
 	"OTHER_DASHBOARD": "/other-dashboard",
-	"FEED": "/news-feed",
+	"FEED": "/tradezone",
 	"DASHBOARD": "/dashboard",
 	"FOLLOWERS": "/followers",
 	"FOLLOWING": "/following",
