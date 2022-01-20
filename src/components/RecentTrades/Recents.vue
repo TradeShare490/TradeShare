@@ -10,7 +10,7 @@
             <v-list-item-content>
               <v-list-item-avatar>
                 <v-avatar size="40">
-                  <img :src="image" />
+                  <img :src="image" alt=""/>
                 </v-avatar>
               </v-list-item-avatar>
               <v-list-item-title
