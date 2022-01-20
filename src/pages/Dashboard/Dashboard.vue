@@ -35,35 +35,19 @@
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
-        <v-card min-width="350" data-cy="positions">
-          <Positions />
-        </v-card>
+        <Positions />
       </v-col>
       <v-col xs="12" lg="4" xl="3">
-          <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350">
-            <v-card-title class="pb-0" style="word-break: normal">
-              <span class="blue--text">Recent Trades</span>
-            </v-card-title>
-            <Recents
-              v-for="activity in recentActivities"
-              :key="activity.id"
-              :image="activity.image"
-              :name="activity.name"
-              :company="activity.company"
-              :purchased="activity.purchased"
-              :when="activity.when"
-              :today="activity.today"
-            ></Recents>
-            <router-link
-              to="/tradezone"
-              class="d-flex justify-end"
-              style="text-decoration: none; font-size: 12px"
-              data-cy="recent-trade-view-all"
-            >
-              View all
-              <v-icon color="primary" dense> mdi-menu-right </v-icon>
-            </router-link>
-          </v-card>
+        <Recents
+          v-for="activity in recentActivities"
+          :key="activity.id"
+          :image="activity.image"
+          :name="activity.name"
+          :company="activity.company"
+          :purchased="activity.purchased"
+          :when="activity.when"
+          :today="activity.today"
+        ></Recents>
       </v-col>
     </v-row>
     <v-row>
@@ -71,14 +55,7 @@
         <Holdings />
       </v-col>
       <v-col xs="12" md="8" lg="9">
-        <v-card
-          elevation="1"
-          outlined
-          min-width="350"
-          data-cy="bar-char-container"
-        >
-          <BarChartContainer />
-        </v-card>
+        <BarChartContainer />
       </v-col>
     </v-row>
   </v-container>

@@ -1,4 +1,5 @@
 <template>
+<v-card min-width="350" data-cy="positions">
   <v-data-table
     :headers="headers"
     :items="stocks"
@@ -124,6 +125,7 @@
       </v-btn>
     </template>
   </v-data-table>
+  </v-card>
 </template>
 
 <script>
