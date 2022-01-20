@@ -71,44 +71,33 @@
 </template>
 
 <script>
-  export default {
-    name: "UserBlock",
-    props: {
-      currentlyFollowing: Boolean,
-      currentLabelText: String,
-      currentLabelColor: String,
-      name: String,
-      image: String,
-      username: String,
+import {useFollowMixin} from "../../hooks/useFollowMixin.js";
+export default {
+
+  name: "UserBlock",
+  mixins: [useFollowMixin],
+  props: {
+    currentlyFollowing: Boolean,
+    name: String,
+    image: String,
+    username: String,
+  },
+  data() {
+    return {
+      following: this.currentlyFollowing,
+    };
+  },
+  computed: {
+    size() {
+      const size = {
+        xs: "x-small",
+        sm: "small",
+        md: "small",
+        lg: "small",
+        xl: "small",
+      }[this.$vuetify.breakpoint.name];
+      return size ? { [size]: true } : {};
     },
-    data() {
-      return {
-        following: this.currentlyFollowing,
-        labelText: this.currentLabelText,
-        labelColor: this.currentLabelColor,
-      };
-    },
-    methods: {
-      follow() {
-        this.following = true;
-        this.labelText = "untagged";
-        this.labelColor = "untagged";
-      },
-      unfollow() {
-        this.following = false;
-      },
-    },
-    computed: {
-      size() {
-        const size = {
-          xs: "x-small",
-          sm: "small",
-          md: "small",
-          lg: "small",
-          xl: "small",
-        }[this.$vuetify.breakpoint.name];
-        return size ? { [size]: true } : {};
-      },
-    },
-  };
+  },
+};
 </script>

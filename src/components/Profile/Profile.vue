@@ -128,40 +128,32 @@
 </template>
 
 <script>
-  export default {
-    name: "Profile",
-    data() {
-      return {
-        name: "Benver Vloshki",
-        username: "benngu",
-        labelText: "untagged",
-        labelColor: "untagged",
-        date: "2021",
-        bio: "This section is available for a small bio. Optional.",
-        numFollowers: "11K",
-        numFollowing: "5K",
-        following: false,
-      };
+import { useFollowMixin } from "../../hooks/useFollowMixin.js";
+export default {
+  name: "Profile",
+  mixins: [useFollowMixin],
+  data() {
+    return {
+      name: "Benver Vloshki",
+      username: "benvloshki",
+      labelText: "untagged",
+      labelColor: "untagged",
+      date: "2021",
+      bio: "This section is available for a small bio. Optional.",
+      numFollowers: "11K",
+      numFollowing: "5K",
+      following: false,
+    };
+  },
+  methods: {
+    label() {
+      this.labelText = "friend";
+      this.labelColor = "friend";
+      console.log("assigning label...");
     },
-    methods: {
-      follow() {
-        this.following = true;
-        this.labelText = "untagged";
-        this.labelColor = "untagged";
-        console.log("following...");
-      },
-      unfollow() {
-        this.following = false;
-        console.log("unfollowing...");
-      },
-      label() {
-        this.labelText = "friend";
-        this.labelColor = "friend";
-        console.log("assigning label...");
-      },
-      message() {
-        console.log("sending a message...");
-      },
+    message() {
+      console.log("sending a message...");
     },
-  };
+  },
+};
 </script>

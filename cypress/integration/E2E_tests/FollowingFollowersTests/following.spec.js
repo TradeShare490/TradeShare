@@ -17,7 +17,6 @@ describe("On the following page, can", () => {
   it("follow a user", () => {
     cy.get("body").then(($body) => {
       if ($body.find("[data-cy=follow]").length > 0) {
-        assert.equal($body.find("[data-cy=label]").length, 0);
         cy.get("[data-cy=follow]").click({ multiple: true });
         cy.get("[data-cy=following]");
       }
