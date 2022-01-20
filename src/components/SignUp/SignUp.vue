@@ -93,8 +93,7 @@
 </template>
 
 <script>
-// import { signUp } from "../../hooks/useCredential.js";
-import UserService from "../../services/User.service";
+import { signUp } from "../../hooks/useCredential.js";
 
 export default {
   name: "SignUp",
@@ -136,18 +135,10 @@ export default {
           lastname: this.lastName,
           username: this.username
         };
-        const response = await UserService.signup(credentials);
-        if (response.success) {
-          this.$store
-              .dispatch("login", {
-                email: this.email,
-                password: this.password,
-              })
-              .then(() => {
-                this.$router.push({ name: "Dashboard" });
-              });
-        } else {
-          this.error = response.message;
+        try {
+          await signUp(credentials, this.$store, this.$router)
+        }catch (e){
+          this.error = e;
         }
       }
     },

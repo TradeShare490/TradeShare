@@ -48,7 +48,7 @@
 </template>
 
 <script>
-// import { login } from "../../hooks/useCredential.js";
+import { login } from "../../hooks/useCredential.js";
 export default {
   name: "Login",
   data: () => ({
@@ -76,14 +76,11 @@ export default {
             password: this.password
           };
         }
-        this.$store
-            .dispatch("login", payload)
-            .then(() => {
-              this.$router.push({ name: "Dashboard" });
-            })
-            .catch(err => {
-              this.error = err.response.data.message;
-            });
+        try {
+          await login(payload, this.$store, this.$router);
+        }catch (e) {
+          this.error = e
+        }
       }
     }
   }

@@ -7,7 +7,7 @@ export const signUp = async (credentials, store, router) => {
       router.push({ name: "Dashboard" });
     });
   } else {
-    return response.message;
+    throw response.message;
   }
   return false;
 };
@@ -15,17 +15,15 @@ export const signUp = async (credentials, store, router) => {
 
 export const login = async (credentials, store, router) => {
 
-  store
+  await store
     .dispatch("login", credentials)
     .then(() => {
       router.push({ name: "Dashboard" });
-    }).catch(err => {
-      console.log(err.response.data)
-      return err.response.data;
-      // console.log(err.response.data.message)
-      // return err.response.data.message
+    }).catch((err) => {
+      throw err.response.data.message
   });
-  return false };
+  return true
+};
 
 export const logout = async (store, router) => {
   store.dispatch("logout").then(() => {
