@@ -25,19 +25,16 @@
       >
         <v-list-item color="black">
           <v-list-item-content class="py-1">
-            <v-list-item-title
-              class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
-              >{{ this.name }}</v-list-item-title
-            >
-            <v-list-item-title
-                class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
-            >@{{this.username}}</v-list-item-title
-            >
+            <v-list-item-title class="text-sm-body-2 text-caption text-wrap">
+              {{ this.name }}
+            </v-list-item-title>
+            <v-list-item-title class="text-sm-body-2 text-caption text-wrap">
+              @{{ this.username }}
+            </v-list-item-title>
           </v-list-item-content>
-
         </v-list-item>
       </v-col>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-col cols="4" sm="3" md="2" lg="2" xl="2" align-self="center">
         <v-btn
           block
@@ -45,7 +42,7 @@
           elevation="0"
           outlined
           color="primary"
-          v-if="following == true"
+          v-if="following === true"
           @click="unfollow"
           class="my-3 caption"
           data-cy="following"
@@ -57,7 +54,7 @@
           v-bind="size"
           elevation="0"
           color="primary"
-          v-if="following == false"
+          v-if="following === false"
           @click="follow"
           class="my-3 caption"
           data-cy="follow"
@@ -66,25 +63,24 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
+    <v-divider />
   </v-card>
 </template>
 
 <script>
-import {useFollowMixin} from "../../hooks/useFollowMixin.js";
+import { useFollowMixin } from "../../hooks/useFollowMixin.js";
 export default {
-
   name: "UserBlock",
   mixins: [useFollowMixin],
   props: {
     currentlyFollowing: Boolean,
     name: String,
     image: String,
-    username: String,
+    username: String
   },
   data() {
     return {
-      following: this.currentlyFollowing,
+      following: this.currentlyFollowing
     };
   },
   computed: {
@@ -94,10 +90,10 @@ export default {
         sm: "small",
         md: "small",
         lg: "small",
-        xl: "small",
+        xl: "small"
       }[this.$vuetify.breakpoint.name];
       return size ? { [size]: true } : {};
-    },
-  },
+    }
+  }
 };
 </script>

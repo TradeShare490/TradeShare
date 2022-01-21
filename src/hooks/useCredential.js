@@ -12,17 +12,16 @@ export const signUp = async (credentials, store, router) => {
   return false;
 };
 
-
 export const login = async (credentials, store, router) => {
-
   await store
     .dispatch("login", credentials)
     .then(() => {
       router.push({ name: "Dashboard" });
-    }).catch((err) => {
-      throw err.response.data.message
-  });
-  return true
+    })
+    .catch(err => {
+      throw err.response.data.message;
+    });
+  return true;
 };
 
 export const logout = async (store, router) => {
@@ -32,14 +31,7 @@ export const logout = async (store, router) => {
 };
 
 export const brokerageSignUp = async credentials => {
-  console.log("hooks/useCredential.sj");
-  console.log(
-    "Brokerage: ",
-    credentials.select,
-    "\n",
-    "Email: ",
-    credentials.email
-  );
+  return credentials;
 };
 
 

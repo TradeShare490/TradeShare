@@ -9,8 +9,7 @@
           :rules="[rules.required]"
           @keyup.enter="submit"
           data-cy="email"
-        ></v-text-field>
-
+        />
         <v-text-field
           v-model="password"
           :value="password"
@@ -22,8 +21,7 @@
           :rules="[rules.required]"
           @keyup.enter="submit"
           data-cy="password"
-        ></v-text-field>
-
+        />
         <p left class="text-body-2 text-right">
           <router-link to="">Forgot Password</router-link>
         </p>
@@ -34,8 +32,8 @@
           class="my-3 text-button"
           @click="submit"
           data-cy="login-button"
-          >Log In</v-btn
-        >
+          >Log In
+        </v-btn>
       </v-form>
       <v-alert dense text v-if="error" type="error">
         {{ error }}
@@ -59,7 +57,7 @@ export default {
     rules: {
       required: v => !!v || "Required"
     },
-    error: false,
+    error: false
   }),
   methods: {
     async submit() {
@@ -78,8 +76,8 @@ export default {
         }
         try {
           await login(payload, this.$store, this.$router);
-        }catch (e) {
-          this.error = e
+        } catch (e) {
+          this.error = e;
         }
       }
     }

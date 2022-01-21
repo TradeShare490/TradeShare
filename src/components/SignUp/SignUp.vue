@@ -11,11 +11,9 @@
               color="primary"
               :rules="[rules.required]"
               @keyup.enter="submit"
-            ></v-text-field>
+            />
           </v-flex>
-
-          <v-flex xs1></v-flex>
-
+          <v-flex xs1 />
           <v-flex xs5>
             <v-text-field
               data-cy="last-name"
@@ -24,19 +22,17 @@
               color="primary"
               :rules="[rules.required]"
               @keyup.enter="submit"
-            ></v-text-field>
+            />
           </v-flex>
         </v-layout>
-
         <v-text-field
-            data-cy="user-name"
-            v-model="username"
-            label="Username"
-            color="primary"
-            :rules="[rules.required, rulesUsername.min, rulesUsername.format]"
-            @keyup.enter="submit"
-        ></v-text-field>
-
+          data-cy="user-name"
+          v-model="username"
+          label="Username"
+          color="primary"
+          :rules="[rules.required, rulesUsername.min, rulesUsername.format]"
+          @keyup.enter="submit"
+        />
         <v-text-field
           class="my-5"
           data-cy="email"
@@ -45,8 +41,7 @@
           color="primary"
           :rules="[rules.required, rulesEmail.format]"
           @keyup.enter="submit"
-        ></v-text-field>
-
+        />
         <v-text-field
           class="my-5"
           data-cy="password"
@@ -58,8 +53,7 @@
           :rules="[rules.required, rulesPassword.min]"
           @keyup.enter="submit"
           autocomplete="new-password"
-        ></v-text-field>
-
+        />
         <v-text-field
           class="my-5"
           data-cy="password-confirm"
@@ -69,7 +63,7 @@
           type="password"
           :rules="[rules.required, rulesPassword.min, passwordConfirmation]"
           @keyup.enter="submit"
-        ></v-text-field>
+        />
 
         <v-btn
           data-cy="signup-button"
@@ -107,22 +101,24 @@ export default {
     password: "",
     passwordConfirm: "",
     rules: {
-      required: (v) => !!v || "Required",
+      required: v => !!v || "Required"
     },
     rulesEmail: {
-      format: (v) =>
+      format: v =>
         /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
-        ) || "E-mail must be valid",
+        ) || "E-mail must be valid"
     },
     rulesUsername: {
-      min: (v) => v.length >= 4 || "Min 4 characters",
-      format: (v) => /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(v) || "No special characters"
+      min: v => v.length >= 4 || "Min 4 characters",
+      format: v =>
+        /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/.test(v) ||
+        "No special characters"
     },
     rulesPassword: {
-      min: (v) => v.length >= 8 || "Min 8 characters",
+      min: v => v.length >= 8 || "Min 8 characters"
     },
-    error: false,
+    error: false
   }),
   methods: {
     async submit() {
@@ -136,18 +132,18 @@ export default {
           username: this.username
         };
         try {
-          await signUp(credentials, this.$store, this.$router)
-        }catch (e){
+          await signUp(credentials, this.$store, this.$router);
+        } catch (e) {
           this.error = e;
         }
       }
-    },
+    }
   },
   computed: {
     passwordConfirmation() {
       return () =>
         this.password === this.passwordConfirm || "Password must match";
-    },
-  },
+    }
+  }
 };
 </script>
