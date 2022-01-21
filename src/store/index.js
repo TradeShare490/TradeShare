@@ -22,13 +22,8 @@ export default new Vuex.Store({
 	},
 	actions: {
 		async login({ commit }, credentials) {
-			try {
-				const { data } = await axios.post("/session", credentials);
-				commit("setUserData", data);	
-			} catch (error) {
-				// fail to authenticate due to incorrect credentials
-				console.log(error.message)
-			}
+			const { data } = await axios.post("/session", credentials);
+			commit("setUserData", data);
 		},
 		logout({ commit }) {
 			commit("logOut");
