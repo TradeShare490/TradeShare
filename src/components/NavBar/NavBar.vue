@@ -32,11 +32,11 @@
           data-cy="autocomplete-search-bar"
         >
           <template v-slot:item="data">
-            <v-list-tile-content
+            <v-list-item-content
             data-cy="autocomplete-list-content"
             >
-              <v-list-tile-title v-on:click="redirect(data.item['symbol'])" data-cy="autocomplete-list-item" ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
-            </v-list-tile-content>
+              <v-list-item-title v-on:click="redirect(data.item['symbol'])" data-cy="autocomplete-list-item" ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-item-title>
+            </v-list-item-content>
           </template>
         </v-autocomplete>
       <v-btn icon class="mt-1">
