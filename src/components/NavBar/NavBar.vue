@@ -33,10 +33,9 @@
         >
           <template v-slot:item="data">
             <v-list-tile-content
-            v-on:click="redirect(data.item['symbol'])"
             data-cy="autocomplete-list-content"
             >
-              <v-list-tile-title data-cy="autocomplete-list-item" ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
+              <v-list-tile-title v-on:click="redirect(data.item['symbol'])" data-cy="autocomplete-list-item" ><strong>{{ data.item['symbol'] }}</strong>: {{ data.item['name'] }}</v-list-tile-title>
             </v-list-tile-content>
           </template>
         </v-autocomplete>
@@ -69,17 +68,17 @@ export default {
     submit() {
       logout(this.$store, this.$router);
     },
+    redirect(symbol){
+      const regex = /^\S+$/;
+      if(regex.test(symbol)){
+        window.open("https://finance.yahoo.com/quote/"+symbol);
+      }
+      return true
+    }
   },
   computed: {
     items() {
       return null;
-    },
-    redirect(symbol){
-      const regex = /^\S+$/;
-      if(!regex.test(symbol)){
-        window.open("https://finance.yahoo.com/quote/"+symbol);
-      }
-      return true
     }
   },
 };
