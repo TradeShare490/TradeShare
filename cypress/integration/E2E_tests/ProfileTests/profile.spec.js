@@ -48,7 +48,7 @@ describe("Profile component can ", () => {
     //To edit that stock
     cy.get("[data-cy=edit-stock-button]").last().click();
     cy.get("[data-cy=positions-new-item-symbol-tf]").type("GOOG");
-    cy.get("[data-cy=positions-new-item-position-size-tf]").type("10");
+    cy.get("[data-cy=positions-new-item-position-size-tf]").type("{backspace}10");
     cy.get("[data-cy=positions-new-item-submit-btn]").click();
     //To share it
     cy.get("[data-cy=share-stock-button]").last().click();
