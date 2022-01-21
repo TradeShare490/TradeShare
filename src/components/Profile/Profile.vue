@@ -32,7 +32,7 @@
               {{ name }}
             </v-list-item-title>
             <v-list-item-subtitle class="text-subtitle-1">
-              AKA {{ nickname }}
+              @{{ username }}
             </v-list-item-subtitle>
             <v-list-item-subtitle class="text-wrap">
               Member since {{ date }}
@@ -135,7 +135,7 @@ export default {
   data() {
     return {
       name: "Benver Vloshki",
-      nickname: "Ben",
+      username: "benvloshki",
       labelText: "untagged",
       labelColor: "untagged",
       date: "2021",
