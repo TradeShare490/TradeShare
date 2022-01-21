@@ -21,9 +21,9 @@ export default new Vuex.Store({
       localStorage.removeItem("user");
       location.reload();
     },
-	updateUserData(state, userData){
+    updateUserData(state, userData) {
       localStorage.setItem("user", JSON.stringify(userData.response.data));
-	}
+    }
   },
   actions: {
     async login({ commit }, credentials) {
