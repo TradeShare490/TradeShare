@@ -76,7 +76,7 @@ export default {
     },
     redirect(symbol){
       const regex = /^\S+$/;
-      if(regex.test(symbol)){
+      if(!regex.test(symbol)){
         window.open("https://finance.yahoo.com/quote/"+symbol);
       }
       return true

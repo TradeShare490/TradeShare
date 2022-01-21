@@ -23,9 +23,10 @@ describe("Brokerage SignUp can", () => {
       .click();
     cy.get(".v-select__selection").should("have.text", "Interactive Brokers");
   });
-  it("Enter email", () => {
+  it("Enter email and submit it", () => {
     cy.get("[data-cy=email-input]")
       .type("test@hotmail.com")
       .should("have.value", "test@hotmail.com");
+    cy.get("[data-cy=email-input]").type('{enter}');
   });
 });
