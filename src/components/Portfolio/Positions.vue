@@ -201,15 +201,12 @@ export default {
 
   methods: {
     async initialize() {
-      // this.tempArray = [];
-      let a = null;
       try {
         this.stocks = await UserService.getPositions(this.userId);
         this.tempArray = a;
       } catch (err) {
         console.log(err);
       }
-      // this.stocks = this.tempArray;
     },
 
     editStock(stock) {
