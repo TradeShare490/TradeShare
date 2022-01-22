@@ -35,13 +35,12 @@
       </v-flex>
       <v-flex class="mt-4">
         <v-img
-            class="mx-auto"
-            max-width="15vh"
-            contain
-            src="../../assets/TradeShare.png"
-            alt="TradeShare Logo"
-        >
-        </v-img>
+          class="mx-auto"
+          max-width="15vh"
+          contain
+          src="../../assets/TradeShare.png"
+          alt="TradeShare Logo"
+        />
         <Login v-if="isLogin" />
         <SignUp v-else />
       </v-flex>
