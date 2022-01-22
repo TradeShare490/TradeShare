@@ -4,7 +4,7 @@
     :items="stocks"
     sort-by="date"
     class="elevation-1"
-    mobile-breakpoint="825"
+    mobile-breakpoint="700"
   >
     <template v-slot:top>
       <v-toolbar flat>

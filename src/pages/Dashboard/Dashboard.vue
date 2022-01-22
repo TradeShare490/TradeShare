@@ -35,12 +35,12 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col xs="12" sm="6" md="12" lg="8" xl="9">
+      <v-col xs="12" lg="8" xl="9">
         <v-card min-width="350" data-cy="positions">
           <Positions />
         </v-card>
       </v-col>
-      <v-col xs="12" sm="6" md="12" lg="4" xl="3">
+      <v-col xs="12" lg="4" xl="3">
           <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350" max-width="500">
             <v-card-title class="pb-0" style="word-break: normal">
               <span class="blue--text">Recent Trades</span>
