@@ -152,11 +152,6 @@ export default {
         bio: "This section is available for a small bio. Optional."
       };
       this.positions = await UserService.getPositions(this.userId);
-
-      // this.stocks = this.positions.forEach(function(position){
-      //   position.date = new Date("10/13/2021").toLocaleString();
-      //   position.verified = true;
-      // });
     }
   },
   components: {

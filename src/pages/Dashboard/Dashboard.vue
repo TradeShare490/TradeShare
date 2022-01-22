@@ -36,7 +36,7 @@
     <v-row>
       <v-col xs="12" lg="8" xl="9">
         <v-card min-width="350" data-cy="positions">
-          <Positions />
+          <Positions :userId="user.userId"/>
         </v-card>
       </v-col>
       <v-col xs="12" lg="4" xl="3">
@@ -144,5 +144,11 @@ export default {
     Holdings,
     MonthlyProfitLoss,
   },
+  computed: {
+    user() {
+      let user = JSON.parse(localStorage.getItem("user"));
+      return user["userInfo"];
+    },
+  }
 };
 </script>

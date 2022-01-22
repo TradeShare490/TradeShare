@@ -80,7 +80,7 @@
               elevation="0"
               outlined
               color="primary"
-              v-if="user.following == true"
+              v-if="user.following === true"
               @click="unfollow"
               class="my-3 caption"
               data-cy="following"
@@ -92,7 +92,7 @@
               small
               elevation="0"
               color="primary"
-              v-if="user.following == false"
+              v-if="user.following === false"
               @click="follow"
               class="my-3 caption"
               data-cy="follow"

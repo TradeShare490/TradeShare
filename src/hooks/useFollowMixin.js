@@ -1,14 +1,10 @@
 export const useFollowMixin = {
   methods: {
     async follow() {
-      console.log("following...");
-      this.following = true;
-      console.log("followed");
+      this.user.following = true;
     },
     async unfollow() {
-      console.log("unfollowing...");
-      this.following = false;
-      console.log("unfollowed");
+      this.user.following = false;
     },
   },
 };

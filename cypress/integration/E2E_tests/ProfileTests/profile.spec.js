@@ -14,7 +14,7 @@ describe("Profile component can ", () => {
         // checking if it is the "follow" button
         cy.get("[data-cy=follow]").click();
         cy.wait(1000); // waiting in case it requires time to update button to "following" button
-        cy.get("[data-cy=following"); // checking that it switched the button to "following"
+        cy.get("[data-cy=following]"); // checking that it switched the button to "following"
       } else {
         // this means it was "following" button initially
         cy.get("[data-cy=following]").click();
