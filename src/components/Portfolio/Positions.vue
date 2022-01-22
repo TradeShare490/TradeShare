@@ -203,7 +203,6 @@ export default {
     async initialize() {
       try {
         this.stocks = await UserService.getPositions(this.userId);
-        this.tempArray = a;
       } catch (err) {
         console.log(err);
       }
