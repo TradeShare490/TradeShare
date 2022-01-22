@@ -29,13 +29,13 @@
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
             >
-              {{ name }}
+              {{ user.firstname }} {{user.lastname}}
             </v-list-item-title>
             <v-list-item-subtitle class="text-subtitle-1">
-              AKA {{ nickname }}
+              AKA {{ user.username }}
             </v-list-item-subtitle>
             <v-list-item-subtitle class="text-wrap">
-              Member since {{ date }}
+              Member since {{ user.date }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -54,7 +54,7 @@
           Bio
         </v-list-item-title>
         <v-list-item-subtitle class="text-wrap text-xs-caption">
-          {{ bio }}
+          {{ user.bio }}
         </v-list-item-subtitle>
       </v-col>
       <v-spacer class="hidden-sm-and-down" />
@@ -71,7 +71,7 @@
         <v-row>
           <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
             <v-list-item-title class="font-weight-bold">
-              {{ numFollowers }}
+              {{ user.numFollowers }}
             </v-list-item-title>
             <v-list-item-subtitle> Followers </v-list-item-subtitle>
             <v-btn
@@ -80,7 +80,7 @@
               elevation="0"
               outlined
               color="primary"
-              v-if="following == true"
+              v-if="user.following == true"
               @click="unfollow"
               class="my-3 caption"
               data-cy="following"
@@ -92,7 +92,7 @@
               small
               elevation="0"
               color="primary"
-              v-if="following == false"
+              v-if="user.following == false"
               @click="follow"
               class="my-3 caption"
               data-cy="follow"
@@ -102,7 +102,7 @@
           </v-col>
           <v-col cols="6" class="mx-0 px-0 pl-1 pb-0 mb-0">
             <v-list-item-title class="font-weight-bold">
-              {{ numFollowing }}
+              {{ user.numFollowing }}
             </v-list-item-title>
             <v-list-item-subtitle> Following </v-list-item-subtitle>
             <v-btn
@@ -124,26 +124,16 @@
 </template>
 
 <script>
-import UserService from "../../services/User.service";
+// import UserService from "../../services/User.service";
 export default {
   name: "Profile",
   info: [],
-  data() {
-    return {
-      name: "Benver Vloshki",
-      nickname: "Ben",
-      labelText: "untagged",
-      labelColor: "untagged",
-      date: "2021",
-      bio: "This section is available for a small bio. Optional.",
-      numFollowers: "11K",
-      numFollowing: "5K",
-      following: false,
-    };
+  props: {
+    user: Object
   },
-  created() {
-    this.profileData("6181c0d2e1707d7eac58940f");
-  },
+  // created() {
+  //   this.profileData("6181c0d2e1707d7eac58940f");
+  // },
   methods: {
     follow() {
       this.following = true;
@@ -164,28 +154,26 @@ export default {
       console.log("sending a message...");
     },
     //THIS METHOD WORKS, I JUST CAN'T FEED DISPLAY THE INFO ON THE PAGE
-    async profileData(UID) {
-      this.info = [];
-      let a = null;
-      try {
-        console.log("Profile data:");
-        a = await UserService.pullUserProfileData(UID);
-        this.info["name"] = a.data.firstname + " " + a.data.lastname;
-        this.info["nickname"] = a.data.username;
-        this.info["labelText"] = "untagged";
-        this.info["labelColor"] = "untagged";
-        this.info["date"] = "2021";
-        this.info["bio"] =
-          "This section is available for a small bio. Optional.";
-        this.info["numFollowers"] = a.data.followers.length;
-        this.info["numFollowing"] = a.data.following.length;
-        this.info["following"] = false;
-      } catch (err) {
-        console.log(err);
-        return;
-      }
-      return this.info;
-    },
-  },
+    // async profileData(UID) {
+    //   this.info = [];
+    //   let a = null;
+    //   try {
+    //     console.log("Profile data:");
+    //     a = await UserService.getUserInfo(UID);
+    //     this.info["name"] = a.data.firstname + " " + a.data.lastname;
+    //     this.info["nickname"] = a.data.username;
+    //     this.info["labelText"] = "untagged";
+    //     this.info["labelColor"] = "untagged";
+    //     this.info["date"] = "2021";
+    //     this.info["bio"] =
+    //       "This section is available for a small bio. Optional.";
+    //     this.info["following"] = false;
+    //   } catch (err) {
+    //     console.log(err);
+    //     return;
+    //   }
+    //   return this.info;
+    // }
+  }
 };
 </script>

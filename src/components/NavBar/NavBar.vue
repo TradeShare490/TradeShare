@@ -18,7 +18,7 @@
           append-icon="mdi-magnify"
           class="shrink mr-3"
           :items="stocks"
-          :loading="IsLoading"
+          :loading="isLoading"
           :item-text="item => item['symbol'] +': '+ item['name']"
           rounded
           single-line

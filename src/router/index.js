@@ -75,7 +75,7 @@ const routes = [
     component: BrokerageSignUp,
   },
   {
-    path: "/other-dashboard",
+    path: "/dashboard/:id",
     name: "OtherDashboard",
     component: OtherDashboard
   },

@@ -41,20 +41,20 @@
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedStock.positionSize"
+                      v-model="editedStock.qty"
                       label="Position Size"
                       data-cy="positions-new-item-position-size-tf"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedStock.date"
+                      v-model="date"
                       label="Execution Date"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedStock.profitLoss"
+                      v-model="editedStock.unrealized_plpc"
                       label="P/L"
                       data-cy="positions-new-item-pl-tf"
                     ></v-text-field>
@@ -112,12 +112,16 @@
         >{{ item.verified ? "VERIFIED" : "MANUAL" }}</v-chip
       >
     </template>
-    <template v-slot:[`item.profitLoss`]="{ item }">
+    <template v-slot:[`item.unrealized_plpc`]="{ item }">
       <v-card min-width="80" flat>
-        <v-icon x-small left :color="item.profitLoss > 0 ? 'green' : 'red'">
+        <v-icon
+          x-small
+          left
+          :color="item.unrealized_plpc > 0 ? 'green' : 'red'"
+        >
           mdi-circle
         </v-icon>
-        {{ getDisplayNumber(Number(item.profitLoss)) }}%
+        {{ getDisplayNumber(Number(item.unrealized_plpc)) }}%
       </v-card>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
@@ -137,8 +141,13 @@
 import UserService from "../../services/User.service";
 export default {
   name: "Positions",
+  props: {
+    userId: String
+  },
   data() {
     return {
+      verified: true,
+      date: new Date(),
       dialog: false,
       dialogDelete: false,
       headers: [
@@ -147,9 +156,9 @@ export default {
           align: "start",
           value: "symbol",
         },
-        { text: "Position Size", value: "positionSize" },
+        { text: "Position Size", value: "qty" },
         { text: "Execution Date", value: "date" },
-        { text: "P/L", value: "profitLoss" },
+        { text: "P/L", value: "unrealized_plpc" },
         { text: "Verified", value: "verified" },
         { text: "Actions", value: "actions", sortable: false },
       ],
@@ -157,16 +166,16 @@ export default {
       editedIndex: -1,
       editedStock: {
         symbol: "",
-        positionSize: 0,
+        qty: 0,
         date: new Date(),
-        profitLoss: 0,
+        unrealized_plpc: 0,
         verified: false,
       },
       defaultStock: {
         symbol: "",
-        positionSize: 0,
+        qty: 0,
         date: new Date(),
-        profitLoss: 0,
+        unrealized_plpc: 0,
         verified: false,
       },
     };
@@ -187,57 +196,20 @@ export default {
   },
 
   created() {
-    this.initialize("6181c0d2e1707d7eac58940f");
+    this.initialize();
   },
 
   methods: {
-    async initialize(UID) {
-      this.tempArray = [];
+    async initialize() {
+      // this.tempArray = [];
       let a = null;
       try {
-        a = await UserService.pullUserPortfolioData(UID);
-        for (let i = 0; i < a.data.positions.length; i++) {
-          this.tempArray[i] = {
-            symbol: a.data.positions[i].symbol,
-            positionSize: Number(a.data.positions[i].qty),
-            date: new Date().toLocaleString(),
-            profitLoss:
-              a.data.positions[i].current_price -
-              a.data.positions[i].lastday_price,
-            verified: true,
-          };
-          console.log(this.stocks[i]);
-        }
+        this.stocks = await UserService.getPositions(this.userId);
+        this.tempArray = a;
       } catch (err) {
         console.log(err);
       }
-
-      this.stocks = this.tempArray;
-      /*this.stocks = [
-                {
-                    symbol: 'MSFT',
-                    positionSize: 1000,
-                    date: new Date().toLocaleString(),
-                    profitLoss: 21.33,
-                    verified: true,
-                },
-                {
-                    symbol: 'AAPL',
-                    positionSize: 25,
-                    date: new Date("10/12/2021").toLocaleString(),
-                    profitLoss: -3.76,
-                    verified: false,
-                },
-                {
-                    symbol: 'FSR',
-                    positionSize: 240,
-                    date: new Date("10/13/2021").toLocaleString(),
-                    profitLoss: 67.30,
-                    verified: true,
-                },
-                
-            ]*/
-      console.log(this.stocks);
+      // this.stocks = this.tempArray;
     },
 
     editStock(stock) {

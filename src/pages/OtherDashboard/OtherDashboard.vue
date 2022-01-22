@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Profile />
+    <Profile :user="info" />
     <v-container class="ma-0" fluid>
       <v-row>
         <v-col xs="12" md="8" lg="9">
@@ -15,7 +15,7 @@
       <v-row>
         <v-col xs="12" lg="8" xl="9">
           <v-card min-width="350">
-            <Positions />
+            <Positions :userId="userId" />
           </v-card>
         </v-col>
         <v-col xs="12" lg="4" xl="3">
@@ -53,14 +53,15 @@
 <script>
 import Positions from "../../components/Portfolio/Positions.vue";
 import Profile from "../../components/Profile/Profile.vue";
-import Recents from "@/components/RecentTrades/Recents";
-import BarChartContainer from "@/components/ReturnGraphs/ReturnGraphs";
-import Holdings from "@/components/Dashboard/Holdings";
-
+import Recents from "../../components/RecentTrades/Recents";
+import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs";
+import Holdings from "../../components/Dashboard/Holdings";
+import UserService from "../../services/User.service";
 export default {
   name: "OtherDashboard",
   data() {
     return {
+      userId: this.$route.params.id,
       recentTrades: [
         {
           id: 1,
@@ -69,7 +70,7 @@ export default {
           company: "Dropbox",
           purchased: true,
           when: "Today",
-          today: true,
+          today: true
         },
         {
           id: 2,
@@ -78,7 +79,7 @@ export default {
           company: "NVIDIA",
           purchased: false,
           when: "Today",
-          today: true,
+          today: true
         },
         {
           id: 3,
@@ -87,7 +88,7 @@ export default {
           company: "Twitter",
           purchased: true,
           when: "Yesterday",
-          today: false,
+          today: false
         },
         {
           id: 4,
@@ -96,17 +97,74 @@ export default {
           company: "Voyager",
           purchased: false,
           when: "Today",
-          today: true,
-        },
+          today: true
+        }
       ],
+      stocks: [
+        // {
+        //   symbol: "MSFT",
+        //   positionSize: 1000,
+        //   date: new Date().toLocaleString(),
+        //   profitLoss: 21.33,
+        //   verified: true
+        // },
+        // {
+        //   symbol: "AAPL",
+        //   positionSize: 25,
+        //   date: new Date("10/12/2021").toLocaleString(),
+        //   profitLoss: -3.76,
+        //   verified: false
+        // },
+        // {
+        //   symbol: "FSRLMAOOO",
+        //   positionSize: 240,
+        //   date: new Date("10/13/2021").toLocaleString(),
+        //   profitLoss: 67.3,
+        //   verified: true
+        // }
+      ],
+      userInfo: {
+        name: "Benver Vloshki",
+        nickname: "Ben",
+        labelText: "untagged",
+        labelColor: "untagged",
+        date: "2021",
+        bio: "This section is available for a small bio. Optional.",
+        numFollowers: "11K",
+        numFollowing: "5K",
+        following: false
+      },
+      info: {},
+      positions: []
     };
+  },
+  created() {
+    this.initialize();
+  },
+  methods: {
+    async initialize() {
+      this.info = {
+        ...(await UserService.getUserInfo(this.userId)),
+        numFollowers: "11K",
+        numFollowing: "5K",
+        following: false,
+        date: "2021",
+        bio: "This section is available for a small bio. Optional."
+      };
+      this.positions = await UserService.getPositions(this.userId);
+
+      // this.stocks = this.positions.forEach(function(position){
+      //   position.date = new Date("10/13/2021").toLocaleString();
+      //   position.verified = true;
+      // });
+    }
   },
   components: {
     Positions,
     Profile,
     Recents,
     BarChartContainer,
-    Holdings,
-  },
+    Holdings
+  }
 };
 </script>
