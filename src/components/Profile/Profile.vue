@@ -32,7 +32,7 @@
               {{ user.firstname }} {{user.lastname}}
             </v-list-item-title>
             <v-list-item-subtitle class="text-subtitle-1">
-              AKA {{ user.username }}
+              @{{ user.username }}
             </v-list-item-subtitle>
             <v-list-item-subtitle class="text-wrap">
               Member since {{ user.date }}
@@ -124,27 +124,14 @@
 </template>
 
 <script>
-// import UserService from "../../services/User.service";
+import { useFollowMixin } from "../../hooks/useFollowMixin.js";
 export default {
   name: "Profile",
-  info: [],
+  mixins: [useFollowMixin],
   props: {
     user: Object
   },
-  // created() {
-  //   this.profileData("6181c0d2e1707d7eac58940f");
-  // },
   methods: {
-    follow() {
-      this.following = true;
-      this.labelText = "untagged";
-      this.labelColor = "untagged";
-      console.log("following...");
-    },
-    unfollow() {
-      this.following = false;
-      console.log("unfollowing...");
-    },
     label() {
       this.labelText = "friend";
       this.labelColor = "friend";
@@ -153,27 +140,6 @@ export default {
     message() {
       console.log("sending a message...");
     },
-    //THIS METHOD WORKS, I JUST CAN'T FEED DISPLAY THE INFO ON THE PAGE
-    // async profileData(UID) {
-    //   this.info = [];
-    //   let a = null;
-    //   try {
-    //     console.log("Profile data:");
-    //     a = await UserService.getUserInfo(UID);
-    //     this.info["name"] = a.data.firstname + " " + a.data.lastname;
-    //     this.info["nickname"] = a.data.username;
-    //     this.info["labelText"] = "untagged";
-    //     this.info["labelColor"] = "untagged";
-    //     this.info["date"] = "2021";
-    //     this.info["bio"] =
-    //       "This section is available for a small bio. Optional.";
-    //     this.info["following"] = false;
-    //   } catch (err) {
-    //     console.log(err);
-    //     return;
-    //   }
-    //   return this.info;
-    // }
-  }
+  },
 };
 </script>

@@ -90,6 +90,9 @@
                 <v-card-title class="text-body-1">
                   John Doe
                 </v-card-title>
+                <v-card-subtitle class="text-left text--lighten-2">
+                  @johndoe
+                </v-card-subtitle>
               </v-col>
             </v-row>
             <v-divider v-if="activeChat" />

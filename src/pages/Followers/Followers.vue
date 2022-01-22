@@ -1,19 +1,13 @@
 <template>
   <div>
-    <div>
-      <v-col>
-      <FollowNotif
-      :currentlyFollowing="false"
-      currentLabelColor="friend"
-      currentLabelText="friend"
-      image="https://randomuser.me/api/portraits/men/52.jpg"
-      message="John Molson has followed you."
+    <v-col>
+      <Notifications
+        :currentlyFollowing="false"
+        image="https://randomuser.me/api/portraits/men/52.jpg"
+        message="John Molson has followed you."
       >
-      </FollowNotif>
+      </Notifications>
     </v-col>
-    </div>
-
-    <div>
     <SearchViewBy />
     <UserBlock
       :currentlyFollowing="true"
@@ -21,6 +15,7 @@
       currentLabelText="friend"
       name="Tim Robenman"
       image="https://randomuser.me/api/portraits/men/52.jpg"
+      username="timrobenman"
     ></UserBlock>
     <UserBlock
       :currentlyFollowing="false"
@@ -28,23 +23,22 @@
       currentLabelText="work"
       name="Mary Winchester"
       image="https://randomuser.me/api/portraits/women/79.jpg"
+      username="marywinchester"
     ></UserBlock>
-    </div>
   </div>
-  
 </template>
 
 <script>
-  import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
-  import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
-  import FollowNotif from "../../components/Notification/Notifications.vue";
+import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
+import SearchViewBy from "../../components/SearchViewBy/SearchViewBy.vue";
+import Notifications from "../../components/Notification/Notifications.vue";
 
-  export default {
-    name: "Followers",
-    components: {
-      UserBlock,
-      SearchViewBy,
-      FollowNotif
-    },
-  };
+export default {
+  name: "Followers",
+  components: {
+    UserBlock,
+    SearchViewBy,
+    Notifications,
+  },
+};
 </script>

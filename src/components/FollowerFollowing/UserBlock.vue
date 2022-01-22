@@ -25,25 +25,16 @@
       >
         <v-list-item color="black">
           <v-list-item-content class="py-1">
-            <v-list-item-title
-              class="text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption text-wrap"
-              >{{ this.name }}</v-list-item-title
-            >
-            <v-list-item class="px-0">
-              <v-chip
-                label
-                v-bind="size"
-                class="text-uppercase white--text px-1"
-                :color="this.labelColor"
-                v-if="this.following"
-                data-cy="label"
-                >{{ this.labelText }}</v-chip
-              >
-            </v-list-item>
+            <v-list-item-title class="text-sm-body-2 text-caption text-wrap">
+              {{ this.name }}
+            </v-list-item-title>
+            <v-list-item-title class="text-sm-body-2 text-caption text-wrap">
+              @{{ this.username }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-col cols="4" sm="3" md="2" lg="2" xl="2" align-self="center">
         <v-btn
           block
@@ -51,7 +42,7 @@
           elevation="0"
           outlined
           color="primary"
-          v-if="following == true"
+          v-if="following === true"
           @click="unfollow"
           class="my-3 caption"
           data-cy="following"
@@ -63,7 +54,7 @@
           v-bind="size"
           elevation="0"
           color="primary"
-          v-if="following == false"
+          v-if="following === false"
           @click="follow"
           class="my-3 caption"
           data-cy="follow"
@@ -72,50 +63,37 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
+    <v-divider />
   </v-card>
 </template>
 
 <script>
-  export default {
-    name: "UserBlock",
-    props: {
-      currentlyFollowing: Boolean,
-      currentLabelText: String,
-      currentLabelColor: String,
-      name: String,
-      image: String,
-    },
-    data() {
-      return {
-        following: this.currentlyFollowing,
-        labelText: this.currentLabelText,
-        labelColor: this.currentLabelColor,
-      };
-    },
-    methods: {
-      follow() {
-        this.following = true;
-        this.labelText = "untagged";
-        this.labelColor = "untagged";
-        console.log("following...");
-      },
-      unfollow() {
-        this.following = false;
-        console.log("unfollowing...");
-      },
-    },
-    computed: {
-      size() {
-        const size = {
-          xs: "x-small",
-          sm: "small",
-          md: "small",
-          lg: "small",
-          xl: "small",
-        }[this.$vuetify.breakpoint.name];
-        return size ? { [size]: true } : {};
-      },
-    },
-  };
+import { useFollowMixin } from "../../hooks/useFollowMixin.js";
+export default {
+  name: "UserBlock",
+  mixins: [useFollowMixin],
+  props: {
+    currentlyFollowing: Boolean,
+    name: String,
+    image: String,
+    username: String
+  },
+  data() {
+    return {
+      following: this.currentlyFollowing
+    };
+  },
+  computed: {
+    size() {
+      const size = {
+        xs: "x-small",
+        sm: "small",
+        md: "small",
+        lg: "small",
+        xl: "small"
+      }[this.$vuetify.breakpoint.name];
+      return size ? { [size]: true } : {};
+    }
+  }
+};
 </script>
