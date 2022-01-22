@@ -1,5 +1,10 @@
 <template>
-  <v-card :min-width="$vuetify.breakpoint.smAndUp ? 250 : 350" min-height="168" class="pa-3 white--text d-flex flex-column" color="#3F51B5">
+  <v-card 
+    :min-width="$vuetify.breakpoint.smAndUp ? 250 : 350" 
+    min-height="168" 
+    class="pa-3 white--text d-flex flex-column" 
+    color="#3F51B5"
+  >
     <v-row justify="space-between" align="start" class="mb-6" no-gutters>
       <v-col cols="9" class="text-left">
         <!-- Card Title -->
