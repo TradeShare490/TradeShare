@@ -1,15 +1,21 @@
 <template>
+  <v-card elevation="1" outlined min-width="350" data-cy="bar-char-container">
     <div class="graphContainer">
-        <g-chart v-if="loaded" :chartdata="this.dataCollection" :options="this.options"/>
+      <g-chart
+        v-if="loaded"
+        :chartdata="this.dataCollection"
+        :options="this.options"
+      />
     </div>
+  </v-card>
 </template>
 
 <script>
-import GChart from './GChart.vue'
+import GChart from "./GChart.vue";
 export default {
   components: { GChart },
-    name:"BarChartContainer",
-   /* data: () => ({
+  name: "BarChartContainer",
+  /* data: () => ({
         loaded=false,
         chartdata:null
     }),
@@ -23,37 +29,33 @@ export default {
             console.error(e)
         }
     }*/
-    data: () => ({
-      loaded: false,
-      dataCollection:null,
-      options:null
-      
-    }
-  ),
+  data: () => ({
+    loaded: false,
+    dataCollection: null,
+    options: null,
+  }),
   mounted() {
-     this.dataCollection = {
-      labels: ['Apple', 'Google', 'TSLA'],
+    this.dataCollection = {
+      labels: ["Apple", "Google", "TSLA"],
       datasets: [
         {
-          label: 'Price at purchase',
-          backgroundColor: 'blue',
-          data: [0.1,20,10]
+          label: "Price at purchase",
+          backgroundColor: "blue",
+          data: [0.1, 20, 10],
         },
         {
           label: "Price now",
-          backgroundColor:'red',
-          data: [6,25,30]
-        }
-      ]
-    }
+          backgroundColor: "red",
+          data: [6, 25, 30],
+        },
+      ],
+    };
     this.options = {
       responsive: true,
-      maintainAspectRatio: false
-
-    }
+      maintainAspectRatio: false,
+    };
     console.log("Now mounted");
     this.loaded = true;
-  }
-    
-}
+  },
+};
 </script>

@@ -36,9 +36,7 @@
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
-        <v-card min-width="350" data-cy="positions">
-          <Positions />
-        </v-card>
+        <Positions />
       </v-col>
       <v-col xs="12" lg="4" xl="3">
           <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350" max-width="500">
@@ -72,14 +70,7 @@
         <Holdings />
       </v-col>
       <v-col xs="12" lg="8" xl="9">
-        <v-card
-          elevation="1"
-          outlined
-          min-width="350"
-          data-cy="bar-char-container"
-        >
-          <BarChartContainer />
-        </v-card>
+        <BarChartContainer />
       </v-col>
     </v-row>
   </v-container>
