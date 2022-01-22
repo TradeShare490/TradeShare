@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height class="my-0 py-0">
-    <v-layout row align-center justify-content-center>
+    <v-layout row align-center justify-content-center style="background-color: white">
       <v-flex
         hidden-xs-only
         sm6
@@ -34,16 +34,18 @@
         </div>
       </v-flex>
       <v-flex class="mt-4">
-        <v-img
-          class="mx-auto"
-          max-width="15vh"
-          contain
-          src="../../assets/TradeShare.png"
-          alt="TradeShare Logo"
-        >
-        </v-img>
-        <Login v-if="isLogin" />
-        <SignUp v-else />
+        <div>
+          <v-img
+              class="mx-auto"
+              max-width="15vh"
+              contain
+              src="../../assets/TradeShare.png"
+              alt="TradeShare Logo"
+          >
+          </v-img>
+          <Login v-if="isLogin" />
+          <SignUp v-else />
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
