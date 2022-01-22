@@ -34,18 +34,16 @@
         </div>
       </v-flex>
       <v-flex class="mt-4">
-        <div>
-          <v-img
-              class="mx-auto"
-              max-width="15vh"
-              contain
-              src="../../assets/TradeShare.png"
-              alt="TradeShare Logo"
-          >
-          </v-img>
-          <Login v-if="isLogin" />
-          <SignUp v-else />
-        </div>
+        <v-img
+            class="mx-auto"
+            max-width="15vh"
+            contain
+            src="../../assets/TradeShare.png"
+            alt="TradeShare Logo"
+        >
+        </v-img>
+        <Login v-if="isLogin" />
+        <SignUp v-else />
       </v-flex>
     </v-layout>
   </v-container>
