@@ -40,8 +40,6 @@ class UserService {
     await axios
       .get("/userInfo/" + userID)
       .then(function(res) {
-        // console.log("User info success");
-        // console.log(res);
         userProfileData = res.data;
       })
       .catch(function(err) {

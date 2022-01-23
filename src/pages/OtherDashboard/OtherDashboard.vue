@@ -100,40 +100,6 @@ export default {
           today: true
         }
       ],
-      stocks: [
-        // {
-        //   symbol: "MSFT",
-        //   positionSize: 1000,
-        //   date: new Date().toLocaleString(),
-        //   profitLoss: 21.33,
-        //   verified: true
-        // },
-        // {
-        //   symbol: "AAPL",
-        //   positionSize: 25,
-        //   date: new Date("10/12/2021").toLocaleString(),
-        //   profitLoss: -3.76,
-        //   verified: false
-        // },
-        // {
-        //   symbol: "FSRLMAOOO",
-        //   positionSize: 240,
-        //   date: new Date("10/13/2021").toLocaleString(),
-        //   profitLoss: 67.3,
-        //   verified: true
-        // }
-      ],
-      userInfo: {
-        name: "Benver Vloshki",
-        nickname: "Ben",
-        labelText: "untagged",
-        labelColor: "untagged",
-        date: "2021",
-        bio: "This section is available for a small bio. Optional.",
-        numFollowers: "11K",
-        numFollowing: "5K",
-        following: false
-      },
       info: {},
       positions: []
     };
