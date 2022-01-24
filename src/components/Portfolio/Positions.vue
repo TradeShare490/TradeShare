@@ -273,7 +273,7 @@ export default {
             this.dateError = true; err = true;
           }
           if (err) {
-            this.snackbarText = "Unvalid input, please verify";
+            this.snackbarText = "Invalid input. Please try again.";
             this.snackbarColor = "error";
             this.snackbar = true;
             return;
