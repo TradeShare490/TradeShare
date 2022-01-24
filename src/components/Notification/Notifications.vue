@@ -5,6 +5,7 @@
     min-width="300"
     color="#f5f5f5"
     class="py-1"
+    data-cy="notif-alert"
   >
     <v-row no-gutters class="mt-2">
       <v-col
@@ -18,8 +19,8 @@
       >
         <v-icon large color="primary">
           mdi-exclamation
-        </v-icon>
-        <v-avatar class="profile" size="40">
+        </v-icon >
+        <v-avatar data-cy="notif-profile-pic" class="profile" size="40">
           <v-img :src="image"></v-img>
         </v-avatar>
       </v-col>
@@ -33,7 +34,7 @@
         class="text-left mt-3 pb-1 ml-2"
       >
         <p
-          class="text-wrap font-weight-bold text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption"
+          class="text-wrap font-weight-bold text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption" data-cy="notif-message"
         >
           {{ message }}
         </p>
@@ -56,6 +57,7 @@
           @click="unfollow"
           class="my-3 caption"
           small
+          data-cy="notif-unfollow-button"
         >
           Following
         </v-btn>
@@ -66,6 +68,7 @@
           v-if="following == false"
           @click="follow"
           class="my-3 caption"
+          data-cy="notif-follow-button"
         >
           Follow
         </v-btn>

@@ -24,7 +24,7 @@
         xl="2"
         class="text-left mx-0 px-0"
       >
-        <v-list-item color="black">
+        <v-list-item color="black" data-cy="basic-profile-info">
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
@@ -53,7 +53,7 @@
         <v-list-item-title class="font-weight-bold text-xs-caption">
           Bio
         </v-list-item-title>
-        <v-list-item-subtitle class="text-wrap text-xs-caption">
+        <v-list-item-subtitle class="text-wrap text-xs-caption" data-cy="profile-bio">
           {{ user.bio }}
         </v-list-item-subtitle>
       </v-col>
@@ -70,10 +70,12 @@
       >
         <v-row>
           <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold">
+            <v-list-item-title class="font-weight-bold" data-cy="profile-num-followers">>
               {{ user.numFollowers }}
             </v-list-item-title>
-            <v-list-item-subtitle> Followers </v-list-item-subtitle>
+            <v-list-item-subtitle>
+              Followers
+            </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -101,7 +103,7 @@
             </v-btn>
           </v-col>
           <v-col cols="6" class="mx-0 px-0 pl-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold">
+            <v-list-item-title class="font-weight-bold" data-cy="profile-num-following">
               {{ user.numFollowing }}
             </v-list-item-title>
             <v-list-item-subtitle> Following </v-list-item-subtitle>
