@@ -41,4 +41,27 @@ describe("Profile component can ", () => {
   it("send a message", () => {
     cy.get("[data-cy=message]").click();
   });
+  it("interact with the user portfolio",()=>{
+    //The plan here is to press the new item button and add a stock
+    cy.get("[data-cy=positions-new-item-btn").click();
+    cy.get("[data-cy=positions-new-item-submit-btn]").click();
+    //To edit that stock
+    cy.get("[data-cy=edit-stock-button]").last().click();
+    cy.get("[data-cy=positions-new-item-symbol-tf]").type("GOOG");
+    cy.get("[data-cy=positions-new-item-position-size-tf]").type("{backspace}10");
+    cy.get("[data-cy=positions-new-item-submit-btn]").click();
+    //To share it
+    cy.get("[data-cy=share-stock-button]").last().click();
+    //Then to delete it
+    cy.get("[data-cy=delete-stock-button]").last().click();
+    cy.get("[data-cy=cancel-stock-delete]").click();
+    cy.get("[data-cy=delete-stock-button]").last().click();
+    cy.get("[data-cy=confirm-stock-delete]").click();
+  });
+  it("Display the user data",() =>{
+    cy.get("[data-cy=profile-bio]").should("be.visible");
+    cy.get("[data-cy=basic-profile-info]").should("be.visible");
+    cy.get("[data-cy=profile-num-followers]").should("be.visible");
+    cy.get("[data-cy=profile-num-following]").should("be.visible");
+  });
 });
