@@ -5,7 +5,6 @@ import BrokerageSignUp from '../pages/BrokerageSignUp/BrokerageSignUp.vue'
 import Dashboard from "../pages/Dashboard/Dashboard.vue"
 import Followers from "../pages/Followers/Followers.vue"
 import Following from "../pages/Following/Following.vue"
-import UserGroupDialog from "../components/UserGroupDialog/UserGroupDialog.vue"
 import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
 import TradeZone from "../pages/TradeZone/TradeZone.vue"
 import Messages from "../pages/Messages/Messages.vue"
@@ -63,11 +62,6 @@ const routes = [
   {
     path: "/support",
     name: "Support",
-  },
-  {
-    path: "/user-group-dialog",
-    name: "UserGroupDialog",
-    component: UserGroupDialog,
   },
   {
     path: "/brokerage-signup",
