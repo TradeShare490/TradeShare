@@ -7,11 +7,17 @@
     mobile-breakpoint="825"
   >
     <template v-slot:top>
+      <v-snackbar data-cy="user-grp-snackbar" v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
+        {{snackbarText}}
+        <template v-slot:action="{ attrs }">
+          <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+        </template>
+      </v-snackbar>
       <v-toolbar flat>
         <v-toolbar-title>Your Positions</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on" data-cy="positions-new-item-btn">
               New Item
@@ -29,18 +35,21 @@
                     <v-text-field
                       v-model="editedStock.symbol"
                       label="Symbol" data-cy="positions-new-item-symbol-tf"
+                      :error="symbolError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.positionSize"
                       label="Position Size" data-cy="positions-new-item-position-size-tf"
+                      :error="positionError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.date"
                       label="Execution Date"
+                      :error="dateError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -116,7 +125,6 @@
       <v-icon small @click="shareStock(item)">
         mdi-share
       </v-icon>
-      
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">
@@ -150,17 +158,24 @@ export default {
             editedStock: {
                 symbol: '',
                 positionSize: 0,
-                date: new Date(),
+                date: new Date().toLocaleString(),
                 profitLoss: 0,
                 verified: false,
             },
             defaultStock: {
                 symbol: '',
                 positionSize: 0,
-                date: new Date(),
+                date: new Date().toLocaleString(),
                 profitLoss: 0,
                 verified: false,
-            }
+            },
+            snackbar: false,
+            snackbarText: "",
+            snackbarColor: "primary",
+            snackbarTimeout: 3000,
+            symbolError: false,
+            positionError: false,
+            dateError: false,
         };
     },
     computed: {
@@ -244,12 +259,32 @@ export default {
         },
 
         save () {
-        if (this.editedIndex > -1) {
-            Object.assign(this.stocks[this.editedIndex], this.editedStock)
-        } else {
-            this.stocks.push(this.editedStock)
-        }
-        this.close()
+          this.symbolError = this.positionError = this.dateError = false;
+          let err = false;
+          if (this.editedStock.symbol.trim() == "") {
+            this.symbolError = true; err = true;
+          }
+          if (this.editedStock.positionSize <= 0 && !isNaN(this.editedStock.positionSize)){
+            this.positionError = true; err = true;
+          }
+          if (!Date.parse(this.editedStock.date)) {
+            this.dateError = true; err = true;
+          }
+          if (err) {
+            this.snackbarText = "Unvalid input, please verify";
+            this.snackbarColor = "error";
+            this.snackbar = true;
+            return;
+          }
+          if (this.editedIndex > -1) {
+              Object.assign(this.stocks[this.editedIndex], this.editedStock)
+          } else {
+              this.stocks.push(this.editedStock)
+          }
+          this.snackbarText = "Position added";
+          this.snackbarColor = "primary";
+          this.snackbar = true;
+          this.close()
         },
 
         getDisplayNumber(number) {
