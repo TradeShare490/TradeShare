@@ -1,4 +1,4 @@
-describe("On the dashbooard page, Holdings component can", () => {
+describe("On the dashbooard page, Dashboard can", () => {
   before(() => {
     cy.login();
     cy.wait(2000);
