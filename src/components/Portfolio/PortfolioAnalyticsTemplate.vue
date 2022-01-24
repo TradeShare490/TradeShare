@@ -1,30 +1,27 @@
 <template>
-  <v-card min-width="350" min-height="164">
+  <v-card :min-width="$vuetify.breakpoint.smAndUp ? 250 : 350" min-height="168">
     <v-container class="d-flex flex-column justify-space-between" fluid>
       <v-row>
-        <v-col cols="8" class="text-left">
+        <v-col cols="8" class="text-left pr-0">
           <!-- Card Title -->
           <div class="text-overline">{{ title }}</div>
           <!-- Card Value -->
           <div class="font-weight-bold text-h5 pb-1">{{ value }}</div>
           <!-- Only show if a percentChange is passed through the component -->
-          <v-row :style="{visibility: percentChange ? 'visible' : 'hidden'}" align="center">
-            <!-- TODO Find a way to have each item not space out when resizing screen -->
+          <v-row :style="{visibility: percentChange ? 'visible' : 'hidden'}" align="center" no-gutters>
             <v-col cols="1" class="mr-3">
               <v-icon :class="[percentChangeTextColor()]" class="float-left">{{percentChangeLogo()}}</v-icon>
             </v-col>
-            <v-col cols="2" class="pl-1">
-              <v-list-item-title :class="[percentChangeTextColor()]" class="float-left pr-2">{{ percentChange }}%</v-list-item-title>
+            <v-col cols="2">
+              <v-list-item-title :class="[percentChangeTextColor()]" class="float-left">{{ percentChange }}%</v-list-item-title>
             </v-col>
-            <v-col cols="8">
+            <v-col cols="8" class="pl-4">
               <v-list-item-title class="text-caption">Since last month</v-list-item-title>
             </v-col>
-            <v-spacer></v-spacer>
           </v-row>
           <!-- Only show for Goal Tracker if progress attribute is passed through -->
           <v-progress-linear :style="{visibility: progress ? 'visible' : 'hidden'}" :value="progress"></v-progress-linear>
         </v-col>
-        <v-spacer></v-spacer>
         <!-- Top right Icon -->
         <v-col cols="3" align-self="center">
           <v-icon :class="[percentChangeLogoColor()]" class="rounded-circle pa-4" dark large>{{ icon }}</v-icon>

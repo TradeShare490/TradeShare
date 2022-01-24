@@ -22,7 +22,7 @@
           @keyup.enter="submit"
           data-cy="password"
         />
-        <p left class="text-body-2 text-right">
+        <p class="text-body-2 text-right">
           <router-link to="">Forgot Password</router-link>
         </p>
         <v-btn
