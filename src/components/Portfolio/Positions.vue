@@ -1,10 +1,11 @@
 <template>
+<v-card min-width="350" data-cy="positions">
   <v-data-table
     :headers="headers"
     :items="stocks"
     sort-by="date"
     class="elevation-1"
-    mobile-breakpoint="825"
+    mobile-breakpoint="700"
   >
     <template v-slot:top>
       <v-snackbar data-cy="user-grp-snackbar" v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
@@ -132,6 +133,7 @@
       </v-btn>
     </template>
   </v-data-table>
+  </v-card>
 </template>
 
 <script>
