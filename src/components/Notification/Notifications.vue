@@ -53,7 +53,7 @@
           elevation="0"
           outlined
           color="primary"
-          v-if="following == true"
+          v-if="user.following == true"
           @click="unfollow"
           class="my-3 caption"
           small
@@ -65,7 +65,7 @@
           small
           elevation="0"
           color="primary"
-          v-if="following == false"
+          v-if="user.following == false"
           @click="follow"
           class="my-3 caption"
           data-cy="notif-follow-button"
@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      following: this.currentlyFollowing,
+      user: { following: this.currentlyFollowing }
     };
   },
 };

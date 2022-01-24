@@ -126,11 +126,15 @@
       </v-card>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editStock(item)"> mdi-pencil </v-icon>
-      <v-icon small class="mr-2" @click="deleteStock(item)">
+      <v-icon small class="mr-2" @click="editStock(item)" data-cy="edit-stock-button">
+        mdi-pencil
+      </v-icon>
+      <v-icon small class="mr-2" @click="deleteStock(item)" data-cy="delete-stock-button">
         mdi-delete
       </v-icon>
-      <v-icon small @click="shareStock(item)"> mdi-share </v-icon>
+      <v-icon small data-cy="share-stock-button">
+        mdi-share
+      </v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
