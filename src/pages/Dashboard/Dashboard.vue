@@ -1,7 +1,7 @@
 <template>
   <v-container class="ma-0" fluid>
     <v-row>
-      <v-col lg="6" xl="3" data-cy="portfolio-value-card">
+      <v-col sm="6" lg="3" xl="3" data-cy="portfolio-value-card">
         <PortfolioAnalyticsTemplate
           title="Portfolio Value"
           value="$24,000"
@@ -9,14 +9,15 @@
           icon="mdi-domain"
         />
       </v-col>
-      <v-col lg="6" xl="3" data-cy="daily-change-card">
+      <v-col sm="6" lg="3" xl="3" data-cy="daily-change-card">
         <PortfolioAnalyticsTemplate
           title="Daily Change"
           value="+2.12%"
           :percentChange="16"
           icon="mdi-calendar-today"
-        /> </v-col
-      ><v-col lg="6" xl="3" data-cy="goal-progress-card">
+        />
+      </v-col>
+      <v-col sm="6" lg="3" xl="3" data-cy="goal-progress-card">
         <PortfolioAnalyticsTemplate
           title="Goal Progress"
           value="75%"
@@ -25,7 +26,7 @@
           icon="mdi-progress-clock"
         />
       </v-col>
-      <v-col lg="6" xl="3" data-cy="account-performance-card">
+      <v-col sm="6" lg="3" xl="3" data-cy="account-performance-card">
         <MonthlyProfitLoss
           title="Monthly Realized P/L"
           value="+$5,200.00"
@@ -35,12 +36,10 @@
     </v-row>
     <v-row>
       <v-col xs="12" lg="8" xl="9">
-        <v-card min-width="350" data-cy="positions">
           <Positions :userId="user.userId"/>
-        </v-card>
       </v-col>
       <v-col xs="12" lg="4" xl="3">
-          <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350">
+          <v-card data-cy="recent-trades-card" elevation="1" outlined min-width="350" max-width="500">
             <v-card-title class="pb-0" style="word-break: normal">
               <span class="blue--text">Recent Trades</span>
             </v-card-title>
@@ -67,18 +66,11 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col xs="12" md="4" lg="3">
+      <v-col xs="12" lg="4" xl="3">
         <Holdings />
       </v-col>
-      <v-col xs="12" md="8" lg="9">
-        <v-card
-          elevation="1"
-          outlined
-          min-width="350"
-          data-cy="bar-char-container"
-        >
-          <BarChartContainer />
-        </v-card>
+      <v-col xs="12" lg="8" xl="9">
+        <BarChartContainer />
       </v-col>
     </v-row>
   </v-container>

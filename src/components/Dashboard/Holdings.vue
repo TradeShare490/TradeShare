@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="1" outlined min-width="350">
+  <v-card elevation="1" outlined min-width="350" max-width="500">
     <v-row class="py-2 px-5">
       <v-col cols="10" class="pt-0">
         <v-list-item class="px-0">
