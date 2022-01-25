@@ -16,7 +16,7 @@ export default {
   name: "App",
   data() {
     return {
-      noSideMenu: ["Login", "SignUp", "BrokerageSignUp"],
+      noSideMenu: ["Login", "SignUp", "BrokerageSignUp", "Confirm"],
     };
   },
   components: {
