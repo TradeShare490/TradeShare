@@ -3,6 +3,7 @@ const history = require('connect-history-api-fallback');
 const app = express();
 const path = require("path");
 const staticFileMiddleware = express.static(path.join(__dirname, "dist"));
+app.disable("x-powered-by");
 app.use(staticFileMiddleware);
 app.use(history({
   disableDotRule: true,
