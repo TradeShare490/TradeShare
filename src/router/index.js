@@ -9,6 +9,7 @@ import UserGroupDialog from "../components/UserGroupDialog/UserGroupDialog.vue"
 import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
 import TradeZone from "../pages/TradeZone/TradeZone.vue"
 import Messages from "../pages/Messages/Messages.vue"
+import Confirm from "../pages/BrokerageSignUp/Confirm";
 
 Vue.use(VueRouter);
 
@@ -73,6 +74,11 @@ const routes = [
     path: "/brokerage-signup",
     name: "BrokerageSignUp",
     component: BrokerageSignUp,
+  },
+  {
+    path: "/confirm",
+    name: "Confirm",
+    component: Confirm,
   },
   {
     path: "/other-dashboard",
