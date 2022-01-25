@@ -10,7 +10,7 @@ describe("On the dashbooard page, Dashboard can", () => {
   });
   it("display account summary", () => {
     cy.get("[data-cy=portfolio-value-card]").should("be.visible");
-    cy.get("[data-cy=portfolio-value-card]").contains(/^\$/);
+    cy.get("[data-cy=portfolio-value-card]").contains(/\$/);
     cy.get("[data-cy=daily-change-card]").should("be.visible");
     cy.get("[data-cy=daily-change-card]").contains(/%$/);
     cy.get("[data-cy=goal-progress-card]").should("be.visible");
