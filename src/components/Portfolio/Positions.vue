@@ -8,7 +8,7 @@
     mobile-breakpoint="700"
   >
     <template v-slot:top>
-      <v-snackbar data-cy="user-grp-snackbar" v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
+      <v-snackbar data-cy="positions-snackbar" v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
         {{snackbarText}}
         <template v-slot:action="{ attrs }">
           <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
@@ -73,7 +73,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">
+              <v-btn color="blue darken-1" text @click="close" data-cy="positions-new-item-cancel-btn" >
                 Cancel
               </v-btn>
               <v-btn color="blue darken-1" text @click="save" data-cy="positions-new-item-submit-btn" >
@@ -160,14 +160,14 @@ export default {
             editedStock: {
                 symbol: '',
                 positionSize: 0,
-                date: new Date().toLocaleString(),
+                date: new Date().toLocaleString('en-US'),
                 profitLoss: 0,
                 verified: false,
             },
             defaultStock: {
                 symbol: '',
                 positionSize: 0,
-                date: new Date().toLocaleString(),
+                date: new Date().toLocaleString('en-US'),
                 profitLoss: 0,
                 verified: false,
             },
@@ -205,21 +205,21 @@ export default {
                 {
                     symbol: 'MSFT',
                     positionSize: 1000,
-                    date: new Date().toLocaleString(),
+                    date: new Date().toLocaleString('en-US'),
                     profitLoss: 21.33,
                     verified: true,
                 },
                 {
                     symbol: 'AAPL',
                     positionSize: 25,
-                    date: new Date("10/12/2021").toLocaleString(),
+                    date: new Date("10/12/2021").toLocaleString('en-US'),
                     profitLoss: -3.76,
                     verified: false,
                 },
                 {
                     symbol: 'FSR',
                     positionSize: 240,
-                    date: new Date("10/13/2021").toLocaleString(),
+                    date: new Date("10/13/2021").toLocaleString('en-US'),
                     profitLoss: 67.30,
                     verified: true,
                 },
