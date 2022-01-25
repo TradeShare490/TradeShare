@@ -4,7 +4,7 @@ export const signUp = async (credentials, store, router) => {
   const response = await UserService.signup(credentials);
   if (response.success) {
     store.dispatch("login", credentials).then(() => {
-      router.push({ name: "Dashboard" });
+      router.push({ name: "BrokerageSignUp" });
     });
   } else {
     throw response.message;

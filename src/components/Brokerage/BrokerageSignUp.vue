@@ -22,24 +22,16 @@
             data-cy="brokerage-dropdown"
           ></v-select>
 
-          <v-text-field
-            v-model="email"
-            label="Email Address"
-            color="primary"
-            :rules="[rules.required, rulesEmail.format]"
-            @keyup.enter="submit"
-            data-cy="email-input"
-          ></v-text-field>
-
           <v-btn
             width="250"
             height="45"
             color="primary"
             class="my-3 text-button"
+            @click="redirect"
             >Next</v-btn
           >
           <p left class="text-body-2 text-right pt-3">
-            <router-link to="">Skip for now</router-link>
+            <router-link to="/dashboard">Skip for now</router-link>
           </p>
         </v-form>
       </v-card>
@@ -59,21 +51,26 @@ export default {
   data: () => ({
     valid: true,
     email: "",
-    select: "Questrade",
-    items: ["Questrade", "Interactive Brokers"],
+    select: "Alpaca",
+    items: ["Alpaca"],
     intro_message:
       "The best way to use TradeShare is to link your brokerage account so that we take care of keeping your dashboard up to date automatically.",
     no_brokerage_text:
       "Don’t have a brokerage service? No problem! You can still use TradeShare, you’ll just need to manually add your activity.",
     rules: {
-      required: (v) => !!v || "Required",
+      required: v => !!v || "Required"
     },
     rulesEmail: {
-      format: (v) =>
+      format: v =>
         /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
-        ) || "E-mail must be valid",
+        ) || "E-mail must be valid"
     },
+    user() {
+      let user = JSON.parse(localStorage.getItem("user"));
+      return user["userInfo"];
+    },
+    alpacaURL: process.env.VUE_APP_ALPACA_INTEGRATION_URL
   }),
   methods: {
     submit() {
@@ -85,7 +82,10 @@ export default {
         );
       }
     },
-  },
+    redirect() {
+      window.open(this.alpacaURL, "_self");
+    }
+  }
 };
 </script>
 
