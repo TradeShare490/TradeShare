@@ -8,11 +8,17 @@
     mobile-breakpoint="700"
   >
     <template v-slot:top>
+      <v-snackbar data-cy="positions-snackbar" v-model="snackbar" :snackbarTimeout="snackbarTimeout" :color="snackbarColor">
+        {{snackbarText}}
+        <template v-slot:action="{ attrs }">
+          <v-btn text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+        </template>
+      </v-snackbar>
       <v-toolbar flat>
         <v-toolbar-title>Your Positions</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on" data-cy="positions-new-item-btn">
               New Item
@@ -30,18 +36,21 @@
                     <v-text-field
                       v-model="editedStock.symbol"
                       label="Symbol" data-cy="positions-new-item-symbol-tf"
+                      :error="symbolError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.positionSize"
                       label="Position Size" data-cy="positions-new-item-position-size-tf"
+                      :error="positionError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.date"
                       label="Execution Date"
+                      :error="dateError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -64,7 +73,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">
+              <v-btn color="blue darken-1" text @click="close" data-cy="positions-new-item-cancel-btn" >
                 Cancel
               </v-btn>
               <v-btn color="blue darken-1" text @click="save" data-cy="positions-new-item-submit-btn" >
@@ -117,7 +126,6 @@
       <v-icon small @click="shareStock(item)" data-cy="share-stock-button">
         mdi-share
       </v-icon>
-      
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">
@@ -152,17 +160,24 @@ export default {
             editedStock: {
                 symbol: '',
                 positionSize: 0,
-                date: new Date(),
+                date: new Date().toLocaleString('en-US'),
                 profitLoss: 0,
                 verified: false,
             },
             defaultStock: {
                 symbol: '',
                 positionSize: 0,
-                date: new Date(),
+                date: new Date().toLocaleString('en-US'),
                 profitLoss: 0,
                 verified: false,
-            }
+            },
+            snackbar: false,
+            snackbarText: "",
+            snackbarColor: "primary",
+            snackbarTimeout: 3000,
+            symbolError: false,
+            positionError: false,
+            dateError: false,
         };
     },
     computed: {
@@ -190,21 +205,21 @@ export default {
                 {
                     symbol: 'MSFT',
                     positionSize: 1000,
-                    date: new Date().toLocaleString(),
+                    date: new Date().toLocaleString('en-US'),
                     profitLoss: 21.33,
                     verified: true,
                 },
                 {
                     symbol: 'AAPL',
                     positionSize: 25,
-                    date: new Date("10/12/2021").toLocaleString(),
+                    date: new Date("10/12/2021").toLocaleString('en-US'),
                     profitLoss: -3.76,
                     verified: false,
                 },
                 {
                     symbol: 'FSR',
                     positionSize: 240,
-                    date: new Date("10/13/2021").toLocaleString(),
+                    date: new Date("10/13/2021").toLocaleString('en-US'),
                     profitLoss: 67.30,
                     verified: true,
                 },
@@ -246,12 +261,32 @@ export default {
         },
 
         save () {
-        if (this.editedIndex > -1) {
-            Object.assign(this.stocks[this.editedIndex], this.editedStock)
-        } else {
-            this.stocks.push(this.editedStock)
-        }
-        this.close()
+          this.symbolError = this.positionError = this.dateError = false;
+          let err = false;
+          if (this.editedStock.symbol.trim() == "") {
+            this.symbolError = true; err = true;
+          }
+          if (this.editedStock.positionSize <= 0 && !isNaN(this.editedStock.positionSize)){
+            this.positionError = true; err = true;
+          }
+          if (!Date.parse(this.editedStock.date)) {
+            this.dateError = true; err = true;
+          }
+          if (err) {
+            this.snackbarText = "Invalid input. Please try again.";
+            this.snackbarColor = "error";
+            this.snackbar = true;
+            return;
+          }
+          if (this.editedIndex > -1) {
+              Object.assign(this.stocks[this.editedIndex], this.editedStock)
+          } else {
+              this.stocks.push(this.editedStock)
+          }
+          this.snackbarText = "Position added";
+          this.snackbarColor = "primary";
+          this.snackbar = true;
+          this.close()
         },
 
         getDisplayNumber(number) {
