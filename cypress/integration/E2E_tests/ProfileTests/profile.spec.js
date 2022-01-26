@@ -45,6 +45,9 @@ describe("Profile component can ", () => {
     //The plan here is to press the new item button and add a stock
     cy.get("[data-cy=positions-new-item-btn").click();
     cy.get("[data-cy=positions-new-item-submit-btn]").click();
+    cy.get("[data-cy=positions-snackbar").should('contain', "Invalid input. Please try again.")
+    cy.get("[data-cy=positions-new-item-cancel-btn]").click();
+
     //To edit that stock
     cy.get("[data-cy=edit-stock-button]").last().click();
     cy.get("[data-cy=positions-new-item-symbol-tf]").type("GOOG");
