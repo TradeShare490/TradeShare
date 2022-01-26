@@ -39,7 +39,7 @@
         {{ error }}
       </v-alert>
       <p class="text-body-2 pt-4">
-        Don't have an account? <router-link to="./signup">Sign up</router-link>
+        Don't have an account? <router-link to="./signup" exact>Sign up</router-link>
       </p>
     </v-card>
   </v-container>
