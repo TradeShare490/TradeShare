@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="userInfo">
     <Profile :user="info" />
     <v-container class="ma-0" fluid>
       <v-row>
@@ -47,6 +47,9 @@
         </v-col>
       </v-row>
     </v-container>
+  </div>
+  <div v-else>
+    User doesn't exist
   </div>
 </template>
 
@@ -100,6 +103,7 @@ export default {
           today: true
         }
       ],
+      userInfo: null,
       info: {},
       positions: []
     };
@@ -109,8 +113,9 @@ export default {
   },
   methods: {
     async initialize() {
+      this.userInfo = await UserService.getUserInfo(this.userId);
       this.info = {
-        ...(await UserService.getUserInfo(this.userId)),
+        ...this.userInfo,
         numFollowers: "11K",
         numFollowing: "5K",
         following: false,

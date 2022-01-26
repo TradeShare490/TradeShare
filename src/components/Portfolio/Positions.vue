@@ -1,5 +1,5 @@
 <template>
-<v-card min-width="350" data-cy="positions">
+<v-card v-if="stocks.length > 0" min-width="350" data-cy="positions">
   <v-data-table
     :headers="headers"
     :items="stocks"
@@ -152,6 +152,9 @@
     </template>
   </v-data-table>
   </v-card>
+<v-card v-else min-width="350" data-cy="positions">
+  User has no active positions
+</v-card>
 </template>
 
 <script>
