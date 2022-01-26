@@ -100,8 +100,8 @@ export default {
       this.searchQueue.push(val);
       await new Promise((_) => setTimeout(_, 2000));
       this.searchQueue.pop();
-      if (this.searchQueue.length == 0) {
-        if (val.length == 0) {
+      if (this.searchQueue.length === 0) {
+        if (val?.length === 0) {
           return;
         }
         if (this.isLoading) {
@@ -114,7 +114,6 @@ export default {
         axios
           .get(`/searchRecommendations/${val}`)
           .then((res) => {
-            console.log(res)
             this.stocks = res.data["searchResult"]["bestMatches"];
           })
           .catch((err) => {
