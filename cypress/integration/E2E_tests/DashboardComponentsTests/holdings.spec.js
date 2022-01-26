@@ -7,7 +7,7 @@ describe("On the dashbooard page, Dashboard can", () => {
         `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.DASHBOARD}`
       );
     });
-    cy.wait(2000);
+    cy.wait(5000);
   });
   it("display account summary", () => {
     cy.get("[data-cy=portfolio-value-card]").should("be.visible");
