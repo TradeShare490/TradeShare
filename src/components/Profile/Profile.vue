@@ -70,7 +70,7 @@
       >
         <v-row>
           <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold" data-cy="profile-num-followers">>
+            <v-list-item-title class="font-weight-bold" data-cy="profile-num-followers">
               {{ user.numFollowers }}
             </v-list-item-title>
             <v-list-item-subtitle>
