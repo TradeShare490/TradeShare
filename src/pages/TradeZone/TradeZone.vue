@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col xs="12" sm="12" md="12" lg="9" class="d-flex justify-center py-0 mb-2">
-        <v-card min-width="350" width="800" height="100%" class="mx-10">
+      <v-col xs="12" sm="12" md="12" lg="9" class="d-flex justify-center py-0">
+        <v-card min-width="350" width="800" height="100%" class="mx-10 mb-3">
           <v-row no-gutters>
             <span 
                 class="text-h4 font-weight-medium my-3"
@@ -47,6 +47,10 @@ import TrendingCompanies from "../../components/TrendingCompanies/TrendingCompan
 
 export default {
   name: "TradeZone",
+  components: {
+    Feed,
+    TrendingCompanies,
+  },
   data() {
     return {
       allPosts: [
@@ -113,29 +117,9 @@ export default {
           stock2: "-0.25%",
           stock3: 15.04,
           stock4: "Post+0.19%",
-        },
-        {
-          id: 5,
-          image: "https://randomuser.me/api/portraits/men/52.jpg",
-          name: "Tim Robenman",
-          username: "@timthetatman",
-          when: "Nov 29",
-          purchased: false,
-          company: "NVIDIA Corp.",
-          tag: "NVDA",
-          size: 150,
-          verified: true,
-          stock1: 222.42,
-          stock2: "+0.41%",
-          stock3: 222.7,
-          stock4: "Post+0.13%",
-        },
-      ],
-    };
-  },
-  components: {
-    Feed,
-    TrendingCompanies,
-  },
-};
+        }
+      ]
+    }
+  }
+}
 </script>
