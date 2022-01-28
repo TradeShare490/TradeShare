@@ -4,13 +4,6 @@
       <v-tab><em class="mdi mdi-account-multiple"></em>FOLLOWERS</v-tab>
       <v-tab><em class="mdi mdi-exclamation"></em>FOLLOW REQUESTS</v-tab>
       <v-tab-item class="mt-5">
-        <v-col>
-          <Notifications
-            :currentlyFollowing="false"
-            image="https://randomuser.me/api/portraits/men/52.jpg"
-            message="John Molson has followed you."
-          />
-        </v-col>
         <SearchViewBy />
         <UserBlock
           :currentlyFollowing="true"
