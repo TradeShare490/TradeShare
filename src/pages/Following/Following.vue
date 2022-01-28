@@ -1,18 +1,14 @@
 <template>
-  <div class="mt-5">
+  <div class="container mt-0 mx-auto">
     <SearchViewBy />
     <UserBlock
       :currentlyFollowing="true"
-      currentLabelColor="friend"
-      currentLabelText="friend"
       name="Tim Robenman"
       image="https://randomuser.me/api/portraits/men/52.jpg"
       username="timrobenman"
     ></UserBlock>
     <UserBlock
       :currentlyFollowing="true"
-      currentLabelColor="work"
-      currentLabelText="work"
       name="John Winchester"
       image="https://randomuser.me/api/portraits/men/75.jpg"
       username="johnwinchester"
@@ -32,3 +28,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.container {
+  width: 65%;
+  background-color: white;
+  height: 100%;
+  flex-grow: 1;
+}
+</style>

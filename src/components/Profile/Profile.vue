@@ -53,7 +53,10 @@
         <v-list-item-title class="font-weight-bold text-xs-caption">
           Bio
         </v-list-item-title>
-        <v-list-item-subtitle class="text-wrap text-xs-caption" data-cy="profile-bio">
+        <v-list-item-subtitle
+          class="text-wrap text-xs-caption"
+          data-cy="profile-bio"
+        >
           {{ bio }}
         </v-list-item-subtitle>
       </v-col>
@@ -70,12 +73,13 @@
       >
         <v-row>
           <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold" data-cy="profile-num-followers">
+            <v-list-item-title
+              class="font-weight-bold"
+              data-cy="profile-num-followers"
+            >
               {{ numFollowers }}
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Followers
-            </v-list-item-subtitle>
+            <v-list-item-subtitle> Followers </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -103,12 +107,13 @@
             </v-btn>
           </v-col>
           <v-col cols="6" class="mx-0 px-0 pl-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold" data-cy="profile-num-following">
+            <v-list-item-title
+              class="font-weight-bold"
+              data-cy="profile-num-following"
+            >
               {{ numFollowing }}
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Following
-            </v-list-item-subtitle>
+            <v-list-item-subtitle> Following </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -136,8 +141,6 @@ export default {
     return {
       name: "Benver Vloshki",
       username: "benvloshki",
-      labelText: "untagged",
-      labelColor: "untagged",
       date: "2021",
       bio: "This section is available for a small bio. Optional.",
       numFollowers: "11K",
@@ -147,8 +150,6 @@ export default {
   },
   methods: {
     label() {
-      this.labelText = "friend";
-      this.labelColor = "friend";
       console.log("assigning label...");
     },
     message() {

@@ -4,12 +4,13 @@
     elevation="0"
     min-width="300"
     color="#f5f5f5"
-    class="py-1"
+    class="py-0"
     data-cy="notif-alert"
   >
     <v-row no-gutters class="mt-2">
+      <v-icon class="mt-0 pb-1" large color="primary"> mdi-exclamation </v-icon>
       <v-col
-        class="mt-0 pb-0"
+        class="mt-0 pb-2"
         align-self="center"
         cols="3"
         sm="2"
@@ -17,24 +18,30 @@
         lg="1"
         xl="1"
       >
-        <v-icon large color="primary">
-          mdi-exclamation
-        </v-icon >
         <v-avatar data-cy="notif-profile-pic" class="profile" size="40">
           <v-img :src="image"></v-img>
         </v-avatar>
       </v-col>
 
       <v-col
-        cols="4"
+        cols="1"
         sm="6"
         md="6"
         lg="5"
         xl="5"
-        class="text-left mt-3 pb-1 ml-2"
+        class="text-left mt-4 pb-1 ml-2"
       >
         <p
-          class="text-wrap font-weight-bold text-sm-body-2 text-md-body-2 text-lg-body-2 text-xl-body-2 text-caption" data-cy="notif-message"
+          class="
+            text-wrap
+            font-weight-bold
+            text-sm-body-2
+            text-md-body-2
+            text-lg-body-2
+            text-xl-body-2
+            text-caption
+          "
+          data-cy="notif-message"
         >
           {{ message }}
         </p>
@@ -44,8 +51,8 @@
       <v-col
         sm="2"
         md="2"
-        lg="5"
-        xl="5"
+        lg="1"
+        xl="1"
         class="d-flex justify-end mr-5 pb-1"
         align-self="center"
       >
