@@ -36,10 +36,15 @@
             class="text-left text-body-2"
             @click="redirect(data.item['1. symbol'])"
             data-cy="autocomplete-list-item"
+            v-if="!searchModeUsers"
           >
-            <strong>{{ data.item['1. symbol'] }}:</strong> &nbsp; {{ data.item['2. name'] }}
+            <strong>{{ data.item["1. symbol"] }}:</strong> &nbsp;
+            {{ data.item["2. name"] }}
           </v-list-item>
-        </template>\
+          <v-list-item class="text-left text-body-2" v-if="searchModeUsers">
+            {{ data.item }}
+          </v-list-item>
+        </template>
       </v-autocomplete>
       <v-btn icon class="mt-1">
         <v-icon>mdi-bell</v-icon>
@@ -59,6 +64,8 @@ export default {
   data() {
     return {
       stocks: [],
+      people: ["@Kevin", "@George", "@Alya", "@Siobhan"],
+      searchModeUsers: false,
       isLoading: false,
       searchModel: null,
       search: null,
@@ -76,10 +83,14 @@ export default {
       });
     },
     items() {
-      return this.stocks.map((stock) => {
-        const Description = stock["1. symbol"] + ": " + stock["2. name"];
-        return Object.assign({}, stock, { Description });
-      });
+      if (this.searchModeUsers) {
+        return this.people;
+      } else {
+        return this.stocks.map((stock) => {
+          const Description = stock["1. symbol"] + ": " + stock["2. name"];
+          return Object.assign({}, stock, { Description });
+        });
+      }
     },
   },
   methods: {
@@ -97,29 +108,35 @@ export default {
   watch: {
     async search(val) {
       // Checks if the user has typed anything in the last 2 seconds if not make a request to backend
-      this.searchQueue.push(val);
-      await new Promise((_) => setTimeout(_, 2000));
-      this.searchQueue.pop();
-      if (this.searchQueue.length === 0) {
-        if (val?.length === 0) {
-          return;
-        }
-        if (this.isLoading) {
-          return;
-        }
+      if (val?.charAt(0) === "@") {
+        console.log("Username mode");
+        this.searchModeUsers = true;
+      } else {
+        this.searchModeUsers = false
+        this.searchQueue.push(val);
+        await new Promise((_) => setTimeout(_, 2000));
+        this.searchQueue.pop();
+        if (this.searchQueue.length === 0) {
+          if (val?.length === 0) {
+            return;
+          }
+          if (this.isLoading) {
+            return;
+          }
 
-        this.isLoading = true;
+          this.isLoading = true;
 
-        // Lazily load input items
-        axios
-          .get(`/searchRecommendations/${val}`)
-          .then((res) => {
-            this.stocks = res.data["searchResult"]["bestMatches"];
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => (this.isLoading = false));
+          // Lazily load input items
+          axios
+            .get(`/searchRecommendations/${val}`)
+            .then((res) => {
+              this.stocks = res.data["searchResult"]["bestMatches"];
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => (this.isLoading = false));
+        }
       }
     },
   },
