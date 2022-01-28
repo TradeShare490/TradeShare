@@ -1,11 +1,16 @@
 <template>
-  <v-container fluid data-cy="trade-zone-feed">
+  <v-container fluid class="pb-0" data-cy="trade-zone-feed">
     <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
       <div class="d-flex justify-end mb-n3 mr-1">
         <v-btn icon>
           <v-icon>mdi-dots-horizontal</v-icon>
         </v-btn>
       </div>
+      <router-link
+          :is="this.disabled ? 'span' : 'router-link'"
+          :to="'/' + this.username+'/' + this.id"
+          style="text-decoration: none"
+      >
       <v-row no-gutters class="d-flex justify-start ml-5">
           <v-avatar class="mr-3" size="70">
             <v-img :src="image" alt="pfp"/>
@@ -110,6 +115,7 @@
           </div>
         </v-col>
       </v-row>
+      </router-link>
       <v-row no-gutters class="mb-2">
         <v-col>
           <v-btn
@@ -151,9 +157,17 @@
               text
               x-large
               :ripple="false"
+              @click="copyURL()"
           >
             <v-icon>mdi-link-variant</v-icon>
           </v-btn>
+          <v-snackbar
+            v-model="snackbar"
+            :timeout="timeout"
+            color="primary"
+          >
+            {{ snackbarText }}
+          </v-snackbar>
         </v-col>
       </v-row>
     </v-alert>
@@ -166,6 +180,7 @@ export default {
   components: { StockGraph },
   name: "Feed",
   props: {
+    id: Number,
     image: String,
     name: String,
     username: String,
@@ -179,12 +194,28 @@ export default {
     stock2: String,
     stock3: Number,
     stock4: String,
+    disabled: Boolean
   },
   data() {
     return {
-      like: false
+      like: false,
+      snackbar: false,
+      snackbarText: 'Copied to Clipboard!',
+      timeout: 1500
     }
   },
+  methods: {
+    copyURL() {
+      this.snackbar = true
+      const url = 'localhost:8081' + this.$router.currentRoute.fullPath
+      const temp = document.createElement('textarea')
+      document.body.appendChild(temp)
+      temp.value = url
+      temp.select()
+      document.execCommand('copy');
+      document.body.removeChild(temp)
+    }
+  }
 };
 </script>
 <style scoped>

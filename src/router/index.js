@@ -9,6 +9,7 @@ import OtherDashboard from "../pages/OtherDashboard/OtherDashboard.vue"
 import TradeZone from "../pages/TradeZone/TradeZone.vue"
 import Messages from "../pages/Messages/Messages.vue"
 import Confirm from "../pages/BrokerageSignUp/Confirm";
+import Post from "../pages/TradeZone/IndividualPost/Post"
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const routes = [
     path: "/tradezone",
     name: "TradeZone",
     component: TradeZone,
+  },
+  {
+    path: "/:username/:id",
+    name: "Post",
+    component: Post,
   },
   {
     path: "/dashboard",
