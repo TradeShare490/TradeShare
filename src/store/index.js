@@ -115,6 +115,22 @@ export default new Vuex.Store({
           stock2: "-0.25%",
           stock3: 15.04,
           stock4: "Post+0.19%",
+        },
+        {
+          id: 5,
+          image: "https://randomuser.me/api/portraits/men/52.jpg",
+          name: "Tim Robenman",
+          username: "@timthetatman",
+          when: "Nov 29",
+          purchased: false,
+          company: "NVIDIA Corp.",
+          tag: "NVDA",
+          size: 150,
+          verified: true,
+          stock1: 222.42,
+          stock2: "+0.41%",
+          stock3: 222.7,
+          stock4: "Post+0.13%",
         }
       ]
     }
