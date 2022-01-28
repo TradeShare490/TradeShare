@@ -15,6 +15,7 @@
             <Feed
               v-for="post in allPosts"
               :key="post.id"
+              :id="post.id"
               :image="post.image"
               :name="post.name"
               :username="post.username"
@@ -28,6 +29,7 @@
               :stock2="post.stock2"
               :stock3="post.stock3"
               :stock4="post.stock4"
+              :disabled="false"
             />
           </v-row>
         </v-card>
