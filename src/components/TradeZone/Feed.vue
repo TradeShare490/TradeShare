@@ -8,7 +8,7 @@
       </div>
       <router-link
           :is="this.disabled ? 'span' : 'router-link'"
-          :to="'/' + this.username+'/' + this.id"
+          :to="'/post/' + this.username+'/' + this.id"
           style="text-decoration: none"
       >
       <v-row no-gutters class="d-flex justify-start ml-5">

@@ -34,7 +34,7 @@ const routes = [
     component: TradeZone,
   },
   {
-    path: "/:username/:id",
+    path: "/post/:username/:id",
     name: "Post",
     component: Post,
   },

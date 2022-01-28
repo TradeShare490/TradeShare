@@ -15,7 +15,7 @@
       <v-row>
         <v-col xs="12" lg="8" xl="9">
           <v-card min-width="350">
-            <Positions :userId="userId" />
+            <Positions :userId="userId"/>
           </v-card>
         </v-col>
         <v-col xs="12" lg="4" xl="3">

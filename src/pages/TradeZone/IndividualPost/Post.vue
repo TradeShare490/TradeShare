@@ -93,7 +93,7 @@ export default {
       this.targetUser = this.$router.currentRoute.params.username
       this.postID = this.$router.currentRoute.params.id
       this.allPosts.forEach(i => {
-        if (i.id == this.postID && i.username === this.targetUser) {
+        if (i.id === this.postID && i.username === this.targetUser) {
           this.targetPost = i.id - 1
         }
       })
