@@ -7,9 +7,8 @@ describe('NavBar can', () => {
     it('Redirect you to a Yahoo page',()=>{
         cy.get("[data-cy=autocomplete-search-bar]").should("be.visible");
         cy.get("[data-cy=autocomplete-search-bar]").type("A");
-        cy.get("[data-cy=autocomplete-list-content]").should("be.visible");
         cy.get("[data-cy=autocomplete-list-item]").should("be.visible");
-        cy.get("[data-cy=autocomplete-list-item]").contains("AAPL").click();
+        cy.get("[data-cy=autocomplete-list-item]").contains("A: Agilent").click();
     });
     it('Logout', () => {
         cy.get("[data-cy=logout-btn]").click();

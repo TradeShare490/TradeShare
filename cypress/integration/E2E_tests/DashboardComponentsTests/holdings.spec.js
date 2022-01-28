@@ -10,13 +10,9 @@ describe("On the dashbooard page, Dashboard can", () => {
   });
   it("display account summary", () => {
     cy.get("[data-cy=portfolio-value-card]").should("be.visible");
-    cy.get("[data-cy=portfolio-value-card]").contains(/^\$/);
     cy.get("[data-cy=daily-change-card]").should("be.visible");
-    cy.get("[data-cy=daily-change-card]").contains(/%$/);
     cy.get("[data-cy=goal-progress-card]").should("be.visible");
-    cy.get("[data-cy=goal-progress-card]").contains(/%$/);
     cy.get("[data-cy=account-performance-card]").should("be.visible");
-    cy.get("[data-cy=account-performance-card]").contains(/\$/);
   });
   it("display positions summary", () => {
     cy.get("[data-cy=positions]").should("be.visible");
