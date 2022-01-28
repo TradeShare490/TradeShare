@@ -4,7 +4,7 @@
       <v-col sm="6" lg="3" xl="3" data-cy="portfolio-value-card">
         <PortfolioAnalyticsTemplate
           title="Portfolio Value"
-          value="$24,000"
+          :value="'$'+ account.buying_power"
           :percentChange="-20"
           icon="mdi-domain"
         />
@@ -83,11 +83,12 @@ import PortfolioAnalyticsTemplate from "../../components/Portfolio/PortfolioAnal
 import Holdings from "../../components/Dashboard/Holdings.vue";
 import MonthlyProfitLoss from "../../components/Portfolio/MonthlyProfitLoss.vue";
 import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs.vue";
-
+import UserService from "../../services/User.service";
 export default {
   name: "Dashboard",
   data() {
     return {
+      account: null,
       recentActivities: [
         {
           id: 1,
@@ -135,6 +136,14 @@ export default {
     BarChartContainer,
     Holdings,
     MonthlyProfitLoss,
+  },
+  methods:{
+    async initialize() {
+      this.account = await UserService.getAccount(this.user.userId);
+    }
+  },
+  created() {
+    this.initialize();
   },
   computed: {
     user() {

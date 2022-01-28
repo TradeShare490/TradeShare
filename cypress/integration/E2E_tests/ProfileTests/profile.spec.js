@@ -9,7 +9,6 @@ describe("Profile component can ", () => {
         }`
       );
     });
-    cy.wait(5000);
     cy.get("body").then(($body) => {
       if ($body.find("[data-cy=follow]").length > 0) {
         // checking if it is the "follow" button
