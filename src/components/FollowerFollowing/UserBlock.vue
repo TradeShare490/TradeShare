@@ -138,16 +138,16 @@ export default {
   name: "UserBlock",
   mixins: [useFollowMixin],
   props: {
-    currentlyFollowing: Boolean,
+    currentlyfollowing: Boolean,
     name: String,
     image: String,
     username: String,
-    requestBlock: Boolean,
+    requestblock: Boolean,
   },
   data() {
     return {
-      following: this.currentlyFollowing,
-      request: this.requestBlock,
+      following: this.currentlyfollowing,
+      request: this.requestblock,
     };
   },
   computed: {
