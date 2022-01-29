@@ -118,7 +118,7 @@ export default {
         ...this.userInfo,
         numFollowers: "11K",
         numFollowing: "5K",
-        following: false,
+        following: true,
         date: "2021",
         bio: "This section is available for a small bio. Optional."
       };
