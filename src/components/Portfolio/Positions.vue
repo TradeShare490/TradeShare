@@ -1,5 +1,5 @@
 <template>
-<v-card min-width="350" data-cy="positions">
+<v-card v-if="stocks.length > 0" min-width="350" data-cy="positions">
   <v-data-table
     :headers="headers"
     :items="stocks"
@@ -20,7 +20,14 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="650px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on" data-cy="positions-new-item-btn">
+            <v-btn
+              color="primary"
+              dark
+              class="mb-2"
+              v-bind="attrs"
+              v-on="on"
+              data-cy="positions-new-item-btn"
+            >
               New Item
             </v-btn>
           </template>
@@ -35,28 +42,31 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
                       v-model="editedStock.symbol"
-                      label="Symbol" data-cy="positions-new-item-symbol-tf"
+                      data-cy="positions-new-item-symbol-tf"
+                      label="Symbol"
                       :error="symbolError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedStock.positionSize"
-                      label="Position Size" data-cy="positions-new-item-position-size-tf"
+                      v-model="editedStock.qty"
+                      label="Position Size"
+                      data-cy="positions-new-item-position-size-tf"
                       :error="positionError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedStock.date"
+                      v-model="date"
                       label="Execution Date"
                       :error="dateError"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      v-model="editedStock.profitLoss"
-                      label="P/L" data-cy="positions-new-item-pl-tf"
+                      v-model="editedStock.unrealized_plpc"
+                      label="P/L"
+                      data-cy="positions-new-item-pl-tf"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -73,10 +83,15 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close" data-cy="positions-new-item-cancel-btn" >
+              <v-btn color="blue darken-1" text @click="close" data-cy="positions-new-item-cancel-btn">
                 Cancel
               </v-btn>
-              <v-btn color="blue darken-1" text @click="save" data-cy="positions-new-item-submit-btn" >
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="save"
+                data-cy="positions-new-item-submit-btn"
+              >
                 Save
               </v-btn>
             </v-card-actions>
@@ -102,19 +117,24 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.verified`]="{ item }">
-        <v-chip
-            label
-            class="text-uppercase white--text px-3"
-            :color="item.verified ? 'green' : 'blue'"
-        >{{ item.verified ? "VERIFIED" : "MANUAL" }}</v-chip>  
+      <v-chip
+        label
+        class="text-uppercase white--text px-3"
+        :color="item.verified ? 'green' : 'blue'"
+        >{{ item.verified ? "VERIFIED" : "MANUAL" }}</v-chip
+      >
     </template>
-    <template v-slot:[`item.profitLoss`]="{ item }">
-        <v-card min-width='80' flat>
-          <v-icon x-small left :color="item.profitLoss > 0 ? 'green' : 'red'">
-            mdi-circle
-          </v-icon>
-          {{ getDisplayNumber(Number(item.profitLoss)) }}%
-        </v-card>
+    <template v-slot:[`item.unrealized_plpc`]="{ item }">
+      <v-card min-width="80" flat>
+        <v-icon
+          x-small
+          left
+          :color="item.unrealized_plpc > 0 ? 'green' : 'red'"
+        >
+          mdi-circle
+        </v-icon>
+        {{ getDisplayNumber(Number(item.unrealized_plpc)) }}%
+      </v-card>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="editStock(item)" data-cy="edit-stock-button">
@@ -123,142 +143,130 @@
       <v-icon small class="mr-2" @click="deleteStock(item)" data-cy="delete-stock-button">
         mdi-delete
       </v-icon>
-      <v-icon small @click="shareStock(item)" data-cy="share-stock-button">
+      <v-icon small data-cy="share-stock-button">
         mdi-share
       </v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">
-        Reset
-      </v-btn>
+      <v-btn color="primary" @click="initialize"> Reset </v-btn>
     </template>
   </v-data-table>
   </v-card>
+<v-card v-else min-width="350" data-cy="positions">
+  User has no active positions
+</v-card>
 </template>
 
 <script>
+import UserService from "../../services/User.service";
 export default {
-    name: "Positions",
-    data() {
-        return {
-            dialog: false,
-            dialogDelete: false,
-            headers: [
-                {
-                    text: 'Symbol',
-                    align: 'start',
-                    value: 'symbol',
-                },
-                { text: 'Position Size', value: 'positionSize' },
-                { text: 'Execution Date', value: 'date'},
-                { text: 'P/L', value: 'profitLoss' },
-                { text: 'Verified', value: 'verified' },
-                { text: 'Actions', value: 'actions', sortable: false },
-            ],
-            stocks: [],
-            editedIndex: -1,
-            editedStock: {
-                symbol: '',
-                positionSize: 0,
-                date: new Date().toLocaleString('en-US'),
-                profitLoss: 0,
-                verified: false,
-            },
-            defaultStock: {
-                symbol: '',
-                positionSize: 0,
-                date: new Date().toLocaleString('en-US'),
-                profitLoss: 0,
-                verified: false,
-            },
-            snackbar: false,
-            snackbarText: "",
-            snackbarColor: "primary",
-            snackbarTimeout: 3000,
-            symbolError: false,
-            positionError: false,
-            dateError: false,
-        };
+  name: "Positions",
+  props: {
+    userId: String
+  },
+  data() {
+    return {
+      verified: true,
+      date: new Date(),
+      dialog: false,
+      dialogDelete: false,
+      headers: [
+        {
+          text: "Symbol",
+          align: "start",
+          value: "symbol",
+        },
+        { text: "Position Size", value: "qty" },
+        { text: "Execution Date", value: "date" },
+        { text: "P/L", value: "unrealized_plpc" },
+        { text: "Verified", value: "verified" },
+        { text: "Actions", value: "actions", sortable: false },
+      ],
+      stocks: [],
+      editedIndex: -1,
+      editedStock: {
+        symbol: "",
+        qty: 0,
+        date: new Date().toLocaleString('en-US'),
+        unrealized_plpc: 0,
+        verified: false,
+      },
+      defaultStock: {
+        symbol: "",
+        qty: 0,
+        date: new Date().toLocaleString('en-US'),
+        unrealized_plpc: 0,
+        verified: false,
+      },
+      snackbar: false,
+      snackbarText: "",
+      snackbarColor: "primary",
+      snackbarTimeout: 3000,
+      symbolError: false,
+      positionError: false,
+      dateError: false,
+    };
+  },
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
-    computed: {
-        formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-        },
+  },
+
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
+    dialogDelete(val) {
+      val || this.closeDelete();
+    },
+  },
+
+  created() {
+    this.initialize();
+  },
+
+  methods: {
+    async initialize() {
+      try {
+        this.stocks = await UserService.getPositions(this.userId);
+      } catch (err) {
+        console.log(err);
+      }
     },
 
-    watch: {
-        dialog (val) {
-        val || this.close()
-        },
-        dialogDelete (val) {
-        val || this.closeDelete()
-        },
+    editStock(stock) {
+      this.editedIndex = this.stocks.indexOf(stock);
+      this.editedStock = Object.assign({}, stock);
+      this.dialog = true;
     },
 
-    created () {
-        this.initialize()
+    deleteStock(stock) {
+      this.editedIndex = this.stocks.indexOf(stock);
+      this.editedStock = Object.assign({}, stock);
+      this.dialogDelete = true;
     },
 
-    methods: {
-        initialize () {
-            this.stocks = [
-                {
-                    symbol: 'MSFT',
-                    positionSize: 1000,
-                    date: new Date().toLocaleString('en-US'),
-                    profitLoss: 21.33,
-                    verified: true,
-                },
-                {
-                    symbol: 'AAPL',
-                    positionSize: 25,
-                    date: new Date("10/12/2021").toLocaleString('en-US'),
-                    profitLoss: -3.76,
-                    verified: false,
-                },
-                {
-                    symbol: 'FSR',
-                    positionSize: 240,
-                    date: new Date("10/13/2021").toLocaleString('en-US'),
-                    profitLoss: 67.30,
-                    verified: true,
-                },
-                
-            ]
-        },
+    deleteStockConfirm() {
+      this.stocks.splice(this.editedIndex, 1);
+      this.closeDelete();
+    },
 
-        editStock (stock) {
-        this.editedIndex = this.stocks.indexOf(stock)
-        this.editedStock = Object.assign({}, stock)
-        this.dialog = true
-        },
+    close() {
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedStock = Object.assign({}, this.defaultStock);
+        this.editedIndex = -1;
+      });
+    },
 
-        deleteStock (stock) {
-        this.editedIndex = this.stocks.indexOf(stock)
-        this.editedStock = Object.assign({}, stock)
-        this.dialogDelete = true
-        },
-
-        deleteStockConfirm () {
-        this.stocks.splice(this.editedIndex, 1)
-        this.closeDelete()
-        },
-
-        close () {
-        this.dialog = false
-        this.$nextTick(() => {
-            this.editedStock = Object.assign({}, this.defaultStock)
-            this.editedIndex = -1
-        })
-        },
-
-        closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-            this.editedStock = Object.assign({}, this.defaultStock)
-            this.editedIndex = -1
-        })
-        },
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedStock = Object.assign({}, this.defaultStock);
+        this.editedIndex = -1;
+      });
+    },
 
         save () {
           this.symbolError = this.positionError = this.dateError = false;
@@ -289,17 +297,17 @@ export default {
           this.close()
         },
 
-        getDisplayNumber(number) {
-          if(Math.abs(number) >= 0 && Math.abs(number) < 10) {
-            return number.toFixed(3)
-          } else if(Math.abs(number) >= 10 && Math.abs(number) < 100) {
-            return number.toFixed(2)
-          } else if(Math.abs(number) >= 100 && Math.abs(number) < 1000) {
-            return number.toFixed(1)
-          } else {
-            return number.toFixed(0)
-          }
-        }
+    getDisplayNumber(number) {
+      if (Math.abs(number) >= 0 && Math.abs(number) < 10) {
+        return number.toFixed(3);
+      } else if (Math.abs(number) >= 10 && Math.abs(number) < 100) {
+        return number.toFixed(2);
+      } else if (Math.abs(number) >= 100 && Math.abs(number) < 1000) {
+        return number.toFixed(1);
+      } else {
+        return number.toFixed(0);
+      }
     },
+  },
 };
 </script>

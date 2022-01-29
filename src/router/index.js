@@ -34,7 +34,12 @@ const routes = [
     component: TradeZone,
   },
   {
-    path: "/:username/:id",
+    path: "/dashboard/:id",
+    name: "OtherDashboard",
+    component: OtherDashboard
+  },
+  {
+    path: "/tradezone/:username/:postID",
     name: "Post",
     component: Post,
   },
@@ -79,11 +84,6 @@ const routes = [
     path: "/confirm",
     name: "Confirm",
     component: Confirm,
-  },
-  {
-    path: "/other-dashboard",
-    name: "OtherDashboard",
-    component: OtherDashboard
   },
   {
     path: "/:catchAll(.*)",

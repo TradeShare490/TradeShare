@@ -55,7 +55,7 @@
             elevation="2"
             outlined
             color="primary"
-            v-if="following === true"
+            v-if="user.following === true"
             @click="unfollow"
             class="btn my-3 caption font-weight-bold"
             data-cy="following"
@@ -68,7 +68,7 @@
             v-bind="size"
             elevation="2"
             color="primary"
-            v-if="following === false"
+            v-if="user.following === false"
             @click="follow"
             class="btn my-3 caption font-weight-bold"
             data-cy="follow"
@@ -145,9 +145,9 @@ export default {
   },
   data() {
     return {
-      following: this.currentlyfollowing,
+      user: { following: this.currentlyFollowing }
       request: this.requestblock
-    }
+    };
   },
   computed: {
     size() {
@@ -173,3 +173,4 @@ export default {
   font-size: 1.1em;
 }
 </style>
+
