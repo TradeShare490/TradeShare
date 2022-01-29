@@ -18,21 +18,21 @@
           </v-row>
           <v-row no-gutters class="mx-5">
             <Feed
-                :key="allPosts[targetPost].id"
-                :image="allPosts[targetPost].image"
-                :name="allPosts[targetPost].name"
-                :username="allPosts[targetPost].username"
-                :when="allPosts[targetPost].when"
-                :purchased="allPosts[targetPost].purchased"
-                :company="allPosts[targetPost].company"
-                :tag="allPosts[targetPost].tag"
-                :size="allPosts[targetPost].size"
-                :verified="allPosts[targetPost].verified"
-                :stock1="allPosts[targetPost].stock1"
-                :stock2="allPosts[targetPost].stock2"
-                :stock3="allPosts[targetPost].stock3"
-                :stock4="allPosts[targetPost].stock4"
-                :disabled="true"
+              :key="allPosts[targetPost].id"
+              :image="allPosts[targetPost].image"
+              :name="allPosts[targetPost].name"
+              :username="allPosts[targetPost].username"
+              :when="allPosts[targetPost].when"
+              :purchased="allPosts[targetPost].purchased"
+              :company="allPosts[targetPost].company"
+              :tag="allPosts[targetPost].tag"
+              :size="allPosts[targetPost].size"
+              :verified="allPosts[targetPost].verified"
+              :stock1="allPosts[targetPost].stock1"
+              :stock2="allPosts[targetPost].stock2"
+              :stock3="allPosts[targetPost].stock3"
+              :stock4="allPosts[targetPost].stock4"
+              :disabled="true"
             />
           </v-row>
           <v-row no-gutters class="mx-5">
@@ -70,8 +70,8 @@ export default {
   },
   data() {
     return {
-      targetUser: '',
-      postID: NaN,
+      targetUser: this.$router.currentRoute.params.username,
+      postID: this.$router.currentRoute.params.postID,
       targetPost: NaN,
       allPosts: this.$store.getters.allPosts,
       commentSection: [
@@ -90,8 +90,6 @@ export default {
   },
   methods: {
     getPost() {
-      this.targetUser = this.$router.currentRoute.params.username
-      this.postID = this.$router.currentRoute.params.postID
       this.allPosts.forEach(i => {
         if (i.id == this.postID && i.username === this.targetUser) {
           this.targetPost = i.id - 1
