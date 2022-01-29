@@ -145,7 +145,7 @@ export default {
   },
   data() {
     return {
-      user: { following: this.currentlyFollowing }
+      user: { following: this.currentlyfollowing },
       request: this.requestblock
     };
   },

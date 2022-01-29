@@ -10,7 +10,9 @@
         lg="2"
         xl="2"
       >
-        <v-avatar class="profile" color="grey" size="60%">
+        <v-avatar class="profile" 
+          color="grey" 
+          size="60%">
           <v-img src="https://randomuser.me/api/portraits/men/8.jpg" />
         </v-avatar>
       </v-col>
@@ -23,7 +25,8 @@
         xl="2"
         class="text-left mx-0 px-0"
       >
-        <v-list-item color="black" data-cy="basic-profile-info">
+        <v-list-item color="black" 
+        data-cy="basic-profile-info">
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
@@ -102,7 +105,9 @@
               Follow
             </v-btn>
           </v-col>
-          <v-col cols="6" class="mx-0 px-0 pl-1 pb-0 mb-0">
+          <v-col cols="6" 
+            class="mx-0 px-0 pl-1 pb-0 mb-0">
+            <v-list-item-title class="font-weight-bold" data-cy="profile-num-following">
               {{ user.numFollowing }}
             </v-list-item-title>
             <v-list-item-subtitle> Following </v-list-item-subtitle>
@@ -130,7 +135,7 @@ export default {
   name: "Profile",
   mixins: [useFollowMixin],
   props: {
-    user: Object
+    user: Object,
   },
   methods: {
     label() {
