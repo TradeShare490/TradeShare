@@ -34,7 +34,12 @@ const routes = [
     component: TradeZone,
   },
   {
-    path: "/post/:username/:id",
+    path: "/dashboard/:id",
+    name: "OtherDashboard",
+    component: OtherDashboard
+  },
+  {
+    path: "/tradezone/:username/:postID",
     name: "Post",
     component: Post,
   },
@@ -74,11 +79,6 @@ const routes = [
     path: "/brokerage-signup",
     name: "BrokerageSignUp",
     component: BrokerageSignUp,
-  },
-  {
-    path: "/dashboard/:id",
-    name: "OtherDashboard",
-    component: OtherDashboard
   },
   {
     path: "/confirm",
