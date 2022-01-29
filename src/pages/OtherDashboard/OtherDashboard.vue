@@ -15,7 +15,7 @@
       <v-row>
         <v-col xs="12" lg="8" xl="9">
           <v-card min-width="350">
-            <Positions :userId="userId"/>
+            <Positions :userId="userId" />
           </v-card>
         </v-col>
         <v-col xs="12" lg="4" xl="3">
@@ -48,9 +48,7 @@
       </v-row>
     </v-container>
   </div>
-  <div v-else>
-    User doesn't exist
-  </div>
+  <div v-else>User doesn't exist</div>
 </template>
 
 <script>
@@ -73,7 +71,7 @@ export default {
           company: "Dropbox",
           purchased: true,
           when: "Today",
-          today: true
+          today: true,
         },
         {
           id: 2,
@@ -82,7 +80,7 @@ export default {
           company: "NVIDIA",
           purchased: false,
           when: "Today",
-          today: true
+          today: true,
         },
         {
           id: 3,
@@ -91,7 +89,7 @@ export default {
           company: "Twitter",
           purchased: true,
           when: "Yesterday",
-          today: false
+          today: false,
         },
         {
           id: 4,
@@ -100,12 +98,12 @@ export default {
           company: "Voyager",
           purchased: false,
           when: "Today",
-          today: true
-        }
+          today: true,
+        },
       ],
       userInfo: null,
       info: {},
-      positions: []
+      positions: [],
     };
   },
   created() {
@@ -120,17 +118,17 @@ export default {
         numFollowing: "5K",
         following: true,
         date: "2021",
-        bio: "This section is available for a small bio. Optional."
+        bio: "This section is available for a small bio. Optional.",
       };
       this.positions = await UserService.getPositions(this.userId);
-    }
+    },
   },
   components: {
     Positions,
     Profile,
     Recents,
     BarChartContainer,
-    Holdings
-  }
+    Holdings,
+  },
 };
 </script>

@@ -1,44 +1,72 @@
 <template>
-  <div>
-    <v-col>
-      <Notifications
-        :currentlyFollowing="false"
-        image="https://randomuser.me/api/portraits/men/52.jpg"
-        message="John Molson has followed you."
-      >
-      </Notifications>
-    </v-col>
-    <SearchViewBy />
-    <UserBlock
-      :currentlyFollowing="true"
-      currentLabelColor="friend"
-      currentLabelText="friend"
-      name="Tim Robenman"
-      image="https://randomuser.me/api/portraits/men/52.jpg"
-      username="timrobenman"
-    ></UserBlock>
-    <UserBlock
-      :currentlyFollowing="false"
-      currentLabelColor="work"
-      currentLabelText="work"
-      name="Mary Winchester"
-      image="https://randomuser.me/api/portraits/women/79.jpg"
-      username="marywinchester"
-    ></UserBlock>
+  <div class="container mt-0 mx-auto">
+    <v-tabs centered>
+      <v-tab :ripple="false">
+        <em class="mdi mdi-account-multiple" />
+          <span>FOLLOWERS</span>
+      </v-tab>
+      <v-tab :ripple="false">
+        <em class="mdi mdi-exclamation" />
+        <span>FOLLOW REQUESTS</span>
+      </v-tab>
+      <v-tab-item class="mt-5">
+        <SearchViewBy />
+        <UserBlock
+          :currentlyfollowing="true"
+          name="Tim Robenman"
+          image="https://randomuser.me/api/portraits/men/52.jpg"
+          username="timrobenman"
+        />
+        <UserBlock
+          :currentlyfollowing="false"
+          name="Mary Winchester"
+          image="https://randomuser.me/api/portraits/women/79.jpg"
+          username="marywinchester"
+        />
+      </v-tab-item>
+      <v-tab-item>
+        <div class="mt-5" />
+        <v-divider class="mx-6" />
+        <UserBlock
+          name="Tim Robenman"
+          image="https://randomuser.me/api/portraits/men/52.jpg"
+          username="timrobenman"
+          :requestblock="true"
+        />
+        <UserBlock
+          name="Mary Winchester"
+          image="https://randomuser.me/api/portraits/women/79.jpg"
+          username="marywinchester"
+          :requestblock="true"
+        />
+      </v-tab-item>
+    </v-tabs>
   </div>
 </template>
 
 <script>
 import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
 import SearchViewBy from "../../components/SearchViewBy/SearchViewBy.vue";
-import Notifications from "../../components/Notification/Notifications.vue";
 
 export default {
   name: "Followers",
   components: {
     UserBlock,
-    SearchViewBy,
-    Notifications,
-  },
-};
+    SearchViewBy
+  }
+}
 </script>
+<style scoped>
+.container {
+  width: 65%;
+  background-color: white;
+  height: 100%;
+  flex-grow: 1;
+}
+.v-tab:before{
+  background-color: transparent;
+}
+.v-tab:hover {
+  color: #3F51B5;
+}
+</style>

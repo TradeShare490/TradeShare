@@ -6,13 +6,16 @@
           <v-row no-gutters>
             <span
               class="d-flex justify-start text-h4 font-weight-medium my-3"
-              :class="{'ml-12': $vuetify.breakpoint.xsOnly, 'ml-1': $vuetify.breakpoint.smAndUp}"
+              :class="{
+                'ml-12': $vuetify.breakpoint.xsOnly,
+                'ml-1': $vuetify.breakpoint.smAndUp,
+              }"
             >
-            <router-link to="/tradezone" style="text-decoration: none">
-              <v-btn icon>
-                <v-icon x-large>mdi-chevron-left</v-icon>
-              </v-btn>
-            </router-link>
+              <router-link to="/tradezone" style="text-decoration: none">
+                <v-btn icon>
+                  <v-icon x-large>mdi-chevron-left</v-icon>
+                </v-btn>
+              </router-link>
               Trade Zone
             </span>
           </v-row>
@@ -36,7 +39,7 @@
             />
           </v-row>
           <v-row no-gutters class="mx-5">
-            <CommentSection 
+            <CommentSection
               :date="commentSection[0].date"
               :time="commentSection[0].time"
               :pfp="commentSection[0].pfp"
@@ -50,7 +53,7 @@
         </v-card>
       </v-col>
       <v-col xs="12" sm="12" md="12" lg="3" class="py-0 px-0">
-        <TrendingCompanies class="hidden-md-and-down"/>
+        <TrendingCompanies class="hidden-md-and-down" />
       </v-col>
     </v-row>
   </v-container>
@@ -66,7 +69,7 @@ export default {
   components: {
     CommentSection,
     Feed,
-    TrendingCompanies
+    TrendingCompanies,
   },
   data() {
     return {
@@ -76,29 +79,30 @@ export default {
       allPosts: this.$store.getters.allPosts,
       commentSection: [
         {
-          date: 'December 3, 2021',
-          time: '3h15 PM',
+          date: "December 3, 2021",
+          time: "3h15 PM",
           pfp: "https://randomuser.me/api/portraits/men/1.jpg",
           pfp2: "https://randomuser.me/api/portraits/men/4.jpg",
           name: "Mac Kafe",
           when: "5h ago",
           username: "@macfeez",
-          comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        }
-      ]
-    }
+          comment:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        },
+      ],
+    };
   },
   methods: {
     getPost() {
-      this.allPosts.forEach(i => {
+      this.allPosts.forEach((i) => {
         if (i.id == this.postID && i.username === this.targetUser) {
-          this.targetPost = i.id - 1
+          this.targetPost = i.id - 1;
         }
-      })
-    }
+      });
+    },
   },
   beforeMount() {
-    this.getPost()
-  }
-}
+    this.getPost();
+  },
+};
 </script>

@@ -1,9 +1,9 @@
 <template>
-  <v-card elevation="0" class="px-10">
-    <v-row no-gutters>
+  <v-card elevation="0" class="px-6">
+    <v-row no-gutters class="px-7">
       <v-col
         align-self="center"
-        class="px-0 py-5"
+        class="px-0 py-3"
         cols="2"
         sm="2"
         md="1"
@@ -17,51 +17,115 @@
       <v-col
         align-self="center"
         cols="6"
-        sm="3"
-        md="3"
-        lg="3"
-        xl="3"
-        class="text-left mx-0 px-0 mt-3 py-0"
+        sm="6"
+        md="6"
+        lg="5"
+        xl="5"
+        class="text-left mx-0 px-2 mt-1 py-0"
       >
         <v-list-item color="black">
           <v-list-item-content class="py-1">
-            <v-list-item-title class="text-sm-body-2 text-caption text-wrap">
+            <v-list-item-title
+              class="
+                name-text
+                text-sm-body-1 text-caption text-wrap
+                font-weight-bold"
+            >
               {{ this.name }}
             </v-list-item-title>
-            <v-list-item-title class="text-sm-body-2 text-caption text-wrap">
+            <v-list-item-title class="text-sm-body-3 text-caption text-wrap">
               @{{ this.username }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-col>
       <v-spacer />
-      <v-col cols="4" sm="3" md="2" lg="2" xl="2" align-self="center">
-        <v-btn
-          block
-          v-bind="size"
-          elevation="0"
-          outlined
-          color="primary"
-          v-if="user.following === true"
-          @click="unfollow"
-          class="my-3 caption"
-          data-cy="following"
+      <template v-if="request === false">
+        <v-col
+          cols="4"
+          sm="3"
+          md="2"
+          lg="2"
+          xl="2"
+          align-self="center"
+          class="mr-3"
         >
-          Following
-        </v-btn>
-        <v-btn
-          block
-          v-bind="size"
-          elevation="0"
-          color="primary"
-          v-if="user.following === false"
-          @click="follow"
-          class="my-3 caption"
-          data-cy="follow"
+          <v-btn
+            v-bind="size"
+            elevation="2"
+            outlined
+            color="primary"
+            v-if="user.following === true"
+            @click="unfollow"
+            class="btn my-3 caption font-weight-bold"
+            data-cy="following"
+            height="32px"
+            width="110px"
+          >
+            <div class="text">Following</div>
+          </v-btn>
+          <v-btn
+            v-bind="size"
+            elevation="2"
+            color="primary"
+            v-if="user.following === false"
+            @click="follow"
+            class="btn my-3 caption font-weight-bold"
+            data-cy="follow"
+            height="32px"
+            width="110px"
+          >
+            <div class="text">Follow</div>
+          </v-btn>
+        </v-col>
+      </template>
+      <template v-if="request === true">
+        <v-col
+          cols="3"
+          sm="3"
+          md="3"
+          lg="2"
+          xl="2"
+          align-self="center"
+          class="mr-3"
         >
-          Follow
-        </v-btn>
-      </v-col>
+          <v-btn
+            v-bind="size"
+            elevation="2"
+            color="primary"
+            @click="confirmFollowRequest"
+            class="btn my-3 caption font-weight-bold"
+            data-cy="follow"
+            height="32px"
+            width="110px"
+          >
+            <div class="text">CONFIRM</div>
+          </v-btn>
+        </v-col>
+        <v-col
+          cols="3"
+          sm="3"
+          md="3"
+          lg="2"
+          xl="2"
+          align-self="center"
+          class="mr-3"
+        >
+          <v-btn
+            v-bind="size"
+            elevation="2"
+            color="primary"
+            outlined
+            @click="rejectFollowRequest"
+            class="btn my-3 caption font-weight-bold"
+            data-cy="follow"
+            height="32px"
+            width="110px"
+          >
+            <div class="text">DELETE</div>
+          </v-btn>
+        </v-col>
+      </template>
     </v-row>
     <v-divider />
   </v-card>
@@ -73,14 +137,16 @@ export default {
   name: "UserBlock",
   mixins: [useFollowMixin],
   props: {
-    currentlyFollowing: Boolean,
+    currentlyfollowing: Boolean,
     name: String,
     image: String,
-    username: String
+    username: String,
+    requestblock: Boolean
   },
   data() {
     return {
-      user: { following: this.currentlyFollowing }
+      user: { following: this.currentlyfollowing },
+      request: this.requestblock
     };
   },
   computed: {
@@ -95,5 +161,16 @@ export default {
       return size ? { [size]: true } : {};
     }
   }
-};
+}
 </script>
+<style scoped>
+.btn {
+  border-radius: 3px;
+  border-width: 2px;
+  height: 5px;
+}
+.text {
+  font-size: 1.1em;
+}
+</style>
+
