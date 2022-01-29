@@ -22,7 +22,6 @@
           <v-img :src="image"></v-img>
         </v-avatar>
       </v-col>
-
       <v-col
         cols="1"
         sm="6"
@@ -47,7 +46,6 @@
         </p>
       </v-col>
       <v-spacer />
-
       <v-col
         sm="2"
         md="2"
@@ -93,12 +91,12 @@ export default {
     currentlyFollowing: Boolean,
     image: String,
     message: String,
-    icon: String,
+    icon: String
   },
   data() {
     return {
       following: this.currentlyFollowing,
-    };
-  },
-};
+    }
+  }
+}
 </script>

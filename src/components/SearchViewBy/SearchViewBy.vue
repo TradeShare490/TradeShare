@@ -27,15 +27,17 @@
           flat
           hide-no-data
           hide-details
-          label="SEARCH"
+          label="Search"
           color="primary"
           hide-selected
           single
           line
           outlined
           return-object
+          append-icon="mdi-magnify"
+          solo
           data-cy="search"
-        ></v-autocomplete>
+        />
       </v-col>
     </v-row>
     <v-divider class="mt-3"></v-divider>
@@ -83,12 +85,11 @@ export default {
   },
 };
 </script>
-
 <style scoped>
+.v-text-field--outlined:hover >>> fieldset {
+  border: 1px solid #3F51B5;
+}
 .inputfield {
-  border-radius: 3px !important;
-  /* border-width: 2px !important;
-  border-color: yellow solid;
-  border: 1.5px solid #1422a3 !important; */
+  border-radius: 3px;
 }
 </style>

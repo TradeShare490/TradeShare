@@ -1,8 +1,14 @@
 <template>
   <div class="container mt-0 mx-auto">
     <v-tabs centered>
-      <v-tab><em class="mdi mdi-account-multiple" />FOLLOWERS</v-tab>
-      <v-tab><em class="mdi mdi-exclamation" />FOLLOW REQUESTS</v-tab>
+      <v-tab :ripple="false">
+        <em class="mdi mdi-account-multiple" />
+          <span>FOLLOWERS</span>
+      </v-tab>
+      <v-tab :ripple="false">
+        <em class="mdi mdi-exclamation" />
+        <span>FOLLOW REQUESTS</span>
+      </v-tab>
       <v-tab-item class="mt-5">
         <SearchViewBy />
         <UserBlock
@@ -20,7 +26,6 @@
       </v-tab-item>
       <v-tab-item>
         <div class="mt-5" />
-
         <v-divider class="mx-6" />
         <UserBlock
           name="Tim Robenman"
@@ -47,9 +52,9 @@ export default {
   name: "Followers",
   components: {
     UserBlock,
-    SearchViewBy,
-  },
-};
+    SearchViewBy
+  }
+}
 </script>
 <style scoped>
 .container {
@@ -57,5 +62,11 @@ export default {
   background-color: white;
   height: 100%;
   flex-grow: 1;
+}
+.v-tab:before{
+  background-color: transparent;
+}
+.v-tab:hover {
+  color: #3F51B5;
 }
 </style>

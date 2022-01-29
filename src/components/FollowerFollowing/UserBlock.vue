@@ -29,8 +29,7 @@
               class="
                 name-text
                 text-sm-body-1 text-caption text-wrap
-                font-weight-bold
-              "
+                font-weight-bold"
             >
               {{ this.name }}
             </v-list-item-title>
@@ -142,13 +141,13 @@ export default {
     name: String,
     image: String,
     username: String,
-    requestblock: Boolean,
+    requestblock: Boolean
   },
   data() {
     return {
       following: this.currentlyfollowing,
-      request: this.requestblock,
-    };
+      request: this.requestblock
+    }
   },
   computed: {
     size() {
@@ -157,12 +156,12 @@ export default {
         sm: "small",
         md: "small",
         lg: "small",
-        xl: "small",
+        xl: "small"
       }[this.$vuetify.breakpoint.name];
       return size ? { [size]: true } : {};
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style scoped>
 .btn {
