@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Profile />
+  <div v-if="userInfo">
+    <Profile :user="info" />
     <v-container class="ma-0" fluid>
       <v-row>
         <v-col xs="12" md="8" lg="9">
@@ -15,7 +15,7 @@
       <v-row>
         <v-col xs="12" lg="8" xl="9">
           <v-card min-width="350">
-            <Positions />
+            <Positions :userId="userId"/>
           </v-card>
         </v-col>
         <v-col xs="12" lg="4" xl="3">
@@ -25,19 +25,19 @@
                 <span class="blue--text">Recent Trades</span>
               </v-card-title>
               <Recents
-                  v-for="trade in recentTrades"
-                  :key="trade.id"
-                  :image="trade.image"
-                  :name="trade.name"
-                  :company="trade.company"
-                  :purchased="trade.purchased"
-                  :when="trade.when"
-                  :today="trade.today"
+                v-for="trade in recentTrades"
+                :key="trade.id"
+                :image="trade.image"
+                :name="trade.name"
+                :company="trade.company"
+                :purchased="trade.purchased"
+                :when="trade.when"
+                :today="trade.today"
               ></Recents>
               <router-link
-                  to="/tradezone"
-                  class="d-flex justify-end"
-                  style="text-decoration: none; font-size: 12px"
+                to="/tradezone"
+                class="d-flex justify-end"
+                style="text-decoration: none; font-size: 12px"
               >
                 View all
                 <v-icon color="primary" dense> mdi-menu-right </v-icon>
@@ -48,19 +48,23 @@
       </v-row>
     </v-container>
   </div>
+  <div v-else>
+    User doesn't exist
+  </div>
 </template>
 
 <script>
 import Positions from "../../components/Portfolio/Positions.vue";
-import Profile from "../../components/Profile/Profile.vue"
-import Recents from "@/components/RecentTrades/Recents";
-import BarChartContainer from "@/components/ReturnGraphs/ReturnGraphs";
-import Holdings from "@/components/Dashboard/Holdings";
-
+import Profile from "../../components/Profile/Profile.vue";
+import Recents from "../../components/RecentTrades/Recents";
+import BarChartContainer from "../../components/ReturnGraphs/ReturnGraphs";
+import Holdings from "../../components/Dashboard/Holdings";
+import UserService from "../../services/User.service";
 export default {
   name: "OtherDashboard",
   data() {
     return {
+      userId: this.$route.params.id,
       recentTrades: [
         {
           id: 1,
@@ -69,7 +73,7 @@ export default {
           company: "Dropbox",
           purchased: true,
           when: "Today",
-          today: true,
+          today: true
         },
         {
           id: 2,
@@ -78,7 +82,7 @@ export default {
           company: "NVIDIA",
           purchased: false,
           when: "Today",
-          today: true,
+          today: true
         },
         {
           id: 3,
@@ -87,7 +91,7 @@ export default {
           company: "Twitter",
           purchased: true,
           when: "Yesterday",
-          today: false,
+          today: false
         },
         {
           id: 4,
@@ -96,17 +100,37 @@ export default {
           company: "Voyager",
           purchased: false,
           when: "Today",
-          today: true,
-        },
+          today: true
+        }
       ],
+      userInfo: null,
+      info: {},
+      positions: []
     };
+  },
+  created() {
+    this.initialize();
+  },
+  methods: {
+    async initialize() {
+      this.userInfo = await UserService.getUserInfo(this.userId);
+      this.info = {
+        ...this.userInfo,
+        numFollowers: "11K",
+        numFollowing: "5K",
+        following: true,
+        date: "2021",
+        bio: "This section is available for a small bio. Optional."
+      };
+      this.positions = await UserService.getPositions(this.userId);
+    }
   },
   components: {
     Positions,
     Profile,
     Recents,
     BarChartContainer,
-    Holdings,
+    Holdings
   }
-}
+};
 </script>

@@ -29,13 +29,13 @@
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
             >
-              {{ name }}
+              {{ user.firstname }} {{user.lastname}}
             </v-list-item-title>
             <v-list-item-subtitle class="text-subtitle-1">
-              @{{ username }}
+              @{{ user.username }}
             </v-list-item-subtitle>
             <v-list-item-subtitle class="text-wrap">
-              Member since {{ date }}
+              Member since {{ user.date }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -54,7 +54,7 @@
           Bio
         </v-list-item-title>
         <v-list-item-subtitle class="text-wrap text-xs-caption" data-cy="profile-bio">
-          {{ bio }}
+          {{ user.bio }}
         </v-list-item-subtitle>
       </v-col>
       <v-spacer class="hidden-sm-and-down" />
@@ -71,7 +71,7 @@
         <v-row>
           <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
             <v-list-item-title class="font-weight-bold" data-cy="profile-num-followers">
-              {{ numFollowers }}
+              {{ user.numFollowers }}
             </v-list-item-title>
             <v-list-item-subtitle>
               Followers
@@ -82,7 +82,7 @@
               elevation="0"
               outlined
               color="primary"
-              v-if="following == true"
+              v-if="user.following === true"
               @click="unfollow"
               class="my-3 caption"
               data-cy="following"
@@ -94,7 +94,7 @@
               small
               elevation="0"
               color="primary"
-              v-if="following == false"
+              v-if="user.following === false"
               @click="follow"
               class="my-3 caption"
               data-cy="follow"
@@ -104,11 +104,9 @@
           </v-col>
           <v-col cols="6" class="mx-0 px-0 pl-1 pb-0 mb-0">
             <v-list-item-title class="font-weight-bold" data-cy="profile-num-following">
-              {{ numFollowing }}
+              {{ user.numFollowing }}
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Following
-            </v-list-item-subtitle>
+            <v-list-item-subtitle> Following </v-list-item-subtitle>
             <v-btn
               block
               small
@@ -132,18 +130,8 @@ import { useFollowMixin } from "../../hooks/useFollowMixin.js";
 export default {
   name: "Profile",
   mixins: [useFollowMixin],
-  data() {
-    return {
-      name: "Benver Vloshki",
-      username: "benvloshki",
-      labelText: "untagged",
-      labelColor: "untagged",
-      date: "2021",
-      bio: "This section is available for a small bio. Optional.",
-      numFollowers: "11K",
-      numFollowing: "5K",
-      following: false,
-    };
+  props: {
+    user: Object
   },
   methods: {
     label() {
