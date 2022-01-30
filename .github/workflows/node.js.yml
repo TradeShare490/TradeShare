@@ -39,3 +39,6 @@ jobs:
           CYPRESS_RECORD_KEY: "ca3f404b-1d73-4ff2-8b09-8a931fb57358"
           VUE_APP_BACKEND_HOST: "https://tradeshare-backend-for-test.herokuapp.com/api/v1"
           CI: ""
+      
+      - name: "Show coverage report"
+        run: npm run show-e2e-report
