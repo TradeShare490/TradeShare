@@ -10,6 +10,7 @@
           :is="this.disabled ? 'span' : 'router-link'"
           :to="'/tradezone/' + this.username+'/' + this.id"
           style="text-decoration: none"
+          data-cy="feed-post"
       >
       <v-row no-gutters class="d-flex justify-start ml-5">
           <v-avatar class="mr-3" size="70">
@@ -158,6 +159,7 @@
               x-large
               :ripple="false"
               @click="copyURL()"
+              data-cy="copy-post-btn"
           >
             <v-icon>mdi-link-variant</v-icon>
           </v-btn>

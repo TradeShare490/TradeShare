@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export const useFollowMixin = {
   methods: {
     async follow() {

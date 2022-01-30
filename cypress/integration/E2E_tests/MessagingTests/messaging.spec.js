@@ -17,6 +17,9 @@ describe("On the messages page, can", () => {
   it("create new chat", () => {
     cy.get("[data-cy=new-message]").click();
   });
+  it("can press the emoji button",()=>{
+    cy.get("[data-cy=image-button]").should("be.visible").click();
+  })
   it("send a message", () => {
     cy.get("[data-cy=send-message]").click().type("Hello");
     cy.get("[data-cy=send-button]").click();
@@ -26,4 +29,5 @@ describe("On the messages page, can", () => {
     cy.get("[data-cy=chat]").click().click();
     cy.get("[data-cy=messages-window]").should("not.exist");
   })
+
 });

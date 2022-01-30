@@ -138,6 +138,7 @@ export default {
     user: Object,
   },
   methods: {
+    /* istanbul ignore next */
     label() {
       console.log("assigning label...");
     },

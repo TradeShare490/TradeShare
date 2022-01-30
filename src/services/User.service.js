@@ -3,6 +3,7 @@ import axios from "../axios/axios.v1";
 class UserService {
   constructor() {}
 
+  /* istanbul ignore next */
   async signup(credentials) {
     try {
       const { data } = await axios.post("/user", credentials);
@@ -16,6 +17,7 @@ class UserService {
     }
   }
 
+  /* istanbul ignore next */
   async getPositions(userID) {
     let userPortfolioData = null;
     await axios
@@ -35,6 +37,7 @@ class UserService {
     return userPortfolioData;
   }
 
+  /* istanbul ignore next */
   async getAccount(userID) {
     let userAccountData = null;
     await axios
@@ -49,6 +52,7 @@ class UserService {
     return userAccountData;
   }
 
+  /* istanbul ignore next */
   async getUserInfo(userID) {
     let userProfileData = null;
     await axios
@@ -63,6 +67,7 @@ class UserService {
     return userProfileData;
   }
 
+  /* istanbul ignore next */
   async integrateAlpaca(code, userId) {
     try {
       const { data } = await axios.patch("/userInfo/alpaca/" + userId, {

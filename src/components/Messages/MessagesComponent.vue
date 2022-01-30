@@ -140,7 +140,7 @@
                   <v-icon @click="click" class="mr-2" color="primary">insert_emoticon</v-icon>
                 </template>
                 <template v-slot:append>
-                  <v-icon class="px-2" @click="click" color="primary">image</v-icon>
+                  <v-icon class="px-2" @click="click" color="primary" data-cy="image-button">image</v-icon>
                   <v-icon @click="messages.push(messageForm)" color="primary" data-cy="send-button">send</v-icon>
                 </template>
               </v-text-field>

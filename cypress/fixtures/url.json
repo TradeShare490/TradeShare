@@ -14,5 +14,7 @@
 	"SUPPORT": "/support",
 	"USER_GROUP_DIALOG_TEMP": "/user-group-dialog",
 	"BROKERAGE_SIGNUP": "/brokerage-signup",
-	"TRADEZONE": "/tradezone"
+	"TRADEZONE": "/tradezone",
+	"CONFIRM":"/confirm",
+	"POST":"/tradezone/@ashcoin63/1"
 }

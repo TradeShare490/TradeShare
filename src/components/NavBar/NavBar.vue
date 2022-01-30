@@ -41,7 +41,7 @@
             <strong>{{ data.item["1. symbol"] }}:</strong> &nbsp;
             {{ data.item["2. name"] }}
           </v-list-item>
-          <v-list-item class="text-left text-body-2" v-if="searchModeUsers">
+          <v-list-item class="text-left text-body-2" v-if="searchModeUsers" data-cy="autocomplete-name-list">
             {{ data.item }}
           </v-list-item>
         </template>
@@ -73,6 +73,7 @@ export default {
     };
   },
   computed: {
+    /* istanbul ignore next */
     fields() {
       if (!this.searchModel) return [];
       return Object.keys(this.searchModel).map((key) => {
@@ -127,6 +128,7 @@ export default {
           this.isLoading = true;
 
           // Lazily load input items
+          /* istanbul ignore catch */
           axios
             .get(`/searchRecommendations/${val}`)
             .then((res) => {
