@@ -44,10 +44,13 @@
   </v-container>
 </template>
 
+/* istanbul ignore next */
 <script>
 import { brokerageSignUp } from "../../hooks/useCredential.js";
+
 export default {
   name: "BrokerageSignUp",
+  /* istanbul ignore next */
   data: () => ({
     valid: true,
     email: "",
@@ -60,12 +63,14 @@ export default {
     rules: {
       required: v => !!v || "Required"
     },
+    /* istanbul ignore next */
     rulesEmail: {
       format: v =>
         /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
         ) || "E-mail must be valid"
     },
+    /* istanbul ignore next */
     user() {
       let user = JSON.parse(localStorage.getItem("user"));
       return user["userInfo"];
@@ -73,6 +78,7 @@ export default {
     alpacaURL: process.env.VUE_APP_ALPACA_INTEGRATION_URL
   }),
   methods: {
+    /* istanbul ignore next */
     submit() {
       if (this.$refs.formBrokerage.validate()) {
         brokerageSignUp(
@@ -82,6 +88,7 @@ export default {
         );
       }
     },
+    /* istanbul ignore next */
     redirect() {
       window.open(this.alpacaURL, "_self");
     }

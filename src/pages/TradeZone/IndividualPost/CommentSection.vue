@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-container fluid class="pt-0">
+  <v-container fluid class="pt-0" data-cy="post-comment">
     <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
       <v-row class="mt-2" no-gutters>
         <v-col class="d-flex justify-start ml-5 black--text">
@@ -38,6 +38,7 @@
               color="primary"
               type="submit"
               icon
+              data-cy="comment-submit-btn"
             >
               <v-icon>mdi-chevron-double-right</v-icon>
             </v-btn>
@@ -110,6 +111,7 @@
                     x-large
                     :ripple="false"
                     @click="viewReplies"
+                    data-cy="view-replies-btn"
                 >
                   <v-icon> mdi-minus</v-icon>
                   <span v-if="!view"> View Replies </span>

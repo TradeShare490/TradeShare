@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import UserService from "../services/User.service";
 
 export const signUp = async (credentials, store, router) => {

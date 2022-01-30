@@ -1,8 +1,8 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="470">
-      <v-card class="pt-5">
-        <v-card-title class="text-h6 justify-center">
+    <v-dialog v-model="dialog" persistent max-width="470" >
+      <v-card class="pt-5" >
+        <v-card-title class="text-h6 justify-center" >
           Connect your {{ brokerageApp }} to TradeShare
         </v-card-title>
         <v-container>
@@ -34,10 +34,10 @@
         </v-container>
         <v-card-actions class="pb-5">
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="cancel">
+          <v-btn color="primary" text @click="cancel" data-cy="cancel-linking-btn">
             Cancel
           </v-btn>
-          <v-btn color="primary" @click="accept">
+          <v-btn color="primary" @click="accept" data-cy="confirm-linking-btn">
             Confirm
           </v-btn>
         </v-card-actions>
@@ -53,6 +53,7 @@ export default {
   props: {
     brokerageApp: String
   },
+  /* istanbul ignore next */
   data() {
     return {
       code: this.$route.query.code,
@@ -61,6 +62,7 @@ export default {
     };
   },
   methods: {
+    /* istanbul ignore next */
     async accept() {
       const response = await userService.integrateAlpaca(
         this.code,
@@ -78,11 +80,13 @@ export default {
           this.error = err.response.data.message;
         });
     },
+    /* istanbul ignore next */
     async cancel() {
       await this.$router.push({ name: "Dashboard" });
     }
   },
   computed: {
+    /* istanbul ignore next */
     user() {
       return JSON.parse(localStorage.getItem("user"));
     }
