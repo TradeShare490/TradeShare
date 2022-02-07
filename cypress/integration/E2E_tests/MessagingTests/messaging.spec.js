@@ -8,9 +8,13 @@ describe("On the messages page, can", () => {
       );
     });
   });
-  it("display messages", () => {
-    cy.get("[data-cy=messages-window]").should("be.visible");
+  it("display no messages at first", () => {
+    cy.get("[data-cy=no-messages-window]").should("be.visible");
   });
+  it("select a conversation", ()=> {
+    cy.get("[data-cy=chat]").click()
+    cy.get("[data-cu=messages-window]").should("be.visible");
+  })
   it("search for people", () => {
     cy.get("[data-cy=search]").click().type("Jane Doe");
   });
@@ -25,9 +29,4 @@ describe("On the messages page, can", () => {
     cy.get("[data-cy=send-button]").click();
     cy.get("[data-cy=messages-window]").should("include.text", "Hello");
   });
-  it("hide messages", () => {
-    cy.get("[data-cy=chat]").click().click();
-    cy.get("[data-cy=messages-window]").should("not.exist");
-  })
-
 });

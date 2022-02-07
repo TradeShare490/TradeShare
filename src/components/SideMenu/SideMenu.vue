@@ -18,12 +18,12 @@
           <v-container class="mb-0 pb-0 mx-0 px-0">
             <v-row no-gutters>
               <v-col>
-                <router-link 
+                <router-link
                   to="/following"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ numFollowing + " Following" }} 
+                  {{ numFollowing + " Following" }}
                 </router-link>
               </v-col>
               <v-col>
@@ -32,14 +32,14 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ numFollowers + " Followers" }} 
+                  {{ numFollowers + " Followers" }}
                 </router-link>
               </v-col>
             </v-row>
           </v-container>
         </v-list-item-content>
       </v-list-item>
-      
+
       <v-divider class="my-3 hidden-sm-and-down" />
 
       <v-list dense nav>
@@ -90,7 +90,7 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-      
+
       <template v-slot:append>
         <v-container class="hidden-sm-and-down">
           <v-row no-gutters>
@@ -117,10 +117,12 @@
           </v-row>
           <v-row no-gutters>
             <v-col class="text-center text-caption mt-1  grey--text ">
-              <v-icon size="17" >
+              <v-icon size="17">
                 mdi-copyright
               </v-icon>
-              <span class="grey--text text--darken-2 font-weight-bold">TradeShare</span>
+              <span class="grey--text text--darken-2 font-weight-bold"
+                >TradeShare</span
+              >
             </v-col>
           </v-row>
         </v-container>
@@ -130,55 +132,52 @@
 </template>
 <!-- TradeZone icon could also be chart-areaspline-->
 <script>
-export default {
-  data() {
-    return {
-      selectedItem: "",
-      upperNav: [
-        {
-          title: "Trade Zone",
-          icon: "mdi-target-variant",
-          route: "/tradezone",
-        },
-        {
-          title: "Dashboard",
-          icon: "mdi-view-dashboard",
-          route: "/dashboard",
-        },
-        { title: "Messages",
-          icon: "mdi-forum",
-          route: "/messages"
-        },
-        {
-          title: "Preferences",
-          icon: "mdi-lock-open-outline ",
-          route: "/preferences",
-        },
-        {
-          title: "Connected Apps",
-          icon: "mdi-apps ",
-          route: "/connected-apps",
-        },
-      ],
-      lowerNav: [
-        {
-          title: "Support",
-          icon: "mdi-help-circle-outline",
-          route: "/support",
-        },
-      ],
-      since: "Member since 2021",
-      numFollowing: "190K",
-      numFollowers: "295K",
-    };
-  },
-  computed: {
-    mini() {
-      return this.$vuetify.breakpoint.smAndDown;
+  export default {
+    data() {
+      return {
+        selectedItem: "",
+        upperNav: [
+          {
+            title: "Trade Zone",
+            icon: "mdi-target-variant",
+            route: "/tradezone",
+          },
+          {
+            title: "Dashboard",
+            icon: "mdi-view-dashboard",
+            route: "/dashboard",
+          },
+          { title: "Messages", icon: "mdi-forum", route: "/messages/0" },
+          {
+            title: "Preferences",
+            icon: "mdi-lock-open-outline ",
+            route: "/preferences",
+          },
+          {
+            title: "Connected Apps",
+            icon: "mdi-apps ",
+            route: "/connected-apps",
+          },
+        ],
+        lowerNav: [
+          {
+            title: "Support",
+            icon: "mdi-help-circle-outline",
+            route: "/support",
+          },
+        ],
+        since: "Member since 2021",
+        numFollowing: "190K",
+        numFollowers: "295K",
+      };
     },
-    user() {
-      return JSON.parse(localStorage.getItem("user"));
+    computed: {
+      mini() {
+        return this.$vuetify.breakpoint.smAndDown;
+      },
+      user() {
+        return JSON.parse(localStorage.getItem("user"));
+      },
     },
-  },
-};
+  };
 </script>
