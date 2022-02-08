@@ -8,7 +8,7 @@
 	"DASHBOARD": "/dashboard",
 	"FOLLOWERS": "/followers",
 	"FOLLOWING": "/following",
-	"MESSAGES": "/messages",
+	"MESSAGES": "/messages/0",
 	"PREFERENCES": "/preferences",
 	"ICONS_AND_IMAGES": "/icons-and-images",
 	"SUPPORT": "/support",
