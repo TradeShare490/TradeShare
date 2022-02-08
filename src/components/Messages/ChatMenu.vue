@@ -161,11 +161,11 @@
             timeLastMessage: "2w",
             messages: [
               {
-                content: "Hey! How have you been",
+                content: "Are you planning on going to the party on Friday?",
                 me: true,
               },
               {
-                content: "Yoooo, I've been good, you?",
+                content: "Not sure yet",
                 me: false,
               },
             ],
@@ -179,19 +179,19 @@
             timeLastMessage: "Oct 12, 2021",
             messages: [
               {
-                content: "Hey! How have you been",
+                content: "Happy thanksgiving! How are you?",
                 me: true,
               },
               {
-                content: "Yoooo, I've been good, you?",
+                content: "Thanks! I'm good you?",
                 me: false,
               },
               {
-                content: "I've been sooo busy lately",
+                content: "Tired of work tbh",
                 me: false,
               },
               {
-                content: "I'm good, tired as per usual",
+                content: "Oh yeah? Why's that?",
                 me: true,
               },
               {
@@ -199,12 +199,11 @@
                 me: true,
               },
               {
-                content:
-                  "This new project I took on, man is it time consuming. I thought it was going to be a lot easier...",
+                content: "The project I'm working on is taking forever",
                 me: false,
               },
               {
-                content: "Rip, I hope it's fun at least",
+                content: "Sorry to hear that",
                 me: true,
               },
             ],
