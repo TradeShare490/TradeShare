@@ -43,7 +43,14 @@
           :to="/messages/ + user.id"
           data-cy="chat"
           class="px-0"
-          @click="conversationSelected(user.name, user.username, user.img, user.messages)"
+          @click="
+            conversationSelected(
+              user.name,
+              user.username,
+              user.img,
+              user.messages
+            )
+          "
         >
           <v-list-item :key="`user${index}`" :value="user.id">
             <v-avatar class="profile" size="40">
@@ -79,7 +86,6 @@
 
 <script>
   export default {
-    created() {},
     methods: {
       conversationSelected(name, username, img, messages) {
         this.$emit("clicked", name, username, img, messages);
