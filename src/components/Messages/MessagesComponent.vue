@@ -1,5 +1,9 @@
 <template>
-  <v-container fluid fill-height class="pa-0 d-flex justify-center align-center">
+  <v-container
+    fluid
+    fill-height
+    class="pa-0 d-flex justify-center align-center"
+  >
     <v-row class="no-gutters" style="overflow: hidden">
       <v-col
         cols="12"
@@ -10,98 +14,47 @@
         class="flex-grow-1 flex-shrink-0"
         style="border-right: 1px solid #0000001f;"
       >
-        <v-row class="py-5">
-          <v-col cols="12" align-self="center" class="py-0 pt-2">
-            <p class="primary--text font-weight-medium">Messages</p>
-            <v-divider />
-          </v-col>
-          <v-col cols="12" align-self="center" class="py-0 pt-5">
-            <v-autocomplete
-              dense
-              class="mx-4 text-body-2"
-              flat
-              hide-no-data
-              hide-details
-              label="Search for people and messages"
-              outlined
-              color="primary"
-              hide-selected
-              single
-              line
-              return-object
-              single-line
-              data-cy="search"
-            ></v-autocomplete>
-          </v-col>
-          <v-col cols="12" class="px-7">
-            <v-btn small color="primary" width="100%" data-cy="new-message">
-              <v-icon left>
-                mdi-pencil
-              </v-icon>
-              New Message
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-divider />
-        <v-responsive class="overflow-y-auto fill-height" height="65vh">
-          <v-list subheader>
-            <v-list-item-group v-model="activeChat" data-cy="chat">
-              <div v-for="(user, index) in users" :key="user.id">
-                <v-list-item :key="`user${index}`" :value="user.id">
-                  <v-avatar class="profile" size="40">
-                    <v-img :src="user.img"></v-img>
-                  </v-avatar>
-                  <v-list-item-content class="text-left pl-5">
-                    <v-col class="px-0 py-0" cols="6">
-                      <v-list-item-title
-                        v-text="user.name"
-                        class="text-wrap text-body-2"
-                      />
-                    </v-col>
-                    <v-col class="px-0 py-0" cols="6">
-                      <v-list-item-subtitle
-                        v-text="user.timeLastMessage"
-                        class="text-wrap text-right text-caption"
-                      />
-                    </v-col>
-                    <v-list-item-subtitle
-                      v-text="user.lastMessage"
-                      class="pt-2 text-caption"
-                    />
-                  </v-list-item-content>
-                </v-list-item>
-                <v-divider :key="`chatDivider${index}`" class="my-0" />
-              </div>
-            </v-list-item-group>
-          </v-list>
-        </v-responsive>
+        <ChatMenu @clicked="conversationSelected" />
       </v-col>
 
       <v-col cols="auto" class="flex-grow-1 flex-shrink-0">
-         <v-row v-if="activeChat" class="pl-3" v-on:change="$vuetify.goTo(9999)">
-              <v-col cols="1" class="pt-5">
-                <v-avatar class="profile" size="40">
-                  <v-img
-                    src="https://randomuser.me/api/portraits/men/52.jpg"
-                  ></v-img>
-                </v-avatar>
-              </v-col>
-              <v-col cols="6">
-                <v-card-title class="text-body-1">
-                  John Doe
-                </v-card-title>
-                <v-card-subtitle class="text-left text--lighten-2">
-                  @johndoe
-                </v-card-subtitle>
-              </v-col>
-            </v-row>
-            <v-divider v-if="activeChat" />
-        <v-responsive
-          v-if="activeChat"
-          class="overflow-y-hidden fill-height"
-          height="80vh"
-        >
-          <v-card flat class="d-flex flex-column fill-height" data-cy="messages-window">
+        <v-row class="pl-3" v-on:change="$vuetify.goTo(9999)">
+          <v-col cols="1" class="pt-8">
+            <v-avatar class="profile" size="40">
+              <v-img :src="avatar"></v-img>
+            </v-avatar>
+          </v-col>
+          <v-col cols="6">
+            <v-card-title class="text-body-1">
+              {{ name }}
+            </v-card-title>
+            <v-card-subtitle class="text-left text--lighten-2">
+              {{ username }}
+            </v-card-subtitle>
+          </v-col>
+        </v-row>
+        <v-divider v-if="activeChat" />
+        <v-responsive class="overflow-y-hidden fill-height" height="80vh">
+          <v-card
+            v-if="!activeChat"
+            flat
+            class="fill-height d-flex align-center justify-center"
+            data-cy="no-messages-window"
+          >
+            <v-list>
+              <h2 class="primary--text font-weight-light">Your messages</h2>
+              <v-list-item-subtitle
+                >Send private messages and attachments to a friend or
+                group</v-list-item-subtitle
+              >
+            </v-list>
+          </v-card>
+          <v-card
+            v-if="activeChat"
+            flat
+            class="d-flex flex-column fill-height"
+            data-cy="messages-window"
+          >
             <v-card-text class="flex-grow-1 overflow-y-auto">
               <div
                 v-for="msg in messages"
@@ -137,11 +90,24 @@
                 data-cy="send-message"
               >
                 <template v-slot:prepend-inner>
-                  <v-icon @click="click" class="mr-2" color="primary">insert_emoticon</v-icon>
+                  <v-icon @click="click" class="mr-2" color="primary"
+                    >insert_emoticon</v-icon
+                  >
                 </template>
                 <template v-slot:append>
-                  <v-icon class="px-2" @click="click" color="primary" data-cy="image-button">image</v-icon>
-                  <v-icon @click="messages.push(messageForm)" color="primary" data-cy="send-button">send</v-icon>
+                  <v-icon
+                    class="px-2"
+                    @click="click"
+                    color="primary"
+                    data-cy="image-button"
+                    >image</v-icon
+                  >
+                  <v-icon
+                    @click="messages.push(messageForm)"
+                    color="primary"
+                    data-cy="send-button"
+                    >send</v-icon
+                  >
                 </template>
               </v-text-field>
             </v-card-text>
@@ -153,102 +119,41 @@
 </template>
 
 <script>
+  import ChatMenu from "../Messages/ChatMenu.vue";
   export default {
     name: "MessagesComponent",
+    components: {
+      ChatMenu,
+    },
     props: {
       image: String,
     },
+    created() {
+      if (performance.getEntriesByType("navigation")[0].type == "reload") {
+        this.$router.push({ path: "/messages/0" });
+      }
+    },
     data: () => ({
-      activeChat: 1,
-      users: [
-        {
-          id: 1,
-          name: "John Doe",
-          active: false,
-          img: "https://randomuser.me/api/portraits/men/52.jpg",
-          lastMessage: "What are you up to today?",
-          timeLastMessage: "5m",
-        },
-        {
-          id: 2,
-          name: "Jane Doe",
-          active: false,
-          img: "https://randomuser.me/api/portraits/women/45.jpg",
-          lastMessage:
-            "I couldn't believe it when I saw he had bought it. I really didn't expect that from him.",
-          timeLastMessage: "2w",
-        },
-        {
-          id: 3,
-          name: "Scarlett Hienm",
-          active: false,
-          img: "https://randomuser.me/api/portraits/women/17.jpg",
-          lastMessage: "Good idea",
-          timeLastMessage: "Oct 12, 2021",
-        },
-      ],
-      messages: [
-        {
-          content: "Hey! How have you been",
-          me: true,
-        },
-        {
-          content: "Yoooo, I've been good, you?",
-          me: false,
-        },
-        {
-          content: "I've been sooo busy lately",
-          me: false,
-        },
-        {
-          content: "I'm good, tired as per usual",
-          me: true,
-        },
-        {
-          content: "What's kept you busy?",
-          me: true,
-        },
-        {
-          content: "This new project I took on, man is it time consuming. I thought it was going to be a lot easier...",
-          me: false,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-        {
-          content: "Rip, I hope it's fun at least",
-          me: true,
-        },
-      ],
+      activeChat: false,
+      name: "",
+      username: "",
+      avatar: "",
+      messages: [],
       messageForm: {
         content: "",
         me: true,
       },
     }),
-     methods: {
-      click () {
-        alert('You clicked the icon!')
+    methods: {
+      click() {
+        alert("You clicked the icon!");
+      },
+      conversationSelected(name, username, avatar, message) {
+        this.name = name;
+        this.username = username;
+        this.avatar = avatar;
+        this.messages = message;
+        this.activeChat = true;
       },
     },
   };

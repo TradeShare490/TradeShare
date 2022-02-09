@@ -1,4 +1,4 @@
-describe("On the messages page, can", () => {
+describe("On the messaging page, can", () => {
   before(() => {
     cy.login();
     cy.wait(2000);
@@ -8,26 +8,37 @@ describe("On the messages page, can", () => {
       );
     });
   });
-  it("display messages", () => {
+  it("select a conversation", () => {
+    cy.get("[data-cy=no-messages-window]").should("be.visible");
+    cy.get("[data-cy=chat]")
+      .first()
+      .click();
     cy.get("[data-cy=messages-window]").should("be.visible");
   });
   it("search for people", () => {
-    cy.get("[data-cy=search]").click().type("Jane Doe");
+    cy.get("[data-cy=search]")
+      .click()
+      .type("Jane Doe");
   });
   it("create new chat", () => {
     cy.get("[data-cy=new-message]").click();
   });
-  it("can press the emoji button",()=>{
-    cy.get("[data-cy=image-button]").should("be.visible").click();
-  })
+  it("can press the emoji button", () => {
+    cy.get("[data-cy=chat]")
+      .first()
+      .click();
+    cy.get("[data-cy=image-button]")
+      .should("be.visible")
+      .click();
+  });
   it("send a message", () => {
-    cy.get("[data-cy=send-message]").click().type("Hello");
+    cy.get("[data-cy=chat]")
+      .first()
+      .click();
+    cy.get("[data-cy=send-message]")
+      .click()
+      .type("Hello");
     cy.get("[data-cy=send-button]").click();
     cy.get("[data-cy=messages-window]").should("include.text", "Hello");
   });
-  it("hide messages", () => {
-    cy.get("[data-cy=chat]").click().click();
-    cy.get("[data-cy=messages-window]").should("not.exist");
-  })
-
 });

@@ -59,8 +59,9 @@ const routes = [
     component: Followers,
   },
   {
-    path: "/messages",
+    path: "/messages/:id",
     name: "Messages",
+    props: true,
     component: Messages,
   },
   {
