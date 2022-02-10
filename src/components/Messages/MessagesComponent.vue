@@ -12,7 +12,7 @@
         lg="4"
         xl="4"
         class="flex-grow-1 flex-shrink-0"
-        style="border-right: 1px solid #0000001f;"
+        style="border-right: 1px solid #0000001f"
       >
         <ChatMenu @clicked="conversationSelected" />
       </v-col>
@@ -55,7 +55,7 @@
             class="d-flex flex-column fill-height"
             data-cy="messages-window"
           >
-            <v-card-text class="flex-grow-1 overflow-y-auto">
+            <v-card-text class="flex-grow-1 overflow-y-auto" ref="messages">
               <div
                 v-for="msg in messages"
                 :key="msg"
@@ -66,7 +66,11 @@
                     <template v-slot:activator="{}">
                       <!-- needed for messages to be displayed -->
                       <v-chip
-                        style="height: auto; white-space: normal; max-width: 360px;"
+                        style="
+                          height: auto;
+                          white-space: normal;
+                          max-width: 360px;
+                        "
                         class="px-4 py-2 mb-2 black--text text-left"
                         :outlined="msg.me ? false : true"
                       >
@@ -119,42 +123,49 @@
 </template>
 
 <script>
-  import ChatMenu from "../Messages/ChatMenu.vue";
-  export default {
-    name: "MessagesComponent",
-    components: {
-      ChatMenu,
+import ChatMenu from "../Messages/ChatMenu.vue";
+export default {
+  name: "MessagesComponent",
+  components: {
+    ChatMenu,
+  },
+  props: {
+    image: String,
+  },
+  updated() {
+    this.$nextTick(() => this.scrollToBottom());
+  },
+  created() {
+    if (performance.getEntriesByType("navigation")[0].type == "reload") {
+      this.$router.push({ path: "/messages/0" });
+    }
+  },
+  data: () => ({
+    activeChat: false,
+    name: "",
+    username: "",
+    avatar: "",
+    messages: [],
+    messageForm: {
+      content: "",
+      me: true,
     },
-    props: {
-      image: String,
+  }),
+  methods: {
+    click() {
+      alert("You clicked the icon!");
     },
-    created() {
-      if (performance.getEntriesByType("navigation")[0].type == "reload") {
-        this.$router.push({ path: "/messages/0" });
-      }
+    conversationSelected(name, username, avatar, message) {
+      this.name = name;
+      this.username = username;
+      this.avatar = avatar;
+      this.messages = message;
+      this.activeChat = true;
     },
-    data: () => ({
-      activeChat: false,
-      name: "",
-      username: "",
-      avatar: "",
-      messages: [],
-      messageForm: {
-        content: "",
-        me: true,
-      },
-    }),
-    methods: {
-      click() {
-        alert("You clicked the icon!");
-      },
-      conversationSelected(name, username, avatar, message) {
-        this.name = name;
-        this.username = username;
-        this.avatar = avatar;
-        this.messages = message;
-        this.activeChat = true;
-      },
+    scrollToBottom() {
+      var container = this.$refs.messages;
+      container.scrollTop = container.scrollHeight;
     },
-  };
+  },
+};
 </script>
