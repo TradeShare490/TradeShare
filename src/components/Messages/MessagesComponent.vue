@@ -25,10 +25,13 @@
             </v-avatar>
           </v-col>
           <v-col cols="6">
-            <v-card-title class="text-body-1">
+            <v-card-title class="text-body-1" data-cy="name">
               {{ name }}
             </v-card-title>
-            <v-card-subtitle class="text-left text--lighten-2">
+            <v-card-subtitle
+              class="text-left text--lighten-2"
+              data-cy="username"
+            >
               {{ username }}
             </v-card-subtitle>
           </v-col>
@@ -55,7 +58,11 @@
             class="d-flex flex-column fill-height"
             data-cy="messages-window"
           >
-            <v-card-text class="flex-grow-1 overflow-y-auto" ref="messages">
+            <v-card-text
+              class="flex-grow-1 overflow-y-auto"
+              ref="messages"
+              data-cy="messages"
+            >
               <div
                 v-for="msg in messages"
                 :key="msg"
@@ -94,7 +101,11 @@
                 data-cy="send-message"
               >
                 <template v-slot:prepend-inner>
-                  <v-icon @click="click" class="mr-2" color="primary"
+                  <v-icon
+                    @click="click"
+                    class="mr-2"
+                    color="primary"
+                    data-cy="emoji-button"
                     >insert_emoticon</v-icon
                   >
                 </template>
@@ -123,49 +134,49 @@
 </template>
 
 <script>
-import ChatMenu from "../Messages/ChatMenu.vue";
-export default {
-  name: "MessagesComponent",
-  components: {
-    ChatMenu,
-  },
-  props: {
-    image: String,
-  },
-  updated() {
-    this.$nextTick(() => this.scrollToBottom());
-  },
-  created() {
-    if (performance.getEntriesByType("navigation")[0].type == "reload") {
-      this.$router.push({ path: "/messages/0" });
-    }
-  },
-  data: () => ({
-    activeChat: false,
-    name: "",
-    username: "",
-    avatar: "",
-    messages: [],
-    messageForm: {
-      content: "",
-      me: true,
+  import ChatMenu from "../Messages/ChatMenu.vue";
+  export default {
+    name: "MessagesComponent",
+    components: {
+      ChatMenu,
     },
-  }),
-  methods: {
-    click() {
-      alert("You clicked the icon!");
+    props: {
+      image: String,
     },
-    conversationSelected(name, username, avatar, message) {
-      this.name = name;
-      this.username = username;
-      this.avatar = avatar;
-      this.messages = message;
-      this.activeChat = true;
+    updated() {
+      this.$nextTick(() => this.scrollToBottom());
     },
-    scrollToBottom() {
-      var container = this.$refs.messages;
-      container.scrollTop = container.scrollHeight;
+    created() {
+      if (performance.getEntriesByType("navigation")[0].type === "reload") {
+        this.$router.push({ path: "/messages/0" });
+      }
     },
-  },
-};
+    data: () => ({
+      activeChat: false,
+      name: "",
+      username: "",
+      avatar: "",
+      messages: [],
+      messageForm: {
+        content: "",
+        me: true,
+      },
+    }),
+    methods: {
+      click() {
+        alert("You clicked the icon!");
+      },
+      conversationSelected(name, username, avatar, message) {
+        this.name = name;
+        this.username = username;
+        this.avatar = avatar;
+        this.messages = message;
+        this.activeChat = true;
+      },
+      scrollToBottom() {
+        const container = this.$refs.messages;
+        container.scrollTop = container.scrollHeight;
+      },
+    },
+  };
 </script>
