@@ -1,38 +1,47 @@
 <script>
-import { Doughnut } from "vue-chartjs";
+import { Doughnut } from 'vue-chartjs'
 
 export default {
   extends: Doughnut,
   props: {
-    equities: Number,
-    cash: Number,
-    options: Number,
+    equities: {
+      type: Number,
+      default: 0
+    },
+    cash: {
+      type: Number,
+      default: 0
+    },
+    options: {
+      type: Number,
+      default: 0
+    }
   },
   data: () => ({
     chartOptions: {
       responsive: true,
       maintainAspectRatio: true,
       legend: {
-        display: false,
-      },
-    },
+        display: false
+      }
+    }
   }),
   computed: {
-    chartdata: function() {
+    chartdata: function () {
       return {
         datasets: [
           {
-            label: "Holdings",
-            backgroundColor: ["#2274E6", "#1E984F", "#000000"],
-            data: [this.equities, this.cash, this.options],
-          },
+            label: 'Holdings',
+            backgroundColor: ['#2274E6', '#1E984F', '#000000'],
+            data: [this.equities, this.cash, this.options]
+          }
         ],
-        labels: ["Equities", "Cash", "Options"],
-      };
-    },
+        labels: ['Equities', 'Cash', 'Options']
+      }
+    }
   },
-  mounted() {
-    this.renderChart(this.chartdata, this.chartOptions);
-  },
-};
+  mounted () {
+    this.renderChart(this.chartdata, this.chartOptions)
+  }
+}
 </script>

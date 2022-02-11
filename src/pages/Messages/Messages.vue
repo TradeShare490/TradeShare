@@ -1,15 +1,16 @@
 <template>
   <v-card>
-    <MessagesComponent/>
+    <MessagesComponent />
   </v-card>
 </template>
 
 <script>
-  import MessagesComponent from "../../components/Messages/MessagesComponent.vue"
-  export default {
-    name: "Messages",
-    components: {
-      MessagesComponent,
-    }
-  };
+import MessagesComponent from '../../components/Messages/MessagesComponent.vue'
+
+export default {
+  name: 'MessagesPage',
+  components: {
+    MessagesComponent
+  }
+}
 </script>

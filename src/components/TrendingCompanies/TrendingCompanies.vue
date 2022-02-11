@@ -1,5 +1,8 @@
 ﻿<template>
-  <v-card class="sticky-card" height="100%">
+  <v-card
+    class="sticky-card"
+    height="100%"
+  >
     <v-row no-gutters>
       <v-col>
         <v-list-item>
@@ -15,7 +18,10 @@
       </v-col>
     </v-row>
     <v-list disabled>
-      <div v-for="company in companies" :key="company.title">
+      <div
+        v-for="company in companies"
+        :key="company.title"
+      >
         <CompanyCard
           :title="company.title"
           :subtitle="company.subtitle"
@@ -25,60 +31,51 @@
         <v-divider class="my-3" />
       </div>
     </v-list>
-    <!-- INSERT REF HERE -->
-    <router-link
-        to="/"
-        class="d-flex justify-end"
-        style="text-decoration: none; font-size: 12px"
-    >
-      View all
-      <v-icon color="primary" dense> mdi-menu-right </v-icon>
-    </router-link>
   </v-card>
 </template>
 
 <script>
-import CompanyCard from "../TrendingCompanies/CompanyCard.vue";
+import CompanyCard from '../TrendingCompanies/CompanyCard.vue'
 export default {
+  name: 'TrendingCompanies',
   components: { CompanyCard },
-  name: "TrendingCompanies",
-  data() {
+  data () {
     return {
-      searchCriteria: "",
+      searchCriteria: '',
       search: null,
       companies: [
         {
-          title: "Dropbox",
-          subtitle: "sold recently by Dave",
-          imageSource: "../../assets/TradeShare.png",
-          sold: true,
+          title: 'Dropbox',
+          subtitle: 'sold recently by Dave',
+          imageSource: '../../assets/TradeShare.png',
+          sold: true
         },
         {
-          title: "Medium Corporation",
-          subtitle: "bought recently by Dave",
-          imageSource: "../../assets/TradeShare.png",
-          sold: false,
+          title: 'Medium Corporation',
+          subtitle: 'bought recently by Dave',
+          imageSource: '../../assets/TradeShare.png',
+          sold: false
         },
         {
-          title: "Github",
-          subtitle: "sold recently by Fred",
-          imageSource: "../../assets/TradeShare.png",
-          sold: true,
+          title: 'Github',
+          subtitle: 'sold recently by Fred',
+          imageSource: '../../assets/TradeShare.png',
+          sold: true
         },
         {
-          title: "Slack",
-          subtitle: "bought recently by Fred",
-          imageSource: "../../assets/TradeShare.png",
-          sold: false,
+          title: 'Slack',
+          subtitle: 'bought recently by Fred',
+          imageSource: '../../assets/TradeShare.png',
+          sold: false
         },
         {
-          title: "Twitter",
-          subtitle: "sold recently by you",
-          imageSource: "../../assets/TradeShare.png",
-          sold: true,
-        },
-      ],
-    };
-  },
-};
+          title: 'Twitter',
+          subtitle: 'sold recently by you',
+          imageSource: '../../assets/TradeShare.png',
+          sold: true
+        }
+      ]
+    }
+  }
+}
 </script>

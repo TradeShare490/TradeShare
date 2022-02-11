@@ -1,6 +1,9 @@
 <template>
   <v-list-item data-cy="company-card">
-    <v-list-item-avatar class="avatar" tile>
+    <v-list-item-avatar
+      class="avatar"
+      tile
+    >
       <v-img src="../../assets/TradeShare.png" />
     </v-list-item-avatar>
 
@@ -8,7 +11,7 @@
       <v-list-item-title>
         {{ title }}
       </v-list-item-title>
-      <v-list-item-subtitle :class="this.sold ? 'red--text' : 'black--text'">
+      <v-list-item-subtitle :class="sold ? 'red--text' : 'black--text'">
         {{ subtitle }}
       </v-list-item-subtitle>
     </v-list-item-content>
@@ -21,12 +24,24 @@
 
 <script>
 export default {
-  name: "CompanyCard",
+  name: 'CompanyCard',
   props: {
-    title: String,
-    subtitle: String,
-    imgsrc: String,
-    sold: Boolean,
-  },
-};
+    title: {
+      type: String,
+      default: ''
+    },
+    subtitle: {
+      type: String,
+      default: ''
+    },
+    imgsrc: {
+      type: String,
+      default: ''
+    },
+    sold: {
+      type: Boolean,
+      default: false
+    }
+  }
+}
 </script>

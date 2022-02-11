@@ -1,22 +1,39 @@
 ﻿<template>
-  <v-container fluid class="pt-0" data-cy="post-comment">
-    <v-alert outlined color="grey lighten-2" class="pa-0 ma-0">
-      <v-row class="mt-2" no-gutters>
+  <v-container
+    fluid
+    class="pt-0"
+    data-cy="post-comment"
+  >
+    <v-alert
+      outlined
+      color="grey lighten-2"
+      class="pa-0 ma-0"
+    >
+      <v-row
+        class="mt-2"
+        no-gutters
+      >
         <v-col class="d-flex justify-start ml-5 black--text">
           <span>
-            {{ this.date }}
+            {{ date }}
           </span>
         </v-col>
         <v-col class="d-flex justify-end mr-5 black--text">
           <span>
-            {{ this.time }}
+            {{ time }}
           </span>
         </v-col>
       </v-row>
       <v-divider />
-      <v-row no-gutters class="mx-6 mt-3 mb-0">
+      <v-row
+        no-gutters
+        class="mx-6 mt-3 mb-0"
+      >
         <v-avatar size="70">
-          <v-img :src="this.pfp" alt="pfp"/>
+          <v-img
+            :src="pfp"
+            alt="pfp"
+          />
         </v-avatar>
         <v-text-field
           class="ml-5 mt-2"
@@ -51,41 +68,76 @@
           <v-icon>mdi-dots-horizontal</v-icon>
         </v-btn>
       </div>
-      <v-row no-gutters class="mx-6 my-3">
+      <v-row
+        no-gutters
+        class="mx-6 my-3"
+      >
         <v-avatar size="70">
-          <v-img :src="this.pfp2" alt="pfp"/>
+          <v-img
+            :src="pfp2"
+            alt="pfp"
+          />
         </v-avatar>
         <div class="d-flex flex-column align-baseline ml-3 mt-1">
-            <span class="text-no-wrap font-weight-bold black--text text-left">
-            {{ this.name }}
+          <span class="text-no-wrap font-weight-bold black--text text-left">
+            {{ name }}
           </span>
           <span class="font-weight-light text-subtitle-2 black--text">
-            {{ this.when }}
+            {{ when }}
           </span>
         </div>
         <div class="d-flex flex-column mt-1 ml-1 truncate">
-            <span class="font-weight-light text-subtitle-2 black--text">
-              {{ this.username }}
-            </span>
+          <span class="font-weight-light text-subtitle-2 black--text">
+            {{ username }}
+          </span>
         </div>
         <div class="black--text text-left d-flex flex-row">
-          <v-col xs="1" sm="1" md="1" lg="1" xl="1" />
-          <v-col xs="11" sm="11" md="11" lg="11" xl="11" class="ml-4 mt-n4">
-            {{ this.comment }}
+          <v-col
+            xs="1"
+            sm="1"
+            md="1"
+            lg="1"
+            xl="1"
+          />
+          <v-col
+            xs="11"
+            sm="11"
+            md="11"
+            lg="11"
+            xl="11"
+            class="ml-4 mt-n4"
+          >
+            {{ comment }}
           </v-col>
         </div>
         <div class="black--text text-left d-flex flex-row">
-          <v-col xs="1" sm="1" md="1" lg="1" xl="1" />
-          <v-col xs="11" sm="11" md="11" lg="11" xl="11" class="ml-4 mt-n5">
-            <v-row no-gutters class="ml-2">
+          <v-col
+            xs="1"
+            sm="1"
+            md="1"
+            lg="1"
+            xl="1"
+          />
+          <v-col
+            xs="11"
+            sm="11"
+            md="11"
+            lg="11"
+            xl="11"
+            class="ml-4 mt-n5"
+          >
+            <v-row
+              no-gutters
+              class="ml-2"
+            >
               <v-col>
                 <v-btn
                   elevation="0"
                   text
                   x-large
                   :ripple="false"
-                  @click="like = !like"
                   :color="like ? 'primary' : ''"
+                  @click="like = !like"
                 >
                   <v-icon> {{ !like ? 'mdi-heart-outline' : 'mdi-heart' }} </v-icon>
                   <span> 780 </span>
@@ -103,15 +155,18 @@
                 </v-btn>
               </v-col>
             </v-row>
-            <v-row no-gutters class="ml-2">
+            <v-row
+              no-gutters
+              class="ml-2"
+            >
               <v-col>
                 <v-btn
-                    style="text-transform: none"
-                    text
-                    x-large
-                    :ripple="false"
-                    @click="viewReplies"
-                    data-cy="view-replies-btn"
+                  style="text-transform: none"
+                  text
+                  x-large
+                  :ripple="false"
+                  data-cy="view-replies-btn"
+                  @click="viewReplies"
                 >
                   <v-icon> mdi-minus</v-icon>
                   <span v-if="!view"> View Replies </span>
@@ -121,49 +176,99 @@
             </v-row>
           </v-col>
         </div>
-        <div v-if="view" class="black--text text-left d-flex flex-row mt-n8">
-          <v-col xs="1" sm="1" md="1" lg="1" xl="1"/>
-          <v-col xs="11" sm="11" md="11" lg="11" xl="11">
+        <div
+          v-if="view"
+          class="black--text text-left d-flex flex-row mt-n8"
+        >
+          <v-col
+            xs="1"
+            sm="1"
+            md="1"
+            lg="1"
+            xl="1"
+          />
+          <v-col
+            xs="11"
+            sm="11"
+            md="11"
+            lg="11"
+            xl="11"
+          >
             <div class="d-flex justify-end mb-n8 mr-1">
               <v-btn icon>
                 <v-icon>mdi-dots-horizontal</v-icon>
               </v-btn>
             </div>
-            <v-row no-gutters class="mx-6 mt-3 mb-n8">
+            <v-row
+              no-gutters
+              class="mx-6 mt-3 mb-n8"
+            >
               <v-avatar size="70">
-                <v-img :src="this.pfp" alt="pfp"/>
+                <v-img
+                  :src="pfp"
+                  alt="pfp"
+                />
               </v-avatar>
               <div class="d-flex flex-column align-baseline ml-3 mt-1">
                 <span class="text-no-wrap font-weight-bold black--text text-left">
-                  {{ this.name }}
+                  {{ name }}
                 </span>
                 <span class="font-weight-light text-subtitle-2 black--text">
-                  {{ this.when }}
+                  {{ when }}
                 </span>
               </div>
               <div class="d-flex flex-column mt-1 ml-1 truncate">
                 <span class="font-weight-light text-subtitle-2 black--text">
-                  {{ this.username }}
+                  {{ username }}
                 </span>
               </div>
               <div class="black--text text-left d-flex flex-row">
-                <v-col xs="1" sm="1" md="1" lg="1" xl="1" />
-                <v-col xs="11" sm="11" md="11" lg="11" xl="11" class="ml-6 mt-n4">
-                  {{ this.comment }}
+                <v-col
+                  xs="1"
+                  sm="1"
+                  md="1"
+                  lg="1"
+                  xl="1"
+                />
+                <v-col
+                  xs="11"
+                  sm="11"
+                  md="11"
+                  lg="11"
+                  xl="11"
+                  class="ml-6 mt-n4"
+                >
+                  {{ comment }}
                 </v-col>
               </div>
               <div class="black--text text-left d-flex flex-row">
-                <v-col xs="1" sm="1" md="1" lg="1" xl="1" />
-                <v-col xs="11" sm="11" md="11" lg="11" xl="11" class="ml-4 mt-n5">
-                  <v-row no-gutters class="ml-2">
+                <v-col
+                  xs="1"
+                  sm="1"
+                  md="1"
+                  lg="1"
+                  xl="1"
+                />
+                <v-col
+                  xs="11"
+                  sm="11"
+                  md="11"
+                  lg="11"
+                  xl="11"
+                  class="ml-4 mt-n5"
+                >
+                  <v-row
+                    no-gutters
+                    class="ml-2"
+                  >
                     <v-col>
                       <v-btn
-                          elevation="0"
-                          text
-                          x-large
-                          :ripple="false"
-                          @click="like = !like"
-                          :color="like ? 'primary' : ''"
+                        elevation="0"
+                        text
+                        x-large
+                        :ripple="false"
+                        :color="like ? 'primary' : ''"
+                        @click="like = !like"
                       >
                         <v-icon> {{ !like ? 'mdi-heart-outline' : 'mdi-heart' }} </v-icon>
                         <span> 1 </span>
@@ -171,10 +276,10 @@
                     </v-col>
                     <v-col>
                       <v-btn
-                          elevation="0"
-                          text
-                          x-large
-                          :ripple="false"
+                        elevation="0"
+                        text
+                        x-large
+                        :ripple="false"
                       >
                         <v-icon>mdi-comment-processing-outline</v-icon>
                         <span> 0 </span>
@@ -193,17 +298,41 @@
 
 <script>
 export default {
-  name: "CommentSection",
+  name: 'CommentSection',
   props: {
-    date: String,
-    time: String,
-    pfp: String,
-    pfp2: String,
-    name: String,
-    when: String,
-    username: String,
-    comment: String
-    
+    date: {
+      type: String,
+      default: ''
+    },
+    time: {
+      type: String,
+      default: ''
+    },
+    pfp: {
+      type: String,
+      default: ''
+    },
+    pfp2: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    when: {
+      type: String,
+      default: ''
+    },
+    username: {
+      type: String,
+      default: ''
+    },
+    comment: {
+      type: String,
+      default: ''
+    }
+
   },
   data () {
     return {
@@ -212,7 +341,7 @@ export default {
     }
   },
   methods: {
-    viewReplies() {
+    viewReplies () {
       this.view = !this.view
     }
   }

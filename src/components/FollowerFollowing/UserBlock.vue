@@ -1,6 +1,12 @@
 <template>
-  <v-card elevation="0" class="px-6">
-    <v-row no-gutters class="px-7">
+  <v-card
+    elevation="0"
+    class="px-6"
+  >
+    <v-row
+      no-gutters
+      class="px-7"
+    >
       <v-col
         align-self="center"
         class="px-0 py-3"
@@ -10,8 +16,11 @@
         lg="1"
         xl="1"
       >
-        <v-avatar class="profile" size="50">
-          <v-img :src="image"></v-img>
+        <v-avatar
+          class="profile"
+          size="50"
+        >
+          <v-img :src="image" />
         </v-avatar>
       </v-col>
       <v-col
@@ -26,15 +35,12 @@
         <v-list-item color="black">
           <v-list-item-content class="py-1">
             <v-list-item-title
-              class="
-                name-text
-                text-sm-body-1 text-caption text-wrap
-                font-weight-bold"
+              class="name-text text-sm-body-1 text-caption text-wrap font-weight-bold"
             >
-              {{ this.name }}
+              {{ name }}
             </v-list-item-title>
             <v-list-item-title class="text-sm-body-3 text-caption text-wrap">
-              @{{ this.username }}
+              @{{ username }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -51,31 +57,35 @@
           class="mr-3"
         >
           <v-btn
+            v-if="user.following === true"
             v-bind="size"
             elevation="2"
             outlined
             color="primary"
-            v-if="user.following === true"
-            @click="unfollow"
             class="btn my-3 caption font-weight-bold"
             data-cy="following"
             height="32px"
             width="110px"
+            @click="unfollow"
           >
-            <div class="text">Following</div>
+            <div class="text">
+              Following
+            </div>
           </v-btn>
           <v-btn
+            v-if="user.following === false"
             v-bind="size"
             elevation="2"
             color="primary"
-            v-if="user.following === false"
-            @click="follow"
             class="btn my-3 caption font-weight-bold"
             data-cy="follow"
             height="32px"
             width="110px"
+            @click="follow"
           >
-            <div class="text">Follow</div>
+            <div class="text">
+              Follow
+            </div>
           </v-btn>
         </v-col>
       </template>
@@ -93,13 +103,15 @@
             v-bind="size"
             elevation="2"
             color="primary"
-            @click="confirmFollowRequest"
             class="btn my-3 caption font-weight-bold"
             data-cy="follow"
             height="32px"
             width="110px"
+            @click="confirmFollowRequest"
           >
-            <div class="text">CONFIRM</div>
+            <div class="text">
+              CONFIRM
+            </div>
           </v-btn>
         </v-col>
         <v-col
@@ -116,13 +128,15 @@
             elevation="2"
             color="primary"
             outlined
-            @click="rejectFollowRequest"
             class="btn my-3 caption font-weight-bold"
             data-cy="follow"
             height="32px"
             width="110px"
+            @click="rejectFollowRequest"
           >
-            <div class="text">DELETE</div>
+            <div class="text">
+              DELETE
+            </div>
           </v-btn>
         </v-col>
       </template>
@@ -132,33 +146,48 @@
 </template>
 
 <script>
-import { useFollowMixin } from "../../hooks/useFollowMixin.js";
+import { useFollowMixin } from '../../hooks/useFollowMixin.js'
 export default {
-  name: "UserBlock",
+  name: 'UserBlock',
   mixins: [useFollowMixin],
   props: {
-    currentlyfollowing: Boolean,
-    name: String,
-    image: String,
-    username: String,
-    requestblock: Boolean
+    currentlyfollowing: {
+      type: Boolean,
+      default: false
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    image: {
+      type: String,
+      default: ''
+    },
+    username: {
+      type: String,
+      default: ''
+    },
+    requestblock: {
+      type: Boolean,
+      default: false
+    }
   },
-  data() {
+  data () {
     return {
       user: { following: this.currentlyfollowing },
       request: this.requestblock
-    };
+    }
   },
   computed: {
-    size() {
+    size () {
       const size = {
-        xs: "x-small",
-        sm: "small",
-        md: "small",
-        lg: "small",
-        xl: "small"
-      }[this.$vuetify.breakpoint.name];
-      return size ? { [size]: true } : {};
+        xs: 'x-small',
+        sm: 'small',
+        md: 'small',
+        lg: 'small',
+        xl: 'small'
+      }[this.$vuetify.breakpoint.name]
+      return size ? { [size]: true } : {}
     }
   }
 }
@@ -173,4 +202,3 @@ export default {
   font-size: 1.1em;
 }
 </style>
-

@@ -10,9 +10,11 @@
         lg="2"
         xl="2"
       >
-        <v-avatar class="profile" 
-          color="grey" 
-          size="60%">
+        <v-avatar
+          class="profile"
+          color="grey"
+          size="60%"
+        >
           <v-img src="https://randomuser.me/api/portraits/men/8.jpg" />
         </v-avatar>
       </v-col>
@@ -25,13 +27,15 @@
         xl="2"
         class="text-left mx-0 px-0"
       >
-        <v-list-item color="black" 
-        data-cy="basic-profile-info">
+        <v-list-item
+          color="black"
+          data-cy="basic-profile-info"
+        >
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
             >
-              {{ user.firstname }} {{user.lastname}}
+              {{ user.firstname }} {{ user.lastname }}
             </v-list-item-title>
             <v-list-item-subtitle class="text-subtitle-1">
               @{{ user.username }}
@@ -42,7 +46,6 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-
       <v-spacer class="hidden-sm-and-down" />
       <v-col
         align-self="center"
@@ -63,7 +66,6 @@
         </v-list-item-subtitle>
       </v-col>
       <v-spacer class="hidden-sm-and-down" />
-
       <v-col
         align-self="center"
         cols="9"
@@ -74,40 +76,51 @@
         class="mx-10 pt-5 pt-sm-5 pt-md-0 pt-lg-0 pt-xl-0"
       >
         <v-row>
-          <v-col cols="6" class="mx-0 px-0 pr-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold" data-cy="profile-num-followers">
+          <v-col
+            cols="6"
+            class="mx-0 px-0 pr-1 pb-0 mb-0"
+          >
+            <v-list-item-title
+              class="font-weight-bold"
+              data-cy="profile-num-followers"
+            >
               {{ user.numFollowers }}
             </v-list-item-title>
             <v-list-item-subtitle> Followers </v-list-item-subtitle>
             <v-btn
+              v-if="user.following === true"
               block
               small
               elevation="0"
               outlined
               color="primary"
-              v-if="user.following === true"
-              @click="unfollow"
               class="my-3 caption"
               data-cy="following"
+              @click="unfollow"
             >
               Following
             </v-btn>
             <v-btn
+              v-if="user.following === false"
               block
               small
               elevation="0"
               color="primary"
-              v-if="user.following === false"
-              @click="follow"
               class="my-3 caption"
               data-cy="follow"
+              @click="follow"
             >
               Follow
             </v-btn>
           </v-col>
-          <v-col cols="6" 
-            class="mx-0 px-0 pl-1 pb-0 mb-0">
-            <v-list-item-title class="font-weight-bold" data-cy="profile-num-following">
+          <v-col
+            cols="6"
+            class="mx-0 px-0 pl-1 pb-0 mb-0"
+          >
+            <v-list-item-title
+              class="font-weight-bold"
+              data-cy="profile-num-following"
+            >
               {{ user.numFollowing }}
             </v-list-item-title>
             <v-list-item-subtitle> Following </v-list-item-subtitle>
@@ -117,8 +130,8 @@
               elevation="0"
               class="my-3 caption"
               color="primary"
-              @click="message"
               data-cy="message"
+              @click="message"
             >
               Send a Message
             </v-btn>
@@ -130,21 +143,21 @@
 </template>
 
 <script>
-import { useFollowMixin } from "../../hooks/useFollowMixin.js";
+import { useFollowMixin } from '../../hooks/useFollowMixin.js'
 export default {
-  name: "Profile",
+  name: 'ProfileInfo',
   mixins: [useFollowMixin],
   props: {
-    user: Object,
+    user: {
+      type: Object,
+      default: null
+    }
   },
   methods: {
     /* istanbul ignore next */
-    label() {
-      console.log("assigning label...");
-    },
-    message() {
-      console.log("sending a message...");
-    },
-  },
-};
+    message () {
+      console.log('sending a message...')
+    }
+  }
+}
 </script>
