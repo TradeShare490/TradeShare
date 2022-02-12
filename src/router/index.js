@@ -10,6 +10,7 @@ import TradeZone from '../pages/TradeZone/TradeZone.vue'
 import Messages from '../pages/Messages/Messages.vue'
 import Confirm from '../pages/BrokerageSignUp/Confirm'
 import Post from '../pages/TradeZone/IndividualPost/Post'
+import DLRPreferences from '../pages/Preferences/DLR'
 
 Vue.use(VueRouter)
 
@@ -65,8 +66,21 @@ const routes = [
     component: Messages
   },
   {
-    path: '/preferences',
-    name: 'Preferences'
+    path: '/preferences/account',
+    name: 'AccountPreferences'
+  },
+  {
+    path: '/preferences/notifications',
+    name: 'NotificationsPreferences'
+  },
+  {
+    path: '/preferences/privacysecurity',
+    name: 'PrivacySecurityPreferences'
+  },
+  {
+    path: '/preferences/dlr',
+    name: 'DLRPreferences',
+    component: DLRPreferences
   },
   {
     path: '/connected-apps',

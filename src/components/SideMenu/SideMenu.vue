@@ -158,7 +158,7 @@ export default {
         { title: 'Trade Zone', icon: 'mdi-target-variant', route: '/tradezone' },
         { title: 'Dashboard', icon: 'mdi-view-dashboard', route: '/dashboard' },
         { title: 'Messages', icon: 'mdi-forum', route: '/messages/0' },
-        { title: 'Preferences', icon: 'mdi-lock-open-outline ', route: '/preferences' },
+        { title: 'Preferences', icon: 'mdi-lock-open-outline ', route: '/preferences/account' },
         { title: 'Connected Apps', icon: 'mdi-apps ', route: '/connected-apps' }
       ],
       lowerNav: [
