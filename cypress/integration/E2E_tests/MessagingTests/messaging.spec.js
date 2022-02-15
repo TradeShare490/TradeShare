@@ -21,26 +21,30 @@ describe("On the messaging page, can", () => {
     cy.get("[data-cy=search]")
       .click()
       .type("Jane Doe")
-      .type('{enter}');
+      .type("{enter}");
   });
   it("create new chat", () => {
-    cy.get("[data-cy=new-message]").click();
+    cy.get("[data-cy=new-message]").click({ force: true });
+    cy.get("[data-cy=chat-user]").click({ force: true }).type("John").type("{enter}")
+    cy.get("[data-cy=list-item]").first().click()
+    cy.get("[data-cy=next-button]").click()
+    cy.get("[data-cy=dialog]").should("not.exist")
   });
   it("can press the emoji button", () => {
     cy.get("[data-cy=emoji-button]")
       .should("be.visible")
       .click();
-    cy.on('window:alert', (str) => {
-        expect(str).to.equal("You clicked the icon!")
-    })  
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal("You clicked the icon!");
+    });
   });
   it("can press the attachment/media button", () => {
     cy.get("[data-cy=image-button]")
       .should("be.visible")
       .click();
-    cy.on('window:alert', (str) => {
-        expect(str).to.equal("You clicked the icon!")
-    })  
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal("You clicked the icon!");
+    });
   });
   it("send a message", () => {
     cy.get("[data-cy=send-message]")

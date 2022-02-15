@@ -25,21 +25,14 @@
           data-cy="search"
         ></v-autocomplete>
       </v-col>
-      <v-col cols="12" align-self="center" class="px-8 pb-6">
-        <v-btn small color="primary" width="100%" data-cy="new-message" @click="newConversation">
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          New Message
-        </v-btn>
-      </v-col>
+      <NewMessage />
     </v-row>
     <v-divider />
     <v-responsive class="overflow-y-auto fill-height" height="65vh">
       <v-list subheader>
         <v-list-item
           v-for="user in chats"
-          v-bind:key="user.name"
+          v-bind:key="user.id"
           :to="/messages/ + user.id"
           data-cy="chat"
           class="px-0"
@@ -48,7 +41,7 @@
               user.name,
               user.username,
               user.img,
-              user.messages,
+              user.messages
             )
           "
         >
@@ -85,11 +78,15 @@
 </template>
 
 <script>
+  import NewMessage from "../Messages/NewMessage.vue";
   export default {
+    name: "MessagesMenu",
+    components: {
+      NewMessage,
+    },
     methods: {
       conversationSelected(name, username, img, messages) {
         this.$emit("clicked", name, username, img, messages);
-
       },
     },
     computed: {
@@ -188,7 +185,7 @@
               {
                 content: "Not sure yet",
                 me: false,
-                timestamp: "2022-01-27 19:10:03"
+                timestamp: "2022-01-27 19:10:03",
               },
             ],
           },
@@ -203,37 +200,37 @@
               {
                 content: "Happy thanksgiving! How are you?",
                 me: true,
-                timestamp: "2021-10-12 10:10:03"
+                timestamp: "2021-10-12 10:10:03",
               },
               {
                 content: "Thanks! I'm good you?",
                 me: false,
-                timestamp: "2021-10-12 11:10:03"
+                timestamp: "2021-10-12 11:10:03",
               },
               {
                 content: "Tired of work tbh",
                 me: false,
-                timestamp: "2021-11-12 14:10:03"
+                timestamp: "2021-11-12 14:10:03",
               },
               {
                 content: "Oh yeah? Why's that?",
                 me: true,
-                timestamp: "2021-10-12 16:10:03"
+                timestamp: "2021-10-12 16:10:03",
               },
               {
                 content: "What's kept you busy?",
                 me: true,
-                timestamp: "2021-10-12 16:11:03"
+                timestamp: "2021-10-12 16:11:03",
               },
               {
                 content: "The project I'm working on is taking forever",
                 me: false,
-                timestamp: "2021-10-12 22:10:03"
+                timestamp: "2021-10-12 22:10:03",
               },
               {
                 content: "Sorry to hear that",
                 me: true,
-                timestamp: "2021-10-12 23:00:03"
+                timestamp: "2021-10-12 23:00:03",
               },
             ],
           },
