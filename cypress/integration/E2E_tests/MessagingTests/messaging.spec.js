@@ -14,27 +14,35 @@ describe("On the messaging page, can", () => {
       .first()
       .click();
     cy.get("[data-cy=messages-window]").should("be.visible");
+    cy.get("[data-cy=name]").should("include.text", "John Doe");
+    cy.get("[data-cy=username]").should("include.text", "@johndoe");
   });
   it("search for people", () => {
     cy.get("[data-cy=search]")
       .click()
-      .type("Jane Doe");
+      .type("Jane Doe")
+      .type('{enter}');
   });
   it("create new chat", () => {
     cy.get("[data-cy=new-message]").click();
   });
   it("can press the emoji button", () => {
-    cy.get("[data-cy=chat]")
-      .first()
+    cy.get("[data-cy=emoji-button]")
+      .should("be.visible")
       .click();
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal("You clicked the icon!")
+    })  
+  });
+  it("can press the attachment/media button", () => {
     cy.get("[data-cy=image-button]")
       .should("be.visible")
       .click();
+    cy.on('window:alert', (str) => {
+        expect(str).to.equal("You clicked the icon!")
+    })  
   });
   it("send a message", () => {
-    cy.get("[data-cy=chat]")
-      .first()
-      .click();
     cy.get("[data-cy=send-message]")
       .click()
       .type("Hello");

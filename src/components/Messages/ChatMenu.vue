@@ -44,6 +44,7 @@
           color="primary"
           width="100%"
           data-cy="new-message"
+          @click="newConversation"
         >
           <v-icon left>
             mdi-pencil
@@ -69,7 +70,7 @@
               user.name,
               user.username,
               user.img,
-              user.messages
+              user.messages,
             )"
         >
           <v-list-item
@@ -132,56 +133,69 @@ export default {
           messages: [
             {
               content: 'Hey! How have you been',
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:10:03'
             },
             {
               content: "Yoooo, I've been good, you?",
-              me: false
+              me: false,
+              timestamp: '2022-02-10 15:15:03'
             },
             {
               content: "I've been sooo busy lately",
-              me: false
+              me: false,
+              timestamp: '2022-02-10 15:15:13'
             },
             {
               content: "I'm good, tired as per usual",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:16:15'
             },
             {
               content: "What's kept you busy?",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:16:40'
             },
             {
               content:
                   'This new project I took on, man is it time consuming. I thought it was going to be a lot easier...',
-              me: false
+              me: false,
+              timestamp: '2022-02-10 15:18:08'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:19:20'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:20:32'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:21:03'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:22:03'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:23:03'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:24:03'
             },
             {
               content: "Rip, I hope it's fun at least",
-              me: true
+              me: true,
+              timestamp: '2022-02-10 15:25:03'
             }
           ]
         },
@@ -196,11 +210,13 @@ export default {
           messages: [
             {
               content: 'Are you planning on going to the party on Friday?',
-              me: true
+              me: true,
+              timestamp: '2022-01-27 15:10:03'
             },
             {
               content: 'Not sure yet',
-              me: false
+              me: false,
+              timestamp: '2022-01-27 19:10:03'
             }
           ]
         },
@@ -214,31 +230,38 @@ export default {
           messages: [
             {
               content: 'Happy thanksgiving! How are you?',
-              me: true
+              me: true,
+              timestamp: '2021-10-12 10:10:03'
             },
             {
               content: "Thanks! I'm good you?",
-              me: false
+              me: false,
+              timestamp: '2021-10-12 11:10:03'
             },
             {
               content: 'Tired of work tbh',
-              me: false
+              me: false,
+              timestamp: '2021-11-12 14:10:03'
             },
             {
               content: "Oh yeah? Why's that?",
-              me: true
+              me: true,
+              timestamp: '2021-10-12 16:10:03'
             },
             {
               content: "What's kept you busy?",
-              me: true
+              me: true,
+              timestamp: '2021-10-12 16:11:03'
             },
             {
               content: "The project I'm working on is taking forever",
-              me: false
+              me: false,
+              timestamp: '2021-10-12 22:10:03'
             },
             {
               content: 'Sorry to hear that',
-              me: true
+              me: true,
+              timestamp: '2021-10-12 23:00:03'
             }
           ]
         }
