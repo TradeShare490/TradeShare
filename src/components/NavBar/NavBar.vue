@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-app-bar color="primary" dark app clipped-left>
+    <v-app-bar
+      color="primary"
+      dark
+      app
+      clipped-left
+    >
       <v-img
         src="../../assets/TS_Logo_White.png"
         alt="TradeShare Logo"
@@ -31,25 +36,37 @@
         solo
         data-cy="autocomplete-search-bar"
       >
-        <template v-slot:item="data">
+        <template #item="data">
           <v-list-item
-            class="text-left text-body-2"
-            @click="redirect(data.item['1. symbol'])"
-            data-cy="autocomplete-list-item"
             v-if="!searchModeUsers"
+            class="text-left text-body-2"
+            data-cy="autocomplete-list-item"
+            @click="redirect(data.item['1. symbol'])"
           >
             <strong>{{ data.item["1. symbol"] }}:</strong> &nbsp;
             {{ data.item["2. name"] }}
           </v-list-item>
-          <v-list-item class="text-left text-body-2" v-if="searchModeUsers" data-cy="autocomplete-name-list">
+          <v-list-item
+            v-if="searchModeUsers"
+            class="text-left text-body-2"
+            data-cy="autocomplete-name-list"
+          >
             {{ data.item }}
           </v-list-item>
         </template>
       </v-autocomplete>
-      <v-btn icon class="mt-1">
+      <v-btn
+        icon
+        class="mt-1"
+      >
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn icon @click="submit" class="mt-1" data-cy="logout-btn">
+      <v-btn
+        icon
+        class="mt-1"
+        data-cy="logout-btn"
+        @click="submit"
+      >
         <v-icon> mdi-logout </v-icon>
       </v-btn>
     </v-app-bar>
@@ -57,90 +74,88 @@
 </template>
 
 <script>
-import { logout } from "../../hooks/useCredential.js";
-import axios from "../../axios/axios.v1";
+import { logout } from '../../hooks/useCredential.js'
+import axios from '../../axios/axios.v1'
 export default {
-  name: "NavBar",
-  data() {
+  name: 'NavBar',
+  data () {
     return {
       stocks: [],
-      people: ["@Kevin", "@George", "@Alya", "@Siobhan"],
+      people: ['@Kevin', '@George', '@Alya', '@Siobhan'],
       searchModeUsers: false,
       isLoading: false,
       searchModel: null,
       search: null,
-      searchQueue: [],
-    };
+      searchQueue: []
+    }
   },
   computed: {
     /* istanbul ignore next */
-    fields() {
-      if (!this.searchModel) return [];
+    fields () {
+      if (!this.searchModel) return []
       return Object.keys(this.searchModel).map((key) => {
         return {
           key,
-          value: this.searchModel[key] || "n/a",
-        };
-      });
+          value: this.searchModel[key] || 'n/a'
+        }
+      })
     },
-    items() {
+    items () {
       if (this.searchModeUsers) {
-        return this.people;
+        return this.people
       } else {
         return this.stocks.map((stock) => {
-          const Description = stock["1. symbol"] + ": " + stock["2. name"];
-          return Object.assign({}, stock, { Description });
-        });
+          const Description = stock['1. symbol'] + ': ' + stock['2. name']
+          return Object.assign({}, stock, { Description })
+        })
       }
-    },
-  },
-  methods: {
-    submit() {
-      logout(this.$store, this.$router);
-    },
-    redirect(symbol) {
-      const regex = /^\S+$/;
-      if (regex.test(symbol)) {
-        window.open("https://finance.yahoo.com/quote/" + symbol);
-      }
-      return true;
-    },
+    }
   },
   watch: {
-    async search(val) {
+    async search (val) {
       // Checks if the user has typed anything in the last 2 seconds if not make a request to backend
-      if (val?.charAt(0) === "@") {
-        console.log("Username mode");
-        this.searchModeUsers = true;
+      if (val?.charAt(0) === '@') {
+        console.log('Username mode')
+        this.searchModeUsers = true
       } else {
         this.searchModeUsers = false
-        this.searchQueue.push(val);
-        await new Promise((_) => setTimeout(_, 2000));
-        this.searchQueue.pop();
+        this.searchQueue.push(val)
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        this.searchQueue.pop()
         if (this.searchQueue.length === 0) {
           if (val?.length === 0) {
-            return;
+            return
           }
           if (this.isLoading) {
-            return;
+            return
           }
-
-          this.isLoading = true;
-
+          this.isLoading = true
           // Lazily load input items
           /* istanbul ignore catch */
           axios
             .get(`/searchRecommendations/${val}`)
             .then((res) => {
-              this.stocks = res.data["searchResult"]["bestMatches"];
+              this.stocks = res.data.searchResult.bestMatches
             })
             .catch((err) => {
-              console.log(err);
+              console.log(err)
             })
-            .finally(() => (this.isLoading = false));
+            .finally(() => (this.isLoading = false))
         }
       }
-    },
+    }
   },
-};
+  methods: {
+    submit () {
+      logout(this.$store, this.$router)
+    },
+    redirect (symbol) {
+      const regex = /^\S+$/
+      if (regex.test(symbol)) {
+        window.open('https://finance.yahoo.com/quote/' + symbol)
+      }
+      return true
+    }
+  }
+}
 </script>

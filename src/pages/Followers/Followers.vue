@@ -3,7 +3,7 @@
     <v-tabs centered>
       <v-tab :ripple="false">
         <em class="mdi mdi-account-multiple" />
-          <span>FOLLOWERS</span>
+        <span>FOLLOWERS</span>
       </v-tab>
       <v-tab :ripple="false">
         <em class="mdi mdi-exclamation" />
@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import UserBlock from "./../../components/FollowerFollowing/UserBlock.vue";
-import SearchViewBy from "../../components/SearchViewBy/SearchViewBy.vue";
+import UserBlock from './../../components/FollowerFollowing/UserBlock.vue'
+import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
 
 export default {
-  name: "Followers",
+  name: 'FollowersPage',
   components: {
     UserBlock,
     SearchViewBy

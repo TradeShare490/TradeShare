@@ -1,17 +1,17 @@
 <template>
-  <Confirm :brokerageApp="Alpaca" />
+  <Confirm :brokerage-app="Alpaca" />
 </template>
 
 <script>
-import Confirm from "../../components/Brokerage/Confirm";
+import Confirm from '../../components/Brokerage/Confirm'
 export default {
-  name: "Confirm.vue",
+  name: 'ConfirmVue',
   components: { Confirm },
-  data() {
+  data () {
     return {
-      Alpaca: "Alpaca",
+      Alpaca: 'Alpaca'
     }
   }
 
-};
+}
 </script>

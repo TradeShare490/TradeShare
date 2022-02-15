@@ -1,5 +1,8 @@
 <template>
-  <v-card elevation="0" class="px-6">
+  <v-card
+    elevation="0"
+    class="px-6"
+  >
     <v-row>
       <v-spacer />
       <v-col
@@ -17,12 +20,11 @@
         order-xl="2"
       >
         <v-autocomplete
-          dense
           v-model="select"
+          dense
           :loading="isLoading"
           :items="users"
           :search-input="search"
-          @update:search-input="(val) => (search = val)"
           class="inputfield mx-4 mt-0"
           flat
           hide-no-data
@@ -37,53 +39,53 @@
           append-icon="mdi-magnify"
           solo
           data-cy="search"
+          @update:search-input="(val) => (search = val)"
         />
       </v-col>
     </v-row>
-    <v-divider class="mt-3"></v-divider>
+    <v-divider class="mt-3" />
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "SearchViewBy",
-  data() {
+  name: 'SearchViewBy',
+  data () {
     return {
       search: null,
       select: null,
       isLoading: false,
       values: [],
-      items: ["Friend", "Family", "Work", "Expert", "Untagged"],
       users: [],
       listUsers: [
-        "Mary Winchester",
-        "John Winchester",
-        "Tim Robenman",
-        "Ash Britan",
-        "Mac Kafe",
-        "Jenny Silver",
-      ],
-    };
+        'Mary Winchester',
+        'John Winchester',
+        'Tim Robenman',
+        'Ash Britan',
+        'Mac Kafe',
+        'Jenny Silver'
+      ]
+    }
   },
   watch: {
-    search(val) {
-      this.users = [];
-      val && val !== this.select && this.querySelections();
-    },
+    search (val) {
+      this.users = []
+      val && val !== this.select && this.querySelections()
+    }
   },
   methods: {
-    querySelections(v) {
-      this.isLoading = true;
+    querySelections (v) {
+      this.isLoading = true
       // Simulated ajax query
       setTimeout(() => {
         this.users = this.listUsers.filter((e) => {
-          return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-        });
-        this.isLoading = false;
-      }, 500);
-    },
-  },
-};
+          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+        })
+        this.isLoading = false
+      }, 500)
+    }
+  }
+}
 </script>
 <style scoped>
 .v-text-field--outlined:hover >>> fieldset {
