@@ -60,7 +60,7 @@
               </template>
               <template v-slot:item="data">
                 <v-list-item-avatar>
-                  <img :src="data.item.avatar" />
+                  <img :src="data.item.avatar" :alt="altText" />
                 </v-list-item-avatar>
                 <v-list-item-content data-cy="list-item">
                   <v-list-item-title>
@@ -96,6 +96,7 @@
         dialog: "",
         select: "",
         searchInput: null,
+        altText: "User avatar",
         people: [
           {
             id: 1,
