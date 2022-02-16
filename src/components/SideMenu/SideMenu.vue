@@ -1,12 +1,26 @@
 <template>
   <v-card>
-    <v-navigation-drawer app clipped permanent :mini-variant="mini">
-      <v-list-item class="hidden-sm-and-down" data-cy="profile">
+    <v-navigation-drawer
+      app
+      clipped
+      permanent
+      :mini-variant="mini"
+    >
+      <v-list-item
+        class="hidden-sm-and-down"
+        data-cy="profile"
+      >
         <v-list-item-content class="mb-0 pb-0">
-          <v-list-item-avatar size="55%" style="flex-direction: column;">
-            <v-img src="https://randomuser.me/api/portraits/men/1.jpg"></v-img>
+          <v-list-item-avatar
+            size="55%"
+            style="flex-direction: column;"
+          >
+            <v-img src="https://randomuser.me/api/portraits/men/1.jpg" />
           </v-list-item-avatar>
-          <v-list-item-title class="mt-3" data-cy="user-name">
+          <v-list-item-title
+            class="mt-3"
+            data-cy="user-name"
+          >
             {{ user.firstname + " " + user.lastname }}
           </v-list-item-title>
           <v-list-item-subtitle class="text-caption black--text ">
@@ -39,11 +53,15 @@
           </v-container>
         </v-list-item-content>
       </v-list-item>
-
       <v-divider class="my-3 hidden-sm-and-down" />
-
-      <v-list dense nav>
-        <v-list-item-group v-model="selectedItem" color="primary">
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item-group
+          v-model="selectedItem"
+          color="primary"
+        >
           <v-list-item
             v-for="item in upperNav"
             :key="item.title"
@@ -56,7 +74,6 @@
                 {{ item.icon }}
               </v-icon>
             </v-list-item-icon>
-
             <v-list-item-content>
               <v-list-item-title class="text-left">
                 {{ item.title }}
@@ -65,11 +82,15 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-
       <v-divider class="my-3" />
-
-      <v-list dense nav>
-        <v-list-item-group v-model="selectedItem" color="primary">
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item-group
+          v-model="selectedItem"
+          color="primary"
+        >
           <v-list-item
             v-for="item in lowerNav"
             :key="item.title"
@@ -81,7 +102,6 @@
                 {{ item.icon }}
               </v-icon>
             </v-list-item-icon>
-
             <v-list-item-content>
               <v-list-item-title class="text-left">
                 {{ item.title }}
@@ -90,8 +110,7 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-
-      <template v-slot:append>
+      <template #append>
         <v-container class="hidden-sm-and-down">
           <v-row no-gutters>
             <v-col>
@@ -120,9 +139,7 @@
               <v-icon size="17">
                 mdi-copyright
               </v-icon>
-              <span class="grey--text text--darken-2 font-weight-bold"
-                >TradeShare</span
-              >
+              <span class="grey--text text--darken-2 font-weight-bold">TradeShare</span>
             </v-col>
           </v-row>
         </v-container>
@@ -132,52 +149,33 @@
 </template>
 <!-- TradeZone icon could also be chart-areaspline-->
 <script>
-  export default {
-    data() {
-      return {
-        selectedItem: "",
-        upperNav: [
-          {
-            title: "Trade Zone",
-            icon: "mdi-target-variant",
-            route: "/tradezone",
-          },
-          {
-            title: "Dashboard",
-            icon: "mdi-view-dashboard",
-            route: "/dashboard",
-          },
-          { title: "Messages", icon: "mdi-forum", route: "/messages/0" },
-          {
-            title: "Preferences",
-            icon: "mdi-lock-open-outline ",
-            route: "/preferences",
-          },
-          {
-            title: "Connected Apps",
-            icon: "mdi-apps ",
-            route: "/connected-apps",
-          },
-        ],
-        lowerNav: [
-          {
-            title: "Support",
-            icon: "mdi-help-circle-outline",
-            route: "/support",
-          },
-        ],
-        since: "Member since 2021",
-        numFollowing: "190K",
-        numFollowers: "295K",
-      };
+export default {
+  name: 'SideMenu',
+  data () {
+    return {
+      selectedItem: '',
+      upperNav: [
+        { title: 'Trade Zone', icon: 'mdi-target-variant', route: '/tradezone' },
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', route: '/dashboard' },
+        { title: 'Messages', icon: 'mdi-forum', route: '/messages/0' },
+        { title: 'Preferences', icon: 'mdi-lock-open-outline ', route: '/preferences' },
+        { title: 'Connected Apps', icon: 'mdi-apps ', route: '/connected-apps' }
+      ],
+      lowerNav: [
+        { title: 'Support', icon: 'mdi-help-circle-outline', route: '/support' }
+      ],
+      since: 'Member since 2021',
+      numFollowing: '190K',
+      numFollowers: '295K'
+    }
+  },
+  computed: {
+    mini () {
+      return this.$vuetify.breakpoint.smAndDown
     },
-    computed: {
-      mini() {
-        return this.$vuetify.breakpoint.smAndDown;
-      },
-      user() {
-        return JSON.parse(localStorage.getItem("user"));
-      },
-    },
-  };
+    user () {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  }
+}
 </script>

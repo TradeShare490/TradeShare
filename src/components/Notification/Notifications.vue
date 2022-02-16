@@ -7,8 +7,17 @@
     class="py-0"
     data-cy="notif-alert"
   >
-    <v-row no-gutters class="mt-2">
-      <v-icon class="mt-0 pb-1" large color="primary"> mdi-exclamation </v-icon>
+    <v-row
+      no-gutters
+      class="mt-2"
+    >
+      <v-icon
+        class="mt-0 pb-1"
+        large
+        color="primary"
+      >
+        mdi-exclamation
+      </v-icon>
       <v-col
         class="mt-0 pb-2"
         align-self="center"
@@ -18,8 +27,12 @@
         lg="1"
         xl="1"
       >
-        <v-avatar data-cy="notif-profile-pic" class="profile" size="40">
-          <v-img :src="image"></v-img>
+        <v-avatar
+          data-cy="notif-profile-pic"
+          class="profile"
+          size="40"
+        >
+          <v-img :src="image" />
         </v-avatar>
       </v-col>
       <v-col
@@ -55,25 +68,25 @@
         align-self="center"
       >
         <v-btn
+          v-if="user.following == true"
           elevation="0"
           outlined
           color="primary"
-          v-if="user.following == true"
-          @click="unfollow"
           class="my-3 caption"
           small
           data-cy="notif-unfollow-button"
+          @click="unfollow"
         >
           Following
         </v-btn>
         <v-btn
+          v-if="user.following == false"
           small
           elevation="0"
           color="primary"
-          v-if="user.following == false"
-          @click="follow"
           class="my-3 caption"
           data-cy="notif-follow-button"
+          @click="follow"
         >
           Follow
         </v-btn>
@@ -83,20 +96,32 @@
 </template>
 
 <script>
-import { useFollowMixin } from "../../hooks/useFollowMixin.js";
+import { useFollowMixin } from '../../hooks/useFollowMixin.js'
 export default {
-  name: "FollowNotif",
+  name: 'FollowNotif',
   mixins: [useFollowMixin],
   props: {
-    currentlyFollowing: Boolean,
-    image: String,
-    message: String,
-    icon: String
+    currentlyFollowing: {
+      type: Boolean,
+      default: false
+    },
+    image: {
+      type: String,
+      default: ''
+    },
+    message: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    }
   },
-  data() {
+  data () {
     return {
       user: { following: this.currentlyFollowing }
-    };
-  },
-};
+    }
+  }
+}
 </script>

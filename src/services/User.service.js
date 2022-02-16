@@ -1,85 +1,83 @@
-import axios from "../axios/axios.v1";
+import axios from '../axios/axios.v1'
 
 class UserService {
-  constructor() {}
-
   /* istanbul ignore next */
-  async signup(credentials) {
+  async signup (credentials) {
     try {
-      const { data } = await axios.post("/user", credentials);
-      console.log(data);
+      const { data } = await axios.post('/user', credentials)
+      console.log(data)
 
       // should be a good response here, but double check for sure
-      return { success: data.success };
+      return { success: data.success }
     } catch (err) {
-      console.log(err);
-      return { success: false, message: err.response.data.message };
+      console.log(err)
+      return { success: false, message: err.response.data.message }
     }
   }
 
   /* istanbul ignore next */
-  async getPositions(userID) {
-    let userPortfolioData = null;
+  async getPositions (userID) {
+    let userPortfolioData = null
     await axios
-      .get("/positions/" + userID)
-      .then(function(res) {
-        res.data.positions.forEach(function(position) {
-          position.verified = true;
-          position.date = new Date().toLocaleString();
-        });
-        userPortfolioData = res.data.positions;
+      .get('/positions/' + userID)
+      .then(function (res) {
+        res.data.positions.forEach(function (position) {
+          position.verified = true
+          position.date = new Date().toLocaleString()
+        })
+        userPortfolioData = res.data.positions
       })
-      .catch(function(err) {
-        console.log(err);
-        return null;
-      });
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
 
-    return userPortfolioData;
+    return userPortfolioData
   }
 
   /* istanbul ignore next */
-  async getAccount(userID) {
-    let userAccountData = null;
+  async getAccount (userID) {
+    let userAccountData = null
     await axios
-      .get("/account/" + userID)
-      .then(function(res) {
-        userAccountData = res.data.account;
+      .get('/account/' + userID)
+      .then(function (res) {
+        userAccountData = res.data.account
       })
-      .catch(function(err) {
-        console.log(err);
-        return null;
-      });
-    return userAccountData;
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return userAccountData
   }
 
   /* istanbul ignore next */
-  async getUserInfo(userID) {
-    let userProfileData = null;
+  async getUserInfo (userID) {
+    let userProfileData = null
     await axios
-      .get("/userInfo/" + userID)
-      .then(function(res) {
-        userProfileData = res.data;
+      .get('/userInfo/' + userID)
+      .then(function (res) {
+        userProfileData = res.data
       })
-      .catch(function(err) {
-        console.log(err);
-        return null;
-      });
-    return userProfileData;
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return userProfileData
   }
 
   /* istanbul ignore next */
-  async integrateAlpaca(code, userId) {
+  async integrateAlpaca (code, userId) {
     try {
-      const { data } = await axios.patch("/userInfo/alpaca/" + userId, {
+      const { data } = await axios.patch('/userInfo/alpaca/' + userId, {
         code: code
-      });
-      console.log(data.message);
+      })
+      console.log(data.message)
 
       // should be a good response here, but double check for sure
-      return { data };
+      return { data }
     } catch (err) {
-      console.log(err);
-      return { success: false, message: err.response.data.message };
+      console.log(err)
+      return { success: false, message: err.response.data.message }
     }
   }
 }
