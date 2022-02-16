@@ -1,7 +1,15 @@
 <template>
-  <v-dialog v-model="dialog" scrollable max-width="500px">
-    <template v-slot:activator="{ on, attrs }">
-      <v-col cols="12" align-self="center" class="px-7 pb-6">
+  <v-dialog
+    v-model="dialog"
+    scrollable
+    max-width="500px"
+  >
+    <template #activator="{ on, attrs }">
+      <v-col
+        cols="12"
+        align-self="center"
+        class="px-7 pb-6"
+      >
         <v-btn
           small
           color="primary"
@@ -20,15 +28,25 @@
     <v-card class="overflow-hidden">
       <v-row>
         <v-col cols="1">
-          <v-icon class="pt-3 pl-3" @click="dialog = false">close</v-icon>
+          <v-icon
+            class="pt-3 pl-3"
+            @click="dialog = false"
+          >
+            close
+          </v-icon>
         </v-col>
         <v-col>
-          <v-card-title class="justify-center mr-10">New Message</v-card-title>
+          <v-card-title class="justify-center mr-10">
+            New Message
+          </v-card-title>
         </v-col>
       </v-row>
       <v-container>
         <v-row>
-          <v-col cols="8" class="pl-8">
+          <v-col
+            cols="8"
+            class="pl-8"
+          >
             <v-autocomplete
               v-model="select"
               :items="people"
@@ -43,11 +61,11 @@
               flat
               append-icon="mdi-magnify"
               multiple
-              @input="searchInput = null"
               :search-input.sync="searchInput"
               data-cy="chat-user"
+              @input="searchInput = null"
             >
-              <template v-slot:selection="data">
+              <template #selection="data">
                 <v-chip
                   v-bind="data.attrs"
                   :input-value="data.selected"
@@ -58,9 +76,12 @@
                   {{ data.item.name }}
                 </v-chip>
               </template>
-              <template v-slot:item="data">
+              <template #item="data">
                 <v-list-item-avatar>
-                  <img :src="data.item.avatar" :alt="altText" />
+                  <img
+                    :src="data.item.avatar"
+                    :alt="altText"
+                  >
                 </v-list-item-avatar>
                 <v-list-item-content data-cy="list-item">
                   <v-list-item-title>
@@ -77,10 +98,11 @@
             <v-btn
               class="justify center"
               color="primary"
-              @click="createConversation(select)"
               data-cy="next-button"
-              >Next</v-btn
+              @click="createConversation(select)"
             >
+              Next
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -89,41 +111,41 @@
 </template>
 
 <script>
-  export default {
-    name: "NewMessage",
-    data() {
-      return {
-        dialog: "",
-        select: "",
-        searchInput: null,
-        altText: "User avatar",
-        people: [
-          {
-            id: 1,
-            name: "John Doe",
-            username: "@johndoe",
-            avatar: "https://randomuser.me/api/portraits/men/52.jpg",
-          },
-          {
-            id: 2,
-            name: "Jane Doe",
-            username: "@janedoe",
-            avatar: "https://randomuser.me/api/portraits/women/45.jpg",
-          },
-        ],
-      };
-    },
-    methods: {
-      remove(item) {
-        const index = this.select.indexOf(item.name);
-        if (index >= 0) this.select.splice(index, 1);
-      },
-      createConversation(select) {
-        if (select.length > 0) {
-          this.dialog = false;
-          alert("You created a new conversation!")
+export default {
+  name: 'NewMessage',
+  data () {
+    return {
+      dialog: '',
+      select: '',
+      searchInput: null,
+      altText: 'User avatar',
+      people: [
+        {
+          id: 1,
+          name: 'John Doe',
+          username: '@johndoe',
+          avatar: 'https://randomuser.me/api/portraits/men/52.jpg'
+        },
+        {
+          id: 2,
+          name: 'Jane Doe',
+          username: '@janedoe',
+          avatar: 'https://randomuser.me/api/portraits/women/45.jpg'
         }
-      },
+      ]
+    }
+  },
+  methods: {
+    remove (item) {
+      const index = this.select.indexOf(item.name)
+      if (index >= 0) this.select.splice(index, 1)
     },
-  };
+    createConversation (select) {
+      if (select.length > 0) {
+        this.dialog = false
+        alert('You created a new conversation!')
+      }
+    }
+  }
+}
 </script>

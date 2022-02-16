@@ -101,11 +101,11 @@
 </template>
 
 <script>
-import NewMessage from "../Messages/NewMessage.vue";
+import NewMessage from '../Messages/NewMessage.vue'
 export default {
   name: 'ChatMenu',
   components: {
-    NewMessage,
+    NewMessage
   },
   computed: {
     chats () {
