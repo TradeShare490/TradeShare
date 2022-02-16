@@ -104,6 +104,9 @@
 import NewMessage from "../Messages/NewMessage.vue";
 export default {
   name: 'ChatMenu',
+  components: {
+    NewMessage,
+  },
   computed: {
     chats () {
       return [
