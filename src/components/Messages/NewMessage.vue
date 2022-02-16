@@ -121,6 +121,7 @@
       createConversation(select) {
         if (select.length > 0) {
           this.dialog = false;
+          alert("You created a new conversation!")
         }
       },
     },

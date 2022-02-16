@@ -28,7 +28,9 @@ describe("On the messaging page, can", () => {
     cy.get("[data-cy=chat-user]").click({ force: true }).type("John").type("{enter}")
     cy.get("[data-cy=list-item]").first().click()
     cy.get("[data-cy=next-button]").click()
-    cy.get("[data-cy=dialog]").should("not.exist")
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal("You created a new conversation!");
+    });
   });
   it("can press the emoji button", () => {
     cy.get("[data-cy=emoji-button]")
