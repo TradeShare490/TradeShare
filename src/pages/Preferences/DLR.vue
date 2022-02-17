@@ -8,15 +8,11 @@
       width="800"
       height="100vh"
       class="px-12"
-      :class="{
-        'ml-9': $vuetify.breakpoint.xsOnly
-      }"
+      :class="{ 'ml-9': $vuetify.breakpoint.xsOnly }"
     >
       <span
         class="font-weight-bold d-flex justify-start mx-3 mt-5 mb-12"
-        :class="{
-          'text-left': $vuetify.breakpoint.xsOnly
-        }"
+        :class="{ 'text-left': $vuetify.breakpoint.xsOnly }"
         style="color: #66788A"
       >
         DISPLAY, LANGUAGE & REGION
@@ -24,9 +20,7 @@
       <v-divider class="mb-8" />
       <div
         class="d-flex justify-start mx-12 mt-5 mb-10"
-        :class="{
-          'flex-column': $vuetify.breakpoint.xsOnly
-        }"
+        :class="{ 'flex-column': $vuetify.breakpoint.xsOnly }"
       >
         <span style="color: #66788A">
           Display
@@ -43,9 +37,7 @@
       <v-divider class="mb-8" />
       <div
         class="d-flex justify-space-between mx-12 my-5"
-        :class="{
-          'flex-column align-center': $vuetify.breakpoint.xsOnly
-        }"
+        :class="{ 'flex-column align-center': $vuetify.breakpoint.xsOnly }"
       >
         <span style="color: #66788A">
           Language
@@ -84,9 +76,7 @@
       <v-divider class="mb-8" />
       <div
         class="d-flex justify-space-between mx-12 my-5"
-        :class="{
-          'flex-column align-center': $vuetify.breakpoint.xsOnly
-        }"
+        :class="{ 'flex-column align-center': $vuetify.breakpoint.xsOnly }"
       >
         <span style="color: #66788A">
           Region
