@@ -5,18 +5,29 @@
   >
     <v-card
       min-width="350"
-      width="900"
+      width="800"
       height="100vh"
       class="px-12"
+      :class="{
+        'ml-9': $vuetify.breakpoint.xsOnly
+      }"
     >
       <span
         class="font-weight-bold d-flex justify-start mx-3 mt-5 mb-12"
+        :class="{
+          'text-left': $vuetify.breakpoint.xsOnly
+        }"
         style="color: #66788A"
       >
         DISPLAY, LANGUAGE & REGION
       </span>
       <v-divider class="mb-8" />
-      <div class="d-flex justify-start mx-12 mt-5 mb-10">
+      <div
+        class="d-flex justify-start mx-12 mt-5 mb-10"
+        :class="{
+          'flex-column': $vuetify.breakpoint.xsOnly
+        }"
+      >
         <span style="color: #66788A">
           Display
         </span>
@@ -30,11 +41,16 @@
         />
       </div>
       <v-divider class="mb-8" />
-      <div class="d-flex justify-space-between mx-12 my-5">
+      <div
+        class="d-flex justify-space-between mx-12 my-5"
+        :class="{
+          'flex-column align-center': $vuetify.breakpoint.xsOnly
+        }"
+      >
         <span style="color: #66788A">
           Language
         </span>
-        <div style="width: 250px">
+        <div style="max-width: 250px">
           <v-autocomplete
             v-model="selectLanguage"
             :items="languages"
@@ -45,10 +61,11 @@
             flat
             return-object
             label="Select a Language"
-            class="ml-n7"
+            class="ml-n7 mt-10"
           />
         </div>
         <v-btn
+          class="mt-10"
           filled
           color="primary"
           :ripple="false"
@@ -65,11 +82,16 @@
         </v-snackbar>
       </div>
       <v-divider class="mb-8" />
-      <div class="d-flex justify-space-between mx-12 my-5">
+      <div
+        class="d-flex justify-space-between mx-12 my-5"
+        :class="{
+          'flex-column align-center': $vuetify.breakpoint.xsOnly
+        }"
+      >
         <span style="color: #66788A">
           Region
         </span>
-        <div style="width: 250px">
+        <div style="max-width: 250px">
           <v-autocomplete
             v-model="selectRegion"
             :items="regions"
@@ -80,10 +102,11 @@
             flat
             return-object
             label="Select a Region"
-            class="ml-n5"
+            class="ml-n5 mt-10"
           />
         </div>
         <v-btn
+          class="mt-10"
           filled
           color="primary"
           :ripple="false"
