@@ -34,24 +34,7 @@
           data-cy="search"
         />
       </v-col>
-      <v-col
-        cols="12"
-        align-self="center"
-        class="px-8 pb-6"
-      >
-        <v-btn
-          small
-          color="primary"
-          width="100%"
-          data-cy="new-message"
-          @click="newConversation"
-        >
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          New Message
-        </v-btn>
-      </v-col>
+      <NewMessage />
     </v-row>
     <v-divider />
     <v-responsive
@@ -118,8 +101,12 @@
 </template>
 
 <script>
+import NewMessage from '../Messages/NewMessage.vue'
 export default {
   name: 'ChatMenu',
+  components: {
+    NewMessage
+  },
   computed: {
     chats () {
       return [
