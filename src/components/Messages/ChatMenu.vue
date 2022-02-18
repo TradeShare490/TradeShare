@@ -53,7 +53,7 @@
               user.name,
               user.username,
               user.img,
-              user.messages,
+              user.messages
             )"
         >
           <v-list-item

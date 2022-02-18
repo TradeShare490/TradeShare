@@ -159,6 +159,7 @@
 
 <script>
 import ChatMenu from '../Messages/ChatMenu.vue'
+
 export default {
   name: 'MessagesComponent',
   components: {
