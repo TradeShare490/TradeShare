@@ -29,7 +29,6 @@ export default {
   data () {
     return {
       apps: [
-        // <!-- '../../assets/ConnectedAppLogos/alpaca.png' -->
         {
           name: 'Alpaca',
           image: require('../../assets/ConnectedAppLogos/alpaca.png'),
