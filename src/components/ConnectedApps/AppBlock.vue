@@ -98,18 +98,21 @@
       max-width="600"
     >
       <v-card>
-        <v-card-title
-          v-if="link===true"
-          class="text-h6"
-        >
-          Are you sure you want to <span class="red--text">&nbsp;unlink&nbsp;</span> with {{ name }}  ?
-        </v-card-title>
-        <v-card-title
-          v-if="link===false"
-          class="text-h6"
-        >
-          To connect to {{ name }}, we will<span class="blue--text lighten-1--text">&nbsp;redirect&nbsp;</span>you to a new page
-        </v-card-title>
+        <div class="mt-5">
+          <v-card-text
+            v-if="link===true"
+            class="text-h6"
+          >
+            Are you sure you want to <span class="red--text">&nbsp;unlink&nbsp;</span> with {{ name }}  ?
+          </v-card-text>
+          <v-card-text
+            v-if="link===false"
+            class="text-h6"
+          >
+            To connect to {{ name }}, we will<span class="blue--text lighten-1--text">&nbsp;redirect&nbsp;</span>you to a new page
+          </v-card-text>
+        </div>
+        <v-divider />
         <v-card-actions>
           <v-spacer />
           <v-btn
