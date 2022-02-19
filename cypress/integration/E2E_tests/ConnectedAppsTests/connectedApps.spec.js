@@ -1,5 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-describe("On the following page, can", () => {
+describe("On the connected apps page, can", () => {
     it("link and unlink apps", () => {
       cy.login();
       cy.wait(2000);
