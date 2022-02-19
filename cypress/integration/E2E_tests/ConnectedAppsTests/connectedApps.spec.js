@@ -5,7 +5,7 @@ describe("On the connected apps page, can", () => {
       cy.wait(2000);
       cy.fixture("url").then((jsonFile) => {
         cy.visit(
-          `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.CONNECTEDAPPS}`
+          `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.CONNECTED_APPS}`
         );
       });
       cy.get("body").then(($body) => {
