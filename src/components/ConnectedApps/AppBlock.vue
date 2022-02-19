@@ -62,8 +62,7 @@
         >
           <v-btn
             v-if="link === false"
-            elevation="2"
-            outlined
+            elevation="1"
             color="primary"
             class="btn my-3 caption font-weight-bold"
             :data-cy="`${name}-linked`"
@@ -77,12 +76,13 @@
           </v-btn>
           <v-btn
             v-if="link === true"
-            elevation="2"
+            elevation="0"
             color="primary"
             class="btn my-3 caption font-weight-bold"
             :data-cy="`${name}-unlinked`"
             height="32px"
             width="110px"
+            outlined
 
             @click="handleDialog"
           >
