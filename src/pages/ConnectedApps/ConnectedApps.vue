@@ -43,7 +43,7 @@ export default {
         {
           name: 'Welbull',
           image: require('../../assets/ConnectedAppLogos/webull.png'),
-          linked: false
+          linked: true
         },
         {
           name: 'SoFi Invest',

@@ -66,7 +66,7 @@
             outlined
             color="primary"
             class="btn my-3 caption font-weight-bold"
-            data-cy="linked"
+            :data-cy="`${name}-linked`"
             height="32px"
             width="110px"
             @click="handleDialog"
@@ -80,9 +80,10 @@
             elevation="2"
             color="primary"
             class="btn my-3 caption font-weight-bold"
-            data-cy="follow"
+            :data-cy="`${name}-unlinked`"
             height="32px"
             width="110px"
+
             @click="handleDialog"
           >
             <div class="text">
@@ -113,6 +114,7 @@
           <v-spacer />
           <v-btn
             depressed
+            :data-cy="`${name}-handleDialogActionCancel`"
             @click="dialog = false"
           >
             Cancel
@@ -121,6 +123,7 @@
             class="ml-3"
             depressed
             color="primary"
+            :data-cy="`${name}-handleDialogActionSubmit`"
             @click="handleAction"
           >
             Confirm
@@ -128,6 +131,22 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      v-model="snackbar"
+      :snackbar-timeout="snackbarTimeout"
+      :color="snackbarColor"
+    >
+      {{ snackbarText }}
+      <template #action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -153,6 +172,10 @@ export default {
   },
   data () {
     return {
+      snackbar: false,
+      snackbarText: '',
+      snackbarColor: '',
+      snackbarTimeout: 2000,
       dialog: false,
       link: this.linked
     }
@@ -162,10 +185,23 @@ export default {
       this.dialog = true
     },
     handleAction () {
+      const err = false
+
       if (this.link === true) {
         this.removeApp()
       } else {
         this.connectApp()
+      }
+
+      if (err) {
+        this.snackbarText = 'Error occured.'
+        this.snackbarColor = 'error'
+        this.snackbar = true
+        return
+      } else {
+        this.snackbarText = 'Action completed'
+        this.snackbarColor = 'green'
+        this.snackbar = true
       }
       this.dialog = false
     }
