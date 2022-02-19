@@ -17,5 +17,5 @@
 	"TRADEZONE": "/tradezone",
 	"CONFIRM":"/confirm",
 	"POST":"/tradezone/@ashcoin63/1",
-	"CONNECTEDAPPS":"/connected-apps"
+	"CONNECTED_APPS":"/connected-apps"
 }
