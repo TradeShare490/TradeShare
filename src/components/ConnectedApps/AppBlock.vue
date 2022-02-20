@@ -39,6 +39,7 @@
           lg="5"
           xl="5"
           class="text-left mx-0 px-2 mt-1 py-0"
+          :class="{'d-none': $vuetify.breakpoint.xsOnly}"
         >
           <v-list-item color="black">
             <v-list-item-content class="py-1">

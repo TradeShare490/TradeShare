@@ -5,8 +5,8 @@
     </div>
     <div>
       <div
-        v-for="app in apps"
-        :key="app.name"
+        v-for="(app, i) in apps"
+        :key="i"
       >
         <AppBlock
           :name="app.name"
@@ -70,6 +70,11 @@ export default {
   background-color: white;
   height: 100%;
   flex-grow: 1;
+}
+@media only screen and (max-width: 768px) {
+  .container {
+  width: 100%;
+}
 }
 .title {
   color: rgb(72, 95, 151);
