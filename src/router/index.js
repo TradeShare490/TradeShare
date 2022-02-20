@@ -14,6 +14,7 @@ import AccountPreferences from '../pages/Preferences/Account'
 import NotificationsPreferences from '../pages/Preferences/Notifications'
 import PrivacySecurityPreferences from '../pages/Preferences/PrivacySecurity'
 import DLRPreferences from '../pages/Preferences/DLR'
+import ConnectedApps from '../pages/ConnectedApps/ConnectedApps.vue'
 
 Vue.use(VueRouter)
 
@@ -90,7 +91,8 @@ const routes = [
   },
   {
     path: '/connected-apps',
-    name: 'ConnectedApps'
+    name: 'ConnectedApps',
+    component: ConnectedApps
   },
   {
     path: '/support',

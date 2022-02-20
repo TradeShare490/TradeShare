@@ -16,5 +16,6 @@
 	"BROKERAGE_SIGNUP": "/brokerage-signup",
 	"TRADEZONE": "/tradezone",
 	"CONFIRM":"/confirm",
-	"POST":"/tradezone/@ashcoin63/1"
+	"POST":"/tradezone/@ashcoin63/1",
+	"CONNECTED_APPS":"/connected-apps"
 }
