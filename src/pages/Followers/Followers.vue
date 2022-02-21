@@ -10,39 +10,27 @@
         <span>FOLLOW REQUESTS</span>
       </v-tab>
       <v-tab-item class="mt-5">
-        <SearchViewBy />
-        <div
-          v-for="(follower, i) in followers"
-          :key="i"
-        >
-          <UserBlock
-            :id="follower.id"
-            :currentlyfollowing="follower.currentlyfollowing"
-            :name="`${follower.firstname} ${follower.lastname}`"
-            :username="follower.username"
-            :request="false"
-          />
+        <div v-if="followers.length!=0">
+          <SearchViewBy />
+          <div
+            v-for="(follower, i) in followers"
+            :key="i"
+          >
+            <UserBlock
+              :id="follower.id"
+              :currentlyfollowing="follower.currentlyfollowing"
+              :name="`${follower.firstname} ${follower.lastname}`"
+              :username="follower.username"
+              :request="false"
+            />
+          </div>
         </div>
-
-        <v-btn
-          color="primary"
-          block
-          @click="test"
+        <div
+          v-else
+          class="title font-weight-black text-center"
         >
-          this.followers
-        </v-btn>
-        <UserBlock
-          :currentlyfollowing="true"
-          name="Tim Robenman"
-          image="https://randomuser.me/api/portraits/men/52.jpg"
-          username="timrobenman"
-        />
-        <UserBlock
-          :currentlyfollowing="false"
-          name="Mary Winchester"
-          image="https://randomuser.me/api/portraits/women/79.jpg"
-          username="marywinchester"
-        />
+          EMPTY LIST
+        </div>
       </v-tab-item>
       <v-tab-item>
         <div class="mt-5" />
@@ -61,23 +49,6 @@
         />
       </v-tab-item>
     </v-tabs>
-    <!-- <v-snackbar
-      v-model="snackbar"
-      :snackbar-timeout="snackbarTimeout"
-      :color="snackbarColor"
-      centered
-    >
-      {{ snackbarText }}
-      <template #action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar> -->
   </div>
 </template>
 
@@ -93,31 +64,17 @@ export default {
     SearchViewBy
   },
   mixins: [useFollowMixin],
-  // props: {
-  //   userId: {
-  //     type: String,
-  //     default: ''
-  //   }
-  // },
   data () {
     return {
       followers: []
     }
   },
-  // computed: {
-  //   user () {
-  //     return JSON.parse(localStorage.getItem('user'))
-  //   }
-  // },
   created () {
     this.initialize()
   },
   methods: {
     async initialize () {
       this.getFollowersHook()
-    },
-    test () {
-      console.log(this.followers)
     }
   }
 }
@@ -139,5 +96,10 @@ export default {
 }
 .v-tab:hover {
   color: #3F51B5;
+}
+.title {
+  color: rgb(168, 168, 168);
+  font-size: 0.5em;
+padding: 50% 0;
 }
 </style>

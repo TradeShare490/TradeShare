@@ -20,7 +20,6 @@
           <v-avatar
             class="profile"
             size="50"
-            @click="test"
           >
             <v-img :src="image" />
           </v-avatar>
@@ -149,7 +148,6 @@
       v-model="snackbarFollow"
       :timeout="snackbarTimeout"
       :color="snackbarColor"
-      centered
     >
       {{ snackbarText }}
       <template #action="{ attrs }">
@@ -199,8 +197,11 @@ export default {
   data () {
     return {
       userStat: { following: this.currentlyfollowing },
-      request: this.requestblock
-
+      request: this.requestblock,
+      snackbarFollow: false,
+      snackbarText: 'snackbarText',
+      snackbarColor: 'primary',
+      snackbarTimeout: 1000
     }
   },
   computed: {
@@ -213,14 +214,6 @@ export default {
         xl: 'small'
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
-    }
-
-  },
-  methods: {
-    test () {
-      console.log('this.userStat.id ' + this.userStat.id)
-      console.log('this.userStat.following ' + this.userStat.following)
-      console.log('this.currentlyfollowing ' + this.currentlyfollowing)
     }
 
   }

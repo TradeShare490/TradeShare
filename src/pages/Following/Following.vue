@@ -1,38 +1,26 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <SearchViewBy />
-    <div
-      v-for="(following, i) in followings"
-      :key="i"
-    >
-      <UserBlock
-        :id="following.id"
-        :currentlyfollowing="following.currentlyfollowing"
-        :name="`${following.firstname} ${following.lastname}`"
-        :username="following.username"
-        :request="false"
-      />
+    <div v-if="followings.length!=0">
+      <SearchViewBy />
+      <div
+        v-for="(following, i) in followings"
+        :key="i"
+      >
+        <UserBlock
+          :id="following.id"
+          :currentlyfollowing="following.currentlyfollowing"
+          :name="`${following.firstname} ${following.lastname}`"
+          :username="following.username"
+          :request="false"
+        />
+      </div>
     </div>
-
-    <v-btn
-      color="primary"
-      block
-      @click="test"
+    <div
+      v-else
+      class="title font-weight-black text-center"
     >
-      this.followings
-    </v-btn>
-    <UserBlock
-      :currentlyfollowing="true"
-      name="Tim Robenman"
-      image="https://randomuser.me/api/portraits/men/52.jpg"
-      username="timrobenman"
-    />
-    <UserBlock
-      :currentlyfollowing="false"
-      name="John Winchester"
-      image="https://randomuser.me/api/portraits/men/75.jpg"
-      username="johnwinchester"
-    />
+      EMPTY LIST
+    </div>
   </div>
 </template>
 
@@ -40,7 +28,6 @@
 import UserBlock from './../../components/FollowerFollowing/UserBlock.vue'
 import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
 import { useFollowMixin } from '../../hooks/useFollowMixin.js'
-// import UserService from '../../services/User.service'
 
 export default {
   name: 'FollowingPage',
@@ -60,11 +47,6 @@ export default {
   methods: {
     async initialize () {
       this.getFollowingsHook()
-    },
-    test () {
-      console.log(this.followings)
-      this.snackbarFollow = true
-      // console.log(this.user.userId)
     }
   }
 }
@@ -80,5 +62,10 @@ export default {
   .container {
   width: 100%;
 }
+}
+.title {
+  color: rgb(168, 168, 168);
+  font-size: 0.5em;
+padding: 50% 0;
 }
 </style>

@@ -16,7 +16,6 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userID) {
-    console.log('getPositions ' + userID)
     let userPortfolioData = null
     await axios
       .get('/positions/' + userID)
@@ -31,10 +30,10 @@ class UserService {
         console.log(err)
         return null
       })
-    console.log(userPortfolioData)
     return userPortfolioData
   }
 
+  /* istanbul ignore next */
   async postUnfollow (credentials) {
     try {
       const response = await axios.post('/following/unfollow', credentials)
@@ -45,6 +44,7 @@ class UserService {
     }
   }
 
+  /* istanbul ignore next */
   async postFollow (credentials) {
     try {
       const response = await axios.post('/following/follow', credentials)
@@ -61,7 +61,6 @@ class UserService {
     await axios
       .get('/following/follows/' + userID)
       .then(function (res) {
-        // console.log(res.data)
         followings = res.data.length
       })
       .catch(function (err) {
@@ -72,7 +71,6 @@ class UserService {
     await axios
       .get('/following/followers/' + userID)
       .then(function (res2) {
-        // console.log(res2.data)
         followers = res2.data.length
       })
       .catch(function (err2) {
@@ -80,13 +78,11 @@ class UserService {
         return null
       })
     const values = { numFollowing: followings, numFollowers: followers }
-    // console.log(values)
     return values
   }
 
   /* istanbul ignore next */
   async getFollowers (userID) {
-    console.log('getFollowers ' + userID)
     let followersData = null
     await axios
       .get('/following/followers/' + userID)
@@ -104,7 +100,6 @@ class UserService {
       followerList.push(obj)
     }
 
-    console.log('MY FOLLOWING')
     let followingsData = null
     await axios
       .get('/following/follows/' + userID)
@@ -115,7 +110,6 @@ class UserService {
         console.log(err)
         return null
       })
-    console.log(followingsData)
     for (const id of followingsData) {
       for (const follower of followerList) {
         if (id.indexOf(follower.id) !== -1) {
@@ -124,14 +118,11 @@ class UserService {
         }
       }
     }
-    console.log('end')
-    console.log(followerList)
     return followerList
   }
 
   /* istanbul ignore next */
   async getFollowings (userID) {
-    console.log('getFollowing ' + userID)
     let followingsData = null
     await axios
       .get('/following/follows/' + userID)

@@ -1,14 +1,6 @@
 /* istanbul ignore file */
 import UserService from '../services/User.service'
 export const useFollowMixin = {
-  data () {
-    return {
-      snackbarFollow: false,
-      snackbarText: 'snackbarText',
-      snackbarColor: 'primary',
-      snackbarTimeout: 1000
-    }
-  },
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
@@ -23,7 +15,6 @@ export const useFollowMixin = {
       }
     },
     async getFollowersHook () {
-      console.log('sup')
       try {
         this.followers = await UserService.getFollowers(this.user.userId)
       } catch (err) {
@@ -70,7 +61,6 @@ export const useFollowMixin = {
       }
     },
     toogleSnackbar (status) {
-      console.log(status)
       if (status === 0) {
         this.snackbarText = ('Followed ' + this.name)
       } else {
