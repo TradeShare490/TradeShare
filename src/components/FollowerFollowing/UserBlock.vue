@@ -19,6 +19,7 @@
         <v-avatar
           class="profile"
           size="50"
+          @click="test"
         >
           <v-img :src="image" />
         </v-avatar>
@@ -161,7 +162,7 @@ export default {
     },
     image: {
       type: String,
-      default: ''
+      default: require('../../assets/default_user.png')
     },
     username: {
       type: String,
@@ -188,6 +189,12 @@ export default {
         xl: 'small'
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
+    }
+  },
+  methods: {
+    test () {
+      console.log('this.user.following ' + this.user.following)
+      console.log('this.currentlyfollowing ' + this.currentlyfollowing)
     }
   }
 }

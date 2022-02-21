@@ -37,7 +37,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ numFollowing + " Following" }}
+                  {{ follows.numFollowing + " Following" }}
                 </router-link>
               </v-col>
               <v-col>
@@ -46,7 +46,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ numFollowers + " Followers" }}
+                  {{ follows.numFollowers + " Followers" }}
                 </router-link>
               </v-col>
             </v-row>
@@ -149,6 +149,7 @@
 </template>
 <!-- TradeZone icon could also be chart-areaspline-->
 <script>
+import UserService from '../../services/User.service'
 export default {
   name: 'SideMenu',
   data () {
@@ -165,8 +166,9 @@ export default {
         { title: 'Support', icon: 'mdi-help-circle-outline', route: '/support' }
       ],
       since: 'Member since 2021',
-      numFollowing: '190K',
-      numFollowers: '295K'
+      follows: [
+        { numFollowing: '190K', numFollowers: '295K' }
+      ]
     }
   },
   computed: {
@@ -175,6 +177,19 @@ export default {
     },
     user () {
       return JSON.parse(localStorage.getItem('user'))
+    }
+  },
+  created () {
+    this.initialize()
+  },
+  methods: {
+    async initialize () {
+      this.account = await UserService.getAccount(this.user.userId)
+      try {
+        this.follows = await UserService.getFollowNum(this.user.userId)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

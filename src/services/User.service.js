@@ -17,6 +17,7 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userID) {
+    console.log('getPositions ' + userID)
     let userPortfolioData = null
     await axios
       .get('/positions/' + userID)
@@ -31,23 +32,103 @@ class UserService {
         console.log(err)
         return null
       })
-
+    console.log(userPortfolioData)
     return userPortfolioData
   }
 
   /* istanbul ignore next */
-  async getAccount (userID) {
-    let userAccountData = null
+  async getFollowNum (userID) {
+    let followings = null
     await axios
-      .get('/account/' + userID)
+      .get('/following/follows/' + userID)
       .then(function (res) {
-        userAccountData = res.data.account
+        console.log(res.data)
+        followings = res.data.length
       })
       .catch(function (err) {
         console.log(err)
         return null
       })
-    return userAccountData
+    let followers = null
+    await axios
+      .get('/following/followers/' + userID)
+      .then(function (res2) {
+        console.log(res2.data)
+        followers = res2.data.length
+      })
+      .catch(function (err2) {
+        console.log(err2)
+        return null
+      })
+    const values = { numFollowing: followings, numFollowers: followers }
+    console.log(values)
+    return values
+  }
+
+  /* istanbul ignore next */
+  async getFollowers (userID) {
+    console.log('getFollowers ' + userID)
+    let followersData = null
+    await axios
+      .get('/following/followers/' + userID)
+      .then(function (res) {
+        followersData = res.data
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    const followerList = []
+    for (const user of followersData) {
+      const userInfo = await this.getUserInfo(user)
+      const obj = { id: user, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
+      followerList.push(obj)
+    }
+
+    console.log('MY FOLLOWING')
+    let followingsData = null
+    await axios
+      .get('/following/follows/' + userID)
+      .then(function (res) {
+        followingsData = res.data
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    console.log(followingsData)
+    for (const id of followingsData) {
+      for (const follower of followerList) {
+        if (id.indexOf(follower.id) !== -1) {
+          follower.currentlyfollowing = true
+          break
+        }
+      }
+    }
+    console.log(followerList)
+    return followerList
+  }
+
+  /* istanbul ignore next */
+  async getFollowing (userID) {
+    console.log('getFollowing ' + userID)
+    let followingsData = null
+    await axios
+      .get('/following/follows/' + userID)
+      .then(function (res) {
+        followingsData = res.data
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    const followingList = []
+    for (const user of followingsData) {
+      const userInfo = await this.getUserInfo(user)
+      const obj = { firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
+      followingList.push(obj)
+    }
+    return followingList
   }
 
   /* istanbul ignore next */
@@ -63,6 +144,21 @@ class UserService {
         return null
       })
     return userProfileData
+  }
+
+  /* istanbul ignore next */
+  async getAccount (userID) {
+    let userAccountData = null
+    await axios
+      .get('/account/' + userID)
+      .then(function (res) {
+        userAccountData = res.data.account
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return userAccountData
   }
 
   /* istanbul ignore next */
