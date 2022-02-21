@@ -3,6 +3,6 @@ describe("Login Test", () => {
     cy.visit("http://localhost:8081/login");
     cy.login();
     cy.wait(2000);
-    cy.get("[data-cy=profile]").should("include.text", "Pico Park");
+    cy.get("[data-cy=profile]").should("include.text", "Jane Doe");
   });
 });
