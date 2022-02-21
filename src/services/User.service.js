@@ -6,7 +6,6 @@ class UserService {
     try {
       const { data } = await axios.post('/user', credentials)
       console.log(data)
-
       // should be a good response here, but double check for sure
       return { success: data.success }
     } catch (err) {
@@ -36,13 +35,33 @@ class UserService {
     return userPortfolioData
   }
 
+  async postUnfollow (credentials) {
+    try {
+      const response = await axios.post('/following/unfollow', credentials)
+      return response.data
+    } catch (err) {
+      console.log(err)
+      return { success: false, message: err.response.data.message }
+    }
+  }
+
+  async postFollow (credentials) {
+    try {
+      const response = await axios.post('/following/follow', credentials)
+      return response.data
+    } catch (err) {
+      console.log(err)
+      return { success: false, message: err.response.data.message }
+    }
+  }
+
   /* istanbul ignore next */
   async getFollowNum (userID) {
     let followings = null
     await axios
       .get('/following/follows/' + userID)
       .then(function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         followings = res.data.length
       })
       .catch(function (err) {
@@ -53,7 +72,7 @@ class UserService {
     await axios
       .get('/following/followers/' + userID)
       .then(function (res2) {
-        console.log(res2.data)
+        // console.log(res2.data)
         followers = res2.data.length
       })
       .catch(function (err2) {
@@ -61,7 +80,7 @@ class UserService {
         return null
       })
     const values = { numFollowing: followings, numFollowers: followers }
-    console.log(values)
+    // console.log(values)
     return values
   }
 
@@ -105,12 +124,13 @@ class UserService {
         }
       }
     }
+    console.log('end')
     console.log(followerList)
     return followerList
   }
 
   /* istanbul ignore next */
-  async getFollowing (userID) {
+  async getFollowings (userID) {
     console.log('getFollowing ' + userID)
     let followingsData = null
     await axios
@@ -125,7 +145,7 @@ class UserService {
     const followingList = []
     for (const user of followingsData) {
       const userInfo = await this.getUserInfo(user)
-      const obj = { firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
+      const obj = { id: user, currentlyfollowing: true, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
       followingList.push(obj)
     }
     return followingList

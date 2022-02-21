@@ -6,7 +6,8 @@
       :key="i"
     >
       <UserBlock
-        :currentlyfollowing="true"
+        :id="following.id"
+        :currentlyfollowing="following.currentlyfollowing"
         :name="`${following.firstname} ${following.lastname}`"
         :username="following.username"
         :request="false"
@@ -38,7 +39,8 @@
 <script>
 import UserBlock from './../../components/FollowerFollowing/UserBlock.vue'
 import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
-import UserService from '../../services/User.service'
+import { useFollowMixin } from '../../hooks/useFollowMixin.js'
+// import UserService from '../../services/User.service'
 
 export default {
   name: 'FollowingPage',
@@ -46,21 +48,10 @@ export default {
     UserBlock,
     SearchViewBy
   },
-  props: {
-    userId: {
-      type: String,
-      default: ''
-    }
-  },
+  mixins: [useFollowMixin],
   data () {
     return {
-      account: Object,
       followings: []
-    }
-  },
-  computed: {
-    user () {
-      return JSON.parse(localStorage.getItem('user'))
     }
   },
   created () {
@@ -68,15 +59,12 @@ export default {
   },
   methods: {
     async initialize () {
-      this.account = await UserService.getAccount(this.user.userId)
-      try {
-        this.followings = await UserService.getFollowing(this.user.userId)
-      } catch (err) {
-        console.log(err)
-      }
+      this.getFollowingsHook()
     },
     test () {
       console.log(this.followings)
+      this.snackbarFollow = true
+      // console.log(this.user.userId)
     }
   }
 }

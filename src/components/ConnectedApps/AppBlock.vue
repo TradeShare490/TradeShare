@@ -137,7 +137,7 @@
     </v-dialog>
     <v-snackbar
       v-model="snackbar"
-      :snackbar-timeout="snackbarTimeout"
+      :timeout="snackbarTimeout"
       :color="snackbarColor"
     >
       {{ snackbarText }}

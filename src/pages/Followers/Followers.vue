@@ -16,6 +16,7 @@
           :key="i"
         >
           <UserBlock
+            :id="follower.id"
             :currentlyfollowing="follower.currentlyfollowing"
             :name="`${follower.firstname} ${follower.lastname}`"
             :username="follower.username"
@@ -60,13 +61,30 @@
         />
       </v-tab-item>
     </v-tabs>
+    <!-- <v-snackbar
+      v-model="snackbar"
+      :snackbar-timeout="snackbarTimeout"
+      :color="snackbarColor"
+      centered
+    >
+      {{ snackbarText }}
+      <template #action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar> -->
   </div>
 </template>
 
 <script>
 import UserBlock from './../../components/FollowerFollowing/UserBlock.vue'
 import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
-import UserService from '../../services/User.service'
+import { useFollowMixin } from './../../hooks/useFollowMixin.js'
 
 export default {
   name: 'FollowersPage',
@@ -74,34 +92,29 @@ export default {
     UserBlock,
     SearchViewBy
   },
-  props: {
-    userId: {
-      type: String,
-      default: ''
-    }
-  },
+  mixins: [useFollowMixin],
+  // props: {
+  //   userId: {
+  //     type: String,
+  //     default: ''
+  //   }
+  // },
   data () {
     return {
-      account: Object,
       followers: []
     }
   },
-  computed: {
-    user () {
-      return JSON.parse(localStorage.getItem('user'))
-    }
-  },
+  // computed: {
+  //   user () {
+  //     return JSON.parse(localStorage.getItem('user'))
+  //   }
+  // },
   created () {
     this.initialize()
   },
   methods: {
     async initialize () {
-      this.account = await UserService.getAccount(this.user.userId)
-      try {
-        this.followers = await UserService.getFollowers(this.user.userId)
-      } catch (err) {
-        console.log(err)
-      }
+      this.getFollowersHook()
     },
     test () {
       console.log(this.followers)
