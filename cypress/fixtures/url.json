@@ -3,7 +3,7 @@
 	"HOSTED_BACKEND_URL": "https://tradeshare-backend-for-test.herokuapp.com/api/check",
 	"SIGN_UP": "/signup",
 	"LOGIN": "/login",
-	"OTHER_DASHBOARD": "/dashboard/61f4ab5ff4e3c9e19c9fbe2b",
+	"OTHER_DASHBOARD": "/dashboard/6204a777f82a1fb5c9f80a1f",
 	"FEED": "/tradezone",
 	"DASHBOARD": "/dashboard",
 	"FOLLOWERS": "/followers",
