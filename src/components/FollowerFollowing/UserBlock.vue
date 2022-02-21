@@ -38,7 +38,7 @@
               <v-list-item-title
                 class="name-text text-sm-body-1 text-caption text-wrap font-weight-bold"
               >
-                {{ name }} {{ id }}
+                {{ name }}
               </v-list-item-title>
               <v-list-item-title class="text-sm-body-3 text-caption text-wrap">
                 @{{ username }}
