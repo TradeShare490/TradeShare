@@ -47,19 +47,19 @@
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "babel-plugin-istanbul": "^6.1.1",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-vue": "^8.4.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.11",
     "@cypress/vue": "^3.0.3",
     "@cypress/webpack-dev-server": "^1.6.0",
     "cypress": "^9.3.1",
-    "eslint": "^7.32.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-vue": "^8.4.1",
     "start-server-and-test": "^1.14.0"
   },
   "eslintConfig": {
