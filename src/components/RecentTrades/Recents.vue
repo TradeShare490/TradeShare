@@ -34,7 +34,10 @@
       >
         <v-list-item class="px-0">
           <v-list-item-content>
-            <v-list-item class="d-flex justify-center px-0">
+            <v-list-item
+              class="d-flex justify-center px-0"
+              data-cy="company-tag"
+            >
               <v-chip
                 label
                 class="white--text px-2 text-body-1"
@@ -44,7 +47,7 @@
               </v-chip>
             </v-list-item>
             <v-list-item-title
-              data-cy="trade-date"
+              data-cy="company-name"
               style="font-size: 12px"
             >
               {{ company }}
