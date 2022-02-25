@@ -79,15 +79,30 @@
       </v-row>
     </v-container>
   </div>
-  <div v-else-if="info.blocked">
+  <div
+    v-else-if="info.blocked"
+    class="mt-10"
+  >
     <h2>
       User has been blocked
     </h2>
   </div>
-  <div v-else>
+  <div
+    v-else-if="userInfo == ''"
+    class="mt-10"
+  >
     <h2>
-      User doesn't exist
+      Invalid user
     </h2>
+  </div>
+  <div v-else>
+    <div class="mt-16">
+      <v-progress-circular
+        :size="50"
+        color="primary"
+        indeterminate
+      />
+    </div>
   </div>
 </template>
 
@@ -159,6 +174,7 @@ export default {
   },
   methods: {
     async initialize () {
+      console.log(this.userInfo)
       this.userInfo = await UserService.getUserInfo(this.userId)
       this.info = {
         ...this.userInfo,
@@ -170,6 +186,7 @@ export default {
         blocked: false
       }
       this.positions = await UserService.getPositions(this.userId)
+      console.log(this.userInfo)
     }
   }
 }
