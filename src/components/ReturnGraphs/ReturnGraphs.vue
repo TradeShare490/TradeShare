@@ -4,7 +4,6 @@
     outlined
     min-width="350"
     data-cy="bar-char-container"
-    class="ml-4"
   >
     <div class="graphContainer">
       <g-chart

@@ -1,23 +1,19 @@
 <template>
   <div v-if="userInfo">
-    <Profile :user="info" />
     <v-container
       class="ma-0"
       fluid
     >
+      <div class="d-flex justify-center">
+        <Profile :user="info" />
+      </div>
       <v-row>
         <v-col
           xs="12"
           md="8"
           lg="9"
         >
-          <v-card
-            elevation="1"
-            outlined
-            min-width="350"
-          >
-            <BarChartContainer />
-          </v-card>
+          <BarChartContainer />
         </v-col>
         <v-col
           xs="12"
@@ -83,8 +79,15 @@
       </v-row>
     </v-container>
   </div>
+  <div v-else-if="info.blocked">
+    <h2>
+      User has been blocked
+    </h2>
+  </div>
   <div v-else>
-    User doesn't exist
+    <h2>
+      User doesn't exist
+    </h2>
   </div>
 </template>
 
@@ -163,7 +166,8 @@ export default {
         numFollowing: '5K',
         following: true,
         date: '2021',
-        bio: 'This section is available for a small bio. Optional.'
+        favorite: false,
+        blocked: false
       }
       this.positions = await UserService.getPositions(this.userId)
     }
