@@ -1,14 +1,7 @@
 <template>
-  <v-container
-    fluid
-    class="d-flex justify-center py-0"
-  >
-    <div>
-      <span
-        class="font-weight-bold d-flex justify-start mx-3 mt-5 mb-12"
-        :class="{'text-left': $vuetify.breakpoint.xsOnly}"
-        style="color: #66788A"
-      >
+  <v-container fluid>
+    <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'">
+      <span class="font-weight-bold d-flex justify-start mx-1 mt-3 mb-8">
         DISPLAY, LANGUAGE & REGION
       </span>
       <v-divider class="mb-8" />
@@ -16,7 +9,7 @@
         class="d-flex justify-start mx-12 mt-5 mb-10"
         :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
       >
-        <span style="color: #66788A">
+        <span>
           Display
         </span>
         <v-switch
@@ -33,7 +26,7 @@
         class="d-flex justify-space-between mx-12 my-5"
         :class="{'flex-column align-center': $vuetify.breakpoint.xsOnly}"
       >
-        <span style="color: #66788A">
+        <span>
           Language
         </span>
         <div style="max-width: 250px">
@@ -73,7 +66,7 @@
         class="d-flex justify-space-between mx-12 my-5"
         :class="{'flex-column align-center': $vuetify.breakpoint.xsOnly}"
       >
-        <span style="color: #66788A">
+        <span>
           Region
         </span>
         <div style="max-width: 250px">
@@ -164,13 +157,12 @@ export default {
   height: 100vh;
   flex-grow: 1;
 }
+span {
+  color: #66788A;
+}
 @media only screen and (max-width: 768px) {
   .container {
   width: 100%;
-}
-}
-.title {
-  color: rgb(72, 95, 151);
-  text-align: left;
+  }
 }
 </style>

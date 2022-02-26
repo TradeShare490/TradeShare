@@ -1,12 +1,7 @@
 <template>
   <v-container fluid>
-    <div
-      :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'"
-    >
-      <span
-        class="font-weight-bold d-flex justify-start mx-2 mt-3 mb-8"
-        style="color: #66788A"
-      >
+    <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'">
+      <span class="font-weight-bold d-flex justify-start mx-2 mt-3 mb-8">
         ACCOUNT
       </span>
       <v-divider class="mb-8" />
