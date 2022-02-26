@@ -63,6 +63,7 @@
           v-model="snackbar1"
           :timeout="timeout"
           color="primary"
+          right
         >
           {{ snackbar1Text }}
         </v-snackbar>
@@ -102,11 +103,11 @@
           v-model="snackbar2"
           :timeout="timeout"
           color="primary"
+          right
         >
           {{ snackbar2Text }}
         </v-snackbar>
       </div>
-      <v-divider class="mb-8" />
     </div>
   </v-container>
 </template>
@@ -137,9 +138,9 @@ export default {
     selectRegion: null,
     timeout: 1500,
     snackbar1: false,
-    snackbar1Text: 'Language Saved!',
+    snackbar1Text: 'Language Saved',
     snackbar2: false,
-    snackbar2Text: 'Region Saved!'
+    snackbar2Text: 'Region Saved'
   }),
   methods: {
     saveLanguage () {
@@ -160,7 +161,7 @@ export default {
 .container {
   width: 65%;
   background-color: white;
-  height: 100%;
+  height: 100vh;
   flex-grow: 1;
 }
 @media only screen and (max-width: 768px) {
