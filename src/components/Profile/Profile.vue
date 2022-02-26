@@ -1,31 +1,28 @@
 <template>
-  <v-card class="mx-4 mt-7 mb-5">
-    <v-row class="py-5 justify-center">
+  <v-card
+    class="d-flex mx-4 my-5"
+    :class="{'ml-16': $vuetify.breakpoint.xsOnly}"
+    height="25vh"
+    width="50vw"
+    min-width="385px"
+  >
+    <v-row no-gutters>
       <v-col
         align-self="center"
-        class="pl-5"
-        cols="5"
-        sm="4"
-        md="2"
-        lg="2"
-        xl="2"
+        cols="3"
       >
         <v-avatar
           class="profile"
           color="grey"
-          size="60%"
+          size="65%"
         >
           <v-img src="https://randomuser.me/api/portraits/men/8.jpg" />
         </v-avatar>
       </v-col>
       <v-col
         align-self="center"
-        cols="6"
-        sm="4"
-        md="2"
-        lg="2"
-        xl="2"
-        class="text-left mx-0 px-0"
+        class="text-left pl-0"
+        cols="4"
       >
         <v-list-item
           color="black"
@@ -46,47 +43,47 @@
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <v-spacer class="hidden-sm-and-down" />
       <v-col
         align-self="center"
-        cols="12"
-        md="2"
-        lg="4"
-        xl="4"
-        class="px-5 px-sm-0 px-md-0 px-lg-0 px-xl-0 mx-0"
+        cols="4"
       >
-        <v-list-item-title class="font-weight-bold text-xs-caption">
-          Bio
-        </v-list-item-title>
-        <v-list-item-subtitle
-          class="text-wrap text-xs-caption"
-          data-cy="profile-bio"
-        >
-          {{ user.bio }}
-        </v-list-item-subtitle>
-      </v-col>
-      <v-spacer class="hidden-sm-and-down" />
-      <v-col
-        align-self="center"
-        cols="9"
-        sm="9"
-        md="4"
-        lg="3"
-        xl="3"
-        class="mx-10 pt-5 pt-sm-5 pt-md-0 pt-lg-0 pt-xl-0"
-      >
-        <v-row>
-          <v-col
-            cols="6"
-            class="mx-0 px-0 pr-1 pb-0 mb-0"
-          >
+        <v-row no-gutters>
+          <v-col>
             <v-list-item-title
               class="font-weight-bold"
               data-cy="profile-num-followers"
             >
               {{ user.numFollowers }}
             </v-list-item-title>
+          </v-col>
+          <v-col>
+            <v-list-item-title
+              class="font-weight-bold"
+              data-cy="profile-num-following"
+            >
+              {{ user.numFollowing }}
+            </v-list-item-title>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
             <v-list-item-subtitle> Followers </v-list-item-subtitle>
+          </v-col>
+          <v-col>
+            <v-list-item-subtitle> Following </v-list-item-subtitle>
+          </v-col>
+        </v-row>
+        <v-row
+          no-gutters
+          class="my-2"
+        >
+          <v-col
+            xl="8"
+            lg="6"
+            md="12"
+            xs="12"
+            :class="{'mb-2': $vuetify.breakpoint.mdAndDown}"
+          >
             <v-btn
               v-if="user.following === true"
               block
@@ -94,7 +91,8 @@
               elevation="0"
               outlined
               color="primary"
-              class="my-3 caption"
+              :ripple="false"
+              class="caption"
               data-cy="following"
               @click="unfollow"
             >
@@ -106,7 +104,8 @@
               small
               elevation="0"
               color="primary"
-              class="my-3 caption"
+              :ripple="false"
+              class="caption"
               data-cy="follow"
               @click="follow"
             >
@@ -114,28 +113,65 @@
             </v-btn>
           </v-col>
           <v-col
-            cols="6"
-            class="mx-0 px-0 pl-1 pb-0 mb-0"
+            xl="2"
+            lg="3"
+            xs="6"
           >
-            <v-list-item-title
-              class="font-weight-bold"
-              data-cy="profile-num-following"
-            >
-              {{ user.numFollowing }}
-            </v-list-item-title>
-            <v-list-item-subtitle> Following </v-list-item-subtitle>
             <v-btn
-              block
+              class="caption"
+              :class="{'ml-1': $vuetify.breakpoint.lgAndDown}"
               small
               elevation="0"
-              class="my-3 caption"
+              outlined
+              :ripple="false"
               color="primary"
-              data-cy="message"
-              @click="message"
+              @click="favorite = !favorite"
             >
-              Send a Message
+              <v-icon> {{ !favorite ? 'mdi-star-outline' : 'mdi-star' }} </v-icon>
             </v-btn>
           </v-col>
+          <v-col
+            xl="2"
+            lg="3"
+            xs="6"
+          >
+            <v-btn
+              class="caption"
+              style="background-color: #BF0E08; border: none"
+              small
+              elevation="0"
+              outlined
+              :ripple="false"
+              @click="blockUser()"
+            >
+              <v-icon
+                color="white"
+              >
+                {{ 'mdi-cancel mdi-rotate-90' }}
+              </v-icon>
+            </v-btn>
+            <v-snackbar
+              v-model="snackbar"
+              :timeout="timeout"
+              color="#BF0E08"
+            >
+              {{ snackbarText }}
+            </v-snackbar>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-btn
+            block
+            small
+            elevation="0"
+            class="caption"
+            color="primary"
+            :ripple="false"
+            data-cy="message"
+            @click="message"
+          >
+            Send a Message
+          </v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -153,10 +189,23 @@ export default {
       default: null
     }
   },
+  data () {
+    return {
+      favorite: false,
+      blocked: false,
+      snackbar: false,
+      snackbarText: 'User has been blocked',
+      timeout: 1500
+    }
+  },
   methods: {
     /* istanbul ignore next */
     message () {
       console.log('sending a message...')
+    },
+    blockUser () {
+      this.snackbar = true
+      this.blocked = true
     }
   }
 }

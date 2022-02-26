@@ -66,7 +66,6 @@ describe("Profile component can ", () => {
     cy.get("[data-cy=confirm-stock-delete]").click();
   });
   it("Display the user data",() =>{
-    cy.get("[data-cy=profile-bio]").should("be.visible");
     cy.get("[data-cy=basic-profile-info]").should("be.visible");
     cy.get("[data-cy=profile-num-followers]").should("be.visible");
     cy.get("[data-cy=profile-num-following]").should("be.visible");
