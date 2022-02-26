@@ -3,13 +3,7 @@
     fluid
     class="d-flex justify-center py-0"
   >
-    <v-card
-      min-width="350"
-      width="800"
-      height="100vh"
-      class="px-12"
-      :class="{'ml-9': $vuetify.breakpoint.xsOnly}"
-    >
+    <div>
       <span
         class="font-weight-bold d-flex justify-start mx-3 mt-5 mb-12"
         :class="{'text-left': $vuetify.breakpoint.xsOnly}"
@@ -113,7 +107,7 @@
         </v-snackbar>
       </div>
       <v-divider class="mb-8" />
-    </v-card>
+    </div>
   </v-container>
 </template>
 
@@ -162,5 +156,20 @@ export default {
 <style scoped>
 .v-text-field--outlined:hover >>> fieldset {
   border: 1px solid #3F51B5;
+}
+.container {
+  width: 65%;
+  background-color: white;
+  height: 100%;
+  flex-grow: 1;
+}
+@media only screen and (max-width: 768px) {
+  .container {
+  width: 100%;
+}
+}
+.title {
+  color: rgb(72, 95, 151);
+  text-align: left;
 }
 </style>
