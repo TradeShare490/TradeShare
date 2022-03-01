@@ -89,9 +89,6 @@ class UserService {
       .dispatch('update', {
         response
       })
-      // .then(() => {
-      //   this.$router.push({ name: 'Dashboard' })
-      // })
       .catch(err => {
         this.error = err.response.data.message
       })
