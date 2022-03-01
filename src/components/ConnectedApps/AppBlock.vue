@@ -63,6 +63,7 @@
         >
           <v-btn
             v-if="link === false"
+            :disabled="disabled"
             elevation="1"
             color="primary"
             class="btn my-3 caption font-weight-bold"
@@ -77,6 +78,7 @@
           </v-btn>
           <v-btn
             v-if="link === true"
+            :disabled="disabled"
             elevation="0"
             color="primary"
             class="btn my-3 caption font-weight-bold"
@@ -161,6 +163,10 @@ export default {
   name: 'UserBlock',
   mixins: [useConnectAppMixin],
   props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     linked: {
       type: Boolean,
       default: false
@@ -184,6 +190,11 @@ export default {
       link: this.linked
     }
   },
+  computed: {
+    user () {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  },
   methods: {
     handleDialog () {
       this.dialog = true
@@ -192,13 +203,13 @@ export default {
       const err = false
 
       if (this.link === true) {
-        this.removeApp()
+        this.removeApp(this.user.userId, this.$store)
       } else {
         this.connectApp()
       }
 
       if (err) {
-        this.snackbarText = 'Error occured.'
+        this.snackbarText = 'Error occurred.'
         this.snackbarColor = 'error'
         this.snackbar = true
         return
