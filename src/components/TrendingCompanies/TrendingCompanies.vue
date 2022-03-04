@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <v-card
     class="sticky-card"
     height="100%"
