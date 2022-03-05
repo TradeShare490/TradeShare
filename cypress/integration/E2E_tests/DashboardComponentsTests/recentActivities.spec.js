@@ -13,10 +13,9 @@ describe('Recent Activities component can', () => {
     });
     it('display recent activity information',()=>{
         cy.get("[data-cy=trader-name]").should("be.visible");
+        cy.get("[data-cy=company-tag]").should("be.visible");
         cy.get("[data-cy=company-name]").should("be.visible");
         cy.get("[data-cy=trade-type]").should("be.visible");
         cy.get("[data-cy=trade-date]").should("be.visible");
-        cy.get("[data-cy=options-button]").should("be.visible");
-        cy.get("[data-cy=recent-trade-view-all]").should("be.visible");
     });
 })
