@@ -203,6 +203,7 @@ export default {
   methods: {
     async initialize () {
       this.account = await UserService.getAccount(this.user.userId)
+      console.log('userId ' + this.user.userId)
     }
   }
 }

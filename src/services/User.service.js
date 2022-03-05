@@ -57,26 +57,53 @@ class UserService {
 
   /* istanbul ignore next */
   async getFollowNum (userID) {
-    let followings = null
+    console.log('getFollowNum')
+    let followings = 0
     await axios
-      .get('/following/follows/' + userID)
+      .get('/following/followers_num/' + userID)
       .then(function (res) {
-        followings = res.data.length
+        console.log('1')
+        console.log(res.data)
+        followings = res.data.low
       })
       .catch(function (err) {
         console.log(err)
         return null
       })
-    let followers = null
+
+    let followers = 0
     await axios
-      .get('/following/followers/' + userID)
-      .then(function (res2) {
-        followers = res2.data.length
+      .get('/following/follows_num/' + userID)
+      .then(function (res) {
+        console.log('2')
+        console.log(res.data)
+        followers = res.data.low
       })
-      .catch(function (err2) {
-        console.log(err2)
+      .catch(function (err) {
+        console.log(err)
         return null
       })
+
+    // let followings = 0
+    // await axios
+    //   .get('/following/follows/' + userID)
+    //   .then(function (res) {
+    //     followings = res.data.length
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err)
+    //     return null
+    //   })
+    // let followers = 0
+    // await axios
+    //   .get('/following/followers/' + userID)
+    //   .then(function (res2) {
+    //     followers = res2.data.length
+    //   })
+    //   .catch(function (err2) {
+    //     console.log(err2)
+    //     return null
+    //   })
     const values = { numFollowing: followings, numFollowers: followers }
     return values
   }

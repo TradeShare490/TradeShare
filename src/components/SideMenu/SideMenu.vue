@@ -37,7 +37,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ follows.numFollowing + " Following" }}
+                  {{ user.followings_num + " Following" }}
                 </router-link>
               </v-col>
               <v-col>
@@ -46,7 +46,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ follows.numFollowers + " Followers" }}
+                  {{ user.followers_num + " Followers" }}
                 </router-link>
               </v-col>
             </v-row>
@@ -185,11 +185,14 @@ export default {
   methods: {
     async initialize () {
       this.account = await UserService.getAccount(this.user.userId)
-      try {
-        this.follows = await UserService.getFollowNum(this.user.userId)
-      } catch (err) {
-        console.log(err)
-      }
+      console.log('this.account')
+      console.log(this.account)
+      // try {
+      //   this.follows = await UserService.getFollowNum(this.user.userId)
+      //   console.log(this.follows)
+      // } catch (err) {
+      //   console.log(err)
+      // }
     }
   }
 }

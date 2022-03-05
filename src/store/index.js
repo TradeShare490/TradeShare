@@ -10,6 +10,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUserData (state, userData) {
+      console.log('mutations')
       localStorage.setItem('user', JSON.stringify(userData.userInfo))
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
       axios.defaults.headers.common['x-refresh'] = `${userData.refreshToken}`
@@ -26,6 +27,11 @@ export default new Vuex.Store({
   actions: {
     async login ({ commit }, credentials) {
       const { data } = await axios.post('/session', credentials)
+      // const { following } = await axios.get('/following/follows_num', data.userInfo.userId)
+      // console.log({ following })
+      data.userInfo.followers_num = 12
+      data.userInfo.followings_num = 34
+
       commit('setUserData', data)
     },
     logout ({ commit }) {
@@ -41,6 +47,8 @@ export default new Vuex.Store({
   },
   getters: {
     loggedIn (state) {
+      console.log('getter')
+      console.log(!!state.user)
       return !!state.user
     },
     allPosts () {

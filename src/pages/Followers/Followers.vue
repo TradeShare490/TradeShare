@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-0 mx-auto">
+    <SearchViewBy />
     <v-tabs centered>
       <v-tab :ripple="false">
         <em class="mdi mdi-account-multiple" />
@@ -10,26 +11,48 @@
         <span>FOLLOW REQUESTS</span>
       </v-tab>
       <v-tab-item class="mt-5">
-        <div v-if="followers.length!=0">
-          <SearchViewBy />
-          <div
-            v-for="(follower, i) in followers"
-            :key="i"
-          >
-            <UserBlock
-              :id="follower.id"
-              :currentlyfollowing="follower.currentlyfollowing"
-              :name="`${follower.firstname} ${follower.lastname}`"
-              :username="follower.username"
-              :request="false"
-            />
-          </div>
-        </div>
         <div
-          v-else
-          class="title font-weight-black text-center"
+          v-if="isLoading === true"
+          class="mt-7"
         >
-          EMPTY LIST
+          <v-progress-circular
+            :size="50"
+            color="primary"
+            indeterminate
+          />
+        </div>
+        <div v-else>
+          <div v-if="followers.length!=0">
+            <div
+              v-for="(follower, i) in followers"
+              :key="i"
+            >
+              <UserBlock
+                :id="follower.id"
+                :currentlyfollowing="follower.currentlyfollowing"
+                :name="`${follower.firstname} ${follower.lastname}`"
+                :username="follower.username"
+                :request="false"
+              />
+            </div>
+          </div>
+
+          <div
+            v-else
+            class="title font-weight-black"
+          >
+            <v-container
+              fill-height
+              fluid
+            >
+              <v-row
+                align="center"
+                justify="center"
+              >
+                <v-col>You do not have any follower yet.</v-col>
+              </v-row>
+            </v-container>
+          </div>
         </div>
       </v-tab-item>
       <v-tab-item>
@@ -66,7 +89,8 @@ export default {
   mixins: [useFollowMixin],
   data () {
     return {
-      followers: []
+      followers: [],
+      isLoading: false
     }
   },
   created () {
@@ -100,6 +124,5 @@ export default {
 .title {
   color: rgb(168, 168, 168);
   font-size: 0.5em;
-padding: 50% 0;
 }
 </style>

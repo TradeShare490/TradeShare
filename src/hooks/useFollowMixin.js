@@ -8,17 +8,23 @@ export const useFollowMixin = {
   },
   methods: {
     async getFollowingsHook () {
+      this.isLoading = true
       try {
         this.followings = await UserService.getFollowings(this.user.userId)
       } catch (err) {
         console.log(err)
+      } finally {
+        this.isLoading = false
       }
     },
     async getFollowersHook () {
+      this.isLoading = true
       try {
         this.followers = await UserService.getFollowers(this.user.userId)
       } catch (err) {
         console.log(err)
+      } finally {
+        this.isLoading = false
       }
     },
     async follow () {

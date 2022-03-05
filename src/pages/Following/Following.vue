@@ -1,25 +1,49 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <div v-if="followings.length!=0">
-      <SearchViewBy />
-      <div
-        v-for="(following, i) in followings"
-        :key="i"
-      >
-        <UserBlock
-          :id="following.id"
-          :currentlyfollowing="following.currentlyfollowing"
-          :name="`${following.firstname} ${following.lastname}`"
-          :username="following.username"
-          :request="false"
-        />
-      </div>
-    </div>
+    <SearchViewBy />
     <div
-      v-else
-      class="title font-weight-black text-center"
+      v-if="isLoading === true"
+      class="mt-7"
     >
-      EMPTY LIST
+      <v-progress-circular
+        :size="50"
+        color="primary"
+        indeterminate
+        :width="7"
+      />
+    </div>
+    <div v-else>
+      <div v-if="followings.length!=0">
+        <div
+          v-for="(following, i) in followings"
+          :key="i"
+        >
+          <UserBlock
+            :id="following.id"
+            :currentlyfollowing="following.currentlyfollowing"
+            :name="`${following.firstname} ${following.lastname}`"
+            :username="following.username"
+            :request="false"
+          />
+        </div>
+      </div>
+
+      <div
+        v-else
+        class="title font-weight-black"
+      >
+        <v-container
+          fill-height
+          fluid
+        >
+          <v-row
+            align="center"
+            justify="center"
+          >
+            <v-col>You do not following anyone yet.</v-col>
+          </v-row>
+        </v-container>
+      </div>
     </div>
   </div>
 </template>
@@ -38,7 +62,8 @@ export default {
   mixins: [useFollowMixin],
   data () {
     return {
-      followings: []
+      followings: [],
+      isLoading: false
     }
   },
   created () {
@@ -66,6 +91,5 @@ export default {
 .title {
   color: rgb(168, 168, 168);
   font-size: 0.5em;
-padding: 50% 0;
 }
 </style>
