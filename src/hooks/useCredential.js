@@ -14,6 +14,8 @@ export const signUp = async (credentials, store, router) => {
 }
 
 export const login = async (credentials, store, router) => {
+  console.log('login')
+  console.log(credentials)
   await store
     .dispatch('login', credentials)
     .then(() => {

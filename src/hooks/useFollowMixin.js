@@ -5,22 +5,25 @@ export const useFollowMixin = {
     user () {
       return JSON.parse(localStorage.getItem('user'))
     }
+    // followings () {
+    //   return this.$store.state.user.followings
+    // }
   },
   methods: {
-    async getFollowingsHook () {
+    async getFollowingsHook (id) {
       this.isLoading = true
       try {
-        this.followings = await UserService.getFollowings(this.user.userId)
+        this.followings = await UserService.getFollowings(id)
       } catch (err) {
         console.log(err)
       } finally {
         this.isLoading = false
       }
     },
-    async getFollowersHook () {
+    async getFollowersHook (id) {
       this.isLoading = true
       try {
-        this.followers = await UserService.getFollowers(this.user.userId)
+        this.followers = await UserService.getFollowers(id)
       } catch (err) {
         console.log(err)
       } finally {

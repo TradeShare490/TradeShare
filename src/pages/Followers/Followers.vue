@@ -93,12 +93,18 @@ export default {
       isLoading: false
     }
   },
+  computed: {
+    user () {
+      console.log('computed')
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  },
   created () {
     this.initialize()
   },
   methods: {
     async initialize () {
-      this.getFollowersHook()
+      this.getFollowersHook(this.user.userId)
     }
   }
 }

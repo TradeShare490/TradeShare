@@ -1,4 +1,5 @@
 import axios from '../axios/axios.v1'
+import store from '../store/index.js'
 
 class UserService {
   /* istanbul ignore next */
@@ -16,6 +17,10 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userID) {
+    console.log('test')
+    console.log(JSON.parse(localStorage.getItem('user')))
+    console.log(JSON.parse(localStorage.getItem('user')).userId)
+    console.log('User.servivce.getPositions() ' + userID)
     let userPortfolioData = null
     await axios
       .get('/positions/' + userID)
@@ -30,13 +35,20 @@ class UserService {
         console.log(err)
         return null
       })
+    console.log('userPortfolioData END')
+    console.log(userPortfolioData)
     return userPortfolioData
   }
 
   /* istanbul ignore next */
   async postUnfollow (credentials) {
     try {
-      const response = await axios.post('/following/unfollow', credentials)
+      const config = {
+        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+      }
+      const response = await axios.post('/following/unfollow', credentials, config)
+      console.log('unfollowed')
+      console.log(store.state.user)
       return response.data
     } catch (err) {
       console.log(err)
@@ -47,7 +59,12 @@ class UserService {
   /* istanbul ignore next */
   async postFollow (credentials) {
     try {
-      const response = await axios.post('/following/follow', credentials)
+      const config = {
+        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+      }
+      const response = await axios.post('/following/follow', credentials, config)
+      console.log('followed')
+      console.log(store.state.user)
       return response.data
     } catch (err) {
       console.log(err)
@@ -111,8 +128,11 @@ class UserService {
   /* istanbul ignore next */
   async getFollowers (userID) {
     let followersData = null
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
     await axios
-      .get('/following/followers/' + userID)
+      .get('/following/followers/' + userID, config)
       .then(function (res) {
         followersData = res.data
       })
@@ -129,7 +149,7 @@ class UserService {
 
     let followingsData = null
     await axios
-      .get('/following/follows/' + userID)
+      .get('/following/follows/' + userID, config)
       .then(function (res) {
         followingsData = res.data
       })
@@ -150,9 +170,14 @@ class UserService {
 
   /* istanbul ignore next */
   async getFollowings (userID) {
+    const followingList = []
     let followingsData = null
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
     await axios
-      .get('/following/follows/' + userID)
+      .get('/following/follows/' + userID,
+        config)
       .then(function (res) {
         followingsData = res.data
       })
@@ -160,9 +185,14 @@ class UserService {
         console.log(err)
         return null
       })
-    const followingList = []
+
     for (const user of followingsData) {
-      const userInfo = await this.getUserInfo(user)
+      let userInfo = null
+      try {
+        userInfo = await this.getUserInfo(user)
+      } catch (err) {
+        console.error(err)
+      }
       const obj = { id: user, currentlyfollowing: true, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
       followingList.push(obj)
     }

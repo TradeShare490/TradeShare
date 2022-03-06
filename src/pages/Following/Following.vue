@@ -13,7 +13,7 @@
       />
     </div>
     <div v-else>
-      <div v-if="followings.length!=0">
+      <div v-if="typeof followings !== 'undefined' || followings.length!=0">
         <div
           v-for="(following, i) in followings"
           :key="i"
@@ -52,6 +52,7 @@
 import UserBlock from './../../components/FollowerFollowing/UserBlock.vue'
 import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
 import { useFollowMixin } from '../../hooks/useFollowMixin.js'
+// import UserService from '../../services/User.service'
 
 export default {
   name: 'FollowingPage',
@@ -63,7 +64,7 @@ export default {
   data () {
     return {
       followings: [],
-      isLoading: false
+      isLoading: true
     }
   },
   created () {
@@ -71,7 +72,16 @@ export default {
   },
   methods: {
     async initialize () {
-      this.getFollowingsHook()
+      // console.log('Following.initialize()')
+      // console.log(this.user)
+      // this.isLoading = true
+      this.followings = this.getFollowingsHook(this.user.userId)
+      console.log('this.followings ' + this.followings)
+      console.log(this.followings)
+      // this.isLoading = false
+      // console.log('followings list')
+      // console.log(this.followings)
+      // this.isLoading = false
     }
   }
 }

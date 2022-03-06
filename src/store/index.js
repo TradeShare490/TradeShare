@@ -1,20 +1,45 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios/axios.v1'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState({
+    storage: window.sessionStorage
+  })],
   state: {
     user: null
   },
   mutations: {
     setUserData (state, userData) {
       console.log('mutations')
+      state.user = { accessToken: userData.accessToken, ...userData.userInfo }
+      userData.userInfo = { accessToken: userData.accessToken, ...userData.userInfo }
       localStorage.setItem('user', JSON.stringify(userData.userInfo))
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
       axios.defaults.headers.common['x-refresh'] = `${userData.refreshToken}`
-      state.user = userData.userInfo
+      console.log('under mutation')
+      console.log(state.user)
+      console.log('localStorage')
+      console.log(JSON.parse(localStorage.getItem('user')))
+    },
+    async setFollow (state) {
+      const config = {
+        headers: { Authorization: `Bearer ${state.user.accessToken}` }
+      }
+      console.log('state.user')
+      console.log(state.user)
+      const test = await axios.get('/following/follows/' + state.user.userId, config)
+      console.log('testing API')
+      state.user.followings = test.data
+      console.log(test)
+      state.user.follower_num = test.data.length
+      console.log(state.user)
+
+      state.user.follower_num = 12
+      state.user.following_num = 34
     },
     logOut () {
       localStorage.removeItem('user')
@@ -26,13 +51,14 @@ export default new Vuex.Store({
   },
   actions: {
     async login ({ commit }, credentials) {
+      console.log('index.login')
       const { data } = await axios.post('/session', credentials)
-      // const { following } = await axios.get('/following/follows_num', data.userInfo.userId)
-      // console.log({ following })
-      data.userInfo.followers_num = 12
-      data.userInfo.followings_num = 34
-
+      console.log(data)
       commit('setUserData', data)
+    },
+    async getFollows ({ commit }) {
+      console.log('index.getFollows')
+      commit('setFollow')
     },
     logout ({ commit }) {
       commit('logOut')
