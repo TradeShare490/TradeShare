@@ -54,7 +54,7 @@ export default new Vuex.Store({
         },
         {
           id: 2,
-          device: 'iPhone 12 Pro Max',
+          device: 'Macbook Pro',
           location: 'Montreal, QC, Canada',
           browser: 'Safari',
           when: 'Jan 7'

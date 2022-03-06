@@ -14,10 +14,9 @@
         </span>
       </div>
       <div class="d-flex justify-start ml-8">
-        <pre class="caption text-left">
-          Limit your account viewability to those who are not following you.
-          Follow requests will be required in order to view your profile.
-        </pre>
+        <span class="caption text-left text-wrap ml-8 mb-5">
+          Limit your account viewability to those who are not following you. Follow requests will be required in order to view your profile.
+        </span>
       </div>
       <div class="mx-16">
         <v-switch
@@ -110,7 +109,7 @@
               class="mt-2 d-flex justify-start"
             >
               <span>
-                Confirm New
+                Confirm
               </span>
             </v-col>
             <v-col
@@ -159,9 +158,9 @@
         </span>
       </div>
       <div class="d-flex justify-start ml-8 mb-5">
-        <pre class="caption text-left text-wrap ml-8">
-            Blocked users can no longer view, mention, private message or send follow requests to your account.
-          </pre>
+        <span class="caption text-left text-wrap ml-8">
+          Blocked users can no longer view, mention, private message or send follow requests to your account.
+        </span>
       </div>
       <div :class="$vuetify.breakpoint.lgAndDown ? 'ml-16' : 'mx-16'">
         <v-row
@@ -191,7 +190,9 @@
             no-gutters
             :class="$vuetify.breakpoint.lgAndDown ? '' : 'ml-5'"
           >
-            <div class="d-flex justify-start mr-15 mb-2">
+            <div
+              class="d-flex justify-start mr-15 mb-2"
+            >
               <v-btn
                 text
                 color="primary"
@@ -202,10 +203,10 @@
               </v-btn>
             </div>
             <v-col
-              :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
+              :cols="$vuetify.breakpoint.xsOnly ? '5' : '3'"
               class=" mt-2 d-flex justify-start"
             >
-              <span>
+              <span id="truncate">
                 {{ blocked }}
               </span>
             </v-col>
@@ -222,9 +223,9 @@
         </span>
       </div>
       <div class="d-flex justify-start ml-8 mb-5">
-        <pre class="caption text-left text-wrap ml-8">
-            Favorited user's portfolios will be displayed in the "Compare Returns" graph on your dashboard.
-          </pre>
+        <span class="caption text-left text-wrap ml-8">
+          Favorited user's portfolios will be displayed in the "Compare Returns" graph on your dashboard.
+        </span>
       </div>
       <div :class="$vuetify.breakpoint.lgAndDown ? 'ml-16' : 'mx-16'">
         <v-row
@@ -254,7 +255,9 @@
             no-gutters
             :class="$vuetify.breakpoint.lgAndDown ? '' : 'ml-5'"
           >
-            <div class="d-flex justify-start mr-15 mb-2">
+            <div
+              class="d-flex justify-start mr-15 mb-2"
+            >
               <v-btn
                 text
                 color="primary"
@@ -265,10 +268,10 @@
               </v-btn>
             </div>
             <v-col
-              :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
-              class="mt-2 d-flex justify-start"
+              :cols="$vuetify.breakpoint.xsOnly ? '4' : '3'"
+              class=" mt-2 d-flex justify-start"
             >
-              <span>
+              <span id="truncate">
                 {{ favorite }}
               </span>
             </v-col>
@@ -289,15 +292,23 @@
             See where your account is logged in.
           </pre>
       </div>
-      <div :class="$vuetify.breakpoint.xsOnly ? 'pb-5' : 'pb-10'">
-        <pre
+      <div
+        class="d-flex flex-column"
+        :class="{ 'align-center': $vuetify.breakpoint.xsOnly, 'ml-16': $vuetify.breakpoint.smAndUp }"
+      >
+        <span
           v-for="(login, i) in loginActivity"
+          id="truncate"
           :key="i"
-          class="text-left"
+          class="text-left text-wrap mb-8"
         >
+          <div>
             {{ login.device + ' – ' + login.location }}
+          </div>
+          <div>
             {{ login.browser + ' – ' + login.when }}
-          </pre>
+          </div>
+        </span>
       </div>
     </div>
   </v-container>
@@ -334,15 +345,25 @@ export default {
   height: 100%;
   flex-grow: 1;
 }
+
 span {
   color: #66788A;
 }
+
 .v-btn.text::before {
   background-color: transparent;
 }
+
 .v-btn.text:hover {
   font-weight: bold;
 }
+
+#truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
   width: 100%;

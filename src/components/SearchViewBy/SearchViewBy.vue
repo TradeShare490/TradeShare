@@ -1,7 +1,8 @@
 <template>
   <v-card
     elevation="0"
-    class="px-6"
+    min-width="100px"
+    max-width="250px"
   >
     <v-autocomplete
       v-model="select"
@@ -9,7 +10,7 @@
       :loading="isLoading"
       :items="users"
       :search-input="search"
-      class="inputfield mx-4 mt-0"
+      class="inputfield mt-0"
       flat
       hide-no-data
       hide-details
