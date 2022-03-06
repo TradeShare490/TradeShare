@@ -137,8 +137,7 @@ import Holdings from '../../components/Dashboard/Holdings.vue'
 import MonthlyProfitLoss from '../../components/Portfolio/MonthlyProfitLoss.vue'
 import BarChartContainer from '../../components/ReturnGraphs/ReturnGraphs.vue'
 import UserService from '../../services/User.service'
-// import index from '../../store/index.js'
-import { mapActions } from 'vuex'
+// import { mapActions } from 'vuex'
 
 export default {
   name: 'DashboardPage',
@@ -195,8 +194,6 @@ export default {
   },
   computed: {
     user () {
-      console.log('Dashboard.computed.user()')
-      console.log(JSON.parse(localStorage.getItem('user')))
       return JSON.parse(localStorage.getItem('user'))
     }
     // followData () {
@@ -207,13 +204,12 @@ export default {
     this.initialize()
   },
   methods: {
-    ...mapActions([
-      'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`
-    ]),
+    // ...mapActions([
+    //   'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`
+    // ]),
     async initialize () {
-      console.log('Dashboard.initialize()')
       this.account = await UserService.getAccount(this.user.userId)
-      this.getFollows()
+      // this.getFollows()
     }
 
   }

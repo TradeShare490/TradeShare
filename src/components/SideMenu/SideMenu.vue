@@ -14,6 +14,7 @@
           <v-list-item-avatar
             size="55%"
             style="flex-direction: column;"
+            @click="test"
           >
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg" />
           </v-list-item-avatar>
@@ -37,7 +38,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ user.following_num + " Following" }}
+                  {{ following_num }}
                 </router-link>
               </v-col>
               <v-col>
@@ -46,7 +47,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ user.follower_num + " Followers" }}
+                  {{ follower_num }}
                 </router-link>
               </v-col>
             </v-row>
@@ -150,6 +151,7 @@
 <!-- TradeZone icon could also be chart-areaspline-->
 <script>
 import UserService from '../../services/User.service'
+import { mapActions } from 'vuex'
 export default {
   name: 'SideMenu',
   data () {
@@ -177,13 +179,43 @@ export default {
     },
     user () {
       return JSON.parse(localStorage.getItem('user'))
+    },
+    following_num () {
+      return this.$store.state.user.following_num || 0
+    },
+    follower_num () {
+      return this.$store.state.user.follower_num || 0
     }
+    // console.log(this.$store.state.user.following_num)
+    //   console.log(this.$store.state.user.follower_num)
+    //   console.log(this.$store.getters.f1)
+    //   console.log(this.$store.getters.f2)
   },
   created () {
+    console.log('1')
+    console.log(this.$store.state.user.following_num)
+    console.log(this.$store.state.user.follower_num)
+    this.getFollows()
     this.initialize()
+    console.log('2')
+    console.log(this.$store.state.user.following_num)
+    console.log(this.$store.state.user.follower_num)
   },
   methods: {
+    ...mapActions([
+      'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`
+    ]),
+    test () {
+      console.log('testaaaaaaaaaa')
+
+      console.log(this.$store.state.user.following_num)
+      console.log(this.$store.state.user.follower_num)
+      console.log(this.$store.getters.f1)
+      console.log(this.$store.getters.f2)
+      console.log('testaaaaaaaaaa')
+    },
     async initialize () {
+      console.log('initialize')
       this.account = await UserService.getAccount(this.user.userId)
     }
   }

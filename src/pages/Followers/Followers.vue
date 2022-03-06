@@ -90,12 +90,11 @@ export default {
   data () {
     return {
       followers: [],
-      isLoading: false
+      isLoading: true
     }
   },
   computed: {
     user () {
-      console.log('computed')
       return JSON.parse(localStorage.getItem('user'))
     }
   },

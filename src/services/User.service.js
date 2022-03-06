@@ -17,10 +17,6 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userID) {
-    console.log('test')
-    console.log(JSON.parse(localStorage.getItem('user')))
-    console.log(JSON.parse(localStorage.getItem('user')).userId)
-    console.log('User.servivce.getPositions() ' + userID)
     let userPortfolioData = null
     await axios
       .get('/positions/' + userID)
@@ -35,8 +31,6 @@ class UserService {
         console.log(err)
         return null
       })
-    console.log('userPortfolioData END')
-    console.log(userPortfolioData)
     return userPortfolioData
   }
 

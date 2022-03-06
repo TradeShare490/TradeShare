@@ -52,7 +52,6 @@
 import UserBlock from './../../components/FollowerFollowing/UserBlock.vue'
 import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
 import { useFollowMixin } from '../../hooks/useFollowMixin.js'
-// import UserService from '../../services/User.service'
 
 export default {
   name: 'FollowingPage',
@@ -72,16 +71,9 @@ export default {
   },
   methods: {
     async initialize () {
-      // console.log('Following.initialize()')
-      // console.log(this.user)
-      // this.isLoading = true
-      this.followings = this.getFollowingsHook(this.user.userId)
-      console.log('this.followings ' + this.followings)
-      console.log(this.followings)
-      // this.isLoading = false
-      // console.log('followings list')
+      this.getFollowingsHook(this.user.userId)
+      // console.log('this.followings ' + this.followings)
       // console.log(this.followings)
-      // this.isLoading = false
     }
   }
 }

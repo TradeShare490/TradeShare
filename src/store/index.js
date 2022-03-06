@@ -14,32 +14,30 @@ export default new Vuex.Store({
   },
   mutations: {
     setUserData (state, userData) {
-      console.log('mutations')
       state.user = { accessToken: userData.accessToken, ...userData.userInfo }
       userData.userInfo = { accessToken: userData.accessToken, ...userData.userInfo }
       localStorage.setItem('user', JSON.stringify(userData.userInfo))
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
       axios.defaults.headers.common['x-refresh'] = `${userData.refreshToken}`
-      console.log('under mutation')
-      console.log(state.user)
-      console.log('localStorage')
-      console.log(JSON.parse(localStorage.getItem('user')))
     },
     async setFollow (state) {
-      const config = {
-        headers: { Authorization: `Bearer ${state.user.accessToken}` }
-      }
-      console.log('state.user')
-      console.log(state.user)
-      const test = await axios.get('/following/follows/' + state.user.userId, config)
-      console.log('testing API')
-      state.user.followings = test.data
-      console.log(test)
-      state.user.follower_num = test.data.length
-      console.log(state.user)
-
-      state.user.follower_num = 12
-      state.user.following_num = 34
+      console.log('index.setFollows')
+      const config = { headers: { Authorization: `Bearer ${state.user.accessToken}` } }
+      await axios
+        .get('/following/follows/' + state.user.userId, config)
+        .then(function (res) {
+          state.user.following_num = res.data.length
+        })
+        .catch(function (err) { console.log(err) })
+      await axios
+        .get('/following/followers/' + state.user.userId, config)
+        .then(function (res) {
+          state.user.follower_num = res.data.length
+        })
+        .catch(function (err) { console.log(err) })
+      console.log('HEY')
+      console.log(state.user.following_num)
+      console.log(state.user.follower_num)
     },
     logOut () {
       localStorage.removeItem('user')
@@ -51,13 +49,10 @@ export default new Vuex.Store({
   },
   actions: {
     async login ({ commit }, credentials) {
-      console.log('index.login')
       const { data } = await axios.post('/session', credentials)
-      console.log(data)
       commit('setUserData', data)
     },
     async getFollows ({ commit }) {
-      console.log('index.getFollows')
       commit('setFollow')
     },
     logout ({ commit }) {
@@ -77,6 +72,8 @@ export default new Vuex.Store({
       console.log(!!state.user)
       return !!state.user
     },
+    f1: state => { return state.user.following_num },
+    f2: state => { return 999 },
     allPosts () {
       return [
         {
