@@ -28,7 +28,6 @@
         <v-switch
           label="Dark Mode"
           color="primary"
-          value="red"
           hide-details
           class="mt-10"
           :ripple="false"
