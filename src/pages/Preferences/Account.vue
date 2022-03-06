@@ -5,13 +5,9 @@
         ACCOUNT
       </span>
       <v-divider class="mb-8" />
-      <div
-        :class="$vuetify.breakpoint.lgAndDown ? 'mx-5' : 'mx-16'"
-      >
+      <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-5' : 'mx-16'">
         <v-row no-gutters>
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '10' : '4'"
-          >
+          <v-col :cols="$vuetify.breakpoint.xsOnly ? '10' : '4'">
             <v-avatar size="100px">
               <v-img src="https://randomuser.me/api/portraits/men/1.jpg" />
             </v-avatar>
@@ -30,9 +26,7 @@
             />
           </v-col>
         </v-row>
-        <v-form
-          :class="$vuetify.breakpoint.xsOnly ? 'mt-8' : 'mt-12'"
-        >
+        <v-form :class="$vuetify.breakpoint.xsOnly ? 'mt-8' : 'mt-12'">
           <v-row
             no-gutters
             :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'"
@@ -206,7 +200,7 @@
         max-width="600"
       >
         <v-card>
-          <div class="">
+          <div>
             <v-card-text
               v-if="disable"
               class="text-h6"
