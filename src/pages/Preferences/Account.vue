@@ -138,6 +138,7 @@
               color="primary"
               :ripple="false"
               class="text pa-0"
+              :disabled="verified"
               @click="verify()"
             >
               Request Verification
