@@ -331,7 +331,7 @@ export default {
 .container {
   width: 65%;
   background-color: white;
-  height: 100vh;
+  height: 100%;
   flex-grow: 1;
 }
 span {

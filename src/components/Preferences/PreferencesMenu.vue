@@ -2,7 +2,9 @@
   <v-card>
     <v-navigation-drawer
       permanent
+      fixed
       absolute
+      clipped
       height="100vh"
       :mini-variant="mini"
     >
