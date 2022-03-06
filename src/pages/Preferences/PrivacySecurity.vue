@@ -149,7 +149,6 @@
         </v-form>
       </div>
       <v-divider class="mb-8" />
-      <!-- :class="{'flex-column': $vuetify.breakpoint.xsOnly}" -->
       <div
         class="d-flex justify-start mx-12 mt-5 mb-2"
       >
