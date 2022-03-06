@@ -15,6 +15,7 @@ import NotificationsPreferences from '../pages/Preferences/Notifications'
 import PrivacySecurityPreferences from '../pages/Preferences/PrivacySecurity'
 import DLRPreferences from '../pages/Preferences/DLR'
 import ConnectedApps from '../pages/ConnectedApps/ConnectedApps.vue'
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword'
 
 Vue.use(VueRouter)
 
@@ -110,7 +111,8 @@ const routes = [
   },
   {
     path: '/forgotpassword',
-    name: 'ForgotPassword'
+    name: 'ForgotPassword',
+    component: ForgotPassword
   },
   {
     path: '/:catchAll(.*)',

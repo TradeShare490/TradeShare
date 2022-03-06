@@ -6,26 +6,28 @@
       </span>
       <v-divider class="mb-8" />
       <div
-        class="d-flex justify-start mx-12 mt-5 mb-10"
+        class="d-flex justify-start mx-12 mt-5 mb-2"
         :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
       >
         <span>
           Account Privacy
         </span>
+      </div>
+      <div class="d-flex justify-start ml-8">
+        <pre class="caption text-left">
+          Limit your account viewability to those who are not following you.
+          Follow requests will be required in order to view your profile.
+        </pre>
+      </div>
+      <div class="mx-16">
         <v-switch
           v-model="privateAccount"
           label="Private Account"
           color="primary"
           hide-details
-          class="mt-10"
+          class="mt-0 mb-8"
           :ripple="false"
         />
-      </div>
-      <div class="d-flex justify-center">
-        <pre class="caption text-left">
-          Set your account to private. This will limit your account viewability to those who are not following you.
-          Users will need to send you a follow request in order to view your profile.
-        </pre>
       </div>
       <v-divider class="mb-8" />
       <div
@@ -50,7 +52,7 @@
             no-gutters
             :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'"
           >
-            <v-spacer />
+            <v-spacer :class="$vuetify.breakpoint.lgAndDown ? '' : 'd-none'" />
             <v-col
               :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
               class="mt-2 d-flex justify-start"
@@ -76,7 +78,7 @@
             no-gutters
             :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'"
           >
-            <v-spacer />
+            <v-spacer :class="$vuetify.breakpoint.lgAndDown ? '' : 'd-none'" />
             <v-col
               :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
               class="mt-2 d-flex justify-start"
@@ -100,9 +102,9 @@
           </v-row>
           <v-row
             no-gutters
-            :class="$vuetify.breakpoint.xsOnly ? 'mb-10' : 'mb-16'"
+            class="mb-10"
           >
-            <v-spacer />
+            <v-spacer :class="$vuetify.breakpoint.lgAndDown ? '' : 'd-none'" />
             <v-col
               :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
               class="mt-2 d-flex justify-start"
@@ -126,39 +128,49 @@
           </v-row>
           <v-row
             no-gutters
-            class="mb-8"
+            class="mb-8 d-flex justify-end"
+            :class="$vuetify.breakpoint.lgAndDown ? '' : 'd-flex justify-end mr-n7'"
           >
-            <v-spacer />
             <v-btn
               color="primary"
               :ripple="false"
-              type="submit"
+              @click="savePassword"
             >
               Save
             </v-btn>
+            <v-snackbar
+              v-model="snackbar"
+              :timeout="timeout"
+              color="primary"
+              right
+            >
+              {{ snackbarText }}
+            </v-snackbar>
           </v-row>
         </v-form>
-        <v-divider class="mb-8" />
-        <div
-          class="d-flex justify-start mx-12 mt-5 mb-2"
-          :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
-        >
-          <span>
-            Managed Blocked Accounts
-          </span>
-        </div>
-        <div class="d-flex justify-center">
-          <pre class="caption text-left">
+      </div>
+      <v-divider class="mb-8" />
+      <!-- :class="{'flex-column': $vuetify.breakpoint.xsOnly}" -->
+      <div
+        class="d-flex justify-start mx-12 mt-5 mb-2"
+      >
+        <span>
+          Manage Blocked Accounts
+        </span>
+      </div>
+      <div class="d-flex justify-start ml-8 mb-5">
+        <pre class="caption text-left text-wrap ml-8">
             Blocked users can no longer view, mention, private message or send follow requests to your account.
           </pre>
-        </div>
+      </div>
+      <div :class="$vuetify.breakpoint.lgAndDown ? 'ml-16' : 'mx-16'">
         <v-row
           no-gutters
-          :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'"
+          class="mb-3"
         >
           <v-spacer />
           <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
+            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
             class="mt-2 d-flex justify-start"
           >
             <span>
@@ -166,103 +178,127 @@
             </span>
           </v-col>
           <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '8'"
+            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
             class="text-left"
           >
             <SearchViewBy :search-list="blockedList" />
           </v-col>
         </v-row>
-
-        <v-row
-          no-gutters
-          :class="$vuetify.breakpoint.xsOnly ? 'mx-0 mb-0' : 'mx-12 mb-3'"
-          class="text-left d-flex align-center"
-        >
-          <v-btn
-            text
-            color="primary"
-            :ripple="false"
-            class="text pa-0"
-            @click="warning(true)"
+        <div :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'">
+          <v-row
+            v-for="(blocked, i) in blockedList"
+            :key="i"
+            no-gutters
+            :class="$vuetify.breakpoint.lgAndDown ? '' : 'ml-5'"
           >
-            Temporarily Disable Account
-          </v-btn>
-        </v-row>
-        <v-row
-          no-gutters
-          :class="$vuetify.breakpoint.xsOnly ? 'mx-0' : 'mx-12'"
-          class="mb-3 text-left d-flex align-center"
-        >
-          <v-btn
-            text
-            color="primary"
-            :ripple="false"
-            class="text pa-0"
-            @click="warning(false)"
-          >
-            Delete Account
-          </v-btn>
-        </v-row>
-        <v-row
-          no-gutters
-          class="mx-12 pb-3"
-        >
-          <v-btn
-            color="primary"
-            :ripple="false"
-            type="submit"
-          >
-            Submit
-          </v-btn>
-        </v-row>
+            <div class="d-flex justify-start mr-15 mb-2">
+              <v-btn
+                text
+                color="primary"
+                :ripple="false"
+                class="text pa-0"
+              >
+                Unblock
+              </v-btn>
+            </div>
+            <v-col
+              :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
+              class=" mt-2 d-flex justify-start"
+            >
+              <span>
+                {{ blocked }}
+              </span>
+            </v-col>
+          </v-row>
+        </div>
       </div>
-      <v-dialog
-        v-model="dialog"
-        max-width="600"
+      <v-divider class="mb-8" />
+      <div
+        class="d-flex justify-start mx-12 mt-5 mb-2"
+        :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
       >
-        <v-card>
-          <div class="">
-            <v-card-text
-              v-if="disable"
-              class="text-h6"
+        <span>
+          Manage Favorites
+        </span>
+      </div>
+      <div class="d-flex justify-start ml-8 mb-5">
+        <pre class="caption text-left text-wrap ml-8">
+            Favorited user's portfolios will be displayed in the "Compare Returns" graph on your dashboard.
+          </pre>
+      </div>
+      <div :class="$vuetify.breakpoint.lgAndDown ? 'ml-16' : 'mx-16'">
+        <v-row
+          no-gutters
+          class="mb-3"
+        >
+          <v-spacer />
+          <v-col
+            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
+            class="mt-2 d-flex justify-start"
+          >
+            <span>
+              Favorite Users
+            </span>
+          </v-col>
+          <v-col
+            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
+            class="text-left"
+          >
+            <SearchViewBy :search-list="favoriteList" />
+          </v-col>
+        </v-row>
+        <div :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'">
+          <v-row
+            v-for="(favorite, i) in favoriteList"
+            :key="i"
+            no-gutters
+            :class="$vuetify.breakpoint.lgAndDown ? '' : 'ml-5'"
+          >
+            <div class="d-flex justify-start mr-15 mb-2">
+              <v-btn
+                text
+                color="primary"
+                :ripple="false"
+                class="text pa-0"
+              >
+                Unfavorite
+              </v-btn>
+            </div>
+            <v-col
+              :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
+              class="mt-2 d-flex justify-start"
             >
-              Are you sure you want to <span class="blue--text">&nbsp;disable&nbsp;</span> your account?
-            </v-card-text>
-            <v-card-text
-              v-else
-              class="text-h6"
-            >
-              Are you sure you want to <span class="red--text lighten-1--text">&nbsp;delete&nbsp;</span> your account?
-            </v-card-text>
-          </div>
-          <v-divider />
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              depressed
-              @click="dialog = false"
-            >
-              Cancel
-            </v-btn>
-            <v-btn
-              class="ml-3"
-              depressed
-              color="primary"
-              @click="handleAction()"
-            >
-              Confirm
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-snackbar
-        v-model="snackbar2"
-        color="primary"
-        :timeout="timeout"
-        right
+              <span>
+                {{ favorite }}
+              </span>
+            </v-col>
+          </v-row>
+        </div>
+      </div>
+      <v-divider class="mb-8" />
+      <div
+        class="d-flex justify-start mx-12 mt-5 mb-2"
+        :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
       >
-        {{ snackbar2Text }}
-      </v-snackbar>
+        <span>
+          Login Activity
+        </span>
+      </div>
+      <div class="d-flex justify-start ml-8">
+        <pre class="caption text-left">
+            See where your account is logged in.
+          </pre>
+      </div>
+      <div :class="$vuetify.breakpoint.xsOnly ? 'pb-5' : 'pb-10'">
+        <pre
+          v-for="(login, i) in loginActivity"
+          :key="i"
+          class="text-left"
+        >
+            {{ login.device + ' – ' + login.location }}
+            {{ login.browser + ' – ' + login.when }}
+          </pre>
+      </div>
     </div>
   </v-container>
 </template>
@@ -277,60 +313,16 @@ export default {
     return {
       privateAccount: false,
       blockedList: this.$store.getters.blockedUsers,
-      disable: false,
-      dialog: false,
+      favoriteList: this.$store.getters.favoriteUsers,
+      loginActivity: this.$store.getters.loginActivity,
       timeout: 1500,
       snackbar: false,
-      snackbar2: false,
-      snackbarText: 'Request Sent',
-      snackbar2Text: 'Account Disabled'
-    }
-  },
-  computed: {
-    user () {
-      return JSON.parse(localStorage.getItem('user'))
+      snackbarText: 'Password Changed Successfully'
     }
   },
   methods: {
-    $t (label) {
-      if (label === 'fullname') {
-        return this.user.firstname + ' ' + this.user.lastname
-      }
-      if (label === 'username') {
-        return this.user.username
-      }
-      if (label === 'email') {
-        return this.user.email
-      } else {
-        return 'invalid label'
-      }
-    },
-    verify () {
+    savePassword () {
       this.snackbar = true
-    },
-    warning (disable) {
-      this.disable = disable
-      this.dialog = true
-    },
-    handleAction () {
-      const err = false
-      if (this.disable === true) {
-        console.log('Disable account function')
-      } else {
-        console.log('Delete account function')
-      }
-      if (err) {
-        this.snackbar2Text = 'Error occured'
-        this.snackbar2 = true
-        return
-      } else if (this.disable === true) {
-        this.snackbar2Text = 'Account disabled'
-        this.snackbar2 = true
-      } else {
-        this.snackbar2 = true
-        this.snackbar2Text = 'Account deleted'
-      }
-      this.dialog = false
     }
   }
 }

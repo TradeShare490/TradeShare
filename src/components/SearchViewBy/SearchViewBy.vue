@@ -3,46 +3,28 @@
     elevation="0"
     class="px-6"
   >
-    <v-row>
-      <v-spacer />
-      <v-col
-        cols="12"
-        sm="4"
-        md="5"
-        lg="4"
-        xl="4"
-        align-self="center"
-        class="pb-3 px-0"
-        order="first"
-        order-sm="2"
-        order-md="2"
-        order-lg="2"
-        order-xl="2"
-      >
-        <v-autocomplete
-          v-model="select"
-          dense
-          :loading="isLoading"
-          :items="users"
-          :search-input="search"
-          class="inputfield mx-4 mt-0"
-          flat
-          hide-no-data
-          hide-details
-          label="Search"
-          color="primary"
-          hide-selected
-          single
-          line
-          outlined
-          return-object
-          append-icon="mdi-magnify"
-          solo
-          data-cy="search"
-          @update:search-input="(val) => (search = val)"
-        />
-      </v-col>
-    </v-row>
+    <v-autocomplete
+      v-model="select"
+      dense
+      :loading="isLoading"
+      :items="users"
+      :search-input="search"
+      class="inputfield mx-4 mt-0"
+      flat
+      hide-no-data
+      hide-details
+      label="Search"
+      color="primary"
+      hide-selected
+      single
+      line
+      outlined
+      return-object
+      append-icon="mdi-magnify"
+      solo
+      data-cy="search"
+      @update:search-input="(val) => (search = val)"
+    />
   </v-card>
 </template>
 

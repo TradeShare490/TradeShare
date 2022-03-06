@@ -10,7 +10,9 @@
         <span>FOLLOW REQUESTS</span>
       </v-tab>
       <v-tab-item class="mt-5">
-        <SearchViewBy :search-list="usersList" />
+        <div class="d-flex justify-end">
+          <SearchViewBy :search-list="usersList" />
+        </div>
         <v-divider class="mt-3 mx-6" />
         <UserBlock
           :currentlyfollowing="true"

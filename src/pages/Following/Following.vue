@@ -1,6 +1,8 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <SearchViewBy :search-list="usersList" />
+    <div class="d-flex justify-end">
+      <SearchViewBy :search-list="usersList" />
+    </div>
     <v-divider class="mt-3 mx-6" />
     <UserBlock
       :currently-following="true"
