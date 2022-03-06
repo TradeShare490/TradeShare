@@ -43,28 +43,25 @@
         />
       </v-col>
     </v-row>
-    <v-divider class="mt-3" />
   </v-card>
 </template>
 
 <script>
 export default {
   name: 'SearchViewBy',
+  props: {
+    searchList: {
+      type: Array,
+      default: null
+    }
+  },
   data () {
     return {
       search: null,
       select: null,
       isLoading: false,
       values: [],
-      users: [],
-      listUsers: [
-        'Mary Winchester',
-        'John Winchester',
-        'Tim Robenman',
-        'Ash Britan',
-        'Mac Kafe',
-        'Jenny Silver'
-      ]
+      users: []
     }
   },
   watch: {
@@ -78,7 +75,7 @@ export default {
       this.isLoading = true
       // Simulated ajax query
       setTimeout(() => {
-        this.users = this.listUsers.filter((e) => {
+        this.users = this.searchList.filter((e) => {
           return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
         })
         this.isLoading = false

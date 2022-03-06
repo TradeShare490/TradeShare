@@ -28,44 +28,23 @@
         </pre>
       </div>
       <v-divider class="mb-8" />
-      <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-5' : 'mx-16'">
-        <v-row
-          no-gutters
-          :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-15'"
+      <div
+        class="d-flex justify-start mx-12 mt-5 mb-10"
+        :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
+      >
+        <span>
+          Change Password
+        </span>
+        <router-link
+          to="/forgotpassword"
+          exact
+          class="text-decoration-none caption ml-2"
+          style="margin-top: 2px"
         >
-          <v-spacer />
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
-            class="mt-1 d-flex justify-start"
-            :class="{'mt-2': $vuetify.breakpoint.lgAndDown}"
-          >
-            <span>
-              {{ verified ? "Verified" : "Not Verified" }}
-            </span>
-          </v-col>
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '8'"
-            class="text-left d-flex align-center"
-          >
-            <v-btn
-              text
-              color="primary"
-              :ripple="false"
-              class="text pa-0"
-              @click="verify()"
-            >
-              Request Verification
-            </v-btn>
-            <v-snackbar
-              v-model="snackbar"
-              :timeout="timeout"
-              color="primary"
-              right
-            >
-              {{ snackbarText }}
-            </v-snackbar>
-          </v-col>
-        </v-row>
+          Forgot Password?
+        </router-link>
+      </div>
+      <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-5' : 'mx-16'">
         <v-form :class="$vuetify.breakpoint.xsOnly ? 'mt-8' : 'mt-12'">
           <v-row
             no-gutters
@@ -145,7 +124,55 @@
               />
             </v-col>
           </v-row>
+          <v-row
+            no-gutters
+            class="mb-8"
+          >
+            <v-spacer />
+            <v-btn
+              color="primary"
+              :ripple="false"
+              type="submit"
+            >
+              Save
+            </v-btn>
+          </v-row>
         </v-form>
+        <v-divider class="mb-8" />
+        <div
+          class="d-flex justify-start mx-12 mt-5 mb-2"
+          :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
+        >
+          <span>
+            Managed Blocked Accounts
+          </span>
+        </div>
+        <div class="d-flex justify-center">
+          <pre class="caption text-left">
+            Blocked users can no longer view, mention, private message or send follow requests to your account.
+          </pre>
+        </div>
+        <v-row
+          no-gutters
+          :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'"
+        >
+          <v-spacer />
+          <v-col
+            :cols="$vuetify.breakpoint.xsOnly ? '12' : '3'"
+            class="mt-2 d-flex justify-start"
+          >
+            <span>
+              Blocked Users
+            </span>
+          </v-col>
+          <v-col
+            :cols="$vuetify.breakpoint.xsOnly ? '12' : '8'"
+            class="text-left"
+          >
+            <SearchViewBy :search-list="blockedList" />
+          </v-col>
+        </v-row>
+
         <v-row
           no-gutters
           :class="$vuetify.breakpoint.xsOnly ? 'mx-0 mb-0' : 'mx-12 mb-3'"
@@ -241,12 +268,15 @@
 </template>
 
 <script>
+import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
+
 export default {
   name: 'PrivacySecurityPreferencesPage',
+  components: { SearchViewBy },
   data () {
     return {
       privateAccount: false,
-      verified: false,
+      blockedList: this.$store.getters.blockedUsers,
       disable: false,
       dialog: false,
       timeout: 1500,

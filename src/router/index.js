@@ -109,6 +109,10 @@ const routes = [
     component: Confirm
   },
   {
+    path: '/forgotpassword',
+    name: 'ForgotPassword'
+  },
+  {
     path: '/:catchAll(.*)',
     redirect: '/'
   }

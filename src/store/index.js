@@ -43,6 +43,30 @@ export default new Vuex.Store({
     loggedIn (state) {
       return !!state.user
     },
+    blockedUsers () {
+      return [
+        'UserSpam123',
+        'UserSpam123456',
+        'UserSpam123456789'
+      ]
+    },
+    favoriteUsers () {
+      return [
+        'ashcoin63',
+        'mcafeez',
+        'timthetatman'
+      ]
+    },
+    followersFollowing () {
+      return [
+        'Mary Winchester',
+        'John Winchester',
+        'Tim Robenman',
+        'Ash Britan',
+        'Mac Kafe',
+        'Jenny Silver'
+      ]
+    },
     allPosts () {
       return [
         {
