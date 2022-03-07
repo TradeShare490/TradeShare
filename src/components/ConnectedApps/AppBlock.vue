@@ -99,7 +99,7 @@
       max-width="600"
     >
       <v-card>
-        <div class="mt-5">
+        <div>
           <v-card-text
             v-if="link===true"
             class="text-h6"
