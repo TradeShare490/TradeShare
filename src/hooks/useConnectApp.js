@@ -1,7 +1,7 @@
 import UserService from '../services/User.service'
 export const useConnectAppMixin = {
   methods: {
-    async connectApp () {
+    async connectApp (name) {
       if (name === 'Alpaca') {
         window.open(process.env.VUE_APP_ALPACA_INTEGRATION_URL, '_self')
       }
