@@ -130,7 +130,7 @@
             depressed
             color="primary"
             :data-cy="`${name}-handleDialogActionSubmit`"
-            @click="handleAction"
+            @click="handleAction(name)"
           >
             Confirm
           </v-btn>
@@ -199,13 +199,13 @@ export default {
     handleDialog () {
       this.dialog = true
     },
-    handleAction () {
+    handleAction (name) {
       const err = false
 
       if (this.link === true) {
-        this.removeApp(this.user.userId, this.$store)
+        this.removeApp(this.user.userId, this.$store, name)
       } else {
-        this.connectApp()
+        this.connectApp(name)
       }
 
       if (err) {
