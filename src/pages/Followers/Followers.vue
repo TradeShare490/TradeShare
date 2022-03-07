@@ -10,7 +10,10 @@
         <span>FOLLOW REQUESTS</span>
       </v-tab>
       <v-tab-item class="mt-5">
-        <SearchViewBy />
+        <div class="d-flex justify-end">
+          <SearchViewBy :search-list="usersList" />
+        </div>
+        <v-divider class="mt-3 mx-6" />
         <UserBlock
           :currentlyfollowing="true"
           name="Tim Robenman"
@@ -53,6 +56,11 @@ export default {
   components: {
     UserBlock,
     SearchViewBy
+  },
+  data () {
+    return {
+      usersList: this.$store.getters.followersFollowing
+    }
   }
 }
 </script>

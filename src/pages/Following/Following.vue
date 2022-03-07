@@ -1,6 +1,9 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <SearchViewBy />
+    <div class="d-flex justify-end">
+      <SearchViewBy :search-list="usersList" />
+    </div>
+    <v-divider class="mt-3 mx-6" />
     <UserBlock
       :currently-following="true"
       name="Tim Robenman"
@@ -25,6 +28,11 @@ export default {
   components: {
     UserBlock,
     SearchViewBy
+  },
+  data () {
+    return {
+      usersList: this.$store.getters.followersFollowing
+    }
   }
 }
 </script>
