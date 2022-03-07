@@ -9,22 +9,25 @@
           Enter your email and if your email exists then we will send you a password replacement form.
         </p>
         <br>
-        <v-label for="enter-email"> Enter Email: </v-label>
+        <v-label for="enter-email">
+          Enter Email:
+        </v-label>
         <v-input
           id="enter-email"
           name="enter-email"
         >
-        <br>
-        <v-btn
-          width="250"
-          height="45"
-          color="primary"
-          class="my-3 text-button"
-          data-cy="login-button"
-          @click="submit"
-        >
-          Submit
-        </v-btn>
+          <br>
+          <v-btn
+            width="250"
+            height="45"
+            color="primary"
+            class="my-3 text-button"
+            data-cy="login-button"
+            @click="submit"
+          >
+            Submit
+          </v-btn>
+        </v-input>
       </div>
     </div>
   </div>
@@ -34,7 +37,7 @@
 export default {
   methods: {
     async submit () {
-      //here we should call the method that sends the email to the user with the password renewal form.
+      // here we should call the method that sends the email to the user with the password renewal form.
       return 0
     }
   }
