@@ -9,15 +9,15 @@
           Enter and confirm your new password in the text fields below. Make sure to have at least 3 characters.
         </p>
         <br>
-        <label for="pwd">New Password: </label>
-        <input
+        <v-label for="pwd">New Password: </v-label>
+        <v-input
           id="pwd"
           type="password"
           name="pwd"
         >
         <br>
         <br>
-        <label for="pwd-conf">Confirm New Password: </label>
+        <v-label for="pwd-conf">Confirm New Password: </v-label>
         <input
           id="pwd-conf"
           type="password"
@@ -44,6 +44,7 @@
 export default {
   methods: {
     async submit () {
+      //here we should call the method that patches the password in the mongodb
       return 0
     }
   }
