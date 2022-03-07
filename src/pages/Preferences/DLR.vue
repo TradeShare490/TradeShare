@@ -1,20 +1,7 @@
 <template>
-  <v-container
-    fluid
-    class="d-flex justify-center py-0"
-  >
-    <v-card
-      min-width="350"
-      width="800"
-      height="100vh"
-      class="px-12"
-      :class="{'ml-9': $vuetify.breakpoint.xsOnly}"
-    >
-      <span
-        class="font-weight-bold d-flex justify-start mx-3 mt-5 mb-12"
-        :class="{'text-left': $vuetify.breakpoint.xsOnly}"
-        style="color: #66788A"
-      >
+  <v-container fluid>
+    <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'">
+      <span class="font-weight-bold d-flex justify-start mx-1 mt-3 mb-8">
         DISPLAY, LANGUAGE & REGION
       </span>
       <v-divider class="mb-8" />
@@ -22,7 +9,7 @@
         class="d-flex justify-start mx-12 mt-5 mb-10"
         :class="{'flex-column': $vuetify.breakpoint.xsOnly}"
       >
-        <span style="color: #66788A">
+        <span>
           Display
         </span>
         <v-switch
@@ -39,7 +26,7 @@
         class="d-flex justify-space-between mx-12 my-5"
         :class="{'flex-column align-center': $vuetify.breakpoint.xsOnly}"
       >
-        <span style="color: #66788A">
+        <span>
           Language
         </span>
         <div style="max-width: 250px">
@@ -69,6 +56,7 @@
           v-model="snackbar1"
           :timeout="timeout"
           color="primary"
+          right
         >
           {{ snackbar1Text }}
         </v-snackbar>
@@ -78,7 +66,7 @@
         class="d-flex justify-space-between mx-12 my-5"
         :class="{'flex-column align-center': $vuetify.breakpoint.xsOnly}"
       >
-        <span style="color: #66788A">
+        <span>
           Region
         </span>
         <div style="max-width: 250px">
@@ -108,12 +96,12 @@
           v-model="snackbar2"
           :timeout="timeout"
           color="primary"
+          right
         >
           {{ snackbar2Text }}
         </v-snackbar>
       </div>
-      <v-divider class="mb-8" />
-    </v-card>
+    </div>
   </v-container>
 </template>
 
@@ -143,9 +131,9 @@ export default {
     selectRegion: null,
     timeout: 1500,
     snackbar1: false,
-    snackbar1Text: 'Language Saved!',
+    snackbar1Text: 'Language Saved',
     snackbar2: false,
-    snackbar2Text: 'Region Saved!'
+    snackbar2Text: 'Region Saved'
   }),
   methods: {
     saveLanguage () {
@@ -162,5 +150,19 @@ export default {
 <style scoped>
 .v-text-field--outlined:hover >>> fieldset {
   border: 1px solid #3F51B5;
+}
+.container {
+  width: 65%;
+  background-color: white;
+  height: 100vh;
+  flex-grow: 1;
+}
+span {
+  color: #66788A;
+}
+@media only screen and (max-width: 768px) {
+  .container {
+  width: 100%;
+  }
 }
 </style>
