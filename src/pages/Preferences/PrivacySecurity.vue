@@ -299,7 +299,7 @@
           v-for="(login, i) in loginActivity"
           id="truncate"
           :key="i"
-          class="text-left text-wrap mb-8"
+          class="text-left text-wrap mb-8 text-body-2"
         >
           <div>
             {{ login.device + ' – ' + login.location }}
@@ -341,7 +341,7 @@ export default {
 .container {
   width: 65%;
   background-color: white;
-  height: 100%;
+  min-height: 100vh;
   flex-grow: 1;
 }
 

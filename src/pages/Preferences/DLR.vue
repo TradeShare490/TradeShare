@@ -153,7 +153,7 @@ export default {
 .container {
   width: 65%;
   background-color: white;
-  height: 100vh;
+  min-height: 100vh;
   flex-grow: 1;
 }
 span {
