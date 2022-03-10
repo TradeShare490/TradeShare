@@ -203,6 +203,10 @@ export default {
   created () {
     this.initialize()
   },
+  // mounted () {
+  //   this.$store.dispatch('getFollows', this.user.userId)
+  //   this.$store.dispatch('getFollowers', this.user.userId)
+  // },
   methods: {
     // ...mapActions([
     //   'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`

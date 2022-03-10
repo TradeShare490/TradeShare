@@ -38,7 +38,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ following_num }}
+                  {{ following_num + " Followings" }}
                 </router-link>
               </v-col>
               <v-col>
@@ -47,7 +47,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ follower_num }}
+                  {{ follower_num + " Followers" }}
                 </router-link>
               </v-col>
             </v-row>
@@ -151,7 +151,7 @@
 <!-- TradeZone icon could also be chart-areaspline-->
 <script>
 import UserService from '../../services/User.service'
-import { mapActions } from 'vuex'
+// import { mapActions } from 'vuex'
 export default {
   name: 'SideMenu',
   data () {
@@ -181,42 +181,43 @@ export default {
       return JSON.parse(localStorage.getItem('user'))
     },
     following_num () {
-      return this.$store.state.user.following_num || 0
+      return this.$store.state.user.following.length
     },
     follower_num () {
-      return this.$store.state.user.follower_num || 0
+      return this.$store.state.user.followers.length
+    },
+    getterf1 () {
+      return this.$store.getters.f1
+    },
+    getterf2 () {
+      return this.$store.getters.f2
     }
-    // console.log(this.$store.state.user.following_num)
-    //   console.log(this.$store.state.user.follower_num)
-    //   console.log(this.$store.getters.f1)
-    //   console.log(this.$store.getters.f2)
   },
+  // async mounted () {
+  //   await this.$store.dispatch('getFollows', this.user.userId)
+  //   await this.$store.dispatch('getFollowers', this.user.userId)
+  // },
   created () {
-    console.log('1')
-    console.log(this.$store.state.user.following_num)
-    console.log(this.$store.state.user.follower_num)
-    this.getFollows()
     this.initialize()
-    console.log('2')
-    console.log(this.$store.state.user.following_num)
-    console.log(this.$store.state.user.follower_num)
   },
   methods: {
-    ...mapActions([
-      'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`
-    ]),
+    // ...mapActions([
+    //   'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`
+    // ]),
     test () {
-      console.log('testaaaaaaaaaa')
-
-      console.log(this.$store.state.user.following_num)
-      console.log(this.$store.state.user.follower_num)
-      console.log(this.$store.getters.f1)
-      console.log(this.$store.getters.f2)
-      console.log('testaaaaaaaaaa')
+      console.log('state1 ' + this.$store.state.user.following_num)
+      console.log('state2 ' + this.$store.state.user.follower_num)
+      console.log('state1 ' + this.$store.state.user.following.length)
+      console.log('state2 ' + this.$store.state.user.follower.length)
+      console.log(this.getterf1)
+      console.log(this.getterf2)
+      console.log(this.user)
+      // this.$forceUpdate()
     },
     async initialize () {
       console.log('initialize')
       this.account = await UserService.getAccount(this.user.userId)
+      // this.getFollows()
     }
   }
 }

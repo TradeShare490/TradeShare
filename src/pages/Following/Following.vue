@@ -72,8 +72,6 @@ export default {
   methods: {
     async initialize () {
       this.getFollowingsHook(this.user.userId)
-      // console.log('this.followings ' + this.followings)
-      // console.log(this.followings)
     }
   }
 }
