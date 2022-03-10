@@ -31,8 +31,6 @@ export const useFollowMixin = {
       }
     },
     async follow () {
-      console.log('FOLLOW()')
-      console.log(this.user)
       const credentials = {
         actorId: this.user.userId,
         targetId: this.id
@@ -42,19 +40,13 @@ export const useFollowMixin = {
         console.log(response)
         this.userStat.following = true
         this.toogleSnackbar(0)
-        console.log(this.$store.state.user.following_num)
-        this.$store.state.user.following_num++
-        console.log(this.user)
         this.user.following.push(this.id)
         this.$store.state.user.following.push(this.id)
-        console.log(this.user.following)
-        console.log(this.$store.state.user.following)
       } catch (e) {
         console.log(e)
       }
     },
     async unfollow () {
-      console.log('UNFOLLOW()')
       const credentials = {
         actorId: this.user.userId,
         targetId: this.id
@@ -64,18 +56,12 @@ export const useFollowMixin = {
         console.log(response)
         this.userStat.following = false
         this.toogleSnackbar(1)
-        console.log(this.$store.state.user.following_num)
-        this.$store.state.user.following_num--
-        console.log(this.user)
         const index = this.user.following.indexOf(this.id)
         const index2 = this.$store.state.user.following.indexOf(this.id)
         console.log(index)
         if (index > -1 && index2 > -1) {
           this.user.following.splice(index, 1) // 2nd parameter means remove one item only
           this.$store.state.user.following.splice(index2, 1)
-          console.log('after delete')
-          console.log(this.user.following)
-          console.log(this.$store.state.user.following)
         }
       } catch (e) {
         console.log(e)
