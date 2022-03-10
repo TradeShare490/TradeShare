@@ -288,10 +288,6 @@ export default {
 }
 </script>
 <style scoped>
-.v-te
-    NotificationSettingsxt-field--outlined:hover >>> fieldset {
-  border: 1px solid #3F51B5;
-}
 .container {
   width: 65%;
   background-color: white;
