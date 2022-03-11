@@ -167,10 +167,7 @@ export default {
       lowerNav: [
         { title: 'Support', icon: 'mdi-help-circle-outline', route: '/support' }
       ],
-      since: 'Member since 2021',
-      follows: [
-        { numFollowing: '190K', numFollowers: '295K' }
-      ]
+      since: 'Member since 2021'
     }
   },
   computed: {
@@ -185,25 +182,12 @@ export default {
     },
     follower_num () {
       return this.$store.state.user.followers.length
-    },
-    getterf1 () {
-      return this.$store.getters.f1
-    },
-    getterf2 () {
-      return this.$store.getters.f2
     }
   },
-  // async mounted () {
-  //   await this.$store.dispatch('getFollows', this.user.userId)
-  //   await this.$store.dispatch('getFollowers', this.user.userId)
-  // },
   created () {
     this.initialize()
   },
   methods: {
-    // ...mapActions([
-    //   'getFollows' // map `this.add()` to `this.$store.dispatch('increment')`
-    // ]),
     test () {
       console.log('state1 ' + this.$store.state.user.following_num)
       console.log('state2 ' + this.$store.state.user.follower_num)
@@ -212,12 +196,9 @@ export default {
       console.log(this.getterf1)
       console.log(this.getterf2)
       console.log(this.user)
-      // this.$forceUpdate()
     },
     async initialize () {
-      console.log('initialize')
       this.account = await UserService.getAccount(this.user.userId)
-      // this.getFollows()
     }
   }
 }

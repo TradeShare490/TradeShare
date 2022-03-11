@@ -14,40 +14,11 @@ export default new Vuex.Store({
   },
   mutations: {
     setUserData (state, userData) {
-      console.log('SETUSERDATA')
-      console.log(userData)
-      console.log(userData.accessToken)
-      console.log(userData.userInfo.accessToken)
-      console.log(userData.refreshToken)
-      console.log(JSON.stringify(userData.userInfo))
-      console.log(userData.userInfo.email)
-      console.log(userData.userInfo.firstname)
-      console.log(userData.userInfo)
-      console.log(userData.userInfo.following[0])
-      console.log(userData.userInfo.followers)
-
       state.user = { accessToken: userData.accessToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
       userData.userInfo = { accessToken: userData.accessToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
       localStorage.setItem('user', JSON.stringify(userData.userInfo))
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
       axios.defaults.headers.common['x-refresh'] = `${userData.refreshToken}`
-      console.log('END setUserData')
-      console.log('localstorage')
-      console.log(JSON.parse(localStorage.getItem('user')))
-      console.log('state user')
-      console.log(state.user)
-      state.user.follower_num = userData.userInfo.followers.length
-      state.user.following_num = userData.userInfo.following.length
-    },
-    SET_FOLLOWER (state, data) {
-      console.log('index.SET_FOLLOWER')
-      state.user.follower_num = data
-      console.log('end ' + state.user.follower_num)
-    },
-    SET_FOLLOWING (state, data) {
-      console.log('index.SET_FOLLOWING')
-      state.user.following_num = data
-      console.log('end ' + state.user.following_num)
     },
     logOut () {
       localStorage.removeItem('user')
@@ -62,52 +33,13 @@ export default new Vuex.Store({
       const { data } = await axios.post('/session', credentials)
       await axios.get('/following/follows/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${this.state.user.accessToken}` } })
         .then(response => {
-          console.log('REPS FROM FOLLOWS')
-          console.log(response.data)
           data.userInfo.following = response.data
         })
       await axios.get('/following/followers/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${this.state.user.accessToken}` } })
         .then(response => {
-          console.log('REPS FROM FOLLOWING')
-          console.log(response.data)
           data.userInfo.followers = response.data
         })
       commit('setUserData', data)
-    },
-    getFollows (context, id) {
-      console.log('getFollows')
-      console.log(this.state)
-      console.log(this.state.user)
-      axios.get('/following/follows/' + id, { headers: { Authorization: `Bearer ${this.state.user.accessToken}` } })
-        .then(response => {
-          console.log(response.data)
-          context.commit('SET_FOLLOWING', response.data.length)
-        })
-      // const url = '/following/follows/'
-      // console.log(localStorage.getItem('user').accessToken)
-      // console.log(localStorage.getItem('user').userId)
-      // console.log(url + localStorage.getItem('user').userId)
-      // const headers = {
-      //   'x-api-key': process.env.VUE_APP_SIRH_X_API_KEY,
-      //   Authorization: localStorage.getItem('user').accessToken
-      // }
-      // console.log(headers)
-      // return axios({
-      //   method: 'get',
-      //   url: url + localStorage.getItem('user').userId,
-      //   headers: headers
-      // }).then((response) => {
-      //   context.commit('SET_FOLLOWING', response.data.length)
-      // }).catch((e) => {
-      //   console.log(e)
-      // })
-    },
-    getFollowers ({ commit }, id) {
-      axios.get('/following/followers/' + id, { headers: { Authorization: `Bearer ${this.state.user.accessToken}` } })
-        .then(response => {
-          console.log(response.data)
-          commit('SET_FOLLOWER', response.data.length)
-        })
     },
     logout ({ commit }) {
       commit('logOut')
@@ -124,8 +56,6 @@ export default new Vuex.Store({
     loggedIn (state) {
       return !!state.user
     },
-    f1: (state) => state.user.following_num,
-    f2: (state) => state.user.follower_num,
     allPosts () {
       return [
         {
