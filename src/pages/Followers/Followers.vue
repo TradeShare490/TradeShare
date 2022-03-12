@@ -49,7 +49,7 @@
                 align="center"
                 justify="center"
               >
-                <v-col>You do not have any follower yet.</v-col>
+                <v-col>You do not have any followers yet.</v-col>
               </v-row>
             </v-container>
           </div>

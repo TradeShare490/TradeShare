@@ -75,12 +75,12 @@ export default {
     querySelections (v) {
       this.isLoading = true
       // Simulated ajax query
-      setTimeout(() => {
-        this.users = this.searchList.filter((e) => {
-          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-        })
-        this.isLoading = false
-      }, 500)
+      // setTimeout(() => {
+      //   this.users = this.searchList.filter((e) => {
+      //     return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+      //   })
+      //   this.isLoading = false
+      // }, 500)
     }
   }
 }
