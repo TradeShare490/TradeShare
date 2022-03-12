@@ -128,7 +128,6 @@
               class="text-left"
             >
               <v-textarea
-                style=""
                 label="Type your message here"
                 outlined
                 solo
