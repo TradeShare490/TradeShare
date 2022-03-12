@@ -40,32 +40,32 @@ describe("Profile component can ", () => {
     });
   });
   it("send a message", () => {
-    // cy.get("[data-cy=message]").click();
+    cy.get("[data-cy=message]").click();
   });
-  it("interact with the user portfolio",()=>{
-    //Attempt to add an Invalid Stock
-    cy.get("[data-cy=positions-new-item-btn").click();
-    cy.get("[data-cy=positions-new-item-submit-btn]").click();
-    cy.get("[data-cy=positions-snackbar").should('contain', "Invalid input. Please try again.")
-    cy.get("[data-cy=positions-new-item-cancel-btn]").click();
-    //Attempt to add a valid stock
-    cy.get("[data-cy=positions-new-item-btn").click();
-    cy.get("[data-cy=positions-new-item-symbol-tf]").type("TEST_STOCK");
-    cy.get("[data-cy=positions-new-item-position-size-tf]").type("{backspace}10");
-    cy.get("[data-cy=positions-new-item-submit-btn]").click();
-    //To edit that stock
-    cy.get("[data-cy=edit-stock-button]").first().click();
-    cy.get("[data-cy=positions-new-item-symbol-tf]").clear().type("EDITED_TEST_STOCK");
-    cy.get("[data-cy=positions-new-item-position-size-tf]").clear().type("4");
-    cy.get("[data-cy=positions-new-item-submit-btn]").click();
-    //To share it
-    cy.get("[data-cy=share-stock-button]").first().should('be.visible');
-    //Then to delete it
-    cy.get("[data-cy=delete-stock-button]").last().click();
-    cy.get("[data-cy=cancel-stock-delete]").click();
-    cy.get("[data-cy=delete-stock-button]").first().click();
-    cy.get("[data-cy=confirm-stock-delete]").click();
-  });
+  // it("interact with the user portfolio",()=>{
+  //   //Attempt to add an Invalid Stock
+  //   cy.get("[data-cy=positions-new-item-btn").click();
+  //   cy.get("[data-cy=positions-new-item-submit-btn]").click();
+  //   cy.get("[data-cy=positions-snackbar").should('contain', "Invalid input. Please try again.")
+  //   cy.get("[data-cy=positions-new-item-cancel-btn]").click();
+  //   //Attempt to add a valid stock
+  //   cy.get("[data-cy=positions-new-item-btn").click();
+  //   cy.get("[data-cy=positions-new-item-symbol-tf]").type("TEST_STOCK");
+  //   cy.get("[data-cy=positions-new-item-position-size-tf]").type("{backspace}10");
+  //   cy.get("[data-cy=positions-new-item-submit-btn]").click();
+  //   //To edit that stock
+  //   cy.get("[data-cy=edit-stock-button]").first().click();
+  //   cy.get("[data-cy=positions-new-item-symbol-tf]").clear().type("EDITED_TEST_STOCK");
+  //   cy.get("[data-cy=positions-new-item-position-size-tf]").clear().type("4");
+  //   cy.get("[data-cy=positions-new-item-submit-btn]").click();
+  //   //To share it
+  //   cy.get("[data-cy=share-stock-button]").first().should('be.visible');
+  //   //Then to delete it
+  //   cy.get("[data-cy=delete-stock-button]").last().click();
+  //   cy.get("[data-cy=cancel-stock-delete]").click();
+  //   cy.get("[data-cy=delete-stock-button]").first().click();
+  //   cy.get("[data-cy=confirm-stock-delete]").click();
+  // });
   it("Display the user data",() =>{
     cy.get("[data-cy=basic-profile-info]").should("be.visible");
     cy.get("[data-cy=profile-num-followers]").should("be.visible");
