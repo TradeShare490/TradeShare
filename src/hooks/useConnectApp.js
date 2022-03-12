@@ -1,12 +1,17 @@
+import UserService from '../services/User.service'
 export const useConnectAppMixin = {
   methods: {
-    async connectApp () {
-      this.link = true
-      this.$emit('linked', true)
+    async connectApp (name) {
+      if (name === 'Alpaca') {
+        window.open(process.env.VUE_APP_ALPACA_INTEGRATION_URL, '_self')
+      }
     },
-    async removeApp () {
-      this.link = false
-      this.$emit('linked', false)
+    async removeApp (userId, store, name) {
+      if (name === 'Alpaca') {
+        await UserService.removeAlpaca(userId, store)
+        this.link = false
+        this.$emit('linked', false)
+      }
     }
   }
 }

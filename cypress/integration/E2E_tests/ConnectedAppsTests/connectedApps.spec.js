@@ -9,16 +9,10 @@ describe("On the connected apps page, can", () => {
         );
       });
       cy.get("body").then(($body) => {
-        cy.get("[data-cy=Alpaca-unlinked]").click();
-        cy.get("[data-cy=Alpaca-handleDialogActionSubmit]").click();
-        cy.get("[data-cy=Alpaca-linked]").should('exist');
+        cy.get("[data-cy=Alpaca-unlinked]").should('exist');
       });
       cy.get("body").then(($body) => {
-        cy.get("[data-cy=Moomoo-linked]").click();
-        cy.get("[data-cy=Moomoo-handleDialogActionCancel]").click();
-        cy.get("[data-cy=Moomoo-linked]").click();
-        cy.get("[data-cy=Moomoo-handleDialogActionSubmit]").click();
-        cy.get("[data-cy=Moomoo-unlinked]");
+        cy.get("[data-cy=Moomoo-linked]").should('be.disabled')
       });
     });
   });
