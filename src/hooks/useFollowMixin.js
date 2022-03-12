@@ -11,6 +11,7 @@ export const useFollowMixin = {
       this.isLoading = true
       try {
         this.followings = await UserService.getFollowings(id)
+        console.log(this.followings)
       } catch (err) {
         console.log(err)
       } finally {
@@ -21,6 +22,7 @@ export const useFollowMixin = {
       this.isLoading = true
       try {
         this.followers = await UserService.getFollowers(id)
+        console.log(this.followers)
       } catch (err) {
         console.log(err)
       } finally {

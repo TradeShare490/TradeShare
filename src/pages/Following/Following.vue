@@ -13,7 +13,7 @@
       />
     </div>
     <div v-else>
-      <div v-if="typeof followings !== 'undefined' || followings.length!=0">
+      <div v-if="followings.length!=0">
         <div
           v-for="(following, i) in followings"
           :key="i"
@@ -40,7 +40,7 @@
             align="center"
             justify="center"
           >
-            <v-col>You do not following anyone yet.</v-col>
+            <v-col>You are not following anyone yet.</v-col>
           </v-row>
         </v-container>
       </div>
