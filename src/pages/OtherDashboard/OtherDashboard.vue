@@ -56,16 +56,18 @@
               >
                 <span class="blue--text">Recent Trades</span>
               </v-card-title>
-              <Recents
-                v-for="trade in allPosts.splice(0, 4)"
-                :key="trade.id"
-                :image="trade.image"
-                :name="trade.name"
-                :tag="trade.tag"
-                :company="trade.company"
-                :purchased="trade.purchased"
-                :when="trade.when"
-              />
+              <div v-if="allPosts.length!=0">
+                <Recents
+                  v-for="trade in allPosts.splice(0, 4)"
+                  :key="trade.id"
+                  :image="trade.image"
+                  :name="trade.name"
+                  :tag="trade.tag"
+                  :company="trade.company"
+                  :purchased="trade.purchased"
+                  :when="trade.when"
+                />
+              </div>
             </v-card>
           </div>
         </v-col>
