@@ -42,7 +42,7 @@
         <v-card-actions class="pb-5">
           <v-spacer />
           <v-btn
-            color="primary"
+            depressed
             data-cy="cancel-linking-btn"
             @click="cancel"
           >

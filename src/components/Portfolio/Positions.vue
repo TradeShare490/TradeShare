@@ -176,7 +176,7 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template #[`item.verified`]="{ item }" >
+      <template #[`item.verified`]="{ item }">
         <v-chip
           label
           class="text-uppercase white--text px-3"

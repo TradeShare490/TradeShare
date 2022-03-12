@@ -215,8 +215,7 @@ export default {
       snackbarFollow: false,
       snackbarText: 'snackbarText',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000,
-      following: this.currentlyfollowing
+      snackbarTimeout: 1000
     }
   },
   computed: {
@@ -225,9 +224,6 @@ export default {
     },
     name () {
       return this.otheruser.username
-    },
-    followingA () {
-      return this.otheruser.following
     }
   },
   created () {
