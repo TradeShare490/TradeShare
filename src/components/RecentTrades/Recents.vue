@@ -7,7 +7,7 @@
     >
       <v-col
         xs="12"
-        sm="3"
+        sm="4"
       >
         <v-list-item class="px-0">
           <v-list-item-content>
@@ -30,16 +30,37 @@
       </v-col>
       <v-col
         xs="12"
-        sm="5"
+        sm="4"
       >
         <v-list-item class="px-0">
           <v-list-item-content>
+            <v-list-item
+              class="d-flex justify-center px-0"
+              data-cy="company-tag"
+            >
+              <v-chip
+                label
+                class="white--text px-2 text-body-1"
+                color="primary"
+              >
+                {{ tag }}
+              </v-chip>
+            </v-list-item>
             <v-list-item-title
               data-cy="company-name"
-              class="text-caption text-wrap"
+              style="font-size: 12px"
             >
               {{ company }}
             </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-col>
+      <v-col
+        xs="12"
+        sm="4"
+      >
+        <v-list-item class="px-0">
+          <v-list-item-content class="text-caption text-wrap">
             <v-list-item class="d-flex justify-center px-0">
               <v-chip
                 data-cy="trade-type"
@@ -50,44 +71,20 @@
                 {{ purchased ? "PURCHASED" : "SOLD" }}
               </v-chip>
             </v-list-item>
-          </v-list-item-content>
-        </v-list-item>
-      </v-col>
-      <v-col
-        xs="12"
-        sm="3"
-      >
-        <v-list-item class="px-0">
-          <v-list-item-content class="text-caption text-wrap">
             <v-list-item-title
               data-cy="trade-date"
               style="font-size: 12px"
             >
               {{ when }}
             </v-list-item-title>
-            <v-list-item-icon class="d-flex justify-center mx-0">
-              <v-icon :color="today ? 'primary' : 'grey'">
-                mdi-checkbox-marked-circle
-              </v-icon>
-            </v-list-item-icon>
           </v-list-item-content>
         </v-list-item>
-      </v-col>
-      <v-col
-        xs="12"
-        sm="1"
-      >
-        <v-btn
-          icon
-          data-cy="options-button"
-        >
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
       </v-col>
     </v-row>
     <v-divider />
   </v-container>
 </template>
+
 <script>
 export default {
   name: 'RecentsActivities',
@@ -97,6 +94,10 @@ export default {
       default: ''
     },
     name: {
+      type: String,
+      default: ''
+    },
+    tag: {
       type: String,
       default: ''
     },
@@ -111,10 +112,6 @@ export default {
     when: {
       type: String,
       default: ''
-    },
-    today: {
-      type: Boolean,
-      default: true
     }
   }
 }

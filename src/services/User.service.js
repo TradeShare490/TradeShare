@@ -230,6 +230,19 @@ class UserService {
       return { success: false, message: err.response.data.message }
     }
   }
+
+  async removeAlpaca (userId, store) {
+    const response = await axios.patch('/userInfo/' + userId, {
+      alpacaToken: 'None'
+    })
+    store
+      .dispatch('update', {
+        response
+      })
+      .catch(err => {
+        this.error = err.response.data.message
+      })
+  }
 }
 
 export default new UserService()

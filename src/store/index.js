@@ -57,6 +57,47 @@ export default new Vuex.Store({
     loggedIn (state) {
       return !!state.user
     },
+    loginActivity () {
+      return [
+        {
+          id: 1,
+          device: 'Windows PC',
+          location: 'Montreal, QC, Canada',
+          browser: 'Chrome',
+          when: '6 hours ago'
+        },
+        {
+          id: 2,
+          device: 'Macbook Pro',
+          location: 'Montreal, QC, Canada',
+          browser: 'Safari',
+          when: 'Jan 7'
+        }
+      ]
+    },
+    blockedUsers () {
+      return [
+        'userspam123',
+        'userspam123456',
+        'userspam123456789'
+      ]
+    },
+    favoriteUsers () {
+      return [
+        'ashcoin63',
+        'mcafeez',
+        'timthetatman'
+      ]
+    },
+    followersFollowing () {
+      return [
+        'Mary Winchester',
+        'John Winchester',
+        'Tim Robenman',
+        'Ash Britan',
+        'Mac Kafe'
+      ]
+    },
     allPosts () {
       return [
         {
