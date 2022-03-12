@@ -11,7 +11,6 @@ export const useFollowMixin = {
       this.isLoading = true
       try {
         this.followings = await UserService.getFollowings(id)
-        console.log(this.followings)
       } catch (err) {
         console.log(err)
       } finally {
@@ -22,7 +21,6 @@ export const useFollowMixin = {
       this.isLoading = true
       try {
         this.followers = await UserService.getFollowers(id)
-        console.log(this.followers)
       } catch (err) {
         console.log(err)
       } finally {
@@ -30,14 +28,12 @@ export const useFollowMixin = {
       }
     },
     async follow (type) {
-      console.log('FOLLOW')
       const credentials = {
         actorId: this.user.userId,
         targetId: this.id
       }
       try {
-        const response = await UserService.postFollow(credentials)
-        console.log(response)
+        await UserService.postFollow(credentials)
         switch (type) {
           case 0: this.userStat.following = true; break
           case 1:
@@ -45,26 +41,20 @@ export const useFollowMixin = {
             this.otheruser.numFollowers++
             break
         }
-
         this.toogleSnackbar(0)
         this.user.following.push(this.id)
         this.$store.state.user.following.push(this.id)
-        console.log('new this.$store.state.user.following')
-        console.log(this.$store.state.user.following)
       } catch (e) {
         console.log(e)
       }
     },
     async unfollow (type) {
-      console.log('UNFOLLOW')
       const credentials = {
         actorId: this.user.userId,
         targetId: this.id
       }
-      console.log(credentials)
       try {
-        const response = await UserService.postUnfollow(credentials)
-        console.log(response)
+        await UserService.postUnfollow(credentials)
         switch (type) {
           case 0: this.userStat.following = false; break
           case 1:
@@ -75,13 +65,10 @@ export const useFollowMixin = {
         this.toogleSnackbar(1)
         const index = this.user.following.indexOf(this.id)
         const index2 = this.$store.state.user.following.indexOf(this.id)
-        console.log(index)
         if (index > -1 && index2 > -1) {
           this.user.following.splice(index, 1)
           this.$store.state.user.following.splice(index2, 1)
         }
-        console.log('new this.$store.state.user.following')
-        console.log(this.$store.state.user.following)
       } catch (e) {
         console.log(e)
       }

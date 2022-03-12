@@ -15,7 +15,6 @@
           class="profile"
           color="grey"
           size="65%"
-          @click="test"
         >
           <v-img :src="image" />
         </v-avatar>
@@ -226,32 +225,13 @@ export default {
       return this.otheruser.username
     }
   },
-  created () {
-    this.initialize()
-  },
   methods: {
-    /* istanbul ignore next */
-    initialize () {
-      console.log('AT PROFILE')
-      console.log(this.otheruser)
-    },
     message () {
       console.log('sending a message...')
     },
     blockUser () {
       this.snackbar = true
       this.blocked = true
-    },
-    test () {
-      console.log('PROFILE')
-      console.log('otheruser')
-      console.log(this.otheruser)
-      console.log('this.otheruser.following')
-      console.log(this.otheruser.following)
-      console.log('this.following')
-      console.log(this.following)
-      console.log('this.currentlyfollowing')
-      console.log(this.currentlyfollowing)
     }
   }
 }

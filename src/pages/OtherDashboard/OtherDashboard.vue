@@ -35,9 +35,6 @@
           <v-card min-width="350">
             <Positions :user-id="userId" />
           </v-card>
-          <v-btn @click="test">
-            STATE
-          </v-btn>
         </v-col>
         <v-col
           xs="12"
@@ -108,7 +105,6 @@ import Recents from '../../components/RecentTrades/Recents'
 import BarChartContainer from '../../components/ReturnGraphs/ReturnGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
-// import { useFollowMixin } from '../../hooks/useFollowMixin.js'
 
 export default {
   name: 'OtherDashboard',
@@ -135,32 +131,11 @@ export default {
     this.initialize()
   },
   methods: {
-    test () {
-      console.log('userInfo')
-      console.log(this.userInfo)
-      console.log('this.positions')
-      console.log(this.positions)
-      console.log('this.info')
-      console.log(this.info)
-      console.log('this.followNum')
-      console.log(this.followNum)
-      console.log('this.isFollowingByUser')
-      console.log(this.isFollowingByUser)
-    },
     async initialize () {
-      console.log('OTHER INITIALIZE()')
       this.userInfo = await UserService.getUserInfo(this.userId)
-      console.log('a')
-      console.log(this.userInfo)
       this.positions = await UserService.getPositions(this.userInfo.userId)
-      console.log('OTHER POSITION')
-      console.log(this.positions)
       this.followNum = await UserService.getFollowNum(this.userInfo.userId)
-      console.log('OTHER FOLLOW')
-      console.log(this.followNum)
       this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
-      console.log('IS FOLLOW?')
-      console.log(this.isFollowingByUser)
       this.info = {
         ...this.userInfo,
         numFollowers: this.followNum.numFollower,

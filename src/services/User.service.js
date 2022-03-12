@@ -6,7 +6,6 @@ class UserService {
   async signup (credentials) {
     try {
       const { data } = await axios.post('/user', credentials)
-      console.log(data)
       // should be a good response here, but double check for sure
       return { success: data.success }
     } catch (err) {
@@ -17,15 +16,11 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userID) {
-    console.log('GET POSITION ' + userID)
     let userPortfolioData = null
     await axios
       .get('/positions/' + userID)
       .then(function (res) {
-        console.log('response')
-        console.log(res)
         if (res.data.status === 501) {
-          console.log('501!')
           return []
         }
         res.data.positions.forEach(function (position) {
@@ -38,8 +33,6 @@ class UserService {
         console.log(err)
         return null
       })
-    console.log('returning')
-    console.log(userPortfolioData)
     return userPortfolioData
   }
 
@@ -50,8 +43,6 @@ class UserService {
         headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
       }
       const response = await axios.post('/following/unfollow', credentials, config)
-      console.log('unfollowed')
-      console.log(store.state.user)
       return response.data
     } catch (err) {
       console.log(err)
@@ -66,8 +57,6 @@ class UserService {
         headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
       }
       const response = await axios.post('/following/follow', credentials, config)
-      console.log('followed')
-      console.log(store.state.user)
       return response.data
     } catch (err) {
       console.log(err)
@@ -77,13 +66,11 @@ class UserService {
 
   /* istanbul ignore next */
   async getFollowNum (userID) {
-    console.log('getFollowNum ' + userID)
     const result = { numFollowing: 0, numFollower: 0 }
     const config = { headers: { Authorization: `Bearer ${store.state.user.accessToken}` } }
     await axios
       .get('/following/followers/' + userID, config)
       .then(function (res) {
-        console.log(res.data)
         result.numFollower = res.data.length
       })
       .catch(function (err) {
@@ -92,22 +79,16 @@ class UserService {
     await axios
       .get('/following/follows/' + userID, config)
       .then(function (res) {
-        console.log(res.data)
         result.numFollowing = res.data.length
       })
       .catch(function (err) {
         console.log(err)
       })
-    console.log('before returning')
-    console.log(result)
     return result
   }
 
+  /* istanbul ignore next */
   isFollowed (targetID) {
-    console.log('IS FOLLOWED ' + targetID)
-    // ${store.state.user.accessToken}
-    console.log(store.state.user.following)
-    console.log('isFollowing === ' + (store.state.user.following).includes(targetID))
     return (store.state.user.following).includes(targetID)
   }
 

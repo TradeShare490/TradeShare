@@ -14,7 +14,6 @@
           <v-list-item-avatar
             size="55%"
             style="flex-direction: column;"
-            @click="test"
           >
             <v-img src="https://randomuser.me/api/portraits/men/1.jpg" />
           </v-list-item-avatar>
@@ -187,12 +186,6 @@ export default {
     this.initialize()
   },
   methods: {
-    test () {
-      console.log('TEST()')
-      console.log('following length == ' + this.$store.state.user.following.length)
-      console.log('follower length  == ' + this.$store.state.user.followers.length)
-      console.log(this.user)
-    },
     async initialize () {
       this.account = await UserService.getAccount(this.user.userId)
     }
