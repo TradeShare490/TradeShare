@@ -5,9 +5,6 @@ export const useFollowMixin = {
     user () {
       return JSON.parse(localStorage.getItem('user'))
     }
-    // followings () {
-    //   return this.$store.state.user.followings
-    // }
   },
   methods: {
     async getFollowingsHook (id) {
@@ -30,7 +27,8 @@ export const useFollowMixin = {
         this.isLoading = false
       }
     },
-    async follow () {
+    async follow (type) {
+      console.log('FOLLOW')
       const credentials = {
         actorId: this.user.userId,
         targetId: this.id
@@ -38,35 +36,102 @@ export const useFollowMixin = {
       try {
         const response = await UserService.postFollow(credentials)
         console.log(response)
-        this.userStat.following = true
+        switch (type) {
+          case 0: this.userStat.following = true; break
+          case 1:
+            this.otheruser.following = true
+            this.otheruser.numFollowers++
+            break
+        }
+        this.following = true
         this.toogleSnackbar(0)
         this.user.following.push(this.id)
         this.$store.state.user.following.push(this.id)
+        console.log('new this.$store.state.user.following')
+        console.log(this.$store.state.user.following)
       } catch (e) {
         console.log(e)
       }
     },
-    async unfollow () {
+    async unfollow (type) {
+      console.log('UNFOLLOW')
       const credentials = {
         actorId: this.user.userId,
         targetId: this.id
       }
+      console.log(credentials)
       try {
         const response = await UserService.postUnfollow(credentials)
         console.log(response)
-        this.userStat.following = false
+        switch (type) {
+          case 0: this.userStat.following = false; break
+          case 1:
+            this.otheruser.following = false
+            this.otheruser.numFollowers--
+            break
+        }
         this.toogleSnackbar(1)
         const index = this.user.following.indexOf(this.id)
         const index2 = this.$store.state.user.following.indexOf(this.id)
         console.log(index)
         if (index > -1 && index2 > -1) {
-          this.user.following.splice(index, 1) // 2nd parameter means remove one item only
+          this.user.following.splice(index, 1)
           this.$store.state.user.following.splice(index2, 1)
         }
+        console.log('new this.$store.state.user.following')
+        console.log(this.$store.state.user.following)
       } catch (e) {
         console.log(e)
       }
     },
+
+    async followA () {
+      console.log('FOLLOW')
+      const credentials = {
+        actorId: this.user.userId,
+        targetId: this.id
+      }
+      try {
+        const response = await UserService.postFollow(credentials)
+        console.log(response)
+        // this.userStat.following = true
+
+        this.toogleSnackbar(0)
+        this.user.following.push(this.id)
+        this.$store.state.user.following.push(this.id)
+        console.log('new this.$store.state.user.following')
+        console.log(this.$store.state.user.following)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async unfollowA () {
+      console.log('UNFOLLOW')
+      const credentials = {
+        actorId: this.user.userId,
+        targetId: this.id
+      }
+      console.log(credentials)
+      try {
+        const response = await UserService.postUnfollow(credentials)
+        console.log(response)
+        // this.userStat.following = false
+        this.otheruser.following = false
+        this.toogleSnackbar(1)
+        const index = this.user.following.indexOf(this.id)
+        const index2 = this.$store.state.user.following.indexOf(this.id)
+        console.log(index)
+        if (index > -1 && index2 > -1) {
+          this.user.following.splice(index, 1)
+          this.$store.state.user.following.splice(index2, 1)
+        }
+        console.log('new this.$store.state.user.following')
+        console.log(this.$store.state.user.following)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
     async confirmFollowRequest () {
       console.log('accepting follow request...')
     },

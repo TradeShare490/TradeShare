@@ -31,11 +31,12 @@ export default new Vuex.Store({
   actions: {
     async login ({ commit }, credentials) {
       const { data } = await axios.post('/session', credentials)
-      await axios.get('/following/follows/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${this.state.user.accessToken}` } })
+      console.log(data)
+      await axios.get('/following/follows/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${data.accessToken}` } })
         .then(response => {
           data.userInfo.following = response.data
         })
-      await axios.get('/following/followers/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${this.state.user.accessToken}` } })
+      await axios.get('/following/followers/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${data.accessToken}` } })
         .then(response => {
           data.userInfo.followers = response.data
         })

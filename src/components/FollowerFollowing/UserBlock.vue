@@ -8,22 +8,29 @@
         no-gutters
         class="px-7"
       >
-        <v-col
-          align-self="center"
-          class="px-0 py-3"
-          cols="2"
-          sm="2"
-          md="1"
-          lg="1"
-          xl="1"
+        <router-link
+          :to="router"
+          class="grey--text"
+          style="text-decoration: none; font-size: 12px"
         >
-          <v-avatar
-            class="profile"
-            size="50"
+          <v-col
+            align-self="center"
+            class="px-0 py-3"
+            cols="2"
+            sm="2"
+            md="1"
+            lg="1"
+            xl="1"
           >
-            <v-img :src="image" />
-          </v-avatar>
-        </v-col>
+            <v-avatar
+              class="profile"
+              size="50"
+            >
+              <v-img :src="image" />
+            </v-avatar>
+          </v-col>
+        </router-link>
+
         <v-col
           align-self="center"
           cols="6"
@@ -67,7 +74,7 @@
               data-cy="following"
               height="32px"
               width="110px"
-              @click="unfollow"
+              @click="unfollow(0)"
             >
               <div class="text">
                 Following
@@ -82,7 +89,7 @@
               data-cy="follow"
               height="32px"
               width="110px"
-              @click="follow"
+              @click="follow(0)"
             >
               <div class="text">
                 Follow
@@ -201,7 +208,9 @@ export default {
       snackbarFollow: false,
       snackbarText: 'snackbarText',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000
+      snackbarTimeout: 1000,
+      router: '/dashboard/' + this.id
+      // following: this.currentlyfollowing
     }
   },
   computed: {

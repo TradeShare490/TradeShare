@@ -38,7 +38,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ following_num + " Followings" }}
+                  {{ followingNum + " Followings" }}
                 </router-link>
               </v-col>
               <v-col>
@@ -47,7 +47,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ follower_num + " Followers" }}
+                  {{ followerNum + " Followers" }}
                 </router-link>
               </v-col>
             </v-row>
@@ -148,10 +148,9 @@
     </v-navigation-drawer>
   </v-card>
 </template>
-<!-- TradeZone icon could also be chart-areaspline-->
+
 <script>
 import UserService from '../../services/User.service'
-// import { mapActions } from 'vuex'
 export default {
   name: 'SideMenu',
   data () {
@@ -177,10 +176,10 @@ export default {
     user () {
       return JSON.parse(localStorage.getItem('user'))
     },
-    following_num () {
+    followingNum () {
       return this.$store.state.user.following.length
     },
-    follower_num () {
+    followerNum () {
       return this.$store.state.user.followers.length
     }
   },
@@ -189,12 +188,9 @@ export default {
   },
   methods: {
     test () {
-      console.log('state1 ' + this.$store.state.user.following_num)
-      console.log('state2 ' + this.$store.state.user.follower_num)
-      console.log('state1 ' + this.$store.state.user.following.length)
-      console.log('state2 ' + this.$store.state.user.follower.length)
-      console.log(this.getterf1)
-      console.log(this.getterf2)
+      console.log('TEST()')
+      console.log('following length == ' + this.$store.state.user.following.length)
+      console.log('follower length  == ' + this.$store.state.user.followers.length)
       console.log(this.user)
     },
     async initialize () {
