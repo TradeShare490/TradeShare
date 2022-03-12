@@ -6,14 +6,16 @@
       app
       clipped-left
     >
-      <v-img
-        src="../../assets/TS_Logo_White.png"
-        alt="TradeShare Logo"
-        contain
-        max-width="70px"
-        height="60px"
-        position="left"
-      />
+      <router-link to="/">
+        <v-img
+          src="../../assets/TS_Logo_White.png"
+          alt="TradeShare Logo"
+          contain
+          max-width="70px"
+          height="60px"
+          position="left"
+        />
+      </router-link>
       <v-toolbar-title class="text-h6 mr-6 hidden-sm-and-down">
         TradeShare
       </v-toolbar-title>
