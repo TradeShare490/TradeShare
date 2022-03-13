@@ -49,7 +49,7 @@
               class="text-left text--lighten-2"
               data-cy="username"
             >
-              {{ username }}
+              {{ activeChat ? '@' : '' }}{{ username }}
             </v-card-subtitle>
           </v-col>
         </v-row>

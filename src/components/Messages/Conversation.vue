@@ -11,7 +11,7 @@
     <v-list-item-content class="text-left pl-5">
       <v-col
         class="px-0 py-0"
-        cols="6"
+        cols="7"
       >
         <v-list-item-title
           class="text-wrap text-body-2"
@@ -20,8 +20,13 @@
       </v-col>
       <v-col
         class="px-0 py-0"
-        cols="6"
-      />
+        cols="5"
+      >
+        <v-list-item-subtitle
+          class="text-wrap text-right text-caption"
+          v-text="'1m'"
+        />
+      </v-col>
       <v-col class="px-0 py-0">
         <v-list-item-subtitle
           class="pt-2 text-caption text-truncate"
