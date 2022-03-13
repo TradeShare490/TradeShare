@@ -150,7 +150,18 @@ export default {
         { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: 'Sandra Adams Do you have Paris recommendations? Have you ever been?', date: '3/12/2022, 7:14:33 PM', readed: true },
         { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
         { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true },
-        { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true }
+        { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false }
       ]
     }
   },
