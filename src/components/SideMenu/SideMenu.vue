@@ -150,8 +150,10 @@
 
 <script>
 import UserService from '../../services/User.service'
+import { useFollowMixin } from '../../hooks/useFollowMixin.js'
 export default {
   name: 'SideMenu',
+  mixins: [useFollowMixin],
   data () {
     return {
       selectedItem: '',
@@ -190,6 +192,7 @@ export default {
   methods: {
     async initialize () {
       this.account = await UserService.getAccount(this.user.userId)
+      this.refreshFollowList(this.user.userId)
     }
   }
 }

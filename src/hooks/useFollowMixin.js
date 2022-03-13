@@ -7,6 +7,10 @@ export const useFollowMixin = {
     }
   },
   methods: {
+    async refreshFollowList (id) {
+      this.$store.state.user.following = await UserService.getFollowings(id)
+      this.$store.state.user.followers = await UserService.getFollowers(id)
+    },
     async getFollowingsHook (id) {
       this.isLoading = true
       try {
