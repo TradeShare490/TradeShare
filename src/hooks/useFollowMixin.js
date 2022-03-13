@@ -41,9 +41,12 @@ export const useFollowMixin = {
             this.otheruser.numFollowers++
             break
         }
-        this.toogleSnackbar(0)
         this.user.following.push(this.id)
         this.$store.state.user.following.push(this.id)
+        const lsUser = JSON.parse(localStorage.getItem('user'))
+        if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
+        localStorage.setItem('user', JSON.stringify(lsUser))
+        this.toogleSnackbar(0)
       } catch (e) {
         console.log(e)
       }
@@ -62,13 +65,16 @@ export const useFollowMixin = {
             this.otheruser.numFollowers--
             break
         }
-        this.toogleSnackbar(1)
-        const index = this.user.following.indexOf(this.id)
-        const index2 = this.$store.state.user.following.indexOf(this.id)
-        if (index > -1 && index2 > -1) {
-          this.user.following.splice(index, 1)
-          this.$store.state.user.following.splice(index2, 1)
+        if (this.user.following.indexOf(this.id) > -1) {
+          this.user.following.splice(this.user.following.indexOf(this.id), 1)
         }
+        if (this.$store.state.user.following.indexOf(this.id) > -1) {
+          this.$store.state.user.following.splice(this.$store.state.user.following.indexOf(this.id), 1)
+        }
+        const lsUser = JSON.parse(localStorage.getItem('user'))
+        if (lsUser.following.indexOf(this.id) !== -1) lsUser.following.splice(lsUser.following.indexOf(this.id), 1)
+        localStorage.setItem('user', JSON.stringify(lsUser))
+        this.toogleSnackbar(1)
       } catch (e) {
         console.log(e)
       }
