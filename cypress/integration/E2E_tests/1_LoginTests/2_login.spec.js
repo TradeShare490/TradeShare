@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 describe("Login Test", () => {
   it("Login", () => {
     cy.visit("http://localhost:8081/login");

@@ -12,6 +12,7 @@
           :name="app.name"
           :image="app.image"
           :linked="app.linked"
+          :disabled="app.disabled"
         />
       </div>
     </div>
@@ -32,32 +33,38 @@ export default {
         {
           name: 'Alpaca',
           image: require('../../assets/ConnectedAppLogos/alpaca.png'),
-          linked: true
+          linked: JSON.parse(localStorage.getItem('user')).alpacaToken !== 'None' && JSON.parse(localStorage.getItem('user')).alpacaToken !== undefined,
+          disabled: false
         },
         {
           name: 'Moomoo',
           image: require('../../assets/ConnectedAppLogos/moomoo.png'),
-          linked: false
+          linked: false,
+          disabled: true
         },
         {
           name: 'Welbull',
           image: require('../../assets/ConnectedAppLogos/webull.png'),
-          linked: true
+          linked: false,
+          disabled: true
         },
         {
           name: 'SoFi Invest',
           image: require('../../assets/ConnectedAppLogos/sofiinvest.png'),
-          linked: false
+          linked: false,
+          disabled: true
         },
         {
           name: 'Robinhood',
           image: require('../../assets/ConnectedAppLogos/robinhood.jpg'),
-          linked: false
+          linked: false,
+          disabled: true
         },
         {
           name: 'Questrade',
           image: require('../../assets/ConnectedAppLogos/questrade.jpg'),
-          linked: false
+          linked: false,
+          disabled: true
         }
       ]
     }

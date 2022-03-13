@@ -15,7 +15,6 @@
         <v-switch
           label="Dark Mode"
           color="primary"
-          value="red"
           hide-details
           class="mt-10"
           :ripple="false"
@@ -154,7 +153,7 @@ export default {
 .container {
   width: 65%;
   background-color: white;
-  height: 100vh;
+  min-height: 100vh;
   flex-grow: 1;
 }
 span {

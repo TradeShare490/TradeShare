@@ -16,7 +16,7 @@
           color="grey"
           size="65%"
         >
-          <v-img src="https://randomuser.me/api/portraits/men/8.jpg" />
+          <v-img :src="image" />
         </v-avatar>
       </v-col>
       <v-col
@@ -32,13 +32,13 @@
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
             >
-              {{ user.firstname }} {{ user.lastname }}
+              {{ otheruser.firstname }} {{ otheruser.lastname }}
             </v-list-item-title>
             <v-list-item-subtitle class="text-subtitle-1">
-              @{{ user.username }}
+              @{{ otheruser.username }}
             </v-list-item-subtitle>
             <v-list-item-subtitle class="text-wrap">
-              Member since {{ user.date }}
+              Member since {{ otheruser.date }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -53,7 +53,7 @@
               class="font-weight-bold"
               data-cy="profile-num-followers"
             >
-              {{ user.numFollowers }}
+              {{ otheruser.numFollowers }}
             </v-list-item-title>
           </v-col>
           <v-col>
@@ -61,7 +61,7 @@
               class="font-weight-bold"
               data-cy="profile-num-following"
             >
-              {{ user.numFollowing }}
+              {{ otheruser.numFollowing }}
             </v-list-item-title>
           </v-col>
         </v-row>
@@ -85,7 +85,7 @@
             :class="{'mb-2': $vuetify.breakpoint.mdAndDown}"
           >
             <v-btn
-              v-if="user.following === true"
+              v-if="otheruser.following=== true"
               block
               small
               elevation="0"
@@ -94,12 +94,12 @@
               :ripple="false"
               class="caption"
               data-cy="following"
-              @click="unfollow"
+              @click="unfollow(1)"
             >
               Following
             </v-btn>
             <v-btn
-              v-if="user.following === false"
+              v-if="otheruser.following=== false"
               block
               small
               elevation="0"
@@ -107,7 +107,7 @@
               :ripple="false"
               class="caption"
               data-cy="follow"
-              @click="follow"
+              @click="follow(1)"
             >
               Follow
             </v-btn>
@@ -151,11 +151,20 @@
               </v-icon>
             </v-btn>
             <v-snackbar
-              v-model="snackbar"
-              :timeout="timeout"
-              color="#BF0E08"
+              v-model="snackbarFollow"
+              :timeout="snackbarTimeout"
+              :color="snackbarColor"
             >
               {{ snackbarText }}
+              <template #action="{ attrs }">
+                <v-btn
+                  text
+                  v-bind="attrs"
+                  @click="snackbar = false"
+                >
+                  Close
+                </v-btn>
+              </template>
             </v-snackbar>
           </v-col>
         </v-row>
@@ -184,22 +193,39 @@ export default {
   name: 'ProfileInfo',
   mixins: [useFollowMixin],
   props: {
-    user: {
+    otheruser: {
       type: Object,
       default: null
+    },
+    currentlyfollowing: {
+      type: Boolean,
+      default: false
+    },
+    image: {
+      type: String,
+      default: require('../../assets/default_user.png')
     }
   },
   data () {
     return {
+      userStat: { following: this.otheruser.following },
       favorite: false,
       blocked: false,
-      snackbar: false,
-      snackbarText: 'User has been blocked',
-      timeout: 1500
+      snackbarFollow: false,
+      snackbarText: 'snackbarText',
+      snackbarColor: 'primary',
+      snackbarTimeout: 1000
+    }
+  },
+  computed: {
+    id () {
+      return this.otheruser.userId
+    },
+    name () {
+      return this.otheruser.username
     }
   },
   methods: {
-    /* istanbul ignore next */
     message () {
       console.log('sending a message...')
     },

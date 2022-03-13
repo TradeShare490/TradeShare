@@ -1,19 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios/axios.v1'
+import createPersistedState from 'vuex-persistedstate'
+import createMultiTabState from 'vuex-multi-tab-state'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState({ storage: window.sessionStorage }),
+    createMultiTabState()
+  ],
   state: {
-    user: null
+    user: []
   },
   mutations: {
     setUserData (state, userData) {
+      state.user = { accessToken: userData.accessToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
+      userData.userInfo = { accessToken: userData.accessToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
       localStorage.setItem('user', JSON.stringify(userData.userInfo))
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
       axios.defaults.headers.common['x-refresh'] = `${userData.refreshToken}`
-      state.user = userData.userInfo
     },
     logOut () {
       localStorage.removeItem('user')
@@ -26,6 +33,14 @@ export default new Vuex.Store({
   actions: {
     async login ({ commit }, credentials) {
       const { data } = await axios.post('/session', credentials)
+      await axios.get('/following/follows/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${data.accessToken}` } })
+        .then(response => {
+          data.userInfo.following = response.data
+        })
+      await axios.get('/following/followers/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${data.accessToken}` } })
+        .then(response => {
+          data.userInfo.followers = response.data
+        })
       commit('setUserData', data)
     },
     logout ({ commit }) {
@@ -42,6 +57,47 @@ export default new Vuex.Store({
   getters: {
     loggedIn (state) {
       return !!state.user
+    },
+    loginActivity () {
+      return [
+        {
+          id: 1,
+          device: 'Windows PC',
+          location: 'Montreal, QC, Canada',
+          browser: 'Chrome',
+          when: '6 hours ago'
+        },
+        {
+          id: 2,
+          device: 'Macbook Pro',
+          location: 'Montreal, QC, Canada',
+          browser: 'Safari',
+          when: 'Jan 7'
+        }
+      ]
+    },
+    blockedUsers () {
+      return [
+        'userspam123',
+        'userspam123456',
+        'userspam123456789'
+      ]
+    },
+    favoriteUsers () {
+      return [
+        'ashcoin63',
+        'mcafeez',
+        'timthetatman'
+      ]
+    },
+    followersFollowing () {
+      return [
+        'Mary Winchester',
+        'John Winchester',
+        'Tim Robenman',
+        'Ash Britan',
+        'Mac Kafe'
+      ]
     },
     allPosts () {
       return [
