@@ -32,6 +32,7 @@
     </v-list-item-content>
   </v-list-item>
 </template>
+
 <script>
 export default {
   name: 'ConversationBlock',
@@ -47,9 +48,4 @@ export default {
     }
   }
 }
-
 </script>
-
-<style scoped>
-
-</style>

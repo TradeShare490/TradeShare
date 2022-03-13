@@ -82,7 +82,6 @@ export default {
     user () {
       return JSON.parse(localStorage.getItem('user'))
     },
-    //
     chats () {
       const chats = []
       this.conversations.forEach((conversation) => {
