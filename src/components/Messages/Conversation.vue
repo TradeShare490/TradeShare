@@ -26,7 +26,7 @@
         <v-list-item-subtitle
           class="pt-2 text-caption text-truncate"
           style="max-width: 19vw;"
-          v-text="chat.latestMessage"
+          v-text="''"
         />
       </v-col>
     </v-list-item-content>
