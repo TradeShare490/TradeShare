@@ -59,9 +59,55 @@
       </v-autocomplete>
       <v-btn
         icon
-        class="mt-1"
+        class="Notification mt-1"
+        @click="test"
       >
-        <v-icon>mdi-bell</v-icon>
+        <template>
+          <div>
+            <v-menu
+              transition="slide-y-transition"
+              class="NotificationContainer"
+              bottom
+              offset-y
+            >
+              <template #activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>mdi-bell</v-icon>
+                </v-btn>
+              </template>
+              <v-list
+                v-if="notifItems.length===0"
+                three-line
+                class="NotificationListEmpty"
+              >
+                <v-list-item class="text-center">
+                  <v-col class="grey--text darken-3--text font-weight-bold">
+                    YOU DO NOT HAVE ANY NOTIFICATION YET
+                  </v-col>
+                </v-list-item>
+              </v-list>
+              <v-list
+                v-else
+                three-line
+                class="NotificationList"
+              >
+                <template v-for="(item, index) in notifItems">
+                  <NotificationBlock
+                    :key="index"
+                    :avatar="item.avatar"
+                    :message="item.message"
+                    :date="item.date"
+                    :destination="item.destination"
+                  />
+                </template>
+              </v-list>
+            </v-menu>
+          </div>
+        </template>
       </v-btn>
       <v-btn
         icon
@@ -78,8 +124,12 @@
 <script>
 import { logout } from '../../hooks/useCredential.js'
 import axios from '../../axios/axios.v1'
+import NotificationBlock from './../../components/Notification/NotificationBlock.vue'
 export default {
   name: 'NavBar',
+  components: {
+    NotificationBlock
+  },
   data () {
     return {
       stocks: [],
@@ -88,7 +138,14 @@ export default {
       isLoading: false,
       searchModel: null,
       search: null,
-      searchQueue: []
+      searchQueue: [],
+      notifItems: [
+        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: '<span class="text--primary">Ali Connors</span> &mdash; I\'ll be in your neighborhood doing errands this weekend. Do you want to hang out?', date: '3/12/2021, 7:14:33 PM' },
+        { message: '<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I\'m out of town this weekend.', date: '1/11/2019, 7:14:33 PM' },
+        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?', date: '3/12/2022, 7:14:33 PM' },
+        { message: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM' },
+        { message: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM' }
+      ]
     }
   },
   computed: {
@@ -148,6 +205,9 @@ export default {
     }
   },
   methods: {
+    test () {
+      console.log('NOTIFICATION @CLICK')
+    },
     submit () {
       logout(this.$store, this.$router)
     },
@@ -161,3 +221,32 @@ export default {
   }
 }
 </script>
+<style scoped>
+.NotificationList {
+  background-color: #ffffff;
+  width: 450px;
+  min-height: 50px;
+  max-height: 80vh;
+  overflow:auto;
+}
+.NotificationListEmpty {
+  width: 450px;
+  height: 100px;
+  overflow:hidden;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a8a8a8;
+  border-radius: 15px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #757575;
+}
+</style>
