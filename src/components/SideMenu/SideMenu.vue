@@ -37,7 +37,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ numFollowing + " Following" }}
+                  {{ followingNum + " Followings" }}
                 </router-link>
               </v-col>
               <v-col>
@@ -46,7 +46,7 @@
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
                 >
-                  {{ numFollowers + " Followers" }}
+                  {{ followerNum + " Followers" }}
                 </router-link>
               </v-col>
             </v-row>
@@ -147,10 +147,13 @@
     </v-navigation-drawer>
   </v-card>
 </template>
-<!-- TradeZone icon could also be chart-areaspline-->
+
 <script>
+import UserService from '../../services/User.service'
+import { useFollowMixin } from '../../hooks/useFollowMixin.js'
 export default {
   name: 'SideMenu',
+  mixins: [useFollowMixin],
   data () {
     return {
       selectedItem: '',
@@ -164,9 +167,7 @@ export default {
       lowerNav: [
         { title: 'Support', icon: 'mdi-help-circle-outline', route: '/support' }
       ],
-      since: 'Member since 2021',
-      numFollowing: '190K',
-      numFollowers: '295K'
+      since: 'Member since 2021'
     }
   },
   computed: {
@@ -175,6 +176,23 @@ export default {
     },
     user () {
       return JSON.parse(localStorage.getItem('user'))
+    },
+    followingNum () {
+      if (!this.$store.state.user.following) return 0
+      else return this.$store.state.user.following.length
+    },
+    followerNum () {
+      if (!this.$store.state.user.followers) return 0
+      else return this.$store.state.user.followers.length
+    }
+  },
+  created () {
+    this.initialize()
+  },
+  methods: {
+    async initialize () {
+      this.account = await UserService.getAccount(this.user.userId)
+      this.refreshFollowList(this.user.userId)
     }
   }
 }

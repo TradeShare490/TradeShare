@@ -152,6 +152,7 @@ export default {
     async initialize () {
       this.account = await UserService.getAccount(this.user.userId)
     }
+
   }
 }
 </script>

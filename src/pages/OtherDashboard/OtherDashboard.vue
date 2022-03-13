@@ -5,7 +5,10 @@
       fluid
     >
       <div class="d-flex justify-center">
-        <Profile :user="info" />
+        <Profile
+          :otheruser="info"
+          :currentlyfollowing="isFollowingByUser"
+        />
       </div>
       <v-row>
         <v-col
@@ -50,16 +53,18 @@
               >
                 <span class="blue--text">Recent Trades</span>
               </v-card-title>
-              <Recents
-                v-for="trade in allPosts.splice(0, 4)"
-                :key="trade.id"
-                :image="trade.image"
-                :name="trade.name"
-                :tag="trade.tag"
-                :company="trade.company"
-                :purchased="trade.purchased"
-                :when="trade.when"
-              />
+              <div v-if="allPosts.length!=0">
+                <Recents
+                  v-for="trade in allPosts.splice(0, 4)"
+                  :key="trade.id"
+                  :image="trade.image"
+                  :name="trade.name"
+                  :tag="trade.tag"
+                  :company="trade.company"
+                  :purchased="trade.purchased"
+                  :when="trade.when"
+                />
+              </div>
             </v-card>
           </div>
         </v-col>
@@ -110,13 +115,16 @@ export default {
     BarChartContainer,
     Holdings
   },
+  // mixins: [useFollowMixin],
   data () {
     return {
       userId: this.$route.params.id,
       allPosts: this.$store.getters.allPosts,
       userInfo: null,
       info: {},
-      positions: []
+      positions: [],
+      followNum: [],
+      isFollowingByUser: false
     }
   },
   created () {
@@ -124,19 +132,19 @@ export default {
   },
   methods: {
     async initialize () {
-      console.log(this.userInfo)
       this.userInfo = await UserService.getUserInfo(this.userId)
+      this.positions = await UserService.getPositions(this.userInfo.userId)
+      this.followNum = await UserService.getFollowNum(this.userInfo.userId)
+      this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
       this.info = {
         ...this.userInfo,
-        numFollowers: '11K',
-        numFollowing: '5K',
-        following: true,
+        numFollowers: this.followNum.numFollower,
+        numFollowing: this.followNum.numFollowing,
+        following: this.isFollowingByUser,
         date: '2021',
         favorite: false,
         blocked: false
       }
-      this.positions = await UserService.getPositions(this.userId)
-      console.log(this.userInfo)
     }
   }
 }

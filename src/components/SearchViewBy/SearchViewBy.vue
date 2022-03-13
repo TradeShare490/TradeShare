@@ -1,31 +1,49 @@
 <template>
   <v-card
     elevation="0"
-    min-width="100px"
-    max-width="250px"
+    class="px-6"
   >
-    <v-autocomplete
-      v-model="select"
-      dense
-      :loading="isLoading"
-      :items="users"
-      :search-input="search"
-      class="inputfield mt-0"
-      flat
-      hide-no-data
-      hide-details
-      label="Search"
-      color="primary"
-      hide-selected
-      single
-      line
-      outlined
-      return-object
-      append-icon="mdi-magnify"
-      solo
-      data-cy="search"
-      @update:search-input="(val) => (search = val)"
-    />
+    <v-row>
+      <v-spacer />
+      <v-col
+        cols="12"
+        sm="4"
+        md="5"
+        lg="4"
+        xl="4"
+        align-self="center"
+        class="pb-3 px-0"
+        order="first"
+        order-sm="2"
+        order-md="2"
+        order-lg="2"
+        order-xl="2"
+      >
+        <v-autocomplete
+          v-model="select"
+          dense
+          :loading="isLoading"
+          :items="users"
+          :search-input="search"
+          class="inputfield mt-0"
+          flat
+          hide-no-data
+          hide-details
+          label="Search"
+          color="primary"
+          hide-selected
+          single
+          line
+          outlined
+          return-object
+          append-icon="mdi-magnify"
+          solo
+          data-cy="search"
+          @update:search-input="(val) => (search = val)"
+        />
+      </v-col>
+    </v-row>
+    <v-divider class="mt-3" />
   </v-card>
 </template>
 
@@ -57,12 +75,12 @@ export default {
     querySelections (v) {
       this.isLoading = true
       // Simulated ajax query
-      setTimeout(() => {
-        this.users = this.searchList.filter((e) => {
-          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-        })
-        this.isLoading = false
-      }, 500)
+      // setTimeout(() => {
+      //   this.users = this.searchList.filter((e) => {
+      //     return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+      //   })
+      //   this.isLoading = false
+      // }, 500)
     }
   }
 }
