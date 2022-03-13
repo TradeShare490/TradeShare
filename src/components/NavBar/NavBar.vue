@@ -97,7 +97,7 @@
                 class="NotificationList"
               >
                 <v-subheader class="subheader font-weight-bold mt-1 black--text">
-                  Lastest Notifications
+                  Latest Notifications
                 </v-subheader>
 
                 <template v-for="(item, index) in notifItems">
