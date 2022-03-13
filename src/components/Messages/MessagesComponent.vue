@@ -39,12 +39,12 @@
             </v-avatar>
           </v-col>
           <v-col cols="6">
-            <!--            <v-card-title-->
-            <!--              class="text-body-1"-->
-            <!--              data-cy="name"-->
-            <!--            >-->
-            <!--              {{ name }}-->
-            <!--            </v-card-title>-->
+            <v-card-title
+              class="text-body-1"
+              data-cy="name"
+            >
+              {{ username }}
+            </v-card-title>
             <v-card-subtitle
               class="text-left text--lighten-2"
               data-cy="username"
