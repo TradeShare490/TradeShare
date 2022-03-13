@@ -16,7 +16,7 @@
         <v-list-item-subtitle
           class="message font-weight-medium mr-0"
         >
-          <span class="black--text">{{ getSubject() }}</span> <span class="blue-grey--text darken-4--text">{{ message }}</span>
+          <span class="black--text">{{ getSubject() }}</span> <span class="messageBody ">{{ message }}</span>
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action class="pr-1">
@@ -104,5 +104,8 @@ export default {
   font-size: 0.9em;
   max-width: 40ch;
   font-weight: 600;
+}
+.messageBody {
+  color:  #4e4e4e;
 }
 </style>
