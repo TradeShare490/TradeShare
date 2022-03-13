@@ -40,7 +40,7 @@ class UserService {
   async postUnfollow (credentials) {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
+        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
       }
       const response = await axios.post('/following/unfollow', credentials, config)
       return response.data
@@ -54,7 +54,7 @@ class UserService {
   async postFollow (credentials) {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
+        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
       }
       const response = await axios.post('/following/follow', credentials, config)
       return response.data
@@ -68,7 +68,7 @@ class UserService {
   async getFollowNum (userID) {
     const result = { numFollowing: 0, numFollower: 0 }
     const config = {
-      headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
       .get('/following/followers/' + userID, config)
@@ -90,7 +90,10 @@ class UserService {
   }
 
   /* istanbul ignore next */
-  isFollowed (targetID) {
+  async isFollowed (targetID) {
+    console.log('USER SERVICE ' + targetID)
+    console.log((store.state.user.following))
+    console.log((store.state.user.following).includes(targetID))
     return (store.state.user.following).includes(targetID)
   }
 
@@ -98,7 +101,7 @@ class UserService {
   async getFollowers (userID) {
     let followersData = null
     const config = {
-      headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
       .get('/following/followers/' + userID, config)
@@ -137,12 +140,48 @@ class UserService {
     return followerList
   }
 
+  async getFollowingsRaw (userID) {
+    let followingsData = null
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    await axios
+      .get('/following/follows/' + userID,
+        config)
+      .then(function (res) {
+        followingsData = res.data
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return followingsData
+  }
+
+  async getFollowersRaw (userID) {
+    let followersData = null
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    await axios
+      .get('/following/followers/' + userID,
+        config)
+      .then(function (res) {
+        followersData = res.data
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return followersData
+  }
+
   /* istanbul ignore next */
   async getFollowings (userID) {
     const followingList = []
     let followingsData = null
     const config = {
-      headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
       .get('/following/follows/' + userID,
