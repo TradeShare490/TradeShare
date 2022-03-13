@@ -97,13 +97,9 @@ class UserService {
   /* istanbul ignore next */
   async getFollowers (userID) {
     let followersData = null
-    console.log(store.state.user.accessToken)
-    console.log(userID)
-    console.log(JSON.parse(localStorage.getItem('user')))
     const config = {
       headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
     }
-    console.log(config)
     await axios
       .get('/following/followers/' + userID, config)
       .then(function (res) {
@@ -148,7 +144,6 @@ class UserService {
     const config = {
       headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
     }
-    console.log(config)
     await axios
       .get('/following/follows/' + userID,
         config)
