@@ -6,7 +6,7 @@
   >
     <v-row
       class="no-gutters"
-      style="overflow: hidden"
+      style="overflow: hidden; height:100%"
     >
       <v-col
         cols="12"
