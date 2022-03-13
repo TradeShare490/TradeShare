@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios/axios.v1'
 import createPersistedState from 'vuex-persistedstate'
+import createMultiTabState from 'vuex-multi-tab-state'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  plugins: [createPersistedState({
-    storage: window.sessionStorage
-  })],
+  plugins: [
+    createPersistedState({ storage: window.sessionStorage }),
+    createMultiTabState()
+  ],
   state: {
     user: []
   },

@@ -40,7 +40,7 @@ class UserService {
   async postUnfollow (credentials) {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+        headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
       }
       const response = await axios.post('/following/unfollow', credentials, config)
       return response.data
@@ -54,7 +54,7 @@ class UserService {
   async postFollow (credentials) {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+        headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
       }
       const response = await axios.post('/following/follow', credentials, config)
       return response.data
@@ -67,7 +67,9 @@ class UserService {
   /* istanbul ignore next */
   async getFollowNum (userID) {
     const result = { numFollowing: 0, numFollower: 0 }
-    const config = { headers: { Authorization: `Bearer ${store.state.user.accessToken}` } }
+    const config = {
+      headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
+    }
     await axios
       .get('/following/followers/' + userID, config)
       .then(function (res) {
@@ -95,9 +97,13 @@ class UserService {
   /* istanbul ignore next */
   async getFollowers (userID) {
     let followersData = null
+    console.log(store.state.user.accessToken)
+    console.log(userID)
+    console.log(JSON.parse(localStorage.getItem('user')))
     const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+      headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
     }
+    console.log(config)
     await axios
       .get('/following/followers/' + userID, config)
       .then(function (res) {
@@ -140,8 +146,9 @@ class UserService {
     const followingList = []
     let followingsData = null
     const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+      headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).accessToken}` }
     }
+    console.log(config)
     await axios
       .get('/following/follows/' + userID,
         config)

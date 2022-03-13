@@ -8,8 +8,17 @@ export const useFollowMixin = {
   },
   methods: {
     async refreshFollowList (id) {
+      console.log('refresh')
+      console.log(JSON.parse(localStorage.getItem('user')))
+      // const data1 = await UserService.getFollowings(id)
+      // const data2 = await UserService.getFollowers(id)
+      // console.log(data1)
+      // console.log(data2)
       this.$store.state.user.following = await UserService.getFollowings(id)
       this.$store.state.user.followers = await UserService.getFollowers(id)
+      console.log('after')
+      console.log(this.$store.state.user.following)
+      console.log(this.$store.state.user.followers)
     },
     async getFollowingsHook (id) {
       this.isLoading = true
@@ -47,6 +56,7 @@ export const useFollowMixin = {
         }
         this.user.following.push(this.id)
         this.$store.state.user.following.push(this.id)
+        console.log(this.$store.state.user.following)
         const lsUser = JSON.parse(localStorage.getItem('user'))
         if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
         localStorage.setItem('user', JSON.stringify(lsUser))
@@ -75,6 +85,7 @@ export const useFollowMixin = {
         if (this.$store.state.user.following.indexOf(this.id) > -1) {
           this.$store.state.user.following.splice(this.$store.state.user.following.indexOf(this.id), 1)
         }
+        console.log(this.$store.state.user.following)
         const lsUser = JSON.parse(localStorage.getItem('user'))
         if (lsUser.following.indexOf(this.id) !== -1) lsUser.following.splice(lsUser.following.indexOf(this.id), 1)
         localStorage.setItem('user', JSON.stringify(lsUser))
