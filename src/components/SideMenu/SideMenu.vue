@@ -176,10 +176,12 @@ export default {
       return JSON.parse(localStorage.getItem('user'))
     },
     followingNum () {
-      return this.$store.state.user.following.length
+      if (!this.$store.state.user.following) return 0
+      else return this.$store.state.user.following.length
     },
     followerNum () {
-      return this.$store.state.user.followers.length
+      if (!this.$store.state.user.followers) return 0
+      else return this.$store.state.user.followers.length
     }
   },
   created () {
