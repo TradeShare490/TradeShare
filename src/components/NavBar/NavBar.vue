@@ -95,6 +95,10 @@
                 three-line
                 class="NotificationList"
               >
+                <v-subheader class="subheader font-weight-bold mt-1 black--text">
+                  Lastest Notification
+                </v-subheader>
+
                 <template v-for="(item, index) in notifItems">
                   <NotificationBlock
                     :key="index"
@@ -102,6 +106,7 @@
                     :message="item.message"
                     :date="item.date"
                     :destination="item.destination"
+                    :readed="item.readed"
                   />
                 </template>
               </v-list>
@@ -140,11 +145,12 @@ export default {
       search: null,
       searchQueue: [],
       notifItems: [
-        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: '<span class="text--primary">Ali Connors</span> &mdash; I\'ll be in your neighborhood doing errands this weekend. Do you want to hang out?', date: '3/12/2021, 7:14:33 PM' },
-        { message: '<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I\'m out of town this weekend.', date: '1/11/2019, 7:14:33 PM' },
-        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?', date: '3/12/2022, 7:14:33 PM' },
-        { message: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM' },
-        { message: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM' }
+        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: 'Ali Connors I\'ll be in your neighborhood doing errands this weekend. Do you want to hang out?', date: '3/12/2021, 7:14:33 PM', readed: false },
+        { message: 'to Alex, Scott, Jennifer: Wish I could come, but I\'m out of town this weekend.', date: '1/11/2019, 7:14:33 PM', readed: false },
+        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: 'Sandra Adams Do you have Paris recommendations? Have you ever been?', date: '3/12/2022, 7:14:33 PM', readed: true },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
+        { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true },
+        { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true }
       ]
     }
   },
@@ -222,6 +228,10 @@ export default {
 }
 </script>
 <style scoped>
+.subheader {
+  font-size: 1.1em;
+  color: black;
+}
 .NotificationList {
   background-color: #ffffff;
   width: 450px;
