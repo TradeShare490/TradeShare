@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-v-html */
 <template>
   <div class="NotificationBlock">
     <v-list-item
@@ -8,12 +9,10 @@
         <v-img :src="avatar" />
       </v-list-item-avatar>
       <v-list-item-content class="mx-0 pr-0">
-        <!-- eslint-disable-next-line vue/no-v-html -->
         <v-list-item-subtitle
           class="message font-weight-medium mr-0"
           v-html="message"
-        />
-        <!--eslint-enable-->
+        /> <!-- Noncompliant -->
       </v-list-item-content>
       <v-list-item-action class="pr-1">
         <v-list-item-action-text> {{ getDate() }}</v-list-item-action-text>
