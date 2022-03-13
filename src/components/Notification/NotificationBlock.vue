@@ -88,7 +88,7 @@ export default {
 .NotificationBlock {
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
-  border-bottom: 0.3px solid #c4c7d8;
+  border-bottom: 0.3px solid #e0e2f1;
 }
 .NotificationBlockUnread {
   background-color: #D6D9EC;
