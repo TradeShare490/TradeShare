@@ -3,7 +3,7 @@
   <div
     class="NotificationBlock"
     :class="[readedData ? '' : NotificationBlockUnreadStyle]"
-    @mouseover="hover"
+    @click="onClick"
   >
     <v-list-item
       :key="message"
@@ -14,9 +14,9 @@
       </v-list-item-avatar>
       <v-list-item-content class="mx-0 pr-0">
         <v-list-item-subtitle
-          class="message font-weight-medium mr-0 black--text"
+          class="message font-weight-medium mr-0"
         >
-          {{ message }}
+          <span class="black--text">{{ getSubject() }}</span> <span class="blue-grey--text darken-4--text">{{ message }}</span>
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-list-item-action class="pr-1">
@@ -46,14 +46,18 @@ export default {
       type: String,
       default: ''
     },
-    readed: {
+    read: {
       type: Boolean,
       default: false
+    },
+    subject: {
+      type: Array,
+      default: null
     }
   },
   data () {
     return {
-      readedData: this.readed,
+      readedData: this.read,
       router: '/dashboard/' + this.id,
       unReadBackgroundColor: '#ff0000',
       NotificationBlockUnreadStyle: 'NotificationBlockUnread'
@@ -63,8 +67,19 @@ export default {
     getDate () {
       return '3d'
     },
-    hover () {
+    onClick () {
       this.readedData = true
+    },
+    getSubject () {
+      if (this.subject) {
+        if (this.subject.length === 1) {
+          return this.subject[0]
+        } else {
+          return this.subject[0] + ' and ' + (this.subject.length - 1) + ' other people'
+        }
+      } else {
+        return ''
+      }
     }
   }
 }

@@ -69,6 +69,7 @@
               class="NotificationContainer"
               bottom
               offset-y
+              :close-on-content-click="false"
             >
               <template #activator="{ on, attrs }">
                 <v-btn
@@ -96,17 +97,18 @@
                 class="NotificationList"
               >
                 <v-subheader class="subheader font-weight-bold mt-1 black--text">
-                  Lastest Notification
+                  Lastest Notifications
                 </v-subheader>
 
                 <template v-for="(item, index) in notifItems">
                   <NotificationBlock
                     :key="index"
                     :avatar="item.avatar"
+                    :subject="item.subject"
                     :message="item.message"
                     :date="item.date"
                     :destination="item.destination"
-                    :readed="item.readed"
+                    :read="item.read"
                   />
                 </template>
               </v-list>
@@ -145,23 +147,18 @@ export default {
       search: null,
       searchQueue: [],
       notifItems: [
-        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: 'Ali Connors I\'ll be in your neighborhood doing errands this weekend. Do you want to hang out?', date: '3/12/2021, 7:14:33 PM', readed: false },
-        { message: 'to Alex, Scott, Jennifer: Wish I could come, but I\'m out of town this weekend.', date: '1/11/2019, 7:14:33 PM', readed: false },
-        { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', message: 'Sandra Adams Do you have Paris recommendations? Have you ever been?', date: '3/12/2022, 7:14:33 PM', readed: true },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true },
-        { message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', readed: true },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false },
-        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', readed: false }
+        { subject: ['Team TradeShare'], message: 'published a new privacy policy', date: '3/12/2021, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', subject: ['Owen', 'Aima'], message: 'like your post', date: '3/12/2021, 7:14:33 PM', read: false },
+        { subject: ['Tim Robeman'], message: 'mentioned you in a comment: Roman Kotepov did you this??', date: '1/11/2019, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/91.jpg', subject: ['Aima'], message: 'like your post', date: '3/12/2022, 7:14:33 PM', read: true },
+        { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', subject: ['Tim', 'Cook'], message: 'send your a follow request', date: '1/19/2022, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/81.jpg', subject: ['Jerry'], message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', read: true },
+        { avatar: 'https://randomuser.me/api/portraits/women/65.jpg', subject: ['Aisha', 'Aima'], message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', read: true },
+        { avatar: 'https://randomuser.me/api/portraits/women/56.jpg', subject: ['Menuven', 'Aima'], message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', subject: ['Owen', 'Aima'], message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { subject: ['Aima'], message: 'send you a very long text: Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false }
       ]
     }
   },
@@ -249,6 +246,9 @@ export default {
   min-height: 50px;
   max-height: 80vh;
   overflow:auto;
+}
+.NotificationList:hover {
+  cursor: default;
 }
 .NotificationListEmpty {
   width: 450px;
