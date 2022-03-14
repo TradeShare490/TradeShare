@@ -222,6 +222,33 @@ class UserService {
     return userProfileData
   }
 
+  async getConversations (username) {
+    console.log(username)
+    let conversations = null
+    await axios.get('/conversation/' + username)
+      .then(function (res) {
+        conversations = res.data.conversations
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return conversations
+  }
+
+  async getMessages (conversationId) {
+    let messages = null
+    await axios.get('/message/' + conversationId)
+      .then(function (res) {
+        messages = res.data.messages
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return messages
+  }
+
   /* istanbul ignore next */
   async getAccount (userID) {
     let userAccountData = null

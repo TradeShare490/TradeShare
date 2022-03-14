@@ -6,7 +6,7 @@
   >
     <v-row
       class="no-gutters"
-      style="overflow: hidden"
+      style="overflow: hidden; height:100%"
     >
       <v-col
         cols="12"
@@ -43,13 +43,13 @@
               class="text-body-1"
               data-cy="name"
             >
-              {{ name }}
+              {{ username }}
             </v-card-title>
             <v-card-subtitle
               class="text-left text--lighten-2"
               data-cy="username"
             >
-              {{ username }}
+              {{ activeChat ? '@' : '' }}{{ username }}
             </v-card-subtitle>
           </v-col>
         </v-row>
@@ -100,7 +100,7 @@
                           white-space: normal;
                           max-width: 360px;"
                         class="px-4 py-2 mb-2 black--text text-left"
-                        :outlined="msg.me ? false : true"
+                        :outlined="!msg.me"
                       >
                         {{ msg.content }}
                       </v-chip>
@@ -119,7 +119,7 @@
                 hide-details
                 single-line
                 data-cy="send-message"
-                @keyup.enter="messages.push(messageForm)"
+                @keyup.enter="onSubmit(messageForm)"
               >
                 <template #prepend-inner>
                   <v-icon
@@ -143,7 +143,7 @@
                   <v-icon
                     color="primary"
                     data-cy="send-button"
-                    @click="messages.push(messageForm)"
+                    @click="onSubmit(messageForm)"
                   >
                     send
                   </v-icon>
@@ -159,7 +159,7 @@
 
 <script>
 import ChatMenu from '../Messages/ChatMenu.vue'
-
+import socket from '../../socket'
 export default {
   name: 'MessagesComponent',
   components: {
@@ -172,6 +172,7 @@ export default {
     }
   },
   data: () => ({
+    conversationId: '',
     activeChat: false,
     name: '',
     username: '',
@@ -180,30 +181,66 @@ export default {
     messageForm: {
       content: '',
       me: true
-    }
+    },
+    users: []
   }),
+  computed: {
+    user () {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  },
   updated () {
     this.$nextTick(() => this.scrollToBottom())
   },
   created () {
-    if (performance.getEntriesByType('navigation')[0].type === 'reload') {
-      this.$router.push({ path: '/messages/0' })
-    }
+    console.log(JSON.parse(localStorage.getItem('user')).username)
+    const username = JSON.parse(localStorage.getItem('user')).username
+    socket.auth = { username }
+    socket.connect()
+    console.log('check 1', socket.connected)
+    socket.on('connect', () => {
+      console.log('check 2', socket.connected)
+    })
+    socket.emit('addUser', username)
+    socket.on('getMessage', (data) => {
+      this.messages.push({
+        content: data.content,
+        me: false
+      })
+    })
   },
   methods: {
+    onSubmit (messageForm) {
+      const content = messageForm.content
+      if (content.length > 0) {
+        socket.emit('sendMessage', {
+          sender: JSON.parse(localStorage.getItem('user')).username,
+          receiver: this.username,
+          content: content
+        })
+        this.messages.push({ content: content, me: messageForm.me })
+        this.messageForm.content = ''
+      }
+    },
     click () {
       alert('You clicked the icon!')
     },
-    conversationSelected (name, username, avatar, message) {
+    conversationSelected (name, username, avatar, conversationId) {
       this.name = name
       this.username = username
       this.avatar = avatar
-      this.messages = message
       this.activeChat = true
+      this.conversationId = conversationId
     },
     scrollToBottom () {
       const container = this.$refs.messages
       container.scrollTop = container.scrollHeight
+    },
+    destroyed () {
+      socket.off('connect')
+      socket.off('addUser')
+      socket.off('sendMessage')
+      socket.off('getMessage')
     }
   }
 }

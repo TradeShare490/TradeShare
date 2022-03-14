@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card style="height:100%">
     <MessagesComponent />
   </v-card>
 </template>
