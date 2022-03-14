@@ -145,6 +145,14 @@
 
 <script>
 export default {
+  props: {
+    users: {
+      type: Array,
+      default () {
+        return [{ name: '', color: '' }]
+      }
+    }
+  },
   data: () => ({
     pronoun: 'My',
     radios: '',
@@ -152,14 +160,6 @@ export default {
     from: '',
     to: '',
     dialog: false,
-    users: [
-      { name: 'My', color: 'primary' },
-      { name: 'Benver Vloshki', color: 'red' },
-      { name: 'Mary Winchester', color: 'green' },
-      { name: 'Mac Kafe', color: 'yellow' },
-      { name: 'Tim Robenman', color: 'purple' },
-      { name: 'Ash Britain', color: 'black' }
-    ],
     options: [
       { label: 'Day', value: 'day' },
       { label: 'Week', value: 'week' },
