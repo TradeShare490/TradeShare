@@ -97,6 +97,7 @@
                     v-bind="attrs"
                     label="From"
                     dense
+                    readonly
                     :disabled="radios != 'custom'"
                     class="pl-8 pr-9 pt-1"
                     data-cy="from"
@@ -123,6 +124,7 @@
                   <v-text-field
                     v-model="to"
                     dense
+                    readonly
                     label="To"
                     v-bind="attrs"
                     :disabled="radios != 'custom'"
