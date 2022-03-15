@@ -7,13 +7,15 @@
     >
       <template #activator="{ on, attrs }">
         <v-btn
-          color="red"
+          color="primary"
           dark
           v-bind="attrs"
           data-cy="modal-activate"
+          outlined
+          small
           v-on="on"
         >
-          Click Me
+          COMPARE RETURNS
         </v-btn>
       </template>
 

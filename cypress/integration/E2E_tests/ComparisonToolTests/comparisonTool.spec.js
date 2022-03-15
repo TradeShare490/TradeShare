@@ -6,7 +6,7 @@ describe("On comparison page, can", () => {
     cy.wait(2000);
     cy.fixture("url").then((jsonFile) => {
       cy.visit(
-        `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.COMPARISON_TOOL}`
+        `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.DASHBOARD}`
       );
     });
     cy.get("[data-cy=modal-activate]").click();
