@@ -10,6 +10,7 @@
           color="red"
           dark
           v-bind="attrs"
+          data-cy="modal-activate"
           v-on="on"
         >
           Click Me
@@ -19,9 +20,10 @@
       <v-card
         style="overflow: hidden"
         class="px-8 pb-8 pr-0"
+        data-cy="modal"
       >
         <v-card-title class="pl-0">
-          {{ pronoun }} Returns
+          Comparing Returns
           <v-spacer />
           <button @click="dialog = false">
             <v-icon right>
@@ -55,6 +57,7 @@
                     v-for="(user, i) in users"
                     :key="i"
                     class="pt-0 pb-0 pl-0 text-left"
+                    data-cy="legend"
                   >
                     <v-icon
                       left
@@ -77,9 +80,11 @@
                 :key="i"
                 :label="option.label"
                 :value="option.value"
+                data-cy="radio-buttons"
               />
               <v-menu
-                :close-on-content-click="true"
+                v-model="menu1"
+                :close-on-content-click="false"
                 transition="scale-transition"
                 offset-y
                 min-width="auto"
@@ -92,6 +97,8 @@
                     dense
                     :disabled="radios != 'custom'"
                     class="pl-8 pr-9 pt-1"
+                    data-cy="from"
+                    clearable
                     v-on="on"
                   />
                 </template>
@@ -99,10 +106,13 @@
                   v-model="from"
                   no-title
                   :max="getTodaysDate"
+                  data-cy="date-picker-from"
+                  @change="menu1 = false"
                 />
               </v-menu>
               <v-menu
-                :close-on-content-click="true"
+                v-model="menu2"
+                :close-on-content-click="false"
                 transition="scale-transition"
                 offset-y
                 min-width="auto"
@@ -115,6 +125,8 @@
                     v-bind="attrs"
                     :disabled="radios != 'custom'"
                     class="pl-8 pr-9"
+                    data-cy="to"
+                    clearable
                     v-on="on"
                   />
                 </template>
@@ -123,6 +135,8 @@
                   no-title
                   :max="getTodaysDate"
                   :min="from"
+                  data-cy="date-picker-to"
+                  @change="menu2 = false"
                 />
               </v-menu>
               <v-row class="justify-end pt-5 pr-12">
@@ -130,6 +144,7 @@
                   color="primary"
                   small
                   width="90"
+                  data-cy="refresh"
                   @click="handleInput"
                 >
                   REFRESH
@@ -154,12 +169,13 @@ export default {
     }
   },
   data: () => ({
-    pronoun: 'My',
     radios: '',
     comparison: '',
     from: '',
     to: '',
     dialog: false,
+    menu1: false,
+    menu2: false,
     options: [
       { label: 'Day', value: 'day' },
       { label: 'Week', value: 'week' },
@@ -174,15 +190,45 @@ export default {
   methods: {
     handleInput () {
       console.log(this.radios)
+      const today = this.getTodaysDate
+      let start = ''
+      let end = ''
       if (this.radios === 'custom') {
-        if (this.from === '' & this.to === '') {
-          this.from = this.getTodaysDate
-          this.to = this.getTodaysDate
-        } else if (this.to === '') {
-          this.to = this.getTodaysDate
-        } else if (this.from === '') {
+        if (this.from === '' & this.to === '' || this.from === null & this.to === null) {
+          this.from = today
+          this.to = today
+        } else if (this.to === '' || this.to === null) {
+          this.to = today
+        } else if (this.from === '' || this.from === null) {
           this.from = '1900-01-01'
         }
+      } else if (this.radios === 'day') {
+        start = today
+        end = today
+      } else if (this.radios === 'week') {
+        const date = new Date()
+        date.setDate(date.getDate() - 7)
+        start = date.toISOString().slice(0, 10)
+        end = today
+      } else if (this.radios === 'month') {
+        const date = new Date()
+        date.setDate(date.getDate() - 30)
+        start = date.toISOString().slice(0, 10)
+        end = today
+      } else if (this.radios === 'year') {
+        const date = new Date()
+        date.setDate(date.getDate() - 365)
+        start = date.toISOString().slice(0, 10)
+        end = today
+      } else if (this.radios === 'ytd') {
+        const date = new Date()
+        start = date.getFullYear() + '-01-01'
+        end = today
+      }
+      if (start !== '' & end !== '') {
+        console.log(start)
+        console.log(end)
+      } else {
         console.log(this.from)
         console.log(this.to)
       }

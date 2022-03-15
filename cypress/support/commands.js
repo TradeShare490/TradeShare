@@ -18,3 +18,18 @@ Cypress.Commands.add('signupVerify', (object, message="Required") => {
       .find(".v-messages__message")
       .should("contain.text", message);
   });
+Cypress.Commands.add('checkRadioButton', (option) => {
+    cy.get("[data-cy=radio-buttons]").check(option, { force: true });
+    cy.refresh();
+  });
+Cypress.Commands.add('refresh', () => {
+    cy.get("[data-cy=refresh]").click({ force: true })
+  });
+Cypress.Commands.add('setDate', (fromOrTo, year, month, day, date) => {
+    cy.get("[data-cy=" + fromOrTo + "]").click();
+    cy.get("[data-cy=date-picker-" + fromOrTo + "]").should("be.visible");
+    cy.get("[data-cy=date-picker-" + fromOrTo + "]").contains(year).click({ force: true });
+    cy.get("[data-cy=date-picker-" + fromOrTo + "]").contains(month).click({ force: true });
+    cy.get("[data-cy=date-picker-" + fromOrTo + "]").contains(day).click({ force: true });
+    cy.get("[data-cy=" + fromOrTo + "]").should("have.value", date);
+  });
