@@ -5,7 +5,7 @@
     min-width="350"
     data-cy="bar-char-container"
   >
-    <v-card-title class="pb-0 pt-1">
+    <v-card-title class="pb-1 pt-3">
       My Returns
       <v-spacer />
       <ComparisonModal :users="users" />
@@ -37,11 +37,11 @@ export default {
     options: null,
     userList: ['Benver Vloshki', 'Mary Winchester', 'Mac Kafe', 'Tim Robenman', 'Ash Britain'],
     colors: ['red', 'green', 'yellow', 'purple', 'orange'],
-    users: [{ name: 'My', color: 'primary' }]
+    users: [{ name: 'Me', color: 'primary' }]
   }),
   created () {
     for (let i = 0; i < this.userList.length; i++) {
-      this.users.push({ name: this.userList[i] + "'s", color: this.colors[i] })
+      this.users.push({ name: this.userList[i], color: this.colors[i] })
     }
   },
   mounted () {

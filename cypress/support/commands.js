@@ -18,8 +18,8 @@ Cypress.Commands.add('signupVerify', (object, message="Required") => {
       .find(".v-messages__message")
       .should("contain.text", message);
   });
-Cypress.Commands.add('checkRadioButton', (option) => {
-    cy.get("[data-cy=radio-buttons]").check(option, { force: true });
+Cypress.Commands.add('checkRadioButton', (option, dataCyForRadioButton) => {
+    cy.get("[data-cy=" + dataCyForRadioButton + "]").check(option, { force: true });
     cy.refresh();
   });
 Cypress.Commands.add('refresh', () => {

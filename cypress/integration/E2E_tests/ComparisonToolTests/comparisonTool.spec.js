@@ -18,13 +18,14 @@ describe("On comparison page, can", () => {
   });
   it("see the legend and radio buttons", () => {
     cy.get("[data-cy=legend]").should("have.length", 6);
-    cy.get("[data-cy=radio-buttons]").should("have.length", 7);
+    cy.get("[data-cy=radio-buttons]").should("have.length", 5);
+    cy.get("[data-cy=radio-buttons2]").should("have.length", 2);
   });
   it("select option", () => {
-    cy.checkRadioButton('day');
+    cy.checkRadioButton('day', 'radio-buttons');
   });
   it("select 'Custom'", () => {
-    cy.checkRadioButton('custom');
+    cy.checkRadioButton('custom', 'radio-buttons2');
     cy.get("[data-cy=to]").should("have.value", now);
     cy.get("[data-cy=from]").should("have.value", now);
   });

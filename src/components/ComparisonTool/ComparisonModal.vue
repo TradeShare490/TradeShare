@@ -11,20 +11,18 @@
           dark
           v-bind="attrs"
           data-cy="modal-activate"
-          outlined
-          small
+          medium
           v-on="on"
         >
           COMPARE RETURNS
         </v-btn>
       </template>
-
       <v-card
         style="overflow: hidden"
-        class="px-8 pb-8 pr-0"
+        class="px-8 pb-8 pr-6"
         data-cy="modal"
       >
-        <v-card-title class="pl-0">
+        <v-card-title class="pl-0 pr-0">
           Comparing Returns
           <v-spacer />
           <button @click="dialog = false">
@@ -35,7 +33,11 @@
         </v-card-title>
         <v-row>
           <v-col
-            cols="9"
+            cols="12"
+            xl="9"
+            lg="9"
+            md="9"
+            sm="12"
             class="d-flex justify-center align-center"
           >
             <v-card
@@ -46,19 +48,31 @@
               Insert graph here, and add "flat" to this v-card
             </v-card>
           </v-col>
-          <v-col cols="3">
-            <v-card
-              flat
-            >
-              <v-card-title class="subtitle-1 pb-0 pl-0 pt-0">
-                LEGEND
-              </v-card-title>
+          <v-col
+            cols="12"
+            xl="3"
+            lg="3"
+            md="3"
+            sm="12"
+          >
+            <v-card flat>
               <v-row>
-                <v-col>
+                <v-col
+                  cols="5"
+                  xl="12"
+                  lg="12"
+                  md="12"
+                  sm="5"
+                  class="pr-0"
+                >
+                  <v-card-title class="subtitle-1 pb-0 pl-0 pt-0">
+                    LEGEND
+                  </v-card-title>
+
                   <v-card-text
                     v-for="(user, i) in users"
                     :key="i"
-                    class="pt-0 pb-0 pl-0 text-left"
+                    class="pt-0 pb-0 pl-0 pr-0 text-left"
                     data-cy="legend"
                   >
                     <v-icon
@@ -67,94 +81,130 @@
                     >
                       mdi-circle-medium
                     </v-icon>
-                    {{ user.name }} returns
+                    {{ user.name }}
                   </v-card-text>
+                </v-col>
+                <v-col
+                  cols="7"
+                  xl="12"
+                  lg="12"
+                  md="12"
+                  sm="7"
+                >
+                  <v-radio-group
+                    v-model="radios"
+                    mandatory
+                    dense
+                  >
+                    <v-row>
+                      <v-col
+                        class="pb-0"
+                        xl="12"
+                        lg="12"
+                        md="12"
+                        sm="5"
+                        cols="5"
+                      >
+                        <v-radio
+                          v-for="(option, i) in options"
+                          :key="i"
+                          :label="option.label"
+                          :value="option.value"
+                          data-cy="radio-buttons"
+                        />
+                      </v-col>
+                      <v-col
+                        xl="12"
+                        lg="12"
+                        md="12"
+                        sm="7"
+                        cols="7"
+                      >
+                        <v-radio
+                          v-for="(option2, i2) in options2"
+                          :key="i2"
+                          :label="option2.label"
+                          :value="option2.value"
+                          data-cy="radio-buttons2"
+                        />
+                        <v-menu
+                          v-model="menu1"
+                          :close-on-content-click="false"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                          :nudge-left="260"
+                        >
+                          <template #activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="from"
+                              v-bind="attrs"
+                              label="From"
+                              dense
+                              readonly
+                              :disabled="radios != 'custom'"
+                              class="pl-xl-8 pl-lg-8 pl-md-8 pl-sm-1 pl-1 pr-xl-10 pr-lg-10 pr-md-10 pr-sm-2 pr-2 pt-1"
+                              data-cy="from"
+                              clearable
+                              v-on="on"
+                            />
+                          </template>
+                          <v-date-picker
+                            v-model="from"
+                            no-title
+                            :max="getTodaysDate"
+                            data-cy="date-picker-from"
+                            @change="menu1 = false"
+                          />
+                        </v-menu>
+                        <v-menu
+                          v-model="menu2"
+                          :close-on-content-click="false"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                          :nudge-left="260"
+                        >
+                          <template #activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="to"
+                              dense
+                              readonly
+                              label="To"
+                              v-bind="attrs"
+                              :disabled="radios != 'custom'"
+                              class="pl-xl-8 pl-lg-8 pl-md-8 pl-sm-1 pl-1 pr-xl-10 pr-lg-10 pr-md-10 pr-sm-2 pr-2 pt-1"
+                              data-cy="to"
+                              clearable
+                              v-on="on"
+                            />
+                          </template>
+                          <v-date-picker
+                            v-model="to"
+                            no-title
+                            :max="getTodaysDate"
+                            :min="from"
+                            data-cy="date-picker-to"
+                            @change="menu2 = false"
+                          />
+                        </v-menu>
+                        <v-row class="justify-end pt-5 pr-12">
+                          <v-btn
+                            color="primary"
+                            small
+                            width="90"
+                            data-cy="refresh"
+                            @click="handleInput"
+                          >
+                            REFRESH
+                          </v-btn>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-radio-group>
                 </v-col>
               </v-row>
             </v-card>
-            <v-radio-group
-              v-model="radios"
-              mandatory
-              dense
-            >
-              <v-radio
-                v-for="(option, i) in options"
-                :key="i"
-                :label="option.label"
-                :value="option.value"
-                data-cy="radio-buttons"
-              />
-              <v-menu
-                v-model="menu1"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template #activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="from"
-                    v-bind="attrs"
-                    label="From"
-                    dense
-                    readonly
-                    :disabled="radios != 'custom'"
-                    class="pl-8 pr-9 pt-1"
-                    data-cy="from"
-                    clearable
-                    v-on="on"
-                  />
-                </template>
-                <v-date-picker
-                  v-model="from"
-                  no-title
-                  :max="getTodaysDate"
-                  data-cy="date-picker-from"
-                  @change="menu1 = false"
-                />
-              </v-menu>
-              <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template #activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="to"
-                    dense
-                    readonly
-                    label="To"
-                    v-bind="attrs"
-                    :disabled="radios != 'custom'"
-                    class="pl-8 pr-9"
-                    data-cy="to"
-                    clearable
-                    v-on="on"
-                  />
-                </template>
-                <v-date-picker
-                  v-model="to"
-                  no-title
-                  :max="getTodaysDate"
-                  :min="from"
-                  data-cy="date-picker-to"
-                  @change="menu2 = false"
-                />
-              </v-menu>
-              <v-row class="justify-end pt-5 pr-12">
-                <v-btn
-                  color="primary"
-                  small
-                  width="90"
-                  data-cy="refresh"
-                  @click="handleInput"
-                >
-                  REFRESH
-                </v-btn>
-              </v-row>
-            </v-radio-group>
           </v-col>
         </v-row>
       </v-card>
@@ -164,6 +214,7 @@
 
 <script>
 export default {
+  name: 'ComparisonTool',
   props: {
     users: {
       type: Array,
@@ -185,7 +236,9 @@ export default {
       { label: 'Week', value: 'week' },
       { label: 'Month', value: 'month' },
       { label: 'Year', value: 'year' },
-      { label: 'YTD', value: 'ytd' },
+      { label: 'YTD', value: 'ytd' }
+    ],
+    options2: [
       { label: 'Maximum', value: 'max' },
       { label: 'Custom', value: 'custom' }
     ],
