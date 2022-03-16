@@ -18,20 +18,19 @@ describe("On comparison page, can", () => {
   });
   it("see the legend and radio buttons", () => {
     cy.get("[data-cy=legend]").should("have.length", 6);
-    cy.get("[data-cy=radio-buttons]").should("have.length", 5);
-    cy.get("[data-cy=radio-buttons2]").should("have.length", 2);
+    cy.get("[data-cy=radio-buttons]").should("have.length", 7);
   });
   it("select option", () => {
-    cy.checkRadioButton('day', 'radio-buttons');
+    cy.checkRadioButton('day');
   });
   it("select 'Custom'", () => {
-    cy.checkRadioButton('custom', 'radio-buttons2');
+    cy.checkRadioButton('custom');
     cy.get("[data-cy=to]").should("have.value", now);
     cy.get("[data-cy=from]").should("have.value", now);
   });
   it("enter custom 'From' date", () => {
     cy.setDate("from", "2022", "Feb", "10", "2022-02-10");
-    cy.refresh();
+    cy.update();
     cy.get("[data-cy=to]").should("have.value", now);
   });
   it("cannot select a 'To' date that is before 'From'", () => {
@@ -45,7 +44,7 @@ describe("On comparison page, can", () => {
   it("reset 'From' date and enter custom 'To' date", () => {
     cy.setDate("to", "2022", "Mar", "6", "2022-03-06");
     cy.get("[data-cy=from]").clear({ force: true });
-    cy.refresh();
+    cy.update();
     cy.get("[data-cy=from]").should("have.value", "1900-01-01");
   });
 });

@@ -18,12 +18,12 @@ Cypress.Commands.add('signupVerify', (object, message="Required") => {
       .find(".v-messages__message")
       .should("contain.text", message);
   });
-Cypress.Commands.add('checkRadioButton', (option, dataCyForRadioButton) => {
-    cy.get("[data-cy=" + dataCyForRadioButton + "]").check(option, { force: true });
-    cy.refresh();
+Cypress.Commands.add('checkRadioButton', (option) => {
+    cy.get("[data-cy=radio-buttons]").check(option, { force: true });
+    cy.update();
   });
-Cypress.Commands.add('refresh', () => {
-    cy.get("[data-cy=refresh]").click({ force: true })
+Cypress.Commands.add('update', () => {
+    cy.get("[data-cy=update]").click({ force: true })
   });
 Cypress.Commands.add('setDate', (fromOrTo, year, month, day, date) => {
     cy.get("[data-cy=" + fromOrTo + "]").click();
