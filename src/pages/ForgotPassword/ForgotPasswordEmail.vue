@@ -4,7 +4,7 @@
       Forgot Password (Enter Email)
     </div>
     <div>
-      <div>
+      <v-form>
         <p>
           Enter your email and if your email exists then we will send you a password replacement form.
         </p>
@@ -28,17 +28,17 @@
             Submit
           </v-btn>
         </v-input>
-      </div>
+      </v-form>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   methods: {
-    async submit () {
-      // here we should call the method that sends the email to the user with the password renewal form.
-      return 0
+    submit() {
+      
     }
   }
 }
