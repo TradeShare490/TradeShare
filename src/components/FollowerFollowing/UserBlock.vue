@@ -6,7 +6,7 @@
     >
       <v-row
         no-gutters
-        class="px-7"
+        class="px-5"
       >
         <router-link
           :to="router"
@@ -33,7 +33,7 @@
 
         <v-col
           align-self="center"
-          cols="6"
+          cols="5"
           sm="6"
           md="6"
           lg="5"
