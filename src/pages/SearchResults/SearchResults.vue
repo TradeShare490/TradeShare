@@ -1,6 +1,9 @@
 <template>
   <div class="container mt-5 mx-auto">
-    <div class="primary--text text-h6 text-left pb-3">
+    <div
+      class="primary--text text-h6 text-left pb-3"
+      data-cy="keyword"
+    >
       Search result: {{ keyword }}
     </div>
     <div
@@ -94,7 +97,7 @@ export default {
   },
   data () {
     return {
-      keyword: 'nv',
+      keyword: this.$route.params.keyword,
       followings: [
         {
           id: '1',

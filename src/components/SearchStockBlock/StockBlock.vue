@@ -16,6 +16,7 @@
           class="profile"
           size="50"
           rounded
+          data-cy="logo"
         >
           <v-img :src="logo" />
         </v-avatar>
@@ -33,6 +34,7 @@
           <v-list-item-content class="py-1">
             <v-list-item-title
               class="text-caption text-wrap"
+              data-cy="nasdaq"
             >
               NASDAQ:
               <v-chip
@@ -44,7 +46,10 @@
                 {{ nasdaq }}
               </v-chip>
             </v-list-item-title>
-            <v-list-item-title class="text-md-h6 text-sm-h5 text-wrap font-weight-light text-uppercase">
+            <v-list-item-title
+              class="text-md-h6 text-sm-h5 text-wrap font-weight-light text-uppercase"
+              data-cy="stock-name"
+            >
               {{ name }}
             </v-list-item-title>
           </v-list-item-content>
@@ -58,6 +63,7 @@
           color="primary"
           style="border-width: 2px;"
           elevation="2"
+          data-cy="more-info"
         >
           More Information
           <v-icon class="pl-2">

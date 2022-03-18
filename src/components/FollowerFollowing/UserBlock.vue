@@ -58,7 +58,7 @@
           <v-col
             cols="4"
             sm="3"
-            md="2"
+            md="4"
             lg="2"
             xl="2"
             align-self="center"
