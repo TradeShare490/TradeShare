@@ -15,18 +15,23 @@
       >
         <v-list-item-title
           class="text-wrap text-body-2"
-          v-text="chat.name"
+          v-text="'@' +chat.username"
         />
       </v-col>
       <v-col
         class="px-0 py-0"
         cols="5"
-      />
+      >
+        <v-list-item-subtitle
+          class="text-wrap text-right text-caption"
+          v-text="'1m'"
+        />
+      </v-col>
       <v-col class="px-0 py-0">
         <v-list-item-subtitle
           class="pt-2 text-caption text-truncate"
           style="max-width: 19vw;"
-          v-text="latestMessage"
+          v-text="''"
         />
       </v-col>
     </v-list-item-content>
@@ -42,19 +47,9 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
-      latestMessage: this.chat.latestMessage
-    }
-  },
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
-    }
-  },
-  methods: {
-    setLatestMessage (msg) {
-      this.latestMessage = msg
     }
   }
 }

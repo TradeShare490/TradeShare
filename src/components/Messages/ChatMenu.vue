@@ -50,7 +50,7 @@
           class="px-0"
           @click="
             conversationSelected(
-              chat.name,
+              '',
               chat.username,
               chat.img,
               chat.id
@@ -88,8 +88,7 @@ export default {
         chats.push({
           id: conversation._id,
           username: conversation.members.filter(member => member !== this.user.username)[0],
-          name: conversation.membersNames.filter(member => member !== this.user.firstname + ' ' + this.user.lastname)[0],
-          latestMessage: conversation.latestMessage.length > 0 ? conversation.latestMessage[0].message : ' ',
+          latestMessage: conversation.latestMessage[0].message,
           img: 'https://randomuser.me/api/portraits/women/17.jpg'
         })
       })
@@ -98,7 +97,6 @@ export default {
   },
   created () {
     this.initialize()
-    this.$root.$refs.ChatMenu = this
   },
   methods: {
     conversationSelected (name, username, img, conversationId) {

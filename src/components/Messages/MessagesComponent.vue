@@ -43,7 +43,7 @@
               class="text-body-1"
               data-cy="name"
             >
-              {{ name }}
+              {{ username }}
             </v-card-title>
             <v-card-subtitle
               class="text-left text--lighten-2"
@@ -159,7 +159,6 @@
 
 <script>
 import ChatMenu from '../Messages/ChatMenu.vue'
-import axios from '../../axios/axios.v1'
 import socket from '../../socket'
 export default {
   name: 'MessagesComponent',
@@ -211,16 +210,6 @@ export default {
     })
   },
   methods: {
-    async setMessages (conversationId) {
-      const response = await axios.get(`message/${conversationId}`)
-      const messages = response.data.messages
-      messages.map((msg) => {
-        return this.messages.push({
-          content: msg.message,
-          me: this.user.username === msg.sender
-        })
-      })
-    },
     onSubmit (messageForm) {
       const content = messageForm.content
       if (content.length > 0) {
@@ -231,11 +220,6 @@ export default {
         })
         this.messages.push({ content: content, me: messageForm.me })
         this.messageForm.content = ''
-        axios.post('/message', {
-          sender: this.user.username,
-          message: content,
-          conversationId: this.conversationId
-        })
       }
     },
     click () {
@@ -247,8 +231,6 @@ export default {
       this.avatar = avatar
       this.activeChat = true
       this.conversationId = conversationId
-      this.messages = []
-      this.setMessages(conversationId)
     },
     scrollToBottom () {
       const container = this.$refs.messages
