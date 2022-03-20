@@ -84,16 +84,6 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <!--          <v-col class="pt-5">-->
-          <!--            <v-btn-->
-          <!--              class="justify center"-->
-          <!--              color="primary"-->
-          <!--              data-cy="next-button"-->
-          <!--              @click="createConversation(select)"-->
-          <!--            >-->
-          <!--              Next-->
-          <!--            </v-btn>-->
-          <!--          </v-col>-->
         </v-row>
       </v-container>
     </v-card>
