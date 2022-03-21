@@ -75,25 +75,13 @@ export default {
   },
   data: function () {
     return {
-      conversations: []
+      conversations: [],
+      chats: []
     }
   },
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
-    },
-    chats () {
-      const chats = []
-      this.conversations.forEach((conversation) => {
-        chats.push({
-          id: conversation._id,
-          username: conversation.members.filter(member => member !== this.user.username)[0],
-          name: conversation.membersNames.filter(member => member !== this.user.firstname + ' ' + this.user.lastname)[0],
-          latestMessage: conversation.latestMessage.length > 0 ? conversation.latestMessage[0].message : ' ',
-          img: 'https://randomuser.me/api/portraits/women/17.jpg'
-        })
-      })
-      return chats
     }
   },
   created () {
@@ -109,7 +97,27 @@ export default {
         this.conversations = await UserService.getConversations(JSON.parse(localStorage.getItem('user')).username)
       } catch (err) {
         console.log(err)
+      } finally {
+        this.conversations.forEach((conversation) => {
+          this.chats.push({
+            id: conversation._id,
+            username: conversation.members.filter(member => member !== this.user.username)[0],
+            name: conversation.membersNames.filter(member => member !== this.user.firstname + ' ' + this.user.lastname)[0],
+            latestMessage: conversation.latestMessage.length > 0 ? conversation.latestMessage[0].message : ' ',
+            img: 'https://randomuser.me/api/portraits/women/17.jpg'
+          })
+        })
       }
+    },
+    updateChat (conversationId, content) {
+      console.log('lmao')
+      this.chats = this.chats.map((chat) => {
+        if (chat.id === conversationId) {
+          return { ...chat, latestMessage: content }
+        } else {
+          return chat
+        }
+      })
     }
   }
 }

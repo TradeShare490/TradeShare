@@ -208,6 +208,7 @@ export default {
         content: data.content,
         me: false
       })
+      this.$root.$refs.ChatMenu.updateChat(this.conversationId, data.content)
     })
   },
   methods: {
@@ -236,6 +237,7 @@ export default {
           message: content,
           conversationId: this.conversationId
         })
+        this.$root.$refs.ChatMenu.updateChat(this.conversationId, content)
       }
     },
     click () {

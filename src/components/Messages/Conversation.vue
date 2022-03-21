@@ -26,7 +26,7 @@
         <v-list-item-subtitle
           class="pt-2 text-caption text-truncate"
           style="max-width: 19vw;"
-          v-text="latestMessage"
+          v-text="chat.latestMessage"
         />
       </v-col>
     </v-list-item-content>
@@ -50,11 +50,6 @@ export default {
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
-    }
-  },
-  methods: {
-    setLatestMessage (msg) {
-      this.latestMessage = msg
     }
   }
 }
