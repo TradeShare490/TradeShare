@@ -14,8 +14,6 @@ describe("On the messaging page, can", () => {
       .first()
       .click();
     cy.get("[data-cy=messages-window]").should("be.visible");
-    cy.get("[data-cy=name]").should("include.text", "John Doe");
-    cy.get("[data-cy=username]").should("include.text", "@johndoe");
   });
   it("search for people", () => {
     cy.get("[data-cy=search]")
@@ -47,12 +45,5 @@ describe("On the messaging page, can", () => {
     cy.on("window:alert", (str) => {
       expect(str).to.equal("You clicked the icon!");
     });
-  });
-  it("send a message", () => {
-    cy.get("[data-cy=send-message]")
-      .click()
-      .type("Hello");
-    cy.get("[data-cy=send-button]").click();
-    cy.get("[data-cy=messages-window]").should("include.text", "Hello");
   });
 });

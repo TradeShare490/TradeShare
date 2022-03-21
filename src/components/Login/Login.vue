@@ -97,8 +97,10 @@ export default {
           }
         }
         try {
+          console.log('calling')
           await login(payload, this.$store, this.$router)
         } catch (e) {
+          console.log('!@!!')
           this.error = e
         }
       }
