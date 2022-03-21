@@ -14,7 +14,7 @@ describe("Can", () => {
   });
   it("see stocks", () => {
     cy.get("[data-cy=logo]").should("be.visible");
-    cy.get("[data-cy=nasdaq]").should("be.visible");
+    cy.get("[data-cy=ticker]").should("be.visible");
     cy.get("[data-cy=stock-name]").should("be.visible");
     cy.get("[data-cy=more-info]").first().click();
   });

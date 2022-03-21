@@ -34,16 +34,16 @@
           <v-list-item-content class="py-1">
             <v-list-item-title
               class="text-caption text-wrap"
-              data-cy="nasdaq"
+              data-cy="ticker"
             >
-              NASDAQ:
+              Ticker:
               <v-chip
                 label
                 color="primary"
                 x-small
                 class="text-uppercase"
               >
-                {{ nasdaq }}
+                {{ ticker }}
               </v-chip>
             </v-list-item-title>
             <v-list-item-title
@@ -85,7 +85,7 @@ export default {
       type: String,
       default: ''
     },
-    nasdaq: {
+    ticker: {
       type: String,
       default: ''
     },

@@ -28,7 +28,7 @@
           >
             <StockBlock
               :id="stock.id"
-              :nasdaq="stock.nasdaq"
+              :ticker="stock.ticker"
               :name="stock.name"
               :logo="stock.logo"
             />
@@ -138,13 +138,13 @@ export default {
         {
           id: '1',
           name: 'NVIDIA Corporation',
-          nasdaq: 'nvda',
+          ticker: 'nvda',
           logo: require('../../assets/nvda_logo.png')
         },
         {
           id: '2',
           name: 'Identiv, Inc',
-          nasdaq: 'inve',
+          ticker: 'inve',
           logo: require('../../assets/identiv_logo.png')
         }
       ],
