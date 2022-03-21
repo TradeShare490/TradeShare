@@ -98,6 +98,7 @@ export default {
       } catch (err) {
         console.log(err)
       } finally {
+        this.chats = []
         this.conversations.forEach((conversation) => {
           this.chats.push({
             id: conversation._id,
