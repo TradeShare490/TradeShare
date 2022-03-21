@@ -12,7 +12,7 @@
         {{ company }} : {{ ticker }}
       </v-list-item-title>
       <v-list-item-subtitle>
-        {{ current_price }} : {{ percentage_variation }}%
+        {{ price.toFixed(2) }}$ : {{ variation.toFixed(2) }}%
       </v-list-item-subtitle>
     </v-list-item-content>
 

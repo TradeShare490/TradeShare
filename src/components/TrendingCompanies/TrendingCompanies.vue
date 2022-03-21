@@ -17,7 +17,7 @@
         </v-list-item>
       </v-col>
     </v-row>
-    <v-list disabled>
+    <v-list>
       <div
         v-for="company in companies"
         :key="company.title"
@@ -46,15 +46,18 @@ export default {
       searchCriteria: '',
       search: null,
       //  Could I do this???
-      companies: this.pullCompanies()
+      companies: []
     }
+  },
+  beforeMount () {
+    this.pullCompanies()
   },
   methods: {
     async pullCompanies () {
       // If I am to change the fundamental design of trending companies then I will change the company card props
       const response = await axiosInstace.get('/trendingCompanies')
       console.log(response.data.trendingCompanies)
-      return response.data.trendingCompanies
+      this.companies = response.data.trendingCompanies
     }
   }
 }
