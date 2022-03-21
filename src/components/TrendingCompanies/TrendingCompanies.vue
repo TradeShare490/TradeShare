@@ -23,10 +23,11 @@
         :key="company.title"
       >
         <CompanyCard
-          :title="company.title"
-          :subtitle="company.subtitle"
+          :companyName="company.stock_name"
+          :ticker="company.stock_symbol"
           :imgsrc="company.imageSource"
-          :sold="company.sold"
+          :current_price="company.current_price"
+          :percentage_variation="company.price_variation_percentage"
         />
         <v-divider class="my-3" />
       </div>
@@ -36,6 +37,7 @@
 
 <script>
 import CompanyCard from '../TrendingCompanies/CompanyCard.vue'
+import axiosInstace from '../../axios/axios.v1'
 export default {
   name: 'TrendingCompanies',
   components: { CompanyCard },
@@ -43,7 +45,9 @@ export default {
     return {
       searchCriteria: '',
       search: null,
-      companies: [
+      //Could I do this???
+      companies: pullCompanies()
+      /*[
         {
           title: 'Dropbox',
           subtitle: 'sold recently by Dave',
@@ -74,7 +78,13 @@ export default {
           imageSource: '../../assets/TradeShare.png',
           sold: true
         }
-      ]
+      ]*/
+    }
+  }, methods :{
+    pullCompanies(){
+      //If I am to change the fundamental design of trending companies then I will change the company card props
+      const response = axiosInstace.get("/trendingCompanies")
+      return response.trendingCompanies;
     }
   }
 }

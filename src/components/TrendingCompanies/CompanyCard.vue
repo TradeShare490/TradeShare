@@ -9,10 +9,10 @@
 
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>
-        {{ title }}
+        {{ title }} : {{ticker}}
       </v-list-item-title>
-      <v-list-item-subtitle :class="sold ? 'red--text' : 'black--text'">
-        {{ subtitle }}
+      <v-list-item-subtitle>
+        {{ current_price }} : {{percentage_variation}}%
       </v-list-item-subtitle>
     </v-list-item-content>
 
@@ -26,11 +26,11 @@
 export default {
   name: 'CompanyCard',
   props: {
-    title: {
+    companyName: {
       type: String,
       default: ''
     },
-    subtitle: {
+    ticker: {
       type: String,
       default: ''
     },
@@ -38,9 +38,13 @@ export default {
       type: String,
       default: ''
     },
-    sold: {
-      type: Boolean,
-      default: false
+    current_price: {
+      type: Number,
+      default: 0
+    },
+    percentage_variation: {
+      type:Number,
+      default:0
     }
   }
 }
