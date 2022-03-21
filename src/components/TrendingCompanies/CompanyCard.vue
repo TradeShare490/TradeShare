@@ -9,10 +9,10 @@
 
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>
-        {{ title }} : {{ticker}}
+        {{ company }} : {{ ticker }}
       </v-list-item-title>
       <v-list-item-subtitle>
-        {{ current_price }} : {{percentage_variation}}%
+        {{ current_price }} : {{ percentage_variation }}%
       </v-list-item-subtitle>
     </v-list-item-content>
 
@@ -26,7 +26,7 @@
 export default {
   name: 'CompanyCard',
   props: {
-    companyName: {
+    company: {
       type: String,
       default: ''
     },
@@ -38,13 +38,13 @@ export default {
       type: String,
       default: ''
     },
-    current_price: {
+    price: {
       type: Number,
       default: 0
     },
-    percentage_variation: {
-      type:Number,
-      default:0
+    variation: {
+      type: Number,
+      default: 0
     }
   }
 }

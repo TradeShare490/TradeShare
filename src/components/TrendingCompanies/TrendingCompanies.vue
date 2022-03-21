@@ -23,11 +23,11 @@
         :key="company.title"
       >
         <CompanyCard
-          :companyName="company.stock_name"
+          :company="company.stock_name"
           :ticker="company.stock_symbol"
           :imgsrc="company.imageSource"
-          :current_price="company.current_price"
-          :percentage_variation="company.price_variation_percentage"
+          :price="company.current_price"
+          :variation="company.price_variation_percentage"
         />
         <v-divider class="my-3" />
       </div>
@@ -45,46 +45,16 @@ export default {
     return {
       searchCriteria: '',
       search: null,
-      //Could I do this???
-      companies: pullCompanies()
-      /*[
-        {
-          title: 'Dropbox',
-          subtitle: 'sold recently by Dave',
-          imageSource: '../../assets/TradeShare.png',
-          sold: true
-        },
-        {
-          title: 'Medium Corporation',
-          subtitle: 'bought recently by Dave',
-          imageSource: '../../assets/TradeShare.png',
-          sold: false
-        },
-        {
-          title: 'Github',
-          subtitle: 'sold recently by Fred',
-          imageSource: '../../assets/TradeShare.png',
-          sold: true
-        },
-        {
-          title: 'Slack',
-          subtitle: 'bought recently by Fred',
-          imageSource: '../../assets/TradeShare.png',
-          sold: false
-        },
-        {
-          title: 'Twitter',
-          subtitle: 'sold recently by you',
-          imageSource: '../../assets/TradeShare.png',
-          sold: true
-        }
-      ]*/
+      //  Could I do this???
+      companies: this.pullCompanies()
     }
-  }, methods :{
-    pullCompanies(){
-      //If I am to change the fundamental design of trending companies then I will change the company card props
-      const response = axiosInstace.get("/trendingCompanies")
-      return response.trendingCompanies;
+  },
+  methods: {
+    async pullCompanies () {
+      // If I am to change the fundamental design of trending companies then I will change the company card props
+      const response = await axiosInstace.get('/trendingCompanies')
+      console.log(response.data.trendingCompanies)
+      return response.data.trendingCompanies
     }
   }
 }
