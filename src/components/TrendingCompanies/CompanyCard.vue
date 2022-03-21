@@ -22,7 +22,7 @@
         </v-col>
         <v-col>
           <v-list-item-subtitle>
-            {{ variation.toFixed(2) }}$
+            {{ variation.toFixed(2) }}%
           </v-list-item-subtitle>
         </v-col>
       </v-row>
