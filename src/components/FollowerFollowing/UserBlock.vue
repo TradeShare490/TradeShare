@@ -6,7 +6,7 @@
     >
       <v-row
         no-gutters
-        class="px-7"
+        class="pl-4 pr-3"
       >
         <router-link
           :to="router"
@@ -33,7 +33,7 @@
 
         <v-col
           align-self="center"
-          cols="6"
+          cols="5"
           sm="6"
           md="6"
           lg="5"
@@ -58,11 +58,10 @@
           <v-col
             cols="4"
             sm="3"
-            md="2"
+            md="4"
             lg="2"
             xl="2"
             align-self="center"
-            class="mr-3"
           >
             <v-btn
               v-if="userStat.following === true"
@@ -105,7 +104,7 @@
             lg="2"
             xl="2"
             align-self="center"
-            class="mr-3"
+            class="mr-xl-3 mr-lg-3 d-flex justify-xl-end justify-lg-end justify-center"
           >
             <v-btn
               v-bind="size"
@@ -123,13 +122,18 @@
             </v-btn>
           </v-col>
           <v-col
+            cols="8"
+            class="hidden-lg-and-up"
+          />
+          <v-spacer class="hidden-lg-and-up" />
+          <v-col
             cols="3"
             sm="3"
             md="3"
             lg="2"
             xl="2"
             align-self="center"
-            class="mr-3"
+            class="d-flex justify-center"
           >
             <v-btn
               v-bind="size"

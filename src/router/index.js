@@ -17,6 +17,7 @@ import DLRPreferences from '../pages/Preferences/DLR'
 import ConnectedApps from '../pages/ConnectedApps/ConnectedApps.vue'
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword'
 import Support from '../pages/Support/Support'
+import SearchResults from '../pages/SearchResults/SearchResults'
 
 Vue.use(VueRouter)
 
@@ -115,6 +116,11 @@ const routes = [
     path: '/forgotpassword',
     name: 'ForgotPassword',
     component: ForgotPassword
+  },
+  {
+    path: '/search/keyword=:keyword',
+    name: 'SearchResults',
+    component: SearchResults
   },
   {
     path: '/:catchAll(.*)',

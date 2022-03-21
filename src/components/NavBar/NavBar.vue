@@ -20,43 +20,45 @@
         TradeShare
       </v-toolbar-title>
       <v-spacer />
-      <v-autocomplete
-        v-model="searchModel"
-        class="shrink mr-3 mt-6"
-        :items="items"
-        :search-input.sync="search"
-        :loading="isLoading"
-        item-text="Description"
-        hide-selected
-        hide-no-data
-        label="Search"
-        append-icon="mdi-magnify"
-        light
-        rounded
-        dense
-        single-line
-        solo
-        data-cy="autocomplete-search-bar"
-      >
-        <template #item="data">
-          <v-list-item
-            v-if="!searchModeUsers"
-            class="text-left text-body-2"
-            data-cy="autocomplete-list-item"
-            @click="redirect(data.item['1. symbol'])"
-          >
-            <strong>{{ data.item["1. symbol"] }}:</strong> &nbsp;
-            {{ data.item["2. name"] }}
-          </v-list-item>
-          <v-list-item
-            v-if="searchModeUsers"
-            class="text-left text-body-2"
-            data-cy="autocomplete-name-list"
-          >
-            {{ data.item }}
-          </v-list-item>
-        </template>
-      </v-autocomplete>
+      <v-form @submit="searchResults(search)">
+        <v-autocomplete
+          v-model="searchModel"
+          class="shrink mr-3 mt-6"
+          :items="items"
+          :search-input.sync="search"
+          :loading="isLoading"
+          item-text="Description"
+          hide-selected
+          hide-no-data
+          label="Search"
+          append-icon="mdi-magnify"
+          light
+          rounded
+          dense
+          single-line
+          solo
+          data-cy="autocomplete-search-bar"
+        >
+          <template #item="data">
+            <v-list-item
+              v-if="!searchModeUsers"
+              class="text-left text-body-2"
+              data-cy="autocomplete-list-item"
+              @click="redirect(data.item['1. symbol'])"
+            >
+              <strong>{{ data.item["1. symbol"] }}:</strong> &nbsp;
+              {{ data.item["2. name"] }}
+            </v-list-item>
+            <v-list-item
+              v-if="searchModeUsers"
+              class="text-left text-body-2"
+              data-cy="autocomplete-name-list"
+            >
+              {{ data.item }}
+            </v-list-item>
+          </template>
+        </v-autocomplete>
+      </v-form>
       <v-btn
         icon
         class="Notification mt-1"
@@ -144,7 +146,7 @@ export default {
       searchModeUsers: false,
       isLoading: false,
       searchModel: null,
-      search: null,
+      search: this.$route.params.keyword,
       searchQueue: [],
       notifItems: [
         { subject: ['Team TradeShare'], message: 'published a new privacy policy', date: '3/12/2021, 7:14:33 PM', read: false },
@@ -231,6 +233,9 @@ export default {
         window.open('https://finance.yahoo.com/quote/' + symbol)
       }
       return true
+    },
+    searchResults (keyword) {
+      this.$router.push('/search/keyword=' + keyword)
     }
   }
 }
