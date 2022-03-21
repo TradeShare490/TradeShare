@@ -9,11 +9,23 @@
 
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>
-        {{ company }} : {{ ticker }}
+        {{ company }}
       </v-list-item-title>
-      <v-list-item-subtitle>
-        {{ price.toFixed(2) }}$ : {{ variation.toFixed(2) }}%
-      </v-list-item-subtitle>
+      <v-list-item-title>
+        {{ ticker }}
+      </v-list-item-title>
+      <v-row>
+        <v-col>
+          <v-list-item-subtitle>
+            {{ price.toFixed(2) }}$
+          </v-list-item-subtitle>
+        </v-col>
+        <v-col>
+          <v-list-item-subtitle>
+            {{ variation.toFixed(2) }}$
+          </v-list-item-subtitle>
+        </v-col>
+      </v-row>
     </v-list-item-content>
 
     <v-list-item-icon>
