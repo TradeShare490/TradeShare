@@ -15,6 +15,8 @@ import NotificationsPreferences from '../pages/Preferences/Notifications'
 import PrivacySecurityPreferences from '../pages/Preferences/PrivacySecurity'
 import DLRPreferences from '../pages/Preferences/DLR'
 import ConnectedApps from '../pages/ConnectedApps/ConnectedApps.vue'
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword'
+import Support from '../pages/Support/Support'
 
 Vue.use(VueRouter)
 
@@ -96,7 +98,8 @@ const routes = [
   },
   {
     path: '/support',
-    name: 'Support'
+    name: 'Support',
+    component: Support
   },
   {
     path: '/brokerage-signup',
@@ -107,6 +110,11 @@ const routes = [
     path: '/confirm',
     name: 'Confirm',
     component: Confirm
+  },
+  {
+    path: '/forgotpassword',
+    name: 'ForgotPassword',
+    component: ForgotPassword
   },
   {
     path: '/:catchAll(.*)',

@@ -25,7 +25,7 @@
           :loading="isLoading"
           :items="users"
           :search-input="search"
-          class="inputfield mx-4 mt-0"
+          class="inputfield mt-0"
           flat
           hide-no-data
           hide-details
@@ -50,21 +50,19 @@
 <script>
 export default {
   name: 'SearchViewBy',
+  props: {
+    searchList: {
+      type: Array,
+      default: null
+    }
+  },
   data () {
     return {
       search: null,
       select: null,
       isLoading: false,
       values: [],
-      users: [],
-      listUsers: [
-        'Mary Winchester',
-        'John Winchester',
-        'Tim Robenman',
-        'Ash Britan',
-        'Mac Kafe',
-        'Jenny Silver'
-      ]
+      users: []
     }
   },
   watch: {
@@ -77,12 +75,12 @@ export default {
     querySelections (v) {
       this.isLoading = true
       // Simulated ajax query
-      setTimeout(() => {
-        this.users = this.listUsers.filter((e) => {
-          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-        })
-        this.isLoading = false
-      }, 500)
+      // setTimeout(() => {
+      //   this.users = this.searchList.filter((e) => {
+      //     return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+      //   })
+      //   this.isLoading = false
+      // }, 500)
     }
   }
 }

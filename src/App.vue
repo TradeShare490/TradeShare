@@ -4,12 +4,12 @@
       <NavBar v-if="loggedIn" />
       <SideMenu v-if="loggedIn" />
       <preferences-menu v-if="showMenu" />
-      <v-content
+      <v-main
         v-if="showMenu"
         style="padding-top: 0px"
       >
         <router-view />
-      </v-content>
+      </v-main>
       <router-view v-else />
     </v-main>
   </v-app>

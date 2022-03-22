@@ -6,14 +6,16 @@
       app
       clipped-left
     >
-      <v-img
-        src="../../assets/TS_Logo_White.png"
-        alt="TradeShare Logo"
-        contain
-        max-width="70px"
-        height="60px"
-        position="left"
-      />
+      <router-link to="/">
+        <v-img
+          src="../../assets/TS_Logo_White.png"
+          alt="TradeShare Logo"
+          contain
+          max-width="70px"
+          height="60px"
+          position="left"
+        />
+      </router-link>
       <v-toolbar-title class="text-h6 mr-6 hidden-sm-and-down">
         TradeShare
       </v-toolbar-title>
@@ -57,9 +59,62 @@
       </v-autocomplete>
       <v-btn
         icon
-        class="mt-1"
+        class="Notification mt-1"
+        @click="test"
       >
-        <v-icon>mdi-bell</v-icon>
+        <template>
+          <div>
+            <v-menu
+              transition="slide-y-transition"
+              class="NotificationContainer"
+              bottom
+              offset-y
+              :close-on-content-click="false"
+            >
+              <template #activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>mdi-bell</v-icon>
+                </v-btn>
+              </template>
+              <v-list
+                v-if="notifItems.length===0"
+                three-line
+                class="NotificationListEmpty"
+              >
+                <v-list-item class="text-center">
+                  <v-col class="grey--text darken-3--text font-weight-bold">
+                    YOU DO NOT HAVE ANY NOTIFICATION YET
+                  </v-col>
+                </v-list-item>
+              </v-list>
+              <v-list
+                v-else
+                three-line
+                class="NotificationList"
+              >
+                <v-subheader class="subheader font-weight-bold mt-1 black--text">
+                  Latest Notifications
+                </v-subheader>
+
+                <template v-for="(item, index) in notifItems">
+                  <NotificationBlock
+                    :key="index"
+                    :avatar="item.avatar"
+                    :subject="item.subject"
+                    :message="item.message"
+                    :date="item.date"
+                    :destination="item.destination"
+                    :read="item.read"
+                  />
+                </template>
+              </v-list>
+            </v-menu>
+          </div>
+        </template>
       </v-btn>
       <v-btn
         icon
@@ -76,8 +131,12 @@
 <script>
 import { logout } from '../../hooks/useCredential.js'
 import axios from '../../axios/axios.v1'
+import NotificationBlock from './../../components/Notification/NotificationBlock.vue'
 export default {
   name: 'NavBar',
+  components: {
+    NotificationBlock
+  },
   data () {
     return {
       stocks: [],
@@ -86,7 +145,21 @@ export default {
       isLoading: false,
       searchModel: null,
       search: null,
-      searchQueue: []
+      searchQueue: [],
+      notifItems: [
+        { subject: ['Team TradeShare'], message: 'published a new privacy policy', date: '3/12/2021, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', subject: ['Owen', 'Aima'], message: 'like your post', date: '3/12/2021, 7:14:33 PM', read: false },
+        { subject: ['Tim Robeman'], message: 'mentioned you in a comment: Roman Kotepov did you this??', date: '1/11/2019, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/91.jpg', subject: ['Aima'], message: 'like your post', date: '3/12/2022, 7:14:33 PM', read: true },
+        { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', subject: ['Tim', 'Cook'], message: 'send your a follow request', date: '1/19/2022, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/81.jpg', subject: ['Jerry'], message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', read: true },
+        { avatar: 'https://randomuser.me/api/portraits/women/65.jpg', subject: ['Aisha', 'Aima'], message: 'Sandra Adams: Do you have Paris recommendations? Have you ever been?', date: '1/01/2022, 7:14:33 PM', read: true },
+        { avatar: 'https://randomuser.me/api/portraits/women/56.jpg', subject: ['Menuven', 'Aima'], message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', subject: ['Owen', 'Aima'], message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { message: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false },
+        { subject: ['Aima'], message: 'send you a very long text: Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?', date: '1/19/2022, 7:14:33 PM', read: false }
+      ]
     }
   },
   computed: {
@@ -146,6 +219,9 @@ export default {
     }
   },
   methods: {
+    test () {
+      console.log('NOTIFICATION @CLICK')
+    },
     submit () {
       logout(this.$store, this.$router)
     },
@@ -159,3 +235,39 @@ export default {
   }
 }
 </script>
+<style scoped>
+.subheader {
+  font-size: 1.1em;
+  color: black;
+}
+.NotificationList {
+  background-color: #ffffff;
+  width: 450px;
+  min-height: 50px;
+  max-height: 80vh;
+  overflow:auto;
+}
+.NotificationList:hover {
+  cursor: default;
+}
+.NotificationListEmpty {
+  width: 450px;
+  height: 100px;
+  overflow:hidden;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a8a8a8;
+  border-radius: 15px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #757575;
+}
+</style>
