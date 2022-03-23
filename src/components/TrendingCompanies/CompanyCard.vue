@@ -21,7 +21,7 @@
           </v-list-item-subtitle>
         </v-col>
         <v-col>
-          <v-list-item-subtitle>
+          <v-list-item-subtitle :style="{color: stockcolor }">
             {{ variation.toFixed(2) }}%
           </v-list-item-subtitle>
         </v-col>
@@ -57,6 +57,23 @@ export default {
     variation: {
       type: Number,
       default: 0
+    }
+  },
+  data () {
+    return {
+      stockcolor: ''
+    }
+  },
+  beforeMount () {
+    this.stockColorPicker()
+  },
+  methods: {
+    stockColorPicker () {
+      if (this.variation > 0) {
+        this.stockcolor = 'green'
+      } else {
+        this.stockcolor = 'red'
+      }
     }
   }
 }

@@ -45,7 +45,6 @@ export default {
     return {
       searchCriteria: '',
       search: null,
-      //  Could I do this???
       companies: []
     }
   },
