@@ -45,7 +45,7 @@
 </template>
 
 <script>
-// import { changePassword } from '../../hooks/useCredential.js'
+
 export default {
   methods: {
     async submit () {
