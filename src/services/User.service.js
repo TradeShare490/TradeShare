@@ -292,6 +292,17 @@ class UserService {
         this.error = err.response.data.message
       })
   }
+
+  async togglePrivacy (userId, store, isPrivate) {
+    const response = await axios.patch(`/userInfo/${userId}`, {
+      isPrivate: isPrivate
+    })
+    store.dispatch('update', {
+      response
+    }).catch(err => {
+      this.error = err.response.data.message
+    })
+  }
 }
 
 export default new UserService()

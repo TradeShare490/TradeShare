@@ -26,6 +26,7 @@
           hide-details
           class="mt-0 mb-8"
           :ripple="false"
+          @change="togglePrivacy"
         />
       </div>
       <v-divider class="mb-8" />
@@ -315,6 +316,7 @@
 
 <script>
 import SearchViewBy from '../../components/SearchViewBy/SearchViewBy.vue'
+import UserService from '../../services/User.service'
 
 export default {
   name: 'PrivacySecurityPreferencesPage',
@@ -330,9 +332,15 @@ export default {
       snackbarText: 'Password Changed Successfully'
     }
   },
+  created () {
+    this.privateAccount = JSON.parse(localStorage.getItem('user')).isPrivate
+  },
   methods: {
     savePassword () {
       this.snackbar = true
+    },
+    async togglePrivacy () {
+      UserService.togglePrivacy(JSON.parse(localStorage.getItem('user')).userId, this.$store, this.privateAccount)
     }
   }
 }
