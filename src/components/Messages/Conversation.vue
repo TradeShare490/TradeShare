@@ -1,6 +1,7 @@
 <template>
   <v-list-item
     :value="chat.id"
+    two-line
   >
     <v-avatar
       class="profile"
@@ -26,7 +27,7 @@
         <v-list-item-subtitle
           class="pt-2 text-caption text-truncate"
           style="max-width: 19vw;"
-          v-text="chat.latestMessage"
+          v-text="chat.latestMessage ? chat.latestMessage : ''"
         />
       </v-col>
     </v-list-item-content>

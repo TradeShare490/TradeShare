@@ -58,6 +58,7 @@
               flat
               append-icon="mdi-magnify"
               multiple
+              :loading="isLoading"
               :search-input.sync="searchInput"
               data-cy="chat-user"
               @input="searchInput = null"
@@ -130,13 +131,12 @@ export default {
         if (this.isLoading) {
           return
         }
-        this.loading = true
+        this.isLoading = true
         axios.get(`/userInfo/?username=${val}`).then((res) => {
           this.users = res.data.data
-          console.log(res.data)
         }).catch((err) => {
           console.log(err)
-        }).finally(() => (this.loading = false))
+        }).finally(() => (this.isLoading = false))
       }
     }
   },
@@ -148,17 +148,21 @@ export default {
     createConversation (name, username) {
       if (name.length > 0 && username.length > 0) {
         this.dialog = false
-
-        axios.post('/conversation', {
-          sender: this.user.username,
-          receiver: username,
-          senderName: this.user.firstname + ' ' + this.user.lastname,
-          receiverName: name
-        }).then((res) => {
-          console.log(res.data)
-          this.$root.$refs.ChatMenu.initialize()
-          this.$root.$refs.ChatMenu.conversationSelected(name, username, 'https://randomuser.me/api/portraits/women/17.jpg', res.data.conversation._id)
-        })
+        const checkUsername = obj => obj.username === username
+        if (this.$root.$refs.ChatMenu.chats.some(checkUsername)) {
+          const chat = this.$root.$refs.ChatMenu.chats.find((chat) => chat.username === username)
+          this.$root.$refs.ChatMenu.conversationSelected(chat.name, chat.username, chat.img, chat.id)
+        } else {
+          axios.post('/conversation', {
+            sender: this.user.username,
+            receiver: username,
+            senderName: this.user.firstname + ' ' + this.user.lastname,
+            receiverName: name
+          }).then((res) => {
+            this.$root.$refs.ChatMenu.initialize()
+            this.$root.$refs.ChatMenu.conversationSelected(name, username, 'https://randomuser.me/api/portraits/women/17.jpg', res.data.conversation._id)
+          })
+        }
       }
     }
   }
