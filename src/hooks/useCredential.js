@@ -34,7 +34,3 @@ export const logout = async (store, router) => {
 export const brokerageSignUp = async credentials => {
   return credentials
 }
-
-export const changePassword = async (credentials, store, router) => {
-  return null
-}

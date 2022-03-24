@@ -55,7 +55,6 @@ export default {
     async pullCompanies () {
       // If I am to change the fundamental design of trending companies then I will change the company card props
       const response = await axiosInstace.get('/trendingCompanies')
-      console.log(response.data.trendingCompanies)
       this.companies = response.data.trendingCompanies
     }
   }
