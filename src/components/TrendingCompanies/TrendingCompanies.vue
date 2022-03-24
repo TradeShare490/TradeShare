@@ -9,6 +9,9 @@
           <v-list-item-content>
             <v-list-item-title class="text-h6 text-left blue--text">
               Trending Companies
+              <v-icon>
+                mdi-trending-up
+              </v-icon>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

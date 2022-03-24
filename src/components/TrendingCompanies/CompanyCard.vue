@@ -27,10 +27,6 @@
         </v-col>
       </v-row>
     </v-list-item-content>
-
-    <v-list-item-icon>
-      <v-icon>mdi-dots-vertical</v-icon>
-    </v-list-item-icon>
   </v-list-item>
 </template>
 
