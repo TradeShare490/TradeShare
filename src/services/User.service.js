@@ -223,7 +223,6 @@ class UserService {
   }
 
   async getConversations (username) {
-    console.log(username)
     let conversations = null
     await axios.get('/conversation/' + username)
       .then(function (res) {

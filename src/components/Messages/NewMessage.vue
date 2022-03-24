@@ -43,17 +43,14 @@
       </v-row>
       <v-container>
         <v-row>
-          <v-col
-            cols="8"
-            class="pl-8"
-          >
+          <v-col>
             <v-autocomplete
               v-model="select"
-              :items="people"
+              :items="items"
               hide-selected
               hide-no-data
+              no-filter
               color="primary"
-              small-chips
               outlined
               label="Search..."
               item-text="name"
@@ -61,48 +58,32 @@
               flat
               append-icon="mdi-magnify"
               multiple
+              :loading="isLoading"
               :search-input.sync="searchInput"
               data-cy="chat-user"
               @input="searchInput = null"
             >
-              <template #selection="data">
-                <v-chip
-                  v-bind="data.attrs"
-                  :input-value="data.selected"
-                  close
-                  @click="data.select"
-                  @click:close="remove(data.item)"
-                >
-                  {{ data.item.name }}
-                </v-chip>
-              </template>
               <template #item="data">
-                <v-list-item-avatar>
-                  <img
-                    :src="data.item.avatar"
-                    :alt="altText"
-                  >
-                </v-list-item-avatar>
-                <v-list-item-content data-cy="list-item">
-                  <v-list-item-title>
-                    {{ data.item.name }}
-                  </v-list-item-title>
-                  <v-list-item-subtitle>
-                    {{ data.item.username }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
+                <v-list-item
+                  @click="createConversation(data.item.name, data.item.username)"
+                >
+                  <v-list-item-avatar>
+                    <img
+                      :src="`https://randomuser.me/api/portraits/men/52.jpg`"
+                      :alt="altText"
+                    >
+                  </v-list-item-avatar>
+                  <v-list-item-content data-cy="list-item">
+                    <v-list-item-title>
+                      {{ data.item.name }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      @{{ data.item.username }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
               </template>
             </v-autocomplete>
-          </v-col>
-          <v-col class="pt-5">
-            <v-btn
-              class="justify center"
-              color="primary"
-              data-cy="next-button"
-              @click="createConversation(select)"
-            >
-              Next
-            </v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -111,6 +92,7 @@
 </template>
 
 <script>
+import axios from '../../axios/axios.v1'
 export default {
   name: 'NewMessage',
   data () {
@@ -118,21 +100,44 @@ export default {
       dialog: '',
       select: '',
       searchInput: null,
+      isLoading: false,
+      searchQueue: [],
       altText: 'User avatar',
-      people: [
-        {
-          id: 1,
-          name: 'John Doe',
-          username: '@johndoe',
-          avatar: 'https://randomuser.me/api/portraits/men/52.jpg'
-        },
-        {
-          id: 2,
-          name: 'Jane Doe',
-          username: '@janedoe',
-          avatar: 'https://randomuser.me/api/portraits/women/45.jpg'
+      users: []
+    }
+  },
+  computed: {
+    items () {
+      return this.users.map((user) => {
+        return {
+          username: user.username,
+          name: user.firstname + ' ' + user.lastname
         }
-      ]
+      })
+    },
+    user () {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  },
+  watch: {
+    async searchInput (val) {
+      this.searchQueue.push(val)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      this.searchQueue.pop()
+      if (this.searchQueue.length === 0) {
+        if (val?.length === 0) {
+          return
+        }
+        if (this.isLoading) {
+          return
+        }
+        this.isLoading = true
+        axios.get(`/userInfo/?username=${val}`).then((res) => {
+          this.users = res.data.data
+        }).catch((err) => {
+          console.log(err)
+        }).finally(() => (this.isLoading = false))
+      }
     }
   },
   methods: {
@@ -140,10 +145,24 @@ export default {
       const index = this.select.indexOf(item.name)
       if (index >= 0) this.select.splice(index, 1)
     },
-    createConversation (select) {
-      if (select.length > 0) {
+    createConversation (name, username) {
+      if (name.length > 0 && username.length > 0) {
         this.dialog = false
-        alert('You created a new conversation!')
+        const checkUsername = obj => obj.username === username
+        if (this.$root.$refs.ChatMenu.chats.some(checkUsername)) {
+          const chat = this.$root.$refs.ChatMenu.chats.find((chat) => chat.username === username)
+          this.$root.$refs.ChatMenu.conversationSelected(chat.name, chat.username, chat.img, chat.id)
+        } else {
+          axios.post('/conversation', {
+            sender: this.user.username,
+            receiver: username,
+            senderName: this.user.firstname + ' ' + this.user.lastname,
+            receiverName: name
+          }).then((res) => {
+            this.$root.$refs.ChatMenu.initialize()
+            this.$root.$refs.ChatMenu.conversationSelected(name, username, 'https://randomuser.me/api/portraits/women/17.jpg', res.data.conversation._id)
+          })
+        }
       }
     }
   }

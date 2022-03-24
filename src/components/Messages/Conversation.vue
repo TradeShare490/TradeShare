@@ -1,6 +1,7 @@
 <template>
   <v-list-item
     :value="chat.id"
+    two-line
   >
     <v-avatar
       class="profile"
@@ -15,23 +16,18 @@
       >
         <v-list-item-title
           class="text-wrap text-body-2"
-          v-text="'@' +chat.username"
+          v-text="chat.name"
         />
       </v-col>
       <v-col
         class="px-0 py-0"
         cols="5"
-      >
-        <v-list-item-subtitle
-          class="text-wrap text-right text-caption"
-          v-text="'1m'"
-        />
-      </v-col>
+      />
       <v-col class="px-0 py-0">
         <v-list-item-subtitle
           class="pt-2 text-caption text-truncate"
           style="max-width: 19vw;"
-          v-text="''"
+          v-text="chat.latestMessage ? chat.latestMessage : ''"
         />
       </v-col>
     </v-list-item-content>
@@ -45,6 +41,11 @@ export default {
     chat: {
       type: Object,
       default: null
+    }
+  },
+  data () {
+    return {
+      latestMessage: this.chat.latestMessage
     }
   },
   computed: {
