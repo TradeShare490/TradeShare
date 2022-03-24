@@ -17,7 +17,7 @@
       <v-row>
         <v-col>
           <v-list-item-subtitle>
-            {{ price.toFixed(2) }}$
+            ${{ price.toFixed(2) }}
           </v-list-item-subtitle>
         </v-col>
         <v-col>
