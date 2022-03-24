@@ -53,16 +53,16 @@
               >
                 <span class="blue--text">Recent Trades</span>
               </v-card-title>
-              <div v-if="allPosts.length!=0">
+              <div v-if="activities.length!==0">
                 <Recents
-                  v-for="trade in allPosts.splice(0, 4)"
+                  v-for="trade in activities.slice(0,4)"
                   :key="trade.id"
-                  :image="trade.image"
-                  :name="trade.name"
-                  :tag="trade.tag"
-                  :company="trade.company"
-                  :purchased="trade.purchased"
-                  :when="trade.when"
+                  :image="'https://randomuser.me/api/portraits/men/35.jpg'"
+                  :name="userInfo.firstname + ' ' + userInfo.lastname"
+                  :tag="trade.symbol"
+                  :company="'Quantity:' + trade.qty"
+                  :purchased="trade.side === 'buy'"
+                  :when="timeSince(trade.transaction_time)"
                 />
               </div>
             </v-card>
@@ -119,12 +119,12 @@ export default {
   data () {
     return {
       userId: this.$route.params.id,
-      allPosts: this.$store.getters.allPosts,
       userInfo: null,
       info: {},
       positions: [],
       followNum: [],
-      isFollowingByUser: false
+      isFollowingByUser: false,
+      activities: []
     }
   },
   created () {
@@ -136,6 +136,7 @@ export default {
       this.positions = await UserService.getPositions(this.userInfo.userId)
       this.followNum = await UserService.getFollowNum(this.userInfo.userId)
       this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
+      this.activities = await UserService.getActivities(this.userInfo.userId)
       this.info = {
         ...this.userInfo,
         numFollowers: this.followNum.numFollower,
@@ -145,6 +146,34 @@ export default {
         favorite: false,
         blocked: false
       }
+    },
+    timeSince (date) {
+      const time = new Date(date).getTime() / 1000
+
+      const seconds = Math.floor(((new Date().getTime() / 1000 - time)))
+
+      let interval = seconds / 31536000
+
+      if (interval > 1) {
+        return Math.floor(interval) === 1 ? ' a year ago' : Math.floor(interval) + ' years ago'
+      }
+      interval = seconds / 2592000
+      if (interval > 1) {
+        return Math.floor(interval) === 1 ? ' a month ago' : Math.floor(interval) + ' months ago'
+      }
+      interval = seconds / 86400
+      if (interval > 1) {
+        return Math.floor(interval) === 1 ? ' a day ago' : Math.floor(interval) + ' days ago'
+      }
+      interval = seconds / 3600
+      if (interval > 1) {
+        return Math.floor(interval) === 1 ? ' an hour ago' : Math.floor(interval) + ' hours ago'
+      }
+      interval = seconds / 60
+      if (interval > 1) {
+        return Math.floor(interval) === 1 ? ' a minute ago' : Math.floor(interval) + ' minutes ago'
+      }
+      return Math.floor(interval) === 1 ? ' a second ago' : Math.floor(interval) + ' seconds ago'
     }
   }
 }

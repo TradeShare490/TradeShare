@@ -291,6 +291,20 @@ class UserService {
       .catch(err => {
         this.error = err.response.data.message
       })
+  }/* istanbul ignore next */
+
+  async getActivities (userID) {
+    let activities = null
+    await axios
+      .get('/activities/' + userID)
+      .then(function (res) {
+        activities = res.data.activities
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return activities
   }
 
   async togglePrivacy (userId, store, isPrivate) {
