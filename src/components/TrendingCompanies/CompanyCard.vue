@@ -4,7 +4,7 @@
       <v-list-item-title>
         {{ company }}
       </v-list-item-title>
-      <v-list-item-title>
+      <v-list-item>
         <v-chip
           label
           class="white--text px-2 text-h6"
@@ -12,7 +12,7 @@
         >
           {{ ticker }}
         </v-chip>
-      </v-list-item-title>
+      </v-list-item>
 
       <v-list-item-title />
       <v-row>
