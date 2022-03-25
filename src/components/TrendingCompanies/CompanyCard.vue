@@ -1,12 +1,5 @@
 <template>
   <v-list-item data-cy="company-card">
-    <!--<v-list-item-avatar
-      class="avatar"
-      tile
-    >
-      <v-img src="../../assets/TradeShare.png" />
-    </v-list-item-avatar> -->
-
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>
         {{ company }}
