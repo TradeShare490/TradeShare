@@ -1,19 +1,27 @@
 <template>
   <v-list-item data-cy="company-card">
-    <v-list-item-avatar
+    <!--<v-list-item-avatar
       class="avatar"
       tile
     >
       <v-img src="../../assets/TradeShare.png" />
-    </v-list-item-avatar>
+    </v-list-item-avatar> -->
 
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>
         {{ company }}
       </v-list-item-title>
       <v-list-item-title>
-        {{ ticker }}
+        <v-chip
+          label
+          class="white--text px-2 text-h6"
+          color="primary"
+        >
+          {{ ticker }}
+        </v-chip>
       </v-list-item-title>
+
+      <v-list-item-title />
       <v-row>
         <v-col>
           <v-list-item-subtitle>
