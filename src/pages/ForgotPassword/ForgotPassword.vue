@@ -1,4 +1,5 @@
 <template>
+<v-container>
   <div class="container mt-0 mx-auto">
     <div class="title mt-6 mb-11 px-7">
       Forgot Password
@@ -44,10 +45,10 @@
       </div>
     </div>
   </div>
+</v-container>
 </template>
 
 <script>
-import { signUp } from '../../hooks/useCredential.js'
 
 export default {
   name: 'ChangePassword',
