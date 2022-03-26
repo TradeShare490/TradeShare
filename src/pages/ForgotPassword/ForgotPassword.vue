@@ -6,7 +6,7 @@
     <div>
       <div>
         <p>
-          Enter and confirm your new password in the text fields below. Make sure to have at least 3 characters.
+          Enter and confirm your new password in the text fields below. Make sure to have at least 8 characters.
         </p>
         <br>
         <v-label for="pwd">

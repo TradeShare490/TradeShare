@@ -4,7 +4,10 @@
       Forgot Password (Enter Email)
     </div>
     <div>
-      <v-form>
+      <v-form
+        ref="emailForm"
+        v-model="valid"
+      >
         <p>
           Enter your email and if your email exists then we will send you a password replacement form.
         </p>
@@ -12,33 +15,65 @@
         <v-label for="enter-email">
           Enter Email:
         </v-label>
-        <v-input
-          id="enter-email"
-          name="enter-email"
+        <v-text-field
+          v-model="email"
+          class="my-5"
+          data-cy="email"
+          label="Email"
+          color="primary"
+          :rules="[rules.required, rulesEmail.format]"
+          @keyup.enter="submit"
+        />
+        <br>
+        <v-btn
+          width="250"
+          height="45"
+          color="primary"
+          class="my-3 text-button"
+          data-cy="login-button"
+          @click="submit"
         >
-          <br>
-          <v-btn
-            width="250"
-            height="45"
-            color="primary"
-            class="my-3 text-button"
-            data-cy="login-button"
-            @click="submit"
-          >
-            Submit
-          </v-btn>
-        </v-input>
+          Submit
+        </v-btn>
       </v-form>
     </div>
   </div>
 </template>
 
 <script>
-
+import axiosInstace from '../../axios/axios.v1'
 export default {
+  name: 'EmailSender',
+  data: () => ({
+    valid: '',
+    email: '',
+    rules: {
+      required: v => !!v || 'Required'
+    },
+    rulesEmail: {
+      format: v =>
+        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || 'E-mail must be valid'
+    }
+  }),
   methods: {
-    submit() {
-      
+    async submit () {
+      console.log('submit')
+      if (this.$refs.emailForm.validate()) {
+        const MailOption = {
+          to: this.email,
+          subject: 'TradeShare: Forgot Password',
+          text: 'Change your password in the following link (someone put the link here)'
+        }
+        try {
+          print(MailOption)
+          print('sending MailOption to mailer')
+          return axiosInstace.post('/mailer', MailOption)
+        } catch (e) {
+          this.error = e
+        }
+      }
     }
   }
 }
