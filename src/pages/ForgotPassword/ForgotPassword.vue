@@ -9,48 +9,71 @@
           Enter and confirm your new password in the text fields below. Make sure to have at least 8 characters.
         </p>
         <br>
-        <v-label for="pwd">
-          New Password:
-        </v-label>
-        <v-input
-          id="pwd"
+
+        <v-text-field
+          v-model="password"
+          class="my-5"
+          data-cy="password"
+          label="Password"
+          color="primary"
           type="password"
-          name="pwd"
-        >
-          <br>
-          <br>
-          <v-label for="pwd-conf">
-            Confirm New Password:
-          </v-label>
-          <input
-            id="pwd-conf"
-            type="password"
-            name="pwd-conf"
-          >
-          <br>
-          <v-btn
-            width="250"
-            height="45"
-            color="primary"
-            class="my-3 text-button"
-            data-cy="login-button"
-            @click="submit"
-          >
-            Submit New Password
-          </v-btn>
-        </v-input>
+          hint="At least 8 characters"
+          :rules="[rules.required, rulesPassword.min]"
+          autocomplete="new-password"
+          @keyup.enter="submit"
+        />
+        <v-text-field
+          v-model="passwordConfirm"
+          class="my-5"
+          data-cy="password-confirm"
+          label="Confirm Password"
+          color="primary"
+          type="password"
+          :rules="[rules.required, rulesPassword.min, passwordConfirmation]"
+          @keyup.enter="submit"
+        />
+        <br>
+        <v-btn
+          data-cy="signup-button"
+          width="250"
+          height="45"
+          color="primary"
+          class="my-3 text-button"
+          @click="submit"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { signUp } from '../../hooks/useCredential.js'
 
 export default {
+  name: 'ChangePassword',
+  data: () => ({
+    uid:'',
+    value: String,
+    password: '',
+    passwordConfirm: '',
+    rules: {
+      required: v => !!v || 'Required'
+    },
+    rulesPassword: {
+      min: v => v.length >= 8 || 'Min 8 characters'
+    },
+    error: false
+  }),
+  computed: {
+    passwordConfirmation () {
+      return () =>
+        this.password === this.passwordConfirm || 'Password must match'
+    }
+  },
   methods: {
     async submit () {
-      // here we should call the method that patches the password in the mongodb
-      return 0
+      //here we will patch the request!
+     return 0;
     }
   }
 }
