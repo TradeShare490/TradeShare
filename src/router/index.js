@@ -118,6 +118,11 @@ const routes = [
     component: ForgotPassword
   },
   {
+    path: '/forgotpasswordemail',
+    name: 'ForgotPasswordEmail',
+    component: ForgotPasswordEmail
+  },
+  {
     path: '/search/keyword=:keyword',
     name: 'SearchResults',
     component: SearchResults
