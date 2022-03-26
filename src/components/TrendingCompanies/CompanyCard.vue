@@ -1,24 +1,33 @@
 <template>
   <v-list-item data-cy="company-card">
-    <v-list-item-avatar
-      class="avatar"
-      tile
-    >
-      <v-img src="../../assets/TradeShare.png" />
-    </v-list-item-avatar>
-
     <v-list-item-content class="text-left ml-3">
       <v-list-item-title>
-        {{ title }}
+        {{ company }}
       </v-list-item-title>
-      <v-list-item-subtitle :class="sold ? 'red--text' : 'black--text'">
-        {{ subtitle }}
-      </v-list-item-subtitle>
-    </v-list-item-content>
+      <v-list-item-title>
+        <v-chip
+          label
+          class="white--text px-2 text-h6"
+          color="primary"
+        >
+          {{ ticker }}
+        </v-chip>
+      </v-list-item-title>
 
-    <v-list-item-icon>
-      <v-icon>mdi-dots-vertical</v-icon>
-    </v-list-item-icon>
+      <v-list-item-title />
+      <v-row>
+        <v-col>
+          <v-list-item-subtitle>
+            ${{ price.toFixed(2) }}
+          </v-list-item-subtitle>
+        </v-col>
+        <v-col>
+          <v-list-item-subtitle :style="{color: stockcolor }">
+            {{ variation.toFixed(2) }}%
+          </v-list-item-subtitle>
+        </v-col>
+      </v-row>
+    </v-list-item-content>
   </v-list-item>
 </template>
 
@@ -26,11 +35,11 @@
 export default {
   name: 'CompanyCard',
   props: {
-    title: {
+    company: {
       type: String,
       default: ''
     },
-    subtitle: {
+    ticker: {
       type: String,
       default: ''
     },
@@ -38,9 +47,30 @@ export default {
       type: String,
       default: ''
     },
-    sold: {
-      type: Boolean,
-      default: false
+    price: {
+      type: Number,
+      default: 0
+    },
+    variation: {
+      type: Number,
+      default: 0
+    }
+  },
+  data () {
+    return {
+      stockcolor: ''
+    }
+  },
+  beforeMount () {
+    this.stockColorPicker()
+  },
+  methods: {
+    stockColorPicker () {
+      if (this.variation > 0) {
+        this.stockcolor = 'green'
+      } else {
+        this.stockcolor = 'red'
+      }
     }
   }
 }

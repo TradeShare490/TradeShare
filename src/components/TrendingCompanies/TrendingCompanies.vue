@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <v-card
     class="sticky-card"
     height="100%"
@@ -17,16 +17,17 @@
         </v-list-item>
       </v-col>
     </v-row>
-    <v-list disabled>
+    <v-list>
       <div
         v-for="company in companies"
         :key="company.title"
       >
         <CompanyCard
-          :title="company.title"
-          :subtitle="company.subtitle"
+          :company="company.stock_name"
+          :ticker="company.stock_symbol"
           :imgsrc="company.imageSource"
-          :sold="company.sold"
+          :price="company.current_price"
+          :variation="company.price_variation_percentage"
         />
         <v-divider class="my-3" />
       </div>
@@ -36,6 +37,7 @@
 
 <script>
 import CompanyCard from '../TrendingCompanies/CompanyCard.vue'
+import axiosInstace from '../../axios/axios.v1'
 export default {
   name: 'TrendingCompanies',
   components: { CompanyCard },
@@ -43,38 +45,17 @@ export default {
     return {
       searchCriteria: '',
       search: null,
-      companies: [
-        {
-          title: 'Dropbox',
-          subtitle: 'sold recently by Dave',
-          imageSource: '../../assets/TradeShare.png',
-          sold: true
-        },
-        {
-          title: 'Medium Corporation',
-          subtitle: 'bought recently by Dave',
-          imageSource: '../../assets/TradeShare.png',
-          sold: false
-        },
-        {
-          title: 'Github',
-          subtitle: 'sold recently by Fred',
-          imageSource: '../../assets/TradeShare.png',
-          sold: true
-        },
-        {
-          title: 'Slack',
-          subtitle: 'bought recently by Fred',
-          imageSource: '../../assets/TradeShare.png',
-          sold: false
-        },
-        {
-          title: 'Twitter',
-          subtitle: 'sold recently by you',
-          imageSource: '../../assets/TradeShare.png',
-          sold: true
-        }
-      ]
+      companies: []
+    }
+  },
+  beforeMount () {
+    this.pullCompanies()
+  },
+  methods: {
+    async pullCompanies () {
+      // If I am to change the fundamental design of trending companies then I will change the company card props
+      const response = await axiosInstace.get('/trendingCompanies')
+      this.companies = response.data.trendingCompanies
     }
   }
 }
