@@ -34,7 +34,8 @@ export const useFollowMixin = {
     async follow (type) {
       const credentials = {
         actorId: this.user.userId,
-        targetId: this.id
+        targetId: this.id,
+        bypassPrivate: true
       }
       try {
         await UserService.postFollow(credentials)
@@ -51,6 +52,7 @@ export const useFollowMixin = {
         if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
         localStorage.setItem('user', JSON.stringify(lsUser))
         this.toogleSnackbar(0)
+        this.$router.go()
       } catch (e) {
         console.log(e)
       }
@@ -79,6 +81,7 @@ export const useFollowMixin = {
         if (lsUser.following.indexOf(this.id) !== -1) lsUser.following.splice(lsUser.following.indexOf(this.id), 1)
         localStorage.setItem('user', JSON.stringify(lsUser))
         this.toogleSnackbar(1)
+        this.$router.go()
       } catch (e) {
         console.log(e)
       }
