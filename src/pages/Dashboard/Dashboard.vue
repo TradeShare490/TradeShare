@@ -63,7 +63,10 @@
         lg="8"
         xl="9"
       >
-        <Positions :user-id="user.userId" />
+        <LineChartContainer
+          :user-id="user.userId"
+          :user-name="user.username"
+        />
       </v-col>
       <v-col
         xs="12"
@@ -109,7 +112,7 @@
         lg="8"
         xl="9"
       >
-        <BarChartContainer />
+        <Positions :user-id="user.userId" />
       </v-col>
     </v-row>
   </v-container>
@@ -121,7 +124,7 @@ import Recents from '../../components/RecentTrades/Recents.vue'
 import PortfolioAnalyticsTemplate from '../../components/Portfolio/PortfolioAnalyticsTemplate.vue'
 import Holdings from '../../components/Dashboard/Holdings.vue'
 import MonthlyProfitLoss from '../../components/Portfolio/MonthlyProfitLoss.vue'
-import BarChartContainer from '../../components/ReturnGraphs/ReturnGraphs.vue'
+import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs.vue'
 import UserService from '../../services/User.service'
 
 export default {
@@ -130,7 +133,7 @@ export default {
     Positions,
     Recents,
     PortfolioAnalyticsTemplate,
-    BarChartContainer,
+    LineChartContainer,
     Holdings,
     MonthlyProfitLoss
   },

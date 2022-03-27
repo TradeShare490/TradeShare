@@ -316,6 +316,19 @@ class UserService {
       this.error = err.response.data.message
     })
   }
+
+  async getEquities (userId, period) {
+    let history = null
+    await axios.get('/history/' + userId + '?period=' + period)
+      .then(function (res) {
+        history = res.data.history
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return history
+  }
 }
 
 export default new UserService()
