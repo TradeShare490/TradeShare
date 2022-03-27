@@ -49,6 +49,7 @@
 </template>
 
 <script>
+// import axiosInstace from '../../axios/axios.v1'
 export default {
   name: 'ChangePassword',
   data: () => ({
@@ -73,6 +74,7 @@ export default {
   methods: {
     async submit () {
       // here we will patch the request!
+      // axiosIstace.doSomething
       return 0
     }
   }

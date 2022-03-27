@@ -59,17 +59,19 @@ export default {
   }),
   methods: {
     async submit () {
-      console.log('submit')
       if (this.$refs.emailForm.validate()) {
+        // I'm assuming this is the command that allows me to
+        const UserInfo = axiosInstace.get('/:userInfo', { email: this.email })
+        console.log(UserInfo)
         const MailOption = {
           to: this.email,
           subject: 'TradeShare: Forgot Password',
-          text: 'Change your password in the following link (someone put the link here)'
+          text: 'Change your password in the following link http://localhost:8081/forgotpassword?uid=12345 .'
         }
         try {
           print(MailOption)
           print('sending MailOption to mailer')
-          return axiosInstace.post('/mailer', MailOption)
+          return await axiosInstace.post('/mailer', MailOption)
         } catch (e) {
           this.error = e
         }
