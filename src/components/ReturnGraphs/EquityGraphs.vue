@@ -150,17 +150,6 @@ export default {
     }
   },
   methods: {
-    shuffle (array) {
-      const shuffle = [].concat(array)
-      let j, x, i
-      for (i = array.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1))
-        x = array[i]
-        shuffle[i] = shuffle[j]
-        shuffle[j] = x
-      }
-      return shuffle
-    },
     convertDate (date) {
       return date.map(time => {
         return new Date(time * 1000).toLocaleDateString(navigator.language, {

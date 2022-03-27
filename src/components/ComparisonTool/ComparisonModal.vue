@@ -207,12 +207,12 @@ export default {
               },
               {
                 label: 'Mac Kafe',
-                data: this.shuffle(this.data),
+                data: [70119, 70832, 71646, 72099, 74205, 77285, 77682, 77786, 77999, 78022, 79689, 79831, 80384, 81975, 83866, 84615, 89550, 90918, 92196, 95802, 99737],
                 borderColor: 'yellow'
               },
               {
                 label: 'Mary Winchester',
-                data: this.shuffle(this.data),
+                data: [72041, 73838, 75366, 75759, 75953, 79246, 82020, 85963, 87352, 87597, 88105, 89601, 90304, 90457, 90968, 91763, 94134, 94840, 98224, 99176, 99214],
                 borderColor: 'green'
               }
             ]
@@ -254,17 +254,7 @@ export default {
     }
   },
   methods: {
-    shuffle (array) {
-      const shuffle = [].concat(array)
-      let j, x, i
-      for (i = array.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1))
-        x = array[i]
-        shuffle[i] = shuffle[j]
-        shuffle[j] = x
-      }
-      return shuffle
-    }
+
     // handleInput () {
     //   console.log(this.radios)
     //   const today = this.getTodaysDate
