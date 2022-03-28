@@ -229,7 +229,9 @@ export default {
                 display: false
               },
               ticks: {
-                maxTicksLimit: 16
+                maxTicksLimit: 10,
+                maxRotation: 0,
+                minRotation: 0
               }
             }
           ]
