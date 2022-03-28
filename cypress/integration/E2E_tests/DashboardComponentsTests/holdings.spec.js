@@ -14,23 +14,6 @@ describe("On the dashbooard page, Dashboard can", () => {
     cy.get("[data-cy=goal-progress-card]").should("be.visible");
     cy.get("[data-cy=account-performance-card]").should("be.visible");
   });
-  it("display positions summary", () => {
-    cy.get("[data-cy=positions]").should("be.visible");
-    cy.get('[data-cy=positions-new-item-btn]').click();
-    cy.get('[data-cy=positions-new-item-symbol-tf]')
-      .clear()
-      .type('TEST_STOCK_SYMB')
-      .should('have.value', 'TEST_STOCK_SYMB');
-    cy.get('[data-cy=positions-new-item-position-size-tf]')
-      .clear()
-      .type('10')
-      .should('have.value', '10');
-    cy.get('[data-cy=positions-new-item-pl-tf]')
-      .clear()
-      .type('123')
-      .should('have.value', '123');
-    cy.get('[data-cy=positions-new-item-submit-btn]').click();
-  });
   it("display recent trades component", () => {
     cy.get("[data-cy=recent-trades-card]").should("be.visible");
   });
