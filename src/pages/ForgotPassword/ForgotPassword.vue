@@ -41,7 +41,9 @@
             color="primary"
             class="my-3 text-button"
             @click="submit"
-          />
+          >
+            submit
+          </v-btn>
         </div>
       </div>
     </div>
@@ -49,7 +51,7 @@
 </template>
 
 <script>
-// import axiosInstace from '../../axios/axios.v1'
+import axiosInstace from '../../axios/axios.v1'
 export default {
   name: 'ChangePassword',
   data: () => ({
@@ -74,7 +76,14 @@ export default {
   methods: {
     async submit () {
       // here we will patch the request!
-      // axiosIstace.doSomething
+      if (this.passwordConfirmation()) {
+        try {
+          // This will fail, I'd like some help here with this!
+          return axiosInstace.patch(`/userInfo/${this.uid}`)
+        } catch (e) {
+          console.log(e)
+        }
+      }
       return 0
     }
   }
