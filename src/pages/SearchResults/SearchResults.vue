@@ -88,6 +88,8 @@
 <script>
 import UserBlock from '../../components/FollowerFollowing/UserBlock.vue'
 import StockBlock from '../../components/SearchStockBlock/StockBlock.vue'
+import axiosInstace from '../../axios/axios.v1'
+import UserService from '../../services/User.service'
 
 export default {
   name: 'SearchResults',
@@ -149,6 +151,29 @@ export default {
         }
       ],
       isLoading: false
+    }
+  },
+  async beforeMount () {
+    this.pullPeople()
+  },
+  methods: {
+    async pullPeople () {
+      try {
+        const response = await axiosInstace.get(`/userInfo/?searchQuery=${this.keyword}&limit=10`)
+        const list = response.data.data
+        for (let index = 0; index < list.length; index++) {
+          this.users.push = {
+            id: list[index].userId,
+            firstname: list[index].firstname,
+            lastname: list[index].lastname,
+            username: list[index].username,
+            currentlyfollowing: UserService.isFollowed(list[index].userId),
+            image: 'https://randomuser.me/api/portraits/men/15.jpg'
+          }
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
