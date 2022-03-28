@@ -10,6 +10,7 @@
           :currentlyfollowing="isFollowingByUser"
         />
       </div>
+      <div v-if="showData">
       <v-row>
         <v-col
           xs="12"
@@ -73,6 +74,16 @@
           </div>
         </v-col>
       </v-row>
+      </div>
+      <div
+          v-else
+          class="mt-10"
+      >
+        <h2>
+          This Account is Private
+        </h2>
+        <p>Follow this account to see their content</p>
+      </div>
     </v-container>
   </div>
   <div
@@ -106,7 +117,7 @@
 import Positions from '../../components/Portfolio/Positions.vue'
 import Profile from '../../components/Profile/Profile.vue'
 import Recents from '../../components/RecentTrades/Recents'
-import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
+import BarChartContainer from '../../components/ReturnGraphs/ReturnGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
 
@@ -116,7 +127,7 @@ export default {
     Positions,
     Profile,
     Recents,
-    LineChartContainer,
+    BarChartContainer,
     Holdings
   },
   // mixins: [useFollowMixin],
@@ -129,6 +140,12 @@ export default {
       followNum: [],
       isFollowingByUser: false,
       activities: []
+    }
+  },
+  computed: {
+    showData () {
+      console.log(`Private and Show: ${!this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)}`)
+      return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
     }
   },
   created () {
