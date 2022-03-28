@@ -16,6 +16,15 @@
           <v-toolbar-title>Your Positions</v-toolbar-title>
         </v-toolbar>
       </template>
+      <template #[`item.market_value`]="{ item }">
+        {{ Number(item.market_value).toFixed(2) }}
+      </template>
+      <template #[`item.cost_basis`]="{ item }">
+        {{ Number(item.cost_basis).toFixed(2) }}
+      </template>
+      <template #[`item.lastday_price`]="{ item }">
+        {{ Number(item.lastday_price).toFixed(2) }}
+      </template>
       <template #[`item.unrealized_plpc`]="{ item }">
         <v-card
           min-width="80"
@@ -28,7 +37,7 @@
           >
             mdi-circle
           </v-icon>
-          {{ getDisplayNumber(Number(item.unrealized_plpc)) }}%
+          {{ getDisplayNumber(Number(item.unrealized_plpc*100)) }}%
         </v-card>
       </template>
     </v-data-table>
@@ -61,7 +70,7 @@ export default {
           value: 'symbol'
         },
         { text: 'Position Size', value: 'qty' },
-        { text: 'Market value', value: 'market_value' },
+        { text: 'Market Value', value: 'market_value' },
         { text: 'Cost Basis', value: 'cost_basis' },
         { text: 'Last Traded Price', value: 'lastday_price' },
         { text: 'P/L', value: 'unrealized_plpc' }
