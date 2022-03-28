@@ -11,73 +11,73 @@
         />
       </div>
       <div v-if="showData">
-      <v-row>
-        <v-col
-          xs="12"
-          md="8"
-          lg="9"
-        >
-          <LineChartContainer
-            :user-id="userId"
-            :user-name="userInfo.username"
-            :compare-me="true"
-          />
-        </v-col>
-        <v-col
-          xs="12"
-          md="4"
-          lg="3"
-        >
-          <Holdings />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          xs="12"
-          lg="8"
-          xl="9"
-        >
-          <v-card min-width="350">
-            <Positions :user-id="userId" />
-          </v-card>
-        </v-col>
-        <v-col
-          xs="12"
-          lg="4"
-          xl="3"
-        >
-          <div>
-            <v-card
-              elevation="1"
-              outlined
-              min-width="350"
-            >
-              <v-card-title
-                class="pb-0"
-                style="word-break: normal"
-              >
-                <span class="blue--text">Recent Trades</span>
-              </v-card-title>
-              <div v-if="activities.length!==0">
-                <Recents
-                  v-for="trade in activities.slice(0,4)"
-                  :key="trade.id"
-                  :image="'https://randomuser.me/api/portraits/men/35.jpg'"
-                  :name="userInfo.firstname + ' ' + userInfo.lastname"
-                  :tag="trade.symbol"
-                  :company="'Quantity:' + trade.qty"
-                  :purchased="trade.side === 'buy'"
-                  :when="timeSince(trade.transaction_time)"
-                />
-              </div>
+        <v-row>
+          <v-col
+            xs="12"
+            md="8"
+            lg="9"
+          >
+            <LineChartContainer
+              :user-id="userId"
+              :user-name="userInfo.username"
+              :compare-me="true"
+            />
+          </v-col>
+          <v-col
+            xs="12"
+            md="4"
+            lg="3"
+          >
+            <Holdings />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            xs="12"
+            lg="8"
+            xl="9"
+          >
+            <v-card min-width="350">
+              <Positions :user-id="userId" />
             </v-card>
-          </div>
-        </v-col>
-      </v-row>
+          </v-col>
+          <v-col
+            xs="12"
+            lg="4"
+            xl="3"
+          >
+            <div>
+              <v-card
+                elevation="1"
+                outlined
+                min-width="350"
+              >
+                <v-card-title
+                  class="pb-0"
+                  style="word-break: normal"
+                >
+                  <span class="blue--text">Recent Trades</span>
+                </v-card-title>
+                <div v-if="activities.length!==0">
+                  <Recents
+                    v-for="trade in activities.slice(0,4)"
+                    :key="trade.id"
+                    :image="'https://randomuser.me/api/portraits/men/35.jpg'"
+                    :name="userInfo.firstname + ' ' + userInfo.lastname"
+                    :tag="trade.symbol"
+                    :company="'Quantity:' + trade.qty"
+                    :purchased="trade.side === 'buy'"
+                    :when="timeSince(trade.transaction_time)"
+                  />
+                </div>
+              </v-card>
+            </div>
+          </v-col>
+        </v-row>
       </div>
       <div
-          v-else
-          class="mt-10"
+        v-else
+        class="mt-10"
       >
         <h2>
           This Account is Private
@@ -117,7 +117,7 @@
 import Positions from '../../components/Portfolio/Positions.vue'
 import Profile from '../../components/Profile/Profile.vue'
 import Recents from '../../components/RecentTrades/Recents'
-import BarChartContainer from '../../components/ReturnGraphs/ReturnGraphs'
+import LineChartContainer from '../../components/ReturnGraphs/ReturnGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
 
@@ -127,7 +127,7 @@ export default {
     Positions,
     Profile,
     Recents,
-    BarChartContainer,
+    LineChartContainer,
     Holdings
   },
   // mixins: [useFollowMixin],
