@@ -117,7 +117,7 @@
 import Positions from '../../components/Portfolio/Positions.vue'
 import Profile from '../../components/Profile/Profile.vue'
 import Recents from '../../components/RecentTrades/Recents'
-import LineChartContainer from '../../components/ReturnGraphs/ReturnGraphs'
+import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
 
