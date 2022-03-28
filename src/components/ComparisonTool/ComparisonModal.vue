@@ -140,6 +140,10 @@ export default {
     username: {
       type: String,
       default: ''
+    },
+    options: {
+      type: Object,
+      default: null
     }
   },
   data: () => ({
@@ -219,41 +223,41 @@ export default {
           }
         }
       }
-    },
-    options () {
-      return {
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                maxTicksLimit: 10,
-                maxRotation: 0,
-                minRotation: 0
-              }
-            }
-          ]
-        },
-        elements: {
-          line: {
-            fill: false,
-            tension: 0,
-            borderWidth: 4
-          },
-          point: {
-            radius: 0,
-            hitRadius: 5,
-            hoverRadius: 5
-          }
-        },
-        legend: {
-          display: false
-        },
-        responsive: true
-      }
     }
+    // options () {
+    //   return {
+    //     scales: {
+    //       xAxes: [
+    //         {
+    //           gridLines: {
+    //             display: false
+    //           },
+    //           ticks: {
+    //             maxTicksLimit: 10,
+    //             maxRotation: 0,
+    //             minRotation: 0
+    //           }
+    //         }
+    //       ]
+    //     },
+    //     elements: {
+    //       line: {
+    //         fill: false,
+    //         tension: 0,
+    //         borderWidth: 4
+    //       },
+    //       point: {
+    //         radius: 0,
+    //         hitRadius: 5,
+    //         hoverRadius: 5
+    //       }
+    //     },
+    //     legend: {
+    //       display: false
+    //     },
+    //     responsive: true
+    //   }
+    // }
   },
   methods: {
 

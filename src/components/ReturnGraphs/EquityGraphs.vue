@@ -15,6 +15,7 @@
         :compare-me="compareMe"
         :username="userName"
         :my-equities="myMonthEquities"
+        :options="options"
       />
     </v-card-title>
 
