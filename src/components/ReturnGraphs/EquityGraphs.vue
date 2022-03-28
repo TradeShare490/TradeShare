@@ -20,30 +20,32 @@
     </v-card-title>
 
     <div class="chart">
-      <v-tabs
-        fixed-tabs
-      >
-        <v-tab
-          @click="getHistory('intraday')"
+      <div class="pb-6">
+        <v-tabs
+          fixed-tabs
         >
-          Today
-        </v-tab>
-        <v-tab
-          @click="getHistory('1M')"
-        >
-          Month
-        </v-tab>
-        <v-tab
-          @click="getHistory('1A')"
-        >
-          Year
-        </v-tab>
-        <v-tab
-          @click="getHistory('all')"
-        >
-          Total
-        </v-tab>
-      </v-tabs>
+          <v-tab
+            @click="getHistory('intraday')"
+          >
+            Today
+          </v-tab>
+          <v-tab
+            @click="getHistory('1M')"
+          >
+            Month
+          </v-tab>
+          <v-tab
+            @click="getHistory('1A')"
+          >
+            Year
+          </v-tab>
+          <v-tab
+            @click="getHistory('all')"
+          >
+            Total
+          </v-tab>
+        </v-tabs>
+      </div>
 
       <LineChart
         :chart-data="line.data"
