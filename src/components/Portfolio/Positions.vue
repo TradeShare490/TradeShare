@@ -12,178 +12,9 @@
       mobile-breakpoint="700"
     >
       <template #top>
-        <v-snackbar
-          v-model="snackbar"
-          data-cy="positions-snackbar"
-          :snackbar-timeout="snackbarTimeout"
-          :color="snackbarColor"
-        >
-          {{ snackbarText }}
-          <template #action="{ attrs }">
-            <v-btn
-              text
-              v-bind="attrs"
-              @click="snackbar = false"
-            >
-              Close
-            </v-btn>
-          </template>
-        </v-snackbar>
         <v-toolbar flat>
           <v-toolbar-title>Your Positions</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          />
-          <v-spacer />
-          <v-dialog
-            v-model="dialog"
-            max-width="650px"
-          >
-            <template #activator="{ on, attrs }">
-              <v-btn
-                color="primary"
-                dark
-                class="mb-2"
-                v-bind="attrs"
-                data-cy="positions-new-item-btn"
-                v-on="on"
-              >
-                New Item
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
-              </v-card-title>
-
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedStock.symbol"
-                        data-cy="positions-new-item-symbol-tf"
-                        label="Symbol"
-                        :error="symbolError"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedStock.qty"
-                        label="Position Size"
-                        data-cy="positions-new-item-position-size-tf"
-                        :error="positionError"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="date"
-                        label="Execution Date"
-                        :error="dateError"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedStock.unrealized_plpc"
-                        label="P/L"
-                        data-cy="positions-new-item-pl-tf"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-select
-                        v-model="editedStock.verified"
-                        :items="[true, false]"
-                        label="Verified"
-                        return-object
-                      />
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  data-cy="positions-new-item-cancel-btn"
-                  @click="close"
-                >
-                  Cancel
-                </v-btn>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  data-cy="positions-new-item-submit-btn"
-                  @click="save"
-                >
-                  Save
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <v-dialog
-            v-model="dialogDelete"
-            max-width="500px"
-            data-cy="delete-dialogue"
-          >
-            <v-card>
-              <v-card-title class="text-h5">
-                Are you sure you want to delete this item?
-              </v-card-title>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  data-cy="cancel-stock-delete"
-                  @click="closeDelete"
-                >
-                  Cancel
-                </v-btn>
-                <v-btn
-                  color="blue darken-1"
-                  text
-                  data-cy="confirm-stock-delete"
-                  @click="deleteStockConfirm"
-                >
-                  OK
-                </v-btn>
-                <v-spacer />
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         </v-toolbar>
-      </template>
-      <template #[`item.verified`]="{ item }">
-        <v-chip
-          label
-          class="text-uppercase white--text px-3"
-          :color="item.verified ? 'green' : 'blue'"
-        >
-          {{ item.verified ? "VERIFIED" : "MANUAL" }}
-        </v-chip>
       </template>
       <template #[`item.unrealized_plpc`]="{ item }">
         <v-card
@@ -199,38 +30,6 @@
           </v-icon>
           {{ getDisplayNumber(Number(item.unrealized_plpc)) }}%
         </v-card>
-      </template>
-      <template #[`item.actions`]="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          data-cy="edit-stock-button"
-          @click="editStock(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          class="mr-2"
-          data-cy="delete-stock-button"
-          @click="deleteStock(item)"
-        >
-          mdi-delete
-        </v-icon>
-        <v-icon
-          small
-          data-cy="share-stock-button"
-        >
-          mdi-share
-        </v-icon>
-      </template>
-      <template #no-data>
-        <v-btn
-          color="primary"
-          @click="initialize"
-        >
-          Reset
-        </v-btn>
       </template>
     </v-data-table>
   </v-card>
@@ -255,10 +54,6 @@ export default {
   },
   data () {
     return {
-      verified: true,
-      date: new Date(),
-      dialog: false,
-      dialogDelete: false,
       headers: [
         {
           text: 'Symbol',
@@ -266,48 +61,12 @@ export default {
           value: 'symbol'
         },
         { text: 'Position Size', value: 'qty' },
-        { text: 'Execution Date', value: 'date' },
-        { text: 'P/L', value: 'unrealized_plpc' },
-        { text: 'Verified', value: 'verified' },
-        { text: 'Actions', value: 'actions', sortable: false }
+        { text: 'Market value', value: 'market_value' },
+        { text: 'Cost Basis', value: 'cost_basis' },
+        { text: 'Last Traded Price', value: 'lastday_price' },
+        { text: 'P/L', value: 'unrealized_plpc' }
       ],
-      stocks: [],
-      editedIndex: -1,
-      editedStock: {
-        symbol: '',
-        qty: 0,
-        date: new Date().toLocaleString('en-US'),
-        unrealized_plpc: 0,
-        verified: false
-      },
-      defaultStock: {
-        symbol: '',
-        qty: 0,
-        date: new Date().toLocaleString('en-US'),
-        unrealized_plpc: 0,
-        verified: false
-      },
-      snackbar: false,
-      snackbarText: '',
-      snackbarColor: 'primary',
-      snackbarTimeout: 3000,
-      symbolError: false,
-      positionError: false,
-      dateError: false
-    }
-  },
-  computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
-  },
-
-  watch: {
-    dialog (val) {
-      val || this.close()
-    },
-    dialogDelete (val) {
-      val || this.closeDelete()
+      stocks: []
     }
   },
 
@@ -322,68 +81,6 @@ export default {
       } catch (err) {
         console.log(err)
       }
-    },
-
-    editStock (stock) {
-      this.editedIndex = this.stocks.indexOf(stock)
-      this.editedStock = Object.assign({}, stock)
-      this.dialog = true
-    },
-
-    deleteStock (stock) {
-      this.editedIndex = this.stocks.indexOf(stock)
-      this.editedStock = Object.assign({}, stock)
-      this.dialogDelete = true
-    },
-
-    deleteStockConfirm () {
-      this.stocks.splice(this.editedIndex, 1)
-      this.closeDelete()
-    },
-
-    close () {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedStock = Object.assign({}, this.defaultStock)
-        this.editedIndex = -1
-      })
-    },
-
-    closeDelete () {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedStock = Object.assign({}, this.defaultStock)
-        this.editedIndex = -1
-      })
-    },
-
-    save () {
-      this.symbolError = this.positionError = this.dateError = false
-      let err = false
-      if (this.editedStock.symbol.trim() === '') {
-        this.symbolError = true; err = true
-      }
-      if (this.editedStock.positionSize <= 0 && !isNaN(this.editedStock.positionSize)) {
-        this.positionError = true; err = true
-      }
-      if (!Date.parse(this.editedStock.date)) {
-        this.dateError = true; err = true
-      }
-      if (err) {
-        this.snackbarText = 'Invalid input. Please try again.'
-        this.snackbarColor = 'error'
-        this.snackbar = true
-        return
-      }
-      if (this.editedIndex > -1) {
-        Object.assign(this.stocks[this.editedIndex], this.editedStock)
-      } else {
-        this.stocks.push(this.editedStock)
-      }
-      this.snackbarText = 'Position added'
-      this.snackbarColor = 'primary'
-      this.snackbar = true
-      this.close()
     },
 
     getDisplayNumber (number) {

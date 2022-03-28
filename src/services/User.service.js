@@ -23,10 +23,6 @@ class UserService {
         if (res.data.status === 501) {
           return []
         }
-        res.data.positions.forEach(function (position) {
-          position.verified = true
-          position.date = new Date().toLocaleString()
-        })
         userPortfolioData = res.data.positions
       })
       .catch(function (err) {
