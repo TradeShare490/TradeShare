@@ -10,65 +10,76 @@
           :currentlyfollowing="isFollowingByUser"
         />
       </div>
-      <v-row>
-        <v-col
-          xs="12"
-          md="8"
-          lg="9"
-        >
-          <BarChartContainer />
-        </v-col>
-        <v-col
-          xs="12"
-          md="4"
-          lg="3"
-        >
-          <Holdings />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          xs="12"
-          lg="8"
-          xl="9"
-        >
-          <v-card min-width="350">
-            <Positions :user-id="userId" />
-          </v-card>
-        </v-col>
-        <v-col
-          xs="12"
-          lg="4"
-          xl="3"
-        >
-          <div>
-            <v-card
-              elevation="1"
-              outlined
-              min-width="350"
-            >
-              <v-card-title
-                class="pb-0"
-                style="word-break: normal"
-              >
-                <span class="blue--text">Recent Trades</span>
-              </v-card-title>
-              <div v-if="activities.length!==0">
-                <Recents
-                  v-for="trade in activities.slice(0,4)"
-                  :key="trade.id"
-                  :image="'https://randomuser.me/api/portraits/men/35.jpg'"
-                  :name="userInfo.firstname + ' ' + userInfo.lastname"
-                  :tag="trade.symbol"
-                  :company="'Quantity:' + trade.qty"
-                  :purchased="trade.side === 'buy'"
-                  :when="timeSince(trade.transaction_time)"
-                />
-              </div>
+      <div v-if="showData">
+        <v-row>
+          <v-col
+            xs="12"
+            md="8"
+            lg="9"
+          >
+            <BarChartContainer />
+          </v-col>
+          <v-col
+            xs="12"
+            md="4"
+            lg="3"
+          >
+            <Holdings />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            xs="12"
+            lg="8"
+            xl="9"
+          >
+            <v-card min-width="350">
+              <Positions :user-id="userId" />
             </v-card>
-          </div>
-        </v-col>
-      </v-row>
+          </v-col>
+          <v-col
+            xs="12"
+            lg="4"
+            xl="3"
+          >
+            <div>
+              <v-card
+                elevation="1"
+                outlined
+                min-width="350"
+              >
+                <v-card-title
+                  class="pb-0"
+                  style="word-break: normal"
+                >
+                  <span class="blue--text">Recent Trades</span>
+                </v-card-title>
+                <div v-if="activities.length!==0">
+                  <Recents
+                    v-for="trade in activities.slice(0,4)"
+                    :key="trade.id"
+                    :image="'https://randomuser.me/api/portraits/men/35.jpg'"
+                    :name="userInfo.firstname + ' ' + userInfo.lastname"
+                    :tag="trade.symbol"
+                    :company="'Quantity:' + trade.qty"
+                    :purchased="trade.side === 'buy'"
+                    :when="timeSince(trade.transaction_time)"
+                  />
+                </div>
+              </v-card>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+      <div
+        v-else
+        class="mt-10"
+      >
+        <h2>
+          This Account is Private
+        </h2>
+        <p>Follow this account to see their content</p>
+      </div>
     </v-container>
   </div>
   <div
@@ -125,6 +136,12 @@ export default {
       followNum: [],
       isFollowingByUser: false,
       activities: []
+    }
+  },
+  computed: {
+    showData () {
+      console.log(`Private and Show: ${!this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)}`)
+      return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
     }
   },
   created () {
