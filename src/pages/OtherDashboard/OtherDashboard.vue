@@ -17,7 +17,11 @@
             md="8"
             lg="9"
           >
-            <BarChartContainer />
+            <LineChartContainer
+              :user-id="userId"
+              :user-name="userInfo.username"
+              :compare-me="true"
+            />
           </v-col>
           <v-col
             xs="12"
@@ -113,7 +117,7 @@
 import Positions from '../../components/Portfolio/Positions.vue'
 import Profile from '../../components/Profile/Profile.vue'
 import Recents from '../../components/RecentTrades/Recents'
-import BarChartContainer from '../../components/ReturnGraphs/ReturnGraphs'
+import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
 
@@ -123,7 +127,7 @@ export default {
     Positions,
     Profile,
     Recents,
-    BarChartContainer,
+    LineChartContainer,
     Holdings
   },
   // mixins: [useFollowMixin],
