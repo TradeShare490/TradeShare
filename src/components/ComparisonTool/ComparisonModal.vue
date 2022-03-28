@@ -94,11 +94,96 @@
                   md="12"
                   sm="7"
                 >
-                  <v-radio-group
-                    v-model="radios"
-                    mandatory
-                    dense
-                  />
+                  <div class="demo_purpose">
+                    <v-radio-group
+                      v-model="radios"
+                      mandatory
+                      dense
+                    >
+                      <div class="d-flex flex-wrap flex-xl-column flex-lg-column flex-md-column flex-sm-row flex-row">
+                        <v-radio
+                          v-for="(option, i) in options"
+                          :key="i"
+                          :label="option.label"
+                          :value="option.value"
+                          data-cy="radio-buttons"
+                          class="pr-6 mb-1"
+                        />
+                      </div>
+                      <v-menu
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                        :nudge-left="260"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="from"
+                            v-bind="attrs"
+                            label="From"
+                            dense
+                            readonly
+                            :disabled="radios != 'custom'"
+                            class="pl-xl-8 pl-lg-8 pl-md-8 pl-sm-1 pl-1 pr-xl-10 pr-lg-10 pr-md-10 pr-sm-2 pr-2 pt-1"
+                            data-cy="from"
+                            clearable
+                            v-on="on"
+                          />
+                        </template>
+                        <v-date-picker
+                          v-model="from"
+                          no-title
+                          :max="getTodaysDate"
+                          data-cy="date-picker-from"
+                          @change="menu1 = false"
+                        />
+                      </v-menu>
+                      <v-menu
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                        :nudge-left="260"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="to"
+                            dense
+                            readonly
+                            label="To"
+                            v-bind="attrs"
+                            :disabled="radios != 'custom'"
+                            class="pl-xl-8 pl-lg-8 pl-md-8 pl-sm-1 pl-1 pr-xl-10 pr-lg-10 pr-md-10 pr-sm-2 pr-2 pt-1"
+                            data-cy="to"
+                            clearable
+                            v-on="on"
+                          />
+                        </template>
+                        <v-date-picker
+                          v-model="to"
+                          no-title
+                          :max="getTodaysDate"
+                          :min="from"
+                          data-cy="date-picker-to"
+                          @change="menu2 = false"
+                        />
+                      </v-menu>
+                      <v-row class="justify-end pt-5 pr-xl-12 pr-lg-12 pr-md-12 pr-sm-5 pr-5">
+                        <v-btn
+                          color="primary"
+                          small
+                          width="90"
+                          data-cy="update"
+                          @click="handleInput"
+                        >
+                          UPDATE
+                        </v-btn>
+                      </v-row>
+                    </v-radio-group>
+                  </div>
                 </v-col>
               </v-row>
             </v-card>
@@ -275,3 +360,8 @@ export default {
   }
 }
 </script>
+<style>
+.demo_purpose {
+  display: None;
+}
+</style>
