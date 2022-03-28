@@ -94,7 +94,7 @@
                   md="12"
                   sm="7"
                 >
-                  <div class="demo_purpose">
+                  <div style="display: None;">
                     <v-radio-group
                       v-model="radios"
                       mandatory
@@ -360,8 +360,3 @@ export default {
   }
 }
 </script>
-<style>
-.demo_purpose {
-  display: None;
-}
-</style>
