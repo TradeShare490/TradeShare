@@ -148,22 +148,22 @@ export default {
   },
   data: () => ({
     radios: '',
-    dialog: false
-    // comparison: '',
-    // from: '',
-    // to: '',
-    // menu1: false,
-    // menu2: false,
-    // options2: [
-    //   { label: 'Day', value: 'day' },
-    //   { label: 'Week', value: 'week' },
-    //   { label: 'Month', value: 'month' },
-    //   { label: 'Year', value: 'year' },
-    //   { label: 'YTD', value: 'ytd' },
-    //   { label: 'Maximum', value: 'max' },
-    //   { label: 'Custom', value: 'custom' }
-    // ],
-    // getTodaysDate: new Date().toISOString().slice(0, 10)
+    dialog: false,
+    comparison: '',
+    from: '',
+    to: '',
+    menu1: false,
+    menu2: false,
+    options2: [
+      { label: 'Day', value: 'day' },
+      { label: 'Week', value: 'week' },
+      { label: 'Month', value: 'month' },
+      { label: 'Year', value: 'year' },
+      { label: 'YTD', value: 'ytd' },
+      { label: 'Maximum', value: 'max' },
+      { label: 'Custom', value: 'custom' }
+    ],
+    getTodaysDate: new Date().toISOString().slice(0, 10)
   }),
   computed: {
     usersLegend () {
@@ -224,88 +224,54 @@ export default {
         }
       }
     }
-    // options () {
-    //   return {
-    //     scales: {
-    //       xAxes: [
-    //         {
-    //           gridLines: {
-    //             display: false
-    //           },
-    //           ticks: {
-    //             maxTicksLimit: 10,
-    //             maxRotation: 0,
-    //             minRotation: 0
-    //           }
-    //         }
-    //       ]
-    //     },
-    //     elements: {
-    //       line: {
-    //         fill: false,
-    //         tension: 0,
-    //         borderWidth: 4
-    //       },
-    //       point: {
-    //         radius: 0,
-    //         hitRadius: 5,
-    //         hoverRadius: 5
-    //       }
-    //     },
-    //     legend: {
-    //       display: false
-    //     },
-    //     responsive: true
-    //   }
-    // }
   },
   methods: {
 
-    // handleInput () {
-    //   console.log(this.radios)
-    //   const today = this.getTodaysDate
-    //   let start = ''
-    //   let end = ''
-    //   if (this.radios === 'custom') {
-    //     if (this.from === '' & this.to === '' || this.from === null & this.to === null) {
-    //       this.from = today
-    //       this.to = today
-    //     } else if (this.to === '' || this.to === null) {
-    //       this.to = today
-    //     } else if (this.from === '' || this.from === null) {
-    //       this.from = '1900-01-01'
-    //     }
-    //   } else if (this.radios === 'day') {
-    //     start = today
-    //     end = today
-    //   } else if (this.radios === 'week') {
-    //     const date = new Date()
-    //     date.setDate(date.getDate() - 7)
-    //     start = date.toISOString().slice(0, 10)
-    //     end = today
-    //   } else if (this.radios === 'month') {
-    //     const date = new Date()
-    //     date.setDate(date.getDate() - 30)
-    //     start = date.toISOString().slice(0, 10)
-    //     end = today
-    //   } else if (this.radios === 'year') {
-    //     const date = new Date()
-    //     date.setDate(date.getDate() - 365)
-    //     start = date.toISOString().slice(0, 10)
-    //     end = today
-    //   } else if (this.radios === 'ytd') {
-    //     const date = new Date()
-    //     start = date.getFullYear() + '-01-01'
-    //     end = today
-    //   }
-    //   if (start !== '' & end !== '') {
-    //     console.log(start)
-    //     console.log(end)
-    //   } else {
-    //     console.log(this.from)
-    //     console.log(this.to)
-    //   }
-    // }
+    handleInput () {
+      console.log(this.radios)
+      const today = this.getTodaysDate
+      let start = ''
+      let end = ''
+      if (this.radios === 'custom') {
+        if (this.from === '' & this.to === '' || this.from === null & this.to === null) {
+          this.from = today
+          this.to = today
+        } else if (this.to === '' || this.to === null) {
+          this.to = today
+        } else if (this.from === '' || this.from === null) {
+          this.from = '1900-01-01'
+        }
+      } else if (this.radios === 'day') {
+        start = today
+        end = today
+      } else if (this.radios === 'week') {
+        const date = new Date()
+        date.setDate(date.getDate() - 7)
+        start = date.toISOString().slice(0, 10)
+        end = today
+      } else if (this.radios === 'month') {
+        const date = new Date()
+        date.setDate(date.getDate() - 30)
+        start = date.toISOString().slice(0, 10)
+        end = today
+      } else if (this.radios === 'year') {
+        const date = new Date()
+        date.setDate(date.getDate() - 365)
+        start = date.toISOString().slice(0, 10)
+        end = today
+      } else if (this.radios === 'ytd') {
+        const date = new Date()
+        start = date.getFullYear() + '-01-01'
+        end = today
+      }
+      if (start !== '' & end !== '') {
+        console.log(start)
+        console.log(end)
+      } else {
+        console.log(this.from)
+        console.log(this.to)
+      }
+    }
   }
 }
 </script>
