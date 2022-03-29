@@ -157,7 +157,8 @@ export default {
       return (((this.account.equity - this.account.last_equity) * 100) / this.account.last_equity).toFixed(2).toString()
     },
     monthlyChange () {
-      return (this.monthHistory.equity[0] - this.monthHistory.equity.at(-1)).toFixed(2)
+      const monthChange = (this.monthHistory.equity[0] - this.monthHistory.equity.at(-1)).toFixed(2)
+      return monthChange >= 0 ? '$' + monthChange : '-$' + Math.abs(monthChange)
     }
   },
   created () {
