@@ -55,7 +55,6 @@ import axiosInstace from '../../axios/axios.v1'
 export default {
   name: 'ChangePassword',
   data: () => ({
-    uid: '',
     value: String,
     password: '',
     passwordConfirm: '',
@@ -78,7 +77,6 @@ export default {
       // here we will patch the request!
       if (this.passwordConfirmation()) {
         try {
-          // This will fail, I'd like some help here with this!
           return axiosInstace.patch(`/userInfo/${this.uid}`)
         } catch (e) {
           console.log(e)
