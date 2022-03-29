@@ -99,20 +99,33 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="holdingData.sumCash === 0 && holdingData.numEquity === 0 && holdingData.numOption === 0">
+      <v-col
+        xs="12"
+        lg="12"
+        xl="12"
+      >
+        <Positions
+          :stocks-data="stocks"
+        />
+      </v-col>
+    </v-row>
+    <v-row v-else>
       <v-col
         xs="12"
         lg="4"
         xl="3"
       >
-        <Holdings />
+        <Holdings :holdings-data="holdingData" />
       </v-col>
       <v-col
         xs="12"
         lg="8"
         xl="9"
       >
-        <Positions :user-id="user.userId" />
+        <Positions
+          :stocks-data="stocks"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -140,12 +153,19 @@ export default {
   data () {
     return {
       account: Object,
-      allPosts: this.$store.getters.allPosts
+      stocks: Array,
+      allPosts: this.$store.getters.allPosts,
+      holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
     }
   },
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
+    },
+    holdingData () {
+      console.log('holdingPieChartData computed ')
+      console.log(this.holdingPieChartData)
+      return this.holdingPieChartData
     }
   },
   created () {
@@ -153,7 +173,38 @@ export default {
   },
   methods: {
     async initialize () {
-      this.account = await UserService.getAccount(this.user.userId)
+      try {
+        this.account = await UserService.getAccount(this.user.userId)
+        this.stocks = await UserService.getPositions(this.user.userId)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        console.log('FINALLY')
+        this.handleHoldingPieChartData()
+      }
+    },
+    handleHoldingPieChartData () {
+      const sumCash = Number(this.account.cash)
+      let sumEquity = 0
+      let sumOption = 0
+      let numEquity = 0
+      let numOption = 0
+      this.stocks.forEach(stock => {
+        if (stock.asset_class.toLowerCase().includes('equity')) {
+          numEquity++
+          sumEquity += Number(stock.market_value)
+        } else if (stock.asset_class.toLowerCase().includes('option')) {
+          numOption++
+          sumOption += Number(stock.market_value)
+        }
+      })
+      console.log('handleHoldingPieChartData')
+      console.log(this.holdingPieChartData)
+      this.holdingPieChartData.sumCash = sumCash
+      this.holdingPieChartData.numEquity = numEquity
+      this.holdingPieChartData.sumEquity = sumEquity
+      this.holdingPieChartData.numOption = numOption
+      this.holdingPieChartData.sumOption = sumOption
     }
 
   }

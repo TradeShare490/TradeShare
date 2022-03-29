@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <SearchViewBy />
+    <SearchViewBy :list="followers" />
     <v-tabs centered>
       <v-tab :ripple="false">
         <em class="mdi mdi-account-multiple" />
@@ -32,11 +32,11 @@
                 :currentlyfollowing="follower.currentlyfollowing"
                 :name="`${follower.firstname} ${follower.lastname}`"
                 :username="follower.username"
-                :request="false"
+                :requestblock="false"
+                :is-private="follower.isPrivate"
               />
             </div>
           </div>
-
           <div
             v-else
             class="title font-weight-black"
@@ -58,7 +58,7 @@
       <v-tab-item>
         <div class="mt-5" />
         <v-divider class="mx-6" />
-        <UserBlock
+        <!-- <UserBlock
           name="Tim Robenman"
           image="https://randomuser.me/api/portraits/men/52.jpg"
           username="timrobenman"
@@ -69,9 +69,43 @@
           image="https://randomuser.me/api/portraits/women/79.jpg"
           username="marywinchester"
           :requestblock="true"
-        />
+        /> -->
+        <div v-if="requests.length!=0">
+          <div
+            v-for="(request, i) in requests"
+            :key="i"
+          >
+            <UserBlock
+              :id="request.id"
+              :currentlyfollowing="request.currentlyfollowing"
+              :name="`${request.firstname} ${request.lastname}`"
+              :username="request.username"
+              :requestblock="true"
+              :is-private="request.isPrivate"
+            />
+          </div>
+        </div>
+        <div
+          v-else
+          class="title font-weight-black"
+        >
+          <v-container
+            fill-height
+            fluid
+          >
+            <v-row
+              align="center"
+              justify="center"
+            >
+              <v-col>You do not have any follow request yet.</v-col>
+            </v-row>
+          </v-container>
+        </div>
       </v-tab-item>
     </v-tabs>
+    <v-btn @click="test">
+      STATE
+    </v-btn>
   </div>
 </template>
 
@@ -90,6 +124,7 @@ export default {
   data () {
     return {
       followers: [],
+      requests: [],
       isLoading: true
     }
   },
@@ -104,6 +139,11 @@ export default {
   methods: {
     async initialize () {
       this.getFollowersHook(this.user.userId)
+      this.getFollowRequestHook(this.user.userId)
+    },
+    test () {
+      console.log('test')
+      console.log(this.followers)
     }
   }
 }

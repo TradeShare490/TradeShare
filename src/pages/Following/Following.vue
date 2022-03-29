@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <SearchViewBy />
+    <SearchViewBy :list="followings" />
     <div
       v-if="isLoading === true"
       class="mt-7"
@@ -24,6 +24,7 @@
             :name="`${following.firstname} ${following.lastname}`"
             :username="following.username"
             :request="false"
+            :is-private="following.isPrivate"
           />
         </div>
       </div>
@@ -45,6 +46,9 @@
         </v-container>
       </div>
     </div>
+    <v-btn @click="test">
+      FOLLOWING
+    </v-btn>
   </div>
 </template>
 
@@ -72,6 +76,11 @@ export default {
   methods: {
     async initialize () {
       this.getFollowingsHook(this.user.userId)
+    },
+    test () {
+      console.log('following test ()')
+      console.log(this.followings)
+      console.log(this.followings[0].firstname + ' ' + this.followings[0].lastname)
     }
   }
 }

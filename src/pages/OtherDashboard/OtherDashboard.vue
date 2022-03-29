@@ -8,6 +8,7 @@
         <Profile
           :otheruser="info"
           :currentlyfollowing="isFollowingByUser"
+          :is-private="!showData"
         />
       </div>
       <div v-if="showData">
@@ -24,11 +25,18 @@
             />
           </v-col>
           <v-col
+            v-if="holdingData.sumCash === 0 && holdingData.numEquity === 0 && holdingData.numOption === 0"
+            xs="12"
+            md="4"
+            lg="3"
+          />
+          <v-col
+            v-else
             xs="12"
             md="4"
             lg="3"
           >
-            <Holdings />
+            <Holdings :holdings-data="holdingData" />
           </v-col>
         </v-row>
         <v-row>
@@ -38,7 +46,9 @@
             xl="9"
           >
             <v-card min-width="350">
-              <Positions :user-id="userId" />
+              <Positions
+                :stocks-data="stocks"
+              />
             </v-card>
           </v-col>
           <v-col
@@ -136,16 +146,23 @@ export default {
       userId: this.$route.params.id,
       userInfo: null,
       info: {},
-      positions: [],
+      account: Object,
+      stocks: Array,
       followNum: [],
       isFollowingByUser: false,
-      activities: []
+      activities: [],
+      holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
     }
   },
   computed: {
     showData () {
       console.log(`Private and Show: ${!this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)}`)
       return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
+    },
+    holdingData () {
+      console.log('holdingPieChartData computed ')
+      console.log(this.holdingPieChartData)
+      return this.holdingPieChartData
     }
   },
   created () {
@@ -153,19 +170,27 @@ export default {
   },
   methods: {
     async initialize () {
-      this.userInfo = await UserService.getUserInfo(this.userId)
-      this.positions = await UserService.getPositions(this.userInfo.userId)
-      this.followNum = await UserService.getFollowNum(this.userInfo.userId)
-      this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
-      this.activities = await UserService.getActivities(this.userInfo.userId)
-      this.info = {
-        ...this.userInfo,
-        numFollowers: this.followNum.numFollower,
-        numFollowing: this.followNum.numFollowing,
-        following: this.isFollowingByUser,
-        date: '2021',
-        favorite: false,
-        blocked: false
+      try {
+        this.userInfo = await UserService.getUserInfo(this.userId)
+        this.account = await UserService.getAccount(this.userInfo.userId)
+        this.stocks = await UserService.getPositions(this.userInfo.userId)
+        this.followNum = await UserService.getFollowNum(this.userInfo.userId)
+        this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
+        this.activities = await UserService.getActivities(this.userInfo.userId)
+        this.info = {
+          ...this.userInfo,
+          numFollowers: this.followNum.numFollower,
+          numFollowing: this.followNum.numFollowing,
+          following: this.isFollowingByUser,
+          date: '2021',
+          favorite: false,
+          blocked: false
+        }
+      } catch (err) {
+        console.log(err)
+      } finally {
+        console.log('FINALLY')
+        this.handleHoldingPieChartData()
       }
     },
     timeSince (date) {
@@ -195,6 +220,30 @@ export default {
         return Math.floor(interval) === 1 ? ' a minute ago' : Math.floor(interval) + ' minutes ago'
       }
       return Math.floor(interval) === 1 ? ' a second ago' : Math.floor(interval) + ' seconds ago'
+    },
+    handleHoldingPieChartData () {
+      const sumCash = Number(this.account.cash)
+      let sumEquity = 0
+      let sumOption = 0
+      let numEquity = 0
+      let numOption = 0
+      this.stocks.forEach(stock => {
+        if (stock.asset_class.toLowerCase().includes('equity')) {
+          numEquity++
+          sumEquity += Number(stock.market_value)
+        } else if (stock.asset_class.toLowerCase().includes('option')) {
+          numOption++
+          sumOption += Number(stock.market_value)
+        }
+      })
+      console.log('handleHoldingPieChartData')
+      console.log(this.holdingPieChartData)
+      this.holdingPieChartData.sumCash = sumCash
+      this.holdingPieChartData.numEquity = numEquity
+      this.holdingPieChartData.sumEquity = sumEquity
+      this.holdingPieChartData.numOption = numOption
+      this.holdingPieChartData.sumOption = sumOption
+      console.log('END∂ß')
     }
   }
 }

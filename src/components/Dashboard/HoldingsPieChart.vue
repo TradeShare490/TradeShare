@@ -28,6 +28,8 @@ export default {
   }),
   computed: {
     chartdata: function () {
+      console.log('chartdata computed')
+      console.log([this.equities, this.cash, this.options])
       return {
         datasets: [
           {

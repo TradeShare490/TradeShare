@@ -15,6 +15,7 @@
           class="profile"
           color="grey"
           size="65%"
+          @click="test"
         >
           <v-img :src="image" />
         </v-avatar>
@@ -85,32 +86,48 @@
             :class="{'mb-2': $vuetify.breakpoint.mdAndDown}"
           >
             <v-btn
-              v-if="otheruser.following=== true"
+              v-if="userStat.sentFollowRequest === true"
               block
               small
               elevation="0"
               outlined
               color="primary"
               :ripple="false"
-              class="caption"
+              class="caption mr-1"
               data-cy="following"
-              @click="unfollow(1)"
+              @click="handleUnfollow"
             >
-              Following
+              Sent Request
             </v-btn>
-            <v-btn
-              v-if="otheruser.following === false"
-              block
-              small
-              elevation="0"
-              color="primary"
-              :ripple="false"
-              class="caption"
-              data-cy="follow"
-              @click="follow(1)"
-            >
-              Follow
-            </v-btn>
+            <div v-else>
+              <v-btn
+                v-if="otheruser.following=== true"
+                block
+                small
+                elevation="0"
+                outlined
+                color="primary"
+                :ripple="false"
+                class="caption"
+                data-cy="following"
+                @click="handleUnfollow"
+              >
+                Following
+              </v-btn>
+              <v-btn
+                v-if="otheruser.following === false"
+                block
+                small
+                elevation="0"
+                color="primary"
+                :ripple="false"
+                class="caption"
+                data-cy="follow"
+                @click="handleFollow"
+              >
+                Follow
+              </v-btn>
+            </div>
           </v-col>
           <v-col
             xl="2"
@@ -204,17 +221,21 @@ export default {
     image: {
       type: String,
       default: require('../../assets/default_user.png')
+    },
+    isPrivate: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      userStat: { following: this.otheruser.following },
+      userStat: { following: this.otheruser.following, sentFollowRequest: false },
       favorite: false,
       blocked: false,
       snackbarFollow: false,
       snackbarText: 'snackbarText',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000
+      snackbarTimeout: 3000
     }
   },
   computed: {
@@ -226,12 +247,30 @@ export default {
     }
   },
   methods: {
+    test () {
+      console.log('profile.test()')
+      console.log('private?' + this.isPrivate)
+    },
     message () {
       console.log('sending a message...')
     },
     blockUser () {
       this.snackbar = true
       this.blocked = true
+    },
+    async handleFollow () {
+      console.log('handleFollow private===' + this.isPrivate)
+      if (this.isPrivate) {
+        console.log('this is a private acc')
+        this.sendFollowRequest()
+        this.userStat.sentFollowRequest = true
+        console.log(this.userStat)
+      } else {
+        this.follow(1)
+      }
+    },
+    async handleUnfollow () {
+      this.unfollow(1)
     }
   }
 }

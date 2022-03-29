@@ -45,7 +45,7 @@
               <v-list-item-title
                 class="name-text text-sm-body-1 text-caption text-wrap font-weight-bold"
               >
-                {{ name }}
+                {{ name }}  [{{ isPrivate }}] {{ id }}
               </v-list-item-title>
               <v-list-item-title class="text-sm-body-3 text-caption text-wrap">
                 @{{ username }}
@@ -64,7 +64,7 @@
             align-self="center"
           >
             <v-btn
-              v-if="userStat.following === true"
+              v-if="userStat.sentFollowRequest === true"
               v-bind="size"
               elevation="2"
               outlined
@@ -73,27 +73,44 @@
               data-cy="following"
               height="32px"
               width="110px"
-              @click="unfollow(0)"
             >
               <div class="text">
-                Following
+                Sent Request
               </div>
             </v-btn>
-            <v-btn
-              v-if="userStat.following === false"
-              v-bind="size"
-              elevation="2"
-              color="primary"
-              class="btn my-3 caption font-weight-bold"
-              data-cy="follow"
-              height="32px"
-              width="110px"
-              @click="follow(0)"
-            >
-              <div class="text">
-                Follow
-              </div>
-            </v-btn>
+            <div v-else>
+              <v-btn
+                v-if="userStat.following === true"
+                v-bind="size"
+                elevation="2"
+                outlined
+                color="primary"
+                class="btn my-3 caption font-weight-bold"
+                data-cy="following"
+                height="32px"
+                width="110px"
+                @click="handleUnfollow"
+              >
+                <div class="text">
+                  Following
+                </div>
+              </v-btn>
+              <v-btn
+                v-if="userStat.following === false"
+                v-bind="size"
+                elevation="2"
+                color="primary"
+                class="btn my-3 caption font-weight-bold"
+                data-cy="follow"
+                height="32px"
+                width="110px"
+                @click="handleFollow"
+              >
+                <div class="text">
+                  Follow
+                </div>
+              </v-btn>
+            </div>
           </v-col>
         </template>
         <template v-if="request === true">
@@ -114,7 +131,8 @@
               data-cy="follow"
               height="32px"
               width="110px"
-              @click="confirmFollowRequest"
+              :disabled="requestStatusFinishComputed"
+              @click="handleConfirmFollowRequest"
             >
               <div class="text">
                 CONFIRM
@@ -144,10 +162,11 @@
               data-cy="follow"
               height="32px"
               width="110px"
-              @click="rejectFollowRequest"
+              :disabled="requestStatusFinishComputed"
+              @click="handleRejectFollowRequest"
             >
               <div class="text">
-                DELETE
+                REJECT
               </div>
             </v-btn>
           </v-col>
@@ -203,18 +222,22 @@ export default {
     requestblock: {
       type: Boolean,
       default: false
+    },
+    isPrivate: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      userStat: { following: this.currentlyfollowing },
+      userStat: { following: this.currentlyfollowing, sentFollowRequest: false },
+      requestStatusFinish: false,
       request: this.requestblock,
       snackbarFollow: false,
       snackbarText: 'snackbarText',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000,
+      snackbarTimeout: 3000,
       router: '/dashboard/' + this.id
-      // following: this.currentlyfollowing
     }
   },
   computed: {
@@ -227,8 +250,36 @@ export default {
         xl: 'small'
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
+    },
+    requestStatusFinishComputed () {
+      console.log('requestStatusFinishComputed ' + (this.requestStatusFinish === true))
+      return this.requestStatusFinish === true
+    },
+    disable () {
+      return this.requestStatusFinishComputed === true ? 'disabled' : ''
     }
-
+  },
+  methods: {
+    async handleFollow () {
+      console.log('handleFollow private===' + this.isPrivate)
+      if (this.isPrivate) {
+        console.log('this is a private acc')
+        this.sendFollowRequest()
+        this.userStat.sentFollowRequest = true
+        console.log(this.userStat)
+      } else {
+        this.follow(0)
+      }
+    },
+    async handleUnfollow () {
+      this.unfollow(0)
+    },
+    async handleConfirmFollowRequest () {
+      this.approveFollowPrivate()
+    },
+    async handleRejectFollowRequest () {
+      this.rejectFollowPrivate()
+    }
   }
 }
 </script>
