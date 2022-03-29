@@ -88,7 +88,7 @@
 <script>
 import UserBlock from '../../components/FollowerFollowing/UserBlock.vue'
 import StockBlock from '../../components/SearchStockBlock/StockBlock.vue'
-import axiosInstace from '../../axios/axios.v1'
+import axiosInstance from '../../axios/axios.v1'
 import UserService from '../../services/User.service'
 
 export default {
@@ -113,7 +113,7 @@ export default {
   methods: {
     async pullPeople () {
       try {
-        const response = await axiosInstace.get(`/userInfo/?searchQuery=${this.keyword}`)
+        const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}`)
         const list = response.data.data
         for (let index = 0; index < list.length; index++) {
           const isFollowing = await UserService.isFollowed(list[index.userId])
@@ -137,7 +137,7 @@ export default {
     },
     async pullCompanies () {
       try {
-        const response = await axiosInstace.get(`/searchRecommendations/${this.keyword}`)
+        const response = await axiosInstance.get(`/searchRecommendations/${this.keyword}`)
         const list = response.data.searchResult.bestMatches
         console.log('list')
         console.log(list)
