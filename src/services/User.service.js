@@ -23,10 +23,6 @@ class UserService {
         if (res.data.status === 501) {
           return []
         }
-        res.data.positions.forEach(function (position) {
-          position.verified = true
-          position.date = new Date().toLocaleString()
-        })
         userPortfolioData = res.data.positions
       })
       .catch(function (err) {
@@ -315,6 +311,19 @@ class UserService {
     }).catch(err => {
       this.error = err.response.data.message
     })
+  }
+
+  async getEquities (userId, period) {
+    let history = null
+    await axios.get('/history/' + userId + '?period=' + period)
+      .then(function (res) {
+        history = res.data.history
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    return history
   }
 }
 

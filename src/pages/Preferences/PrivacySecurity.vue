@@ -167,19 +167,17 @@
           no-gutters
           class="mb-3"
         >
-          <v-spacer />
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
-            class="mt-2 d-flex justify-start"
-          >
+          <v-col class="mt-2 d-flex justify-start">
             <span>
               Blocked Users
             </span>
           </v-col>
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
-            class="text-left"
-          >
+        </v-row>
+        <v-row
+          no-gutters
+          class="mb-3"
+        >
+          <v-col class="text-left">
             <SearchViewBy :search-list="blockedList" />
           </v-col>
         </v-row>
@@ -232,19 +230,17 @@
           no-gutters
           class="mb-3"
         >
-          <v-spacer />
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
-            class="mt-2 d-flex justify-start"
-          >
+          <v-col class="mt-2 d-flex justify-start">
             <span>
               Favorite Users
             </span>
           </v-col>
-          <v-col
-            :cols="$vuetify.breakpoint.xsOnly ? '12' : '6'"
-            class="text-left"
-          >
+        </v-row>
+        <v-row
+          no-gutters
+          class="mb-3"
+        >
+          <v-col class="text-left">
             <SearchViewBy :search-list="favoriteList" />
           </v-col>
         </v-row>

@@ -99,7 +99,7 @@
               Following
             </v-btn>
             <v-btn
-              v-if="otheruser.following=== false"
+              v-if="otheruser.following === false"
               block
               small
               elevation="0"
