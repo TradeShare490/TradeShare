@@ -51,7 +51,7 @@
 </template>
 
 <script>
-// import axiosInstance from '../../axios/axios.v1'
+import axiosInstance from '../../axios/axios.v1'
 export default {
   name: 'ChangePassword',
   data: () => ({
@@ -78,7 +78,8 @@ export default {
       // here we will patch the request!
       if (this.passwordConfirmation()) {
         try {
-          return axiosInstace.patch(`/userInfo/${this.uid}`,{"password":this.password})
+          console.log(this.uid)
+          return axiosInstance.patch(`/userInfo/${this.uid}`, { password: this.password })
         } catch (e) {
           console.log(e)
         }

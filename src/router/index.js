@@ -114,7 +114,7 @@ const routes = [
     component: Confirm
   },
   {
-    path: '/forgotpassword/:uid',
+    path: '/forgotpassword/uid=:uid',
     name: 'ForgotPassword',
     component: ForgotPassword
   },
