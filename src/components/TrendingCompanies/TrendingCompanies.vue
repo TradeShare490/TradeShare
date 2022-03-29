@@ -37,7 +37,8 @@
 
 <script>
 import CompanyCard from '../TrendingCompanies/CompanyCard.vue'
-import axiosInstace from '../../axios/axios.v1'
+import axiosInstance from '../../axios/axios.v1'
+
 export default {
   name: 'TrendingCompanies',
   components: { CompanyCard },
@@ -53,8 +54,7 @@ export default {
   },
   methods: {
     async pullCompanies () {
-      // If I am to change the fundamental design of trending companies then I will change the company card props
-      const response = await axiosInstace.get('/trendingCompanies')
+      const response = await axiosInstance.get('/trendingCompanies')
       this.companies = response.data.trendingCompanies
     }
   }
