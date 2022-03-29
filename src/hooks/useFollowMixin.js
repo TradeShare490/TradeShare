@@ -19,7 +19,8 @@ export const useFollowMixin = {
     },
     async getFollowingsHook (id) {
       console.log('getFollowingsHook ' + id)
-      this.isLoading = true
+      this.isLoadingFollowing = true
+      console.log(this.isLoading + ' ----------------- >>> ')
       try {
         this.followings = await UserService.getFollowings(id)
         console.log('finish')
@@ -28,18 +29,21 @@ export const useFollowMixin = {
         console.log(err)
       } finally {
         console.log('end')
-        this.isLoading = false
+        this.isLoadingFollowing = false
+        console.log(this.isLoading + ' <<< ----------------- >>> ')
       }
     },
     async getFollowersHook (id) {
       console.log('getFollowersHook ' + id)
-      this.isLoading = true
+      this.isLoadingFollower = true
+      console.log(this.isLoading + ' ----------------- >>> ')
       try {
         this.followers = await UserService.getFollowers(id)
       } catch (err) {
         console.log(err)
       } finally {
-        this.isLoading = false
+        this.isLoadingFollower = false
+        console.log(this.isLoading + ' <<< ----------------- >>> ')
       }
     },
     // To-DO
@@ -72,10 +76,11 @@ export const useFollowMixin = {
         console.log(response)
         if (response.success) {
           this.userStat.sentFollowRequest = true
-          this.toogleSnackbar(3)
+          this.toogleSnackbar('Sent follow request to ' + this.name)
         }
       } catch (err) {
         console.log(err)
+        this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
     async removeFollowRequestHook (credentials) {
@@ -90,7 +95,7 @@ export const useFollowMixin = {
         }
       } catch (err) {
         console.log(err)
-        this.toogleSnackbar(2)
+        this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
 
@@ -108,9 +113,10 @@ export const useFollowMixin = {
         // if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
         // localStorage.setItem('user', JSON.stringify(lsUser))
         await this.removeFollowRequestHook(credentials)
-        this.toogleSnackbar(5)
+        this.toogleSnackbar('Rejected request')
       } catch (e) {
         console.log(e)
+        this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
     // TO-DO
@@ -135,11 +141,11 @@ export const useFollowMixin = {
           // if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
           // localStorage.setItem('user', JSON.stringify(lsUser))
           this.removeFollowRequestHook(credentials)
-          this.toogleSnackbar(4)
+          this.toogleSnackbar('Approved request')
         }
       } catch (e) {
         console.log(e)
-        this.toogleSnackbar(2)
+        this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
 
@@ -167,19 +173,22 @@ export const useFollowMixin = {
           const lsUser = JSON.parse(localStorage.getItem('user'))
           if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
           localStorage.setItem('user', JSON.stringify(lsUser))
-          this.toogleSnackbar(0)
-        } else {
-          this.toogleSnackbar(2)
+          this.toogleSnackbar('Followed ' + this.name)
+
+          console.log(this.user.following)
+          console.log(this.$store.state.user.following)
+          console.log(JSON.parse(localStorage.getItem('user')).following)
         }
-        this.user.following.push(this.id)
-        this.$store.state.user.following.push(this.id)
-        const lsUser = JSON.parse(localStorage.getItem('user'))
-        if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
-        localStorage.setItem('user', JSON.stringify(lsUser))
-        this.toogleSnackbar(0)
-        this.$router.go()
+        // this.user.following.push(this.id)
+        // this.$store.state.user.following.push(this.id)
+        // const lsUser = JSON.parse(localStorage.getItem('user'))
+        // if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
+        // localStorage.setItem('user', JSON.stringify(lsUser))
+        // this.toogleSnackbar(0, 'Followed ' + this.name)
+        // this.$router.go()
       } catch (e) {
         console.log(e)
+        this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
     async unfollow (type) {
@@ -206,47 +215,32 @@ export const useFollowMixin = {
           const lsUser = JSON.parse(localStorage.getItem('user'))
           if (lsUser.following.indexOf(this.id) !== -1) lsUser.following.splice(lsUser.following.indexOf(this.id), 1)
           localStorage.setItem('user', JSON.stringify(lsUser))
-          this.toogleSnackbar(1)
-        } else {
-          this.toogleSnackbar(2)
+          this.toogleSnackbar('Unfollowed ' + this.name)
+          console.log(this.user.following)
+          console.log(this.$store.state.user.following)
+          console.log(JSON.parse(localStorage.getItem('user')).following)
         }
-        if (this.user.following.indexOf(this.id) > -1) {
-          this.user.following.splice(this.user.following.indexOf(this.id), 1)
-        }
-        if (this.$store.state.user.following.indexOf(this.id) > -1) {
-          this.$store.state.user.following.splice(this.$store.state.user.following.indexOf(this.id), 1)
-        }
-        const lsUser = JSON.parse(localStorage.getItem('user'))
-        if (lsUser.following.indexOf(this.id) !== -1) lsUser.following.splice(lsUser.following.indexOf(this.id), 1)
-        localStorage.setItem('user', JSON.stringify(lsUser))
-        this.toogleSnackbar(1)
-        this.$router.go()
+        // if (this.user.following.indexOf(this.id) > -1) {
+        //   this.user.following.splice(this.user.following.indexOf(this.id), 1)
+        // }
+        // if (this.$store.state.user.following.indexOf(this.id) > -1) {
+        //   this.$store.state.user.following.splice(this.$store.state.user.following.indexOf(this.id), 1)
+        // }
+        // const lsUser = JSON.parse(localStorage.getItem('user'))
+        // if (lsUser.following.indexOf(this.id) !== -1) lsUser.following.splice(lsUser.following.indexOf(this.id), 1)
+        // localStorage.setItem('user', JSON.stringify(lsUser))
+        // this.toogleSnackbar('Unfollowed ' + this.name)
+        // this.$router.go()
       } catch (e) {
         console.log(e)
+        this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
 
-    toogleSnackbar (status) {
-      console.log('toogle snackbar')
-      if (status === 0) {
-        this.snackbarText = ('Followed ' + this.name)
-        this.snackbarColor = 'primary'
-      } else if (status === 1) {
-        this.snackbarText = ('Unfollowed ' + this.name)
-        this.snackbarColor = 'primary'
-      } else if (status === 2) {
-        this.snackbarText = ('Failed to perform action')
-        this.snackbarColor = 'error'
-      } else if (status === 3) {
-        this.snackbarText = ('Sent follow request to ' + this.name)
-        this.snackbarColor = 'primary'
-      } else if (status === 4) {
-        this.snackbarText = ('Approved request')
-        this.snackbarColor = 'primary'
-      } else if (status === 5) {
-        this.snackbarText = ('Reject request')
-        this.snackbarColor = 'primary'
-      }
+    toogleSnackbar (text, color, time) {
+      this.snackbarText = (text)
+      if (color) this.snackbarColor = color
+      if (time) this.snackbarTimeout = time
       this.snackbarFollow = true
     }
   }

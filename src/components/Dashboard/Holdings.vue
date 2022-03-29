@@ -89,7 +89,7 @@
         class="pa-0"
       >
         <div
-          class="text-h6 green--text text--darken-3 pr-0 mr-0"
+          class="text-h6 green--text text--darken-1 pr-0 mr-0"
           data-cy="holdings-cash-value"
         >
           ${{ cash }}
@@ -102,7 +102,7 @@
         class="pa-0"
       >
         <div
-          class="text-h5 black--text"
+          class="text-h5 orange--text text--darken-3"
           data-cy="holdings-options-value"
         >
           {{ options }}

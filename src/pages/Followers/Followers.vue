@@ -1,7 +1,10 @@
 <template>
   <div class="container mt-0 mx-auto">
     <SearchViewBy :list="followers" />
-    <v-tabs centered>
+
+    <v-tabs
+      centered
+    >
       <v-tab :ripple="false">
         <em class="mdi mdi-account-multiple" />
         <span>FOLLOWERS</span>
@@ -10,15 +13,20 @@
         <em class="mdi mdi-exclamation" />
         <span>FOLLOW REQUESTS</span>
       </v-tab>
-      <v-tab-item class="mt-5">
+
+      <v-tab-item
+
+        class="mt-5"
+      >
         <div
-          v-if="isLoading === true"
-          class="mt-7"
+          v-if="isLoadingFollower === true"
         >
           <v-progress-circular
             :size="50"
             color="primary"
             indeterminate
+            :width="7"
+            class="mt-7"
           />
         </div>
         <div v-else>
@@ -58,18 +66,6 @@
       <v-tab-item>
         <div class="mt-5" />
         <v-divider class="mx-6" />
-        <!-- <UserBlock
-          name="Tim Robenman"
-          image="https://randomuser.me/api/portraits/men/52.jpg"
-          username="timrobenman"
-          :requestblock="true"
-        />
-        <UserBlock
-          name="Mary Winchester"
-          image="https://randomuser.me/api/portraits/women/79.jpg"
-          username="marywinchester"
-          :requestblock="true"
-        /> -->
         <div v-if="requests.length!=0">
           <div
             v-for="(request, i) in requests"
@@ -104,7 +100,7 @@
       </v-tab-item>
     </v-tabs>
     <v-btn @click="test">
-      STATE
+      FOLLOWER
     </v-btn>
   </div>
 </template>
@@ -125,12 +121,7 @@ export default {
     return {
       followers: [],
       requests: [],
-      isLoading: true
-    }
-  },
-  computed: {
-    user () {
-      return JSON.parse(localStorage.getItem('user'))
+      isLoadingFollower: true
     }
   },
   created () {

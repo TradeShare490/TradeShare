@@ -57,8 +57,10 @@ export default {
   name: 'PositionsData',
   props: {
     stocksData: {
-      type: Function,
-      default () { return [] }
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
   data () {

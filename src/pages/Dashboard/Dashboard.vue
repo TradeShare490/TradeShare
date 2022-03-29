@@ -153,7 +153,7 @@ export default {
   data () {
     return {
       account: Object,
-      stocks: Array,
+      stocks: [],
       allPosts: this.$store.getters.allPosts,
       holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
     }
@@ -176,6 +176,8 @@ export default {
       try {
         this.account = await UserService.getAccount(this.user.userId)
         this.stocks = await UserService.getPositions(this.user.userId)
+        console.log('this.stocks')
+        console.log(this.stocks)
       } catch (err) {
         console.log(err)
       } finally {

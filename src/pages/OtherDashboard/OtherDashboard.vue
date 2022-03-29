@@ -147,7 +147,7 @@ export default {
       userInfo: null,
       info: {},
       account: Object,
-      stocks: Array,
+      stocks: [],
       followNum: [],
       isFollowingByUser: false,
       activities: [],
@@ -160,8 +160,6 @@ export default {
       return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
     },
     holdingData () {
-      console.log('holdingPieChartData computed ')
-      console.log(this.holdingPieChartData)
       return this.holdingPieChartData
     }
   },
