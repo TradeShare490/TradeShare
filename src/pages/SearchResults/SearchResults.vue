@@ -100,7 +100,15 @@ export default {
   data () {
     return {
       keyword: this.$route.params.keyword,
-      followings: [],
+      followings: [{
+        id: '0',
+        currentlyfollowing: true,
+        firstname: 'Tom',
+        lastname: 'Brady',
+        username: 'yourMother',
+        image: 'https://randomuser.me/api/portraits/men/2.jpg'
+
+      }],
       users: [],
       stocks: [],
       isLoading: false
@@ -113,7 +121,7 @@ export default {
   methods: {
     async pullPeople () {
       try {
-        const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}`)
+        const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}&limit=10`)
         const list = response.data.data
         for (let index = 0; index < list.length; index++) {
           const isFollowing = await UserService.isFollowed(list[index.userId])
