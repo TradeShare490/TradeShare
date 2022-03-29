@@ -354,7 +354,6 @@ export default {
       this.snackbar = true
     },
     async unblock (index) {
-      // let success = false
       const credentials = {
         targetId: this.blockedList.at(index).id,
         actorId: this.user.userId
