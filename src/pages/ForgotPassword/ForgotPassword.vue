@@ -54,19 +54,21 @@
 import axiosInstance from '../../axios/axios.v1'
 export default {
   name: 'ChangePassword',
-  data: () => ({
-    uid: this.$route.params.uid,
-    value: String,
-    password: '',
-    passwordConfirm: '',
-    rules: {
-      required: v => !!v || 'Required'
-    },
-    rulesPassword: {
-      min: v => v.length >= 8 || 'Min 8 characters'
-    },
-    error: false
-  }),
+  data () {
+    return {
+      userId: this.$route.params.userId,
+      value: String,
+      password: '',
+      passwordConfirm: '',
+      rules: {
+        required: v => !!v || 'Required'
+      },
+      rulesPassword: {
+        min: v => v.length >= 8 || 'Min 8 characters'
+      },
+      error: false
+    }
+  },
   computed: {
     passwordConfirmation () {
       return () =>
@@ -79,7 +81,7 @@ export default {
       if (this.passwordConfirmation()) {
         try {
           console.log(this.uid)
-          return axiosInstance.patch(`/userInfo/${this.uid}`, { password: this.password })
+          return axiosInstance.patch(`/userInfo/${this.userId}`, { password: this.password })
         } catch (e) {
           console.log(e)
         }

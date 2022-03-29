@@ -44,28 +44,30 @@
 import axiosInstance from '../../axios/axios.v1'
 export default {
   name: 'EmailSender',
-  data: () => ({
-    valid: '',
-    email: '',
-    rules: {
-      required: v => !!v || 'Required'
-    },
-    rulesEmail: {
-      format: v =>
-        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-          v
-        ) || 'E-mail must be valid'
+  data () {
+    return {
+      valid: '',
+      email: '',
+      rules: {
+        required: v => !!v || 'Required'
+      },
+      rulesEmail: {
+        format: v =>
+          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            v
+          ) || 'E-mail must be valid'
+      }
     }
-  }),
+  },
   methods: {
     async submit () {
       if (this.$refs.emailForm.validate()) {
         try {
           const UserInfo = await axiosInstance.get(`/userInfo?searchQuery=${this.email}&limit=1`)
           const MailOption = {
-            to: 'gdkh514@gmail.com',
+            to: this.email,
             subject: 'TradeShare: Forgot Password',
-            text: `Change your password in the following link http://localhost:8081/forgotpassword/uid=${UserInfo.data.data[0].userId}`
+            text: `Change your password in the following link http://localhost:8081/forgotpassword/userId=${UserInfo.data.data[0].userId}`
           }
           print('sending MailOption to mailer')
           console.log(MailOption.text)
