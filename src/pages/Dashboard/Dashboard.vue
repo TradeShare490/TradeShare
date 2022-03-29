@@ -52,7 +52,7 @@
         <MonthlyProfitLoss
           title="Monthly Realized P/L"
           :value="monthlyChange"
-          percent-change="16"
+          :percent-change="16"
         />
       </v-col>
     </v-row>
