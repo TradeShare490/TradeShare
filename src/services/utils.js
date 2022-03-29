@@ -3,7 +3,7 @@ export const utils = {
     timeSince (date) {
       const time = new Date(date).getTime() / 1000
 
-      const seconds = Math.floor(((new Date().getTime() / 1000 - time)))
+      const seconds = Math.floor((new Date().getTime() / 1000 - time))
 
       let interval = seconds / 31536000
 

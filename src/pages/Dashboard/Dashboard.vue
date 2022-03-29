@@ -158,7 +158,7 @@ export default {
     },
     monthlyChange () {
       const monthChange = (this.monthHistory.equity[0] - this.monthHistory.equity.at(-1)).toFixed(2)
-      return monthChange >= 0 ? '$' + monthChange : '-$' + Math.abs(monthChange)
+      return monthChange >= 0 ? '$' + monthChange : '-$' + Math.abs(Number(monthChange))
     }
   },
   created () {
