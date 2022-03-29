@@ -246,7 +246,7 @@ export default {
     updateFavorites () {
       if (this.list.length <= 5) {
         this.favorite = !this.favorite
-        this.favorite ? this.list = this.list.concat(this.name) : this.list.splice(this.list.findIndex(item => item === this.name), 1)
+        this.favorite ? this.list.push(this.name) : this.list.splice(this.list.findIndex(item => item === this.name), 1)
         this.snackbar2Text = 'Favorites list has been updated'
       } else {
         this.snackbar2Text = 'Favorites list is full'
