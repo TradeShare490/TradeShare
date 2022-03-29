@@ -140,7 +140,12 @@ export default {
   mixins: [utils],
   data () {
     return {
-      account: Object,
+      account: {
+        equity: 0,
+        last_equity: 0,
+        portfolio_value: 0,
+        created_at: ''
+      },
       allPosts: this.$store.getters.allPosts,
       monthHistory: {
         equity: [],
