@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import axiosInstace from '../../axios/axios.v1'
+import axiosInstance from '../../axios/axios.v1'
 export default {
   name: 'EmailSender',
   data: () => ({
@@ -61,7 +61,7 @@ export default {
     async submit () {
       if (this.$refs.emailForm.validate()) {
         try {
-          const UserInfo = await axiosInstace.get(`/userInfo?searchQuery=${this.email}&limit=1`)
+          const UserInfo = await axiosInstance.get(`/userInfo?searchQuery=${this.email}&limit=1`)
           const MailOption = {
             to: this.email,
             subject: 'TradeShare: Forgot Password',
@@ -69,7 +69,7 @@ export default {
           }
           print('sending MailOption to mailer')
           console.log(MailOption.text)
-          return await axiosInstace.post('/mailer', MailOption)
+          return await axiosInstance.post('/mailer', MailOption)
         } catch (e) {
           this.error = e
         }
