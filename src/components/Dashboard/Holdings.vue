@@ -76,10 +76,10 @@
         class="pa-0"
       >
         <div
-          class="text-h5 blue--text text--darken-2"
+          class="text-h6 blue--text text--darken-4"
           data-cy="holdings-equities-value"
         >
-          {{ equities }}
+          ${{ Math.floor(equitiesVal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
         </div>
       </v-col>
       <v-col
@@ -92,7 +92,7 @@
           class="text-h6 green--text text--darken-1 pr-0 mr-0"
           data-cy="holdings-cash-value"
         >
-          ${{ cash }}
+          ${{ cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
         </div>
       </v-col>
       <v-col
