@@ -120,7 +120,7 @@ import Recents from '../../components/RecentTrades/Recents'
 import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
-
+import { utils } from '../../services/utils'
 export default {
   name: 'OtherDashboard',
   components: {
@@ -130,7 +130,7 @@ export default {
     LineChartContainer,
     Holdings
   },
-  // mixins: [useFollowMixin],
+  mixins: [utils],
   data () {
     return {
       userId: this.$route.params.id,
@@ -167,34 +167,6 @@ export default {
         favorite: false,
         blocked: false
       }
-    },
-    timeSince (date) {
-      const time = new Date(date).getTime() / 1000
-
-      const seconds = Math.floor(((new Date().getTime() / 1000 - time)))
-
-      let interval = seconds / 31536000
-
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a year ago' : Math.floor(interval) + ' years ago'
-      }
-      interval = seconds / 2592000
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a month ago' : Math.floor(interval) + ' months ago'
-      }
-      interval = seconds / 86400
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a day ago' : Math.floor(interval) + ' days ago'
-      }
-      interval = seconds / 3600
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' an hour ago' : Math.floor(interval) + ' hours ago'
-      }
-      interval = seconds / 60
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a minute ago' : Math.floor(interval) + ' minutes ago'
-      }
-      return Math.floor(interval) === 1 ? ' a second ago' : Math.floor(interval) + ' seconds ago'
     }
   }
 }
