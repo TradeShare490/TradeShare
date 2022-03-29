@@ -63,7 +63,7 @@ export default {
         try {
           const UserInfo = await axiosInstance.get(`/userInfo?searchQuery=${this.email}&limit=1`)
           const MailOption = {
-            to: this.email,
+            to: 'gdkh514@gmail.com',
             subject: 'TradeShare: Forgot Password',
             text: `Change your password in the following link http://localhost:8081/forgotpassword/uid=${UserInfo.data.data[0].userId}`
           }
