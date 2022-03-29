@@ -55,7 +55,7 @@
 export default {
   name: 'ChangePassword',
   data: () => ({
-    uid: this.$route.route.params.uid,
+    uid: this.$route.params.uid,
     value: String,
     password: '',
     passwordConfirm: '',
@@ -78,9 +78,7 @@ export default {
       // here we will patch the request!
       if (this.passwordConfirmation()) {
         try {
-          console.log('How do I patch beyong this Im confused')
-          console.log(this.uid)
-          // return axiosInstace.patch(`/userInfo/${this.uid}`)
+          return axiosInstace.patch(`/userInfo/${this.uid}`,{"password":this.password})
         } catch (e) {
           console.log(e)
         }
