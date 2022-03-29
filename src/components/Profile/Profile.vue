@@ -247,13 +247,10 @@ export default {
       if (this.list.length <= 5) {
         if (this.favorite === false) {
           this.favorite = !this.favorite
-          console.log(this.list)
           this.list = this.list.concat(this.name)
-          console.log(this.list)
         } else {
           this.favorite = !this.favorite
           this.list.splice(this.list.findIndex(item => item === this.name), 1)
-          console.log(this.list)
         }
         this.snackbar2Text = 'Favorites list has been updated'
       } else {
