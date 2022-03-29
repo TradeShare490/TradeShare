@@ -20,8 +20,8 @@ describe("On the dashbooard page, Dashboard can", () => {
   it("display graph", () => {
     cy.get("[data-cy=pie-chart]").should("be.visible");
   });
-  it("display bar chart graph", () => {
-    cy.get("[data-cy=bar-char-container]").should("be.visible");
+  it("display line chart graph", () => {
+    cy.get("[data-cy=line-chart-container]").should("be.visible");
   });
   it("display percentages", () => {
     cy.get("[data-cy=holdings-equities-value]").should("be.visible");

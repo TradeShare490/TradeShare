@@ -3,7 +3,7 @@
     elevation="1"
     outlined
     min-width="350"
-    data-cy="bar-char-container"
+    data-cy="line-chart-container"
   >
     <v-card-title class="pb-1 pt-3">
       Equity History
