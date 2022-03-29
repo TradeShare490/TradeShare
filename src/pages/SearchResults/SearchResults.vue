@@ -124,8 +124,9 @@ export default {
       try {
         const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}&limit=10`)
         const list = response.data.data
+        console.log(list)
         for (let index = 0; index < list.length; index++) {
-          const isFollowing = await UserService.isFollowed(list[index.userId])
+          const isFollowing = await UserService.isFollowed((list[index].userId))
           const userInfo = {
             id: list[index].userId,
             currentlyfollowing: isFollowing,
