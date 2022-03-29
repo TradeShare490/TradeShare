@@ -51,11 +51,11 @@ export const useFollowMixin = {
       console.log('getFollowRequestHook ' + id)
       this.isLoading = true
       try {
-        // this.requests = await UserService.getFollowRequest(id)
-        this.requests = [
-          { id: 'id1', currentlyfollowing: false, firstname: 'dummy1', lastname: 'dummy1', username: 'dummy1', isPrivate: false },
-          { id: 'id2', currentlyfollowing: true, firstname: 'dummy2', lastname: 'dummy2', username: 'dummy2', isPrivate: true }
-        ]
+        this.requests = await UserService.getFollowRequest(id)
+        // this.requests = [
+        //   { id: 'id1', currentlyfollowing: false, firstname: 'dummy1', lastname: 'dummy1', username: 'dummy1', isPrivate: false },
+        //   { id: 'id2', currentlyfollowing: true, firstname: 'dummy2', lastname: 'dummy2', username: 'dummy2', isPrivate: true }
+        // ]
       } catch (err) {
         console.log(err)
       } finally {
@@ -67,7 +67,8 @@ export const useFollowMixin = {
       console.log('=======\nmixin.sendFollowRequest')
       const credentials = {
         actorId: this.user.userId, // private account id
-        targetId: this.id // account that wants to follow
+        targetId: this.id, // account that wants to follow
+        bypassPrivate: false
       }
       console.log('credentials')
       console.log(credentials)

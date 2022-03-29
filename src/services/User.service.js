@@ -125,21 +125,21 @@ class UserService {
   // ADD REQUEST TO ACCOUNT
   async addFollowRequest (credentials) {
     console.log('service.addFollowRequest ' + credentials.targetId)
-    const requestListRaw = await this.getFollowRequestRaw(credentials.targetId)
-    console.log(requestListRaw)
-    requestListRaw.unshift(credentials.actorId)
-    console.log(requestListRaw)
-    // try {
-    //   const config = {
-    //     headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    //   }
-    //   const response = await axios.post('URL', credentials, requestListRaw, config)
-    //   console.log(response.data)
-    return { success: true }
-    // } catch (err) {
-    //   console.log(err)
-    //   return { success: false, message: err.response.data.message }
-    // }
+    // const requestListRaw = await this.getFollowRequestRaw(credentials.targetId)
+    // console.log(requestListRaw)
+    // requestListRaw.unshift(credentials.actorId)
+    // console.log(requestListRaw)
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+      }
+      const response = await axios.post('following/follow/', credentials, config)
+      console.log(response.data)
+      return { success: true }
+    } catch (err) {
+      console.log(err)
+      return { success: false, message: err.response.data.message }
+    }
   }
 
   async getFollowRequestRaw (userId) {
@@ -164,37 +164,45 @@ class UserService {
   // TO-DO
   // GET LIST OF FOLLOW REQUEST
   async getFollowRequest (userId) {
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
-    const requestListRaw = await this.getFollowRequestRaw(userId)
-    const requestList = []
-    for (const user of requestListRaw) {
-      const userInfo = await this.getUserInfo(user)
-      console.log(userInfo)
-      const obj = { id: user, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
-      requestList.push(obj)
-    }
+    console.log('getFollowRequest ' + userId)
+    // const config = {
+    //   headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    // }
+    // const requestListRaw = await this.getFollowRequestRaw(userId)
+    // const response = await axios.post('following/follow/', credentials, config)
+    // const requestList = []
+    // for (const user of requestListRaw) {
+    //   const userInfo = await this.getUserInfo(user)
+    //   console.log(userInfo)
+    //   const obj = { id: user, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
+    //   requestList.push(obj)
+    // }
 
-    let followingsData = null
-    await axios
-      .get('URL' + userId, config)
-      .then(function (res) {
-        followingsData = res.data
-      })
-      .catch(function (err) {
-        console.log(err)
-        return null
-      })
-    for (const id of followingsData) {
-      for (const follower of requestList) {
-        if (id.indexOf(follower.id) !== -1) {
-          follower.currentlyfollowing = true
-          break
-        }
-      }
-    }
-    return requestList
+    console.log('/following/requests/' + userId)
+
+    // let requestList = null
+    // await axios
+    //   .get('/following/requests/' + userId, config)
+    //   .then(function (res) {
+    //     requestList = res.data
+    //     console.log('requestList')
+    //     console.log(requestList)
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err)
+    //     return null
+    //   })
+    // console.log('for loop')
+
+    // const requestUserList = []
+    // for (const request of requestList) {
+    //   console.log(request)
+    //   const userInfo = await this.getUserInfo(request.senderId)
+    //   console.log(userInfo)
+    //   const obj = { id: userInfo.id, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
+    //   requestUserList.push(obj)
+    // }
+    // return requestUserList
   }
 
   /* istanbul ignore next */
