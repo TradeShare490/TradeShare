@@ -203,8 +203,7 @@ export default {
     async send () {
       this.snackbar = true
       const sendEmail = {
-        // to: 'tradeshare.ca@gmail.com',
-        to: 'sio.cdapbya@hotmail.com',
+        to: 'tradeshare.ca@gmail.com',
         subject: `TradeShare: ${this.type.type} - ${this.fullname}`,
         text: `${this.message} - ${this.email}`
       }
