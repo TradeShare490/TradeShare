@@ -44,21 +44,19 @@
 import axiosInstance from '../../axios/axios.v1'
 export default {
   name: 'EmailSender',
-  data () {
-    return {
-      valid: '',
-      email: '',
-      rules: {
-        required: v => !!v || 'Required'
-      },
-      rulesEmail: {
-        format: v =>
-          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            v
-          ) || 'E-mail must be valid'
-      }
+  data: () => ({
+    valid: '',
+    email: '',
+    rules: {
+      required: v => !!v || 'Required'
+    },
+    rulesEmail: {
+      format: v =>
+        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || 'E-mail must be valid'
     }
-  },
+  }),
   methods: {
     async submit () {
       if (this.$refs.emailForm.validate()) {
