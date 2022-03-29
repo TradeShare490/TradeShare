@@ -128,6 +128,7 @@
               class="text-left"
             >
               <v-textarea
+                v-model="message"
                 label="Type your message here"
                 outlined
                 solo
@@ -166,6 +167,8 @@
 </template>
 
 <script>
+import axiosInstance from '../../axios/axios.v1'
+
 export default {
   name: 'SupportPage',
   data: () => ({
@@ -185,7 +188,11 @@ export default {
     selectLanguage: null,
     timeout: 1500,
     snackbar: false,
-    snackbarText: 'Your message has been sent to us, and we will get back to you shortly.'
+    snackbarText: 'Your message has been sent to us, and we will get back to you shortly.',
+    fullname: '',
+    email: '',
+    type: '',
+    message: ''
   }),
   computed: {
     user () {
@@ -193,18 +200,31 @@ export default {
     }
   },
   methods: {
-    send () {
+    async send () {
       this.snackbar = true
+      const sendEmail = {
+        // to: 'tradeshare.ca@gmail.com',
+        to: 'sio.cdapbya@hotmail.com',
+        subject: `TradeShare: ${this.type.type} - ${this.fullname}`,
+        text: `${this.message} - ${this.email}`
+      }
+      try {
+        return axiosInstance.post('/mailer', sendEmail)
+      } catch (e) {
+        this.error = e
+      }
     },
     $t (label) {
       if (label === 'fullname') {
-        return this.user.firstname + ' ' + this.user.lastname
+        this.fullname = this.user.firstname + ' ' + this.user.lastname
+        return this.fullname
       }
       if (label === 'username') {
         return this.user.username
       }
       if (label === 'email') {
-        return this.user.email
+        this.email = this.user.email
+        return this.email
       } else {
         return 'invalid label'
       }

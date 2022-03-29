@@ -71,9 +71,9 @@ export default {
   data () {
     return {
       items: [
-        { message: 'Catchy description of platform.' },
-        { message: 'Maybe more than.' },
-        { message: 'One line.' }
+        { message: 'Provides market participants with' },
+        { message: 'a transparent way to share portfolio holdings' },
+        { message: 'in near real-time' }
       ]
     }
   },

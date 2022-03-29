@@ -58,8 +58,8 @@
       <v-spacer class="d-none d-md-block" />
       <v-col class="d-flex align-center justify-center pr-5 pb-sm-4 pt-sm-3 pb-4 pt-2">
         <v-btn
-          outlined
           small
+          class="py-4"
           color="primary"
           style="border-width: 2px;"
           elevation="2"
