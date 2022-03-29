@@ -125,10 +125,17 @@
               outlined
               :ripple="false"
               color="primary"
-              @click="favorite = !favorite"
+              @click="updateFavorites"
             >
               <v-icon> {{ !favorite ? 'mdi-star-outline' : 'mdi-star' }} </v-icon>
             </v-btn>
+            <v-snackbar
+              v-model="snackbar2"
+              :timeout="snackbarTimeout"
+              color="primary"
+            >
+              {{ snackbar2Text }}
+            </v-snackbar>
           </v-col>
           <v-col
             xl="2"
@@ -212,9 +219,12 @@ export default {
       favorite: false,
       blocked: false,
       snackbarFollow: false,
+      snackbar2: false,
       snackbarText: 'snackbarText',
+      snackbar2Text: '',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000
+      snackbarTimeout: 1000,
+      list: this.$store.getters.favoriteUsers
     }
   },
   computed: {
@@ -232,6 +242,24 @@ export default {
     blockUser () {
       this.snackbar = true
       this.blocked = true
+    },
+    updateFavorites () {
+      if (this.list.length <= 5) {
+        if (this.favorite === false) {
+          this.favorite = !this.favorite
+          console.log(this.list)
+          this.list = this.list.concat(this.id)
+          console.log(this.list)
+        } else {
+          this.favorite = !this.favorite
+          this.list.splice(this.list.findIndex(item => item === this.id), 1)
+          console.log(this.list)
+        }
+        this.snackbar2Text = 'Favorites list has been updated'
+      } else {
+        this.snackbar2Text = 'Favorites list is full'
+      }
+      this.snackbar2 = true
     }
   }
 }
