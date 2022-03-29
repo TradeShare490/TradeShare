@@ -46,6 +46,7 @@
           <div
             v-for="(following, i) in followings"
             :key="i"
+            data-cy="follow"
           >
             <UserBlock
               :id="following.id"
