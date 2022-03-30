@@ -2,11 +2,6 @@ describe('Recent Activities component can', () => {
     before(() => {
         cy.login();
         cy.wait(2000);
-        cy.fixture("url").then((jsonFile) => {
-            cy.visit(
-              `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.DASHBOARD}`
-            );
-          });
     })
     it('display recent activity box', () => {
         cy.get("[data-cy=recent-trades-card]").should("be.visible");

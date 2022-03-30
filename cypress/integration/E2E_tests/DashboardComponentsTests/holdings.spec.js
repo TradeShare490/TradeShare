@@ -2,11 +2,6 @@ describe("On the dashbooard page, Dashboard can", () => {
   before(() => {
     cy.login();
     cy.wait(2000);
-    cy.fixture("url").then((jsonFile) => {
-      cy.visit(
-        `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.DASHBOARD}`
-      );
-    });
   });
   it("display account summary", () => {
     cy.get("[data-cy=portfolio-value-card]").should("be.visible");
