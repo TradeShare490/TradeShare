@@ -156,7 +156,7 @@ export default {
   },
   computed: {
     user () {
-      return JSON.parse(localStorage.getItem('user')) || {
+      return {
         username: 'janedoe',
         userId: '618b2883418c2006690b69be',
         firstname: 'Jane',
