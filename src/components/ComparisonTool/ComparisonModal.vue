@@ -14,7 +14,7 @@
           medium
           v-on="on"
         >
-          COMPARE RETURNS
+          COMPARE EQUITIES
         </v-btn>
       </template>
       <v-card
@@ -313,7 +313,6 @@ export default {
   methods: {
 
     handleInput () {
-      console.log(this.radios)
       const today = this.getTodaysDate
       let start = ''
       let end = ''

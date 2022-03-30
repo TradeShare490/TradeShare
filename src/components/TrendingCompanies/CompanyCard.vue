@@ -1,7 +1,7 @@
 <template>
   <v-list-item data-cy="company-card">
     <v-list-item-content class="text-left ml-3">
-      <v-list-item-title>
+      <v-list-item-title class="font-weight-bold">
         {{ company }}
       </v-list-item-title>
       <v-list-item-title>

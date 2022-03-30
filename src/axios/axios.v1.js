@@ -6,8 +6,8 @@ const HOST_BY_MODE = {
 }
 
 const HOST = HOST_BY_MODE[process.env.NODE_ENV] || '//localhost:5000/api/v1'
-const axiosInstace = axios.create({
+const axiosInstance = axios.create({
   baseURL: `${HOST}`
 })
 
-export default axiosInstace
+export default axiosInstance

@@ -31,7 +31,7 @@
           @keyup.enter="submit"
         />
         <p class="text-body-2 text-right">
-          <router-link to="">
+          <router-link to="forgotpasswordemail">
             Forgot Password
           </router-link>
         </p>
@@ -97,10 +97,8 @@ export default {
           }
         }
         try {
-          console.log('calling')
           await login(payload, this.$store, this.$router)
         } catch (e) {
-          console.log('!@!!')
           this.error = e
         }
       }
