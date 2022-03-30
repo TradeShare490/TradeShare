@@ -34,7 +34,6 @@ describe("Profile component can ", () => {
     cy.get("[data-cy=profile-num-following]").should("be.visible");
     cy.get("[data-cy=other-dashboard-recents]").should("be.visible");
     cy.get("[data-cy=other-dashboard-positions]").should("be.visible");
-    cy.get("[data-cy=other-dashboard-holdings]").should("be.visible");
     cy.get("[data-cy=other-dashboard-equities]").should("be.visible");
   });
 });
