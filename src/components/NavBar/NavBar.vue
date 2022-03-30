@@ -223,7 +223,6 @@ export default {
       logout(this.$store, this.$router)
     },
     redirect (symbol) {
-      console.log('redirect ' + symbol)
       const regex = /^\S+$/
       if (regex.test(symbol)) {
         window.open('https://finance.yahoo.com/quote/' + symbol)
