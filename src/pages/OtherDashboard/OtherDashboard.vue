@@ -137,6 +137,7 @@ import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
 import { useDashboardMixin } from '../../hooks/useDashboardMixin.js'
+import { utils } from '../../services/utils'
 
 export default {
   name: 'OtherDashboard',
@@ -147,18 +148,17 @@ export default {
     LineChartContainer,
     Holdings
   },
-  mixins: [useDashboardMixin],
+  mixins: [useDashboardMixin, utils],
   data () {
     return {
       userId: this.$route.params.id,
       userInfo: null,
       info: {},
-      // account: Object,
+      account: Object,
       ostocks: [],
       followNum: [],
       isFollowingByUser: false,
       activities: []
-      // holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
     }
   },
   computed: {
@@ -192,34 +192,6 @@ export default {
       } finally {
         this.handleHoldingPieChartData()
       }
-    },
-    timeSince (date) {
-      const time = new Date(date).getTime() / 1000
-
-      const seconds = Math.floor(((new Date().getTime() / 1000 - time)))
-
-      let interval = seconds / 31536000
-
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a year ago' : Math.floor(interval) + ' years ago'
-      }
-      interval = seconds / 2592000
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a month ago' : Math.floor(interval) + ' months ago'
-      }
-      interval = seconds / 86400
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a day ago' : Math.floor(interval) + ' days ago'
-      }
-      interval = seconds / 3600
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' an hour ago' : Math.floor(interval) + ' hours ago'
-      }
-      interval = seconds / 60
-      if (interval > 1) {
-        return Math.floor(interval) === 1 ? ' a minute ago' : Math.floor(interval) + ' minutes ago'
-      }
-      return Math.floor(interval) === 1 ? ' a second ago' : Math.floor(interval) + ' seconds ago'
     }
   }
 }
