@@ -67,7 +67,6 @@ export default {
             subject: 'TradeShare: Forgot Password',
             text: `Change your password in the following link http://localhost:8081/forgotpassword/userId=${UserInfo.data.data[0].userId}`
           }
-          print('sending MailOption to mailer')
           console.log(MailOption.text)
           return await axiosInstance.post('/mailer', MailOption)
         } catch (e) {
