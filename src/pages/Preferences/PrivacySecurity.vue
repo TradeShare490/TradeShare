@@ -181,7 +181,10 @@
             <SearchViewBy :search-list="blockedList" />
           </v-col>
         </v-row>
-        <div :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'">
+        <div
+          :key="componentKey"
+          :class="$vuetify.breakpoint.xsOnly ? 'mb-5' : 'mb-10'"
+        >
           <v-row
             v-for="(blocked, i) in blockedList"
             :key="i"
@@ -196,6 +199,7 @@
                 color="primary"
                 :ripple="false"
                 class="text pa-0"
+                @click="unblock(i)"
               >
                 Unblock
               </v-btn>
@@ -205,7 +209,7 @@
               class=" mt-2 d-flex justify-start"
             >
               <span id="truncate">
-                {{ blocked }}
+                {{ blocked.username }}
               </span>
             </v-col>
           </v-row>
@@ -319,8 +323,10 @@ export default {
   components: { SearchViewBy },
   data () {
     return {
+      componentKey: 0,
+      user: null,
       privateAccount: false,
-      blockedList: this.$store.getters.blockedUsers,
+      blockedList: [],
       favoriteList: this.$store.getters.favoriteUsers,
       loginActivity: this.$store.getters.loginActivity,
       timeout: 1500,
@@ -329,11 +335,30 @@ export default {
     }
   },
   created () {
-    this.privateAccount = JSON.parse(localStorage.getItem('user')).isPrivate
+    this.initialize()
   },
   methods: {
+    forceRerender () {
+      this.componentKey += 1
+    },
+    async initialize () {
+      this.user = JSON.parse(localStorage.getItem('user'))
+      this.privateAccount = this.user.isPrivate
+      this.blockedList = await UserService.getBlockedUsers(this.user.userId)
+    },
     savePassword () {
       this.snackbar = true
+    },
+    async unblock (index) {
+      const credentials = {
+        targetId: this.blockedList.at(index).id,
+        actorId: this.user.userId
+      }
+      const success = await UserService.unblockUser(credentials)
+      if (success) {
+        this.$delete(this.blockedList, index)
+        this.forceRerender()
+      }
     },
     async togglePrivacy () {
       UserService.togglePrivacy(JSON.parse(localStorage.getItem('user')).userId, this.$store, this.privateAccount)

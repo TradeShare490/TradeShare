@@ -1,5 +1,5 @@
 <template>
-  <div v-if="userInfo">
+  <div v-if="userInfo && !blocked && !isLoading">
     <v-container
       class="ma-0"
       fluid
@@ -103,11 +103,22 @@
     </v-container>
   </div>
   <div
-    v-else-if="info.blocked"
+    v-else-if="isLoading"
+    class="mt-10"
+  >
+    <v-progress-circular
+      :size="50"
+      color="primary"
+      indeterminate
+      :width="7"
+    />
+  </div>
+  <div
+    v-else-if="blocked"
     class="mt-10"
   >
     <h2>
-      User has been blocked
+      User blocked your account
     </h2>
   </div>
   <div
@@ -151,6 +162,8 @@ export default {
   mixins: [useDashboardMixin, utils],
   data () {
     return {
+      isLoading: false,
+      blocked: false,
       userId: this.$route.params.id,
       userInfo: null,
       info: {},
@@ -158,7 +171,8 @@ export default {
       ostocks: [],
       followNum: [],
       isFollowingByUser: false,
-      activities: []
+      activities: [],
+      blockedUsers: []
     }
   },
   computed: {
@@ -172,12 +186,15 @@ export default {
   methods: {
     async initialize () {
       try {
+        this.isLoading = true
         this.userInfo = await UserService.getUserInfo(this.userId)
         this.account = await UserService.getAccount(this.userInfo.userId)
         this.ostocks = await UserService.getPositions(this.userInfo.userId)
         this.followNum = await UserService.getFollowNum(this.userInfo.userId)
         this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
         this.activities = await UserService.getActivities(this.userInfo.userId)
+        this.blockedUsers = await UserService.getBlockedUsers(this.userInfo.userId, true)
+        this.blocked = this.blockedUsers.includes(JSON.parse(localStorage.getItem('user')).userId)
         this.info = {
           ...this.userInfo,
           numFollowers: this.followNum.numFollower,
@@ -191,6 +208,7 @@ export default {
         console.log(otherDashboardErr)
       } finally {
         this.handleHoldingPieChartData()
+        this.isLoading = false
       }
     }
   }
