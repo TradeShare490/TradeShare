@@ -88,8 +88,6 @@ class UserService {
   /* istanbul ignore next */
   async isFollowed (targetID) {
     console.log('USER SERVICE ' + targetID)
-    console.log((store.state.user.following))
-    console.log((store.state.user.following).includes(targetID))
     return (store.state.user.following).includes(targetID)
   }
 
@@ -265,9 +263,6 @@ class UserService {
       const { data } = await axios.patch('/userInfo/alpaca/' + userId, {
         code: code
       })
-      console.log(data.message)
-
-      // should be a good response here, but double check for sure
       return { data }
     } catch (err) {
       console.log(err)

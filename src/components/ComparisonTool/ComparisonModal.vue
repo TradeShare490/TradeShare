@@ -313,7 +313,6 @@ export default {
   methods: {
 
     handleInput () {
-      console.log(this.radios)
       const today = this.getTodaysDate
       let start = ''
       let end = ''

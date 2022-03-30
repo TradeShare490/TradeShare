@@ -62,7 +62,6 @@
       <v-btn
         icon
         class="Notification mt-1"
-        @click="test"
       >
         <template>
           <div>
@@ -190,7 +189,6 @@ export default {
     async search (val) {
       // Checks if the user has typed anything in the last 2 seconds if not make a request to backend
       if (val?.charAt(0) === '@') {
-        console.log('Username mode')
         this.searchModeUsers = true
       } else {
         this.searchModeUsers = false
@@ -221,9 +219,6 @@ export default {
     }
   },
   methods: {
-    test () {
-      console.log('NOTIFICATION @CLICK')
-    },
     submit () {
       logout(this.$store, this.$router)
     },
