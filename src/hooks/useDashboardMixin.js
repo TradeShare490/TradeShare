@@ -2,10 +2,7 @@
 export const useDashboardMixin = {
   data () {
     return {
-      account: Object,
-      activities: [],
       holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
-
     }
   },
   computed: {
