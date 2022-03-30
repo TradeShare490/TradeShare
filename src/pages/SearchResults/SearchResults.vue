@@ -114,7 +114,7 @@ export default {
   methods: {
     async pullPeople () {
       try {
-        const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}&limit=10`)
+        const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}`)
         const list = response.data.data
         console.log(list)
         for (let index = 0; index < list.length; index++) {
