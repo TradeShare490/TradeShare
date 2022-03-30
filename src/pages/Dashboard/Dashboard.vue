@@ -156,7 +156,12 @@ export default {
   },
   computed: {
     user () {
-      return JSON.parse(localStorage.getItem('user'))
+      return JSON.parse(localStorage.getItem('user')) || {
+        username: 'janedoe',
+        userId: '618b2883418c2006690b69be',
+        firstname: 'Jane',
+        lastname: 'Doe'
+      }
     },
     dailyChange () {
       return (((this.account.equity - this.account.last_equity) * 100) / this.account.last_equity).toFixed(2).toString()
