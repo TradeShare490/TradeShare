@@ -93,7 +93,6 @@
                 <div :class="{ 'd-flex flex-row-reverse': msg.me }">
                   <v-menu offset-y>
                     <template #activator="{}">
-                      <!-- needed for messages to be displayed -->
                       <v-chip
                         style="
                           height: auto;

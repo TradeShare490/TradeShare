@@ -44,7 +44,6 @@
           auto-select-first
           @click="load"
         >
-          <!-- @update:search-input="(val) => (search = val)" -->
           <template #item="data">
             <v-list-item
               class="text-left text-body-2"
@@ -95,15 +94,6 @@ export default {
     },
     redirect (d) {
       this.$router.push('/dashboard/' + d.item.id)
-    },
-    querySelections (v) {
-      // this.isLoading = true
-      // setTimeout(() => {
-      //   this.users = this.list.filter((e) => {
-      //     return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-      //   })
-      //   this.isLoading = false
-      // }, 500)
     },
     customFilter (item, queryText, itemText) {
       const textOne = item.name.toLowerCase()
