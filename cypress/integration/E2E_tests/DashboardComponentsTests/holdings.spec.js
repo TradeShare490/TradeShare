@@ -1,7 +1,7 @@
-describe("On the dashbooard page, Dashboard can", () => {
+describe("On the dashboard page, Dashboard can", () => {
   before(() => {
     cy.login();
-    cy.wait(2000);
+    cy.wait(5000);
   });
   it("display account summary", () => {
     cy.get("[data-cy=portfolio-value-card]").should("be.visible");

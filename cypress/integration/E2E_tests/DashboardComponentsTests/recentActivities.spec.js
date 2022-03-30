@@ -1,7 +1,7 @@
 describe('Recent Activities component can', () => {
     before(() => {
         cy.login();
-        cy.wait(2000);
+        cy.wait(5000);
     })
     it('display recent activity box', () => {
         cy.get("[data-cy=recent-trades-card]").should("be.visible");

@@ -2,12 +2,7 @@
 describe("On comparison page, can", () => {
   it("open the modal", () => {
     cy.login();
-    cy.wait(2000);
-    cy.fixture("url").then((jsonFile) => {
-      cy.visit(
-        `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.DASHBOARD}`
-      );
-    });
+    cy.wait(5000);
     cy.get("[data-cy=modal-activate]").click();
     cy.get("[data-cy=modal]").should("be.visible");
   });
