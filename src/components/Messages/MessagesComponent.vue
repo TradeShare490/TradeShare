@@ -197,8 +197,6 @@ export default {
     const username = JSON.parse(localStorage.getItem('user')).username
     socket.auth = { username }
     socket.connect()
-    socket.on('connect', () => {
-    })
     socket.emit('addUser', username)
     socket.on('getMessage', (data) => {
       this.messages.push({
