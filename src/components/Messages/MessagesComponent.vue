@@ -193,14 +193,9 @@ export default {
     this.$nextTick(() => this.scrollToBottom())
   },
   created () {
-    console.log(JSON.parse(localStorage.getItem('user')).username)
     const username = JSON.parse(localStorage.getItem('user')).username
     socket.auth = { username }
     socket.connect()
-    console.log('check 1', socket.connected)
-    socket.on('connect', () => {
-      console.log('check 2', socket.connected)
-    })
     socket.emit('addUser', username)
     socket.on('getMessage', (data) => {
       this.messages.push({
