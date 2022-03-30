@@ -250,7 +250,7 @@ export default {
         this.snackbarBlocked = true
         this.blocked = true
       }
-
+    },
     updateFavorites () {
       if (this.list.length <= 5) {
         this.favorite = !this.favorite
