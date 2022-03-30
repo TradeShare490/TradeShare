@@ -19,9 +19,6 @@
         order-lg="2"
         order-xl="2"
       >
-        <v-btn @click="test">
-          TEST
-        </v-btn>
         <v-autocomplete
           v-model="select"
           dense
@@ -45,13 +42,13 @@
           data-cy="search"
           :filter="customFilter"
           auto-select-first
-          @click="test"
+          @click="load"
         >
           <!-- @update:search-input="(val) => (search = val)" -->
           <template #item="data">
             <v-list-item
               class="text-left text-body-2"
-              data-cy="autocomplete-list-item"
+              data-cy="search-result"
               @click="redirect(data)"
             >
               {{ data.item.name }}
@@ -85,49 +82,21 @@ export default {
   watch: {
     search (val) {
       this.users = []
-      console.log('search->' + val)
       val && val !== this.select && this.querySelections(val)
     }
   },
-  created () {
-    this.initialize()
-  },
   methods: {
-    async initialize () {
-      // console.log('SearchViewBy.initialize()')
-      // console.log('this.list')
-      // console.log(this.list)
-      // this.users = this.list
-      // console.log('end initialize')
-      // console.log(this.users)
-    },
-    test () {
-      console.log('test()')
-      console.log(this.list)
+    load () {
       const tempArray = []
       this.list.forEach(el => {
-        tempArray.push({ name: el.firstname + ' ' + el.lastname, username: el.username, id: el.id })
-        // el.name = el.firstname + ' ' + el.lastname
-        // delete el.currentlyfollowing
-        // delete el.firstname
-        // delete el.lastname
-        // console.log(el)
+        tempArray.push({ name: (el.firstname + ' ' + el.lastname).trim(), username: el.username, id: el.id })
       })
-      console.log('tempArray')
-      console.log(tempArray)
       this.users = tempArray
-      console.log(this.users)
     },
     redirect (d) {
-      console.log('redirect ')
-      console.log(d)
-      console.log(d.item.username)
-      console.log(d.item.name)
-      console.log(d.item.id)
       this.$router.push('/dashboard/' + d.item.id)
     },
     querySelections (v) {
-      console.log('querySelections()->' + v)
       // this.isLoading = true
       // setTimeout(() => {
       //   this.users = this.list.filter((e) => {
@@ -137,14 +106,9 @@ export default {
       // }, 500)
     },
     customFilter (item, queryText, itemText) {
-      console.log('customFilter')
-      console.log(item)
-      console.log(queryText)
-      console.log(itemText)
       const textOne = item.name.toLowerCase()
       const textTwo = item.username.toLowerCase()
       const searchText = queryText.toLowerCase()
-
       return textOne.indexOf(searchText) > -1 ||
           textTwo.indexOf(searchText) > -1
     }

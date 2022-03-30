@@ -256,7 +256,6 @@ export default {
       return size ? { [size]: true } : {}
     },
     requestStatusFinishComputed () {
-      console.log('requestStatusFinishComputed ' + (this.requestStatusFinish === true))
       return this.requestStatusFinish === true
     },
     disable () {
@@ -265,14 +264,8 @@ export default {
   },
   methods: {
     async handleFollow () {
-      console.log('handleFollow private===' + this.isPrivate)
-      if (this.isPrivate) {
-        console.log('this is a private acc')
-        this.sendFollowRequest()
-        console.log(this.userStat)
-      } else {
-        this.follow(0)
-      }
+      if (this.isPrivate) this.sendFollowRequest()
+      else this.follow(0)
     },
     async handleUnfollow () {
       this.unfollow(0)

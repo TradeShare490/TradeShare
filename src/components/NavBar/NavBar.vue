@@ -62,7 +62,6 @@
       <v-btn
         icon
         class="Notification mt-1"
-        @click="test"
       >
         <template>
           <div>
@@ -221,9 +220,6 @@ export default {
     }
   },
   methods: {
-    test () {
-      console.log('NOTIFICATION @CLICK')
-    },
     submit () {
       logout(this.$store, this.$router)
     },

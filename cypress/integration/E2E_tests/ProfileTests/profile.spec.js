@@ -15,12 +15,12 @@ describe("Profile component can ", () => {
       if ($body.find("[data-cy=follow]").length > 0) {
         // checking if it is the "follow" button
         cy.get("[data-cy=follow]").click();
-        cy.wait(3000); // waiting in case it requires time to update button to "following" button
+        cy.wait(2000); // waiting in case it requires time to update button to "following" button
         cy.get("[data-cy=following]"); // checking that it switched the button to "following"
       } else {
         // this means it was "following" button initially
         cy.get("[data-cy=following]").click();
-        cy.wait(3000);
+        cy.wait(1000);
         cy.get("[data-cy=follow]");
       }
     });
@@ -32,5 +32,9 @@ describe("Profile component can ", () => {
     cy.get("[data-cy=basic-profile-info]").should("be.visible");
     cy.get("[data-cy=profile-num-followers]").should("be.visible");
     cy.get("[data-cy=profile-num-following]").should("be.visible");
+    cy.get("[data-cy=other-dashboard-recents]").should("be.visible");
+    cy.get("[data-cy=other-dashboard-positions]").should("be.visible");
+    cy.get("[data-cy=other-dashboard-holdings]").should("be.visible");
+    cy.get("[data-cy=other-dashboard-equities]").should("be.visible");
   });
 });

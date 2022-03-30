@@ -163,8 +163,6 @@ export default {
       return JSON.parse(localStorage.getItem('user'))
     },
     holdingData () {
-      console.log('holdingPieChartData computed ')
-      console.log(this.holdingPieChartData)
       return this.holdingPieChartData
     }
   },
@@ -176,12 +174,9 @@ export default {
       try {
         this.account = await UserService.getAccount(this.user.userId)
         this.stocks = await UserService.getPositions(this.user.userId)
-        console.log('this.stocks')
-        console.log(this.stocks)
       } catch (err) {
         console.log(err)
       } finally {
-        console.log('FINALLY')
         this.handleHoldingPieChartData()
       }
     },
@@ -200,8 +195,6 @@ export default {
           sumOption += Number(stock.market_value)
         }
       })
-      console.log('handleHoldingPieChartData')
-      console.log(this.holdingPieChartData)
       this.holdingPieChartData.sumCash = sumCash
       this.holdingPieChartData.numEquity = numEquity
       this.holdingPieChartData.sumEquity = sumEquity

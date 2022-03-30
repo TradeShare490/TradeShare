@@ -100,9 +100,6 @@
         </div>
       </v-tab-item>
     </v-tabs>
-    <v-btn @click="test">
-      FOLLOWER
-    </v-btn>
   </div>
 </template>
 
@@ -132,13 +129,6 @@ export default {
     async initialize () {
       this.getFollowersHook(this.user.userId)
       this.getFollowRequestHook(this.user.userId)
-    },
-    test () {
-      console.log('test')
-      console.log(this.followers)
-      // console.log(this.followers.length)
-      console.log(this.requests)
-      console.log(this.requests.length)
     }
   }
 }

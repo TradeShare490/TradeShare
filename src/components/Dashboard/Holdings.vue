@@ -13,21 +13,12 @@
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 text-left"
-              @click="test"
             >
               Holdings
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-col>
-      <!-- <v-col
-        cols="2"
-        class="d-flex align-center pt-0 justify-end"
-      >
-        <v-icon class="float-right">
-          mdi-reload
-        </v-icon>
-      </v-col> -->
     </v-row>
     <v-divider />
     <v-row class="py-4">
@@ -110,32 +101,6 @@
       </v-col>
       <v-spacer />
     </v-row>
-    <!-- <v-row>
-      <v-col
-        cols="6"
-        class="d-flex align-center pl-10"
-        data-cy="holdings-last-7-days"
-      >
-        <p class="text-subtitle-2 align-center ma-0">
-          Last 7 days
-        </p>
-        <v-icon>arrow_right</v-icon>
-      </v-col>
-      <v-col
-        cols="6"
-        class="d-flex align-center pr-10"
-        data-cy="holdings-breakdown"
-      >
-        <v-list-item class="px-0">
-          <v-list-item-content>
-            <v-list-item-title class="text-subtitle-2 text-right">
-              Breakdown
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-icon>arrow_right</v-icon>
-      </v-col>
-    </v-row> -->
   </v-card>
 </template>
 
@@ -157,20 +122,11 @@ export default {
   },
   data () {
     return {
-      // equities: this.holdingsData.numEquity,
-      // cash: this.holdingsData.sumCash,
-      // options: this.holdingsData.numOption,
       pieChart: {
         width: '50%'
       }
     }
   },
-  // <HoldingsPieChart
-  //           :equities="holdingsData.sumEquity"
-  //           :cash="holdingsData.sumCash"
-  //           :options="holdingsData.sumOption"
-  //           data-cy="pie-chart"
-  //         />
   computed: {
     equities () {
       return this.holdingsData.numEquity
@@ -185,27 +141,10 @@ export default {
       return this.holdingsData.numOption
     },
     equitiesVal () {
-      console.log('equitiesVal ' + this.holdingsData.sumEquity)
       return this.holdingsData.sumEquity
     },
     optionsVal () {
-      console.log('optionsVal ' + this.holdingsData.sumOption)
       return this.holdingsData.sumOption
-    }
-  },
-  methods: {
-    test () {
-      console.log(this.holdingsData)
-      console.log(this.holdingsData.sumCash)
-      console.log(this.holdingsData.sumEquity)
-      console.log(this.holdingsData.sumOption)
-      console.log('===')
-      console.log(this.equities)
-      console.log(this.cash)
-      console.log(this.options)
-      console.log('---')
-      console.log(this.equitiesVal)
-      console.log(this.optionsVal)
     }
   }
 }

@@ -22,6 +22,7 @@
               :user-id="userId"
               :user-name="userInfo.username"
               :compare-me="true"
+              data-cy="other-dashboard-equities"
             />
           </v-col>
           <v-col
@@ -36,7 +37,10 @@
             md="4"
             lg="3"
           >
-            <Holdings :holdings-data="holdingData" />
+            <Holdings
+              :holdings-data="holdingData"
+              data-cy="other-dashboard-holdings"
+            />
           </v-col>
         </v-row>
         <v-row>
@@ -48,6 +52,7 @@
             <v-card min-width="350">
               <Positions
                 :stocks-data="stocks"
+                data-cy="other-dashboard-positions"
               />
             </v-card>
           </v-col>
@@ -78,6 +83,7 @@
                     :company="'Quantity:' + trade.qty"
                     :purchased="trade.side === 'buy'"
                     :when="timeSince(trade.transaction_time)"
+                    data-cy="other-dashboard-recents"
                   />
                 </div>
               </v-card>
@@ -156,7 +162,6 @@ export default {
   },
   computed: {
     showData () {
-      console.log(`Private and Show: ${!this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)}`)
       return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
     },
     holdingData () {
@@ -169,9 +174,7 @@ export default {
   methods: {
     async initialize () {
       try {
-        console.log('OTHER init')
         this.userInfo = await UserService.getUserInfo(this.userId)
-        console.log(this.userInfo)
         this.account = await UserService.getAccount(this.userInfo.userId)
         this.stocks = await UserService.getPositions(this.userInfo.userId)
         this.followNum = await UserService.getFollowNum(this.userInfo.userId)
@@ -189,7 +192,6 @@ export default {
       } catch (err) {
         console.log(err)
       } finally {
-        console.log('FINALLY')
         this.handleHoldingPieChartData()
       }
     },
@@ -236,14 +238,11 @@ export default {
           sumOption += Number(stock.market_value)
         }
       })
-      console.log('handleHoldingPieChartData')
-      console.log(this.holdingPieChartData)
       this.holdingPieChartData.sumCash = sumCash
       this.holdingPieChartData.numEquity = numEquity
       this.holdingPieChartData.sumEquity = sumEquity
       this.holdingPieChartData.numOption = numOption
       this.holdingPieChartData.sumOption = sumOption
-      console.log('END∂ß')
     }
   }
 }

@@ -15,7 +15,6 @@
           class="profile"
           color="grey"
           size="65%"
-          @click="test"
         >
           <v-img :src="image" />
         </v-avatar>
@@ -247,10 +246,6 @@ export default {
     }
   },
   methods: {
-    test () {
-      console.log('profile.test()')
-      console.log('private?' + this.isPrivate)
-    },
     message () {
       console.log('sending a message...')
     },
@@ -259,15 +254,8 @@ export default {
       this.blocked = true
     },
     async handleFollow () {
-      console.log('handleFollow private===' + this.isPrivate)
-      if (this.isPrivate) {
-        console.log('this is a private acc')
-        this.sendFollowRequest()
-
-        console.log(this.userStat)
-      } else {
-        this.follow(1)
-      }
+      if (this.isPrivate) this.sendFollowRequest()
+      else this.follow(1)
     },
     async handleUnfollow () {
       this.unfollow(1)

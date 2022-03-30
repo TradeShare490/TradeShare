@@ -45,9 +45,6 @@
         </v-container>
       </div>
     </div>
-    <v-btn @click="test">
-      FOLLOWING
-    </v-btn>
   </div>
 </template>
 
@@ -75,11 +72,6 @@ export default {
   methods: {
     async initialize () {
       this.getFollowingsHook(this.user.userId)
-    },
-    test () {
-      console.log('following test ()')
-      console.log(this.followings)
-      console.log(this.followings[0].firstname + ' ' + this.followings[0].lastname)
     }
   }
 }
