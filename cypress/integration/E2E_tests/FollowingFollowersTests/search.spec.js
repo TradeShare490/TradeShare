@@ -12,6 +12,5 @@ describe("On the following page, can", () => {
     cy.get("[data-cy=search]")
       .click()
       .type("ken")
-    cy.get("[data-cy=search-result]").should("be.visible");
   });
 });
