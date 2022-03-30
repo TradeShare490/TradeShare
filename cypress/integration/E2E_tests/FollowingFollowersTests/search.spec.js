@@ -16,6 +16,5 @@ describe("On the following page, can", () => {
       .type("{downarrow}")
       .type("{downarrow}")
       .type("{enter}");
-    // cy.get("[data-cy=search]").should("have.value", "Mary Winchester");
   });
 });
