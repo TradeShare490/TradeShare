@@ -101,15 +101,7 @@ export default {
   data () {
     return {
       keyword: this.$route.params.keyword,
-      followings: [{
-        id: '0',
-        currentlyfollowing: true,
-        firstname: 'Tom',
-        lastname: 'Brady',
-        username: 'yourMother',
-        image: 'https://randomuser.me/api/portraits/men/2.jpg'
-
-      }],
+      followings: [],
       users: [],
       stocks: [],
       isLoading: false
@@ -132,8 +124,7 @@ export default {
             currentlyfollowing: isFollowing,
             firstname: list[index].firstname,
             lastname: list[index].lastname,
-            username: list[index].username,
-            image: 'https://randomuser.me/api/portraits/men/15.jpg'
+            username: list[index].username
           }
           if (isFollowing) {
             this.followings.push(userInfo)
@@ -156,7 +147,7 @@ export default {
             id: (index + 1).toString,
             name: list[index]['2. name'],
             ticker: list[index]['1. symbol'],
-            logo: 'https://randomuser.me/api/portraits/men/15.jpg'
+            logo: ''
           }
           this.stocks.push(companyInfo)
         }
