@@ -8,7 +8,7 @@
         <Profile
           :otheruser="info"
           :currentlyfollowing="isFollowingByUser"
-          :is-private="!showData"
+          :is-private="info.isPrivate"
         />
       </div>
       <div v-if="showData">
@@ -169,7 +169,9 @@ export default {
   methods: {
     async initialize () {
       try {
+        console.log('OTHER init')
         this.userInfo = await UserService.getUserInfo(this.userId)
+        console.log(this.userInfo)
         this.account = await UserService.getAccount(this.userInfo.userId)
         this.stocks = await UserService.getPositions(this.userInfo.userId)
         this.followNum = await UserService.getFollowNum(this.userInfo.userId)

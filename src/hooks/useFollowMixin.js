@@ -12,6 +12,7 @@ export const useFollowMixin = {
   },
   methods: {
     async refreshFollowList (id) {
+      console.log('refreshFollowList')
       this.$store.state.user.following = await UserService.getFollowingsRaw(id)
       this.$store.state.user.followers = await UserService.getFollowersRaw(id)
       console.log(this.$store.state.user.following)
@@ -39,11 +40,13 @@ export const useFollowMixin = {
       console.log(this.isLoading + ' ----------------- >>> ')
       try {
         this.followers = await UserService.getFollowers(id)
+        console.log('update this.followers')
+        console.log(this.followers)
       } catch (err) {
         console.log(err)
       } finally {
         this.isLoadingFollower = false
-        console.log(this.isLoading + ' <<< ----------------- >>> ')
+        // console.log(this.isLoading + ' <<< ----------------- >>> ')
       }
     },
     // To-DO
@@ -56,6 +59,8 @@ export const useFollowMixin = {
         //   { id: 'id1', currentlyfollowing: false, firstname: 'dummy1', lastname: 'dummy1', username: 'dummy1', isPrivate: false },
         //   { id: 'id2', currentlyfollowing: true, firstname: 'dummy2', lastname: 'dummy2', username: 'dummy2', isPrivate: true }
         // ]
+        console.log('update this.requests')
+        console.log(this.requests)
       } catch (err) {
         console.log(err)
       } finally {
@@ -76,53 +81,33 @@ export const useFollowMixin = {
         const response = await UserService.addFollowRequest(credentials)
         console.log(response)
         if (response.success) {
-          this.userStat.sentFollowRequest = true
           this.toogleSnackbar('Sent follow request to ' + this.name)
         }
       } catch (err) {
         console.log(err)
         this.toogleSnackbar('Failed to perform action', 'error')
-      }
-    },
-    async removeFollowRequestHook (credentials) {
-      try {
-        const response1 = await UserService.removeFollowRequest(credentials)
-        if (response1.success) {
-          this.requestStatusFinish = true
-          console.log('removed request')
-          console.log(this.requestStatusFinish)
-          // this.$destroy()
-          // this.$el.parentNode.removeChild(this.$el)
-        }
-      } catch (err) {
-        console.log(err)
-        this.toogleSnackbar('Failed to perform action', 'error')
+      } finally {
+        this.userStat.sentFollowRequest = true
       }
     },
 
-    async rejectFollowPrivate () {
-      console.log('mixin.rejectFollowPrivate')
-      const credentials = {
-        actorId: this.id,
-        targetId: this.user.userId
-      }
-      console.log(credentials)
+    async rejectFollowPrivate (requestId) {
+      console.log('mixin.rejectFollowPrivate ' + requestId)
       try {
-        // this.user.following.push(this.id)
-        // this.$store.state.user.following.push(this.id)
-        // const lsUser = JSON.parse(localStorage.getItem('user'))
-        // if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
-        // localStorage.setItem('user', JSON.stringify(lsUser))
-        await this.removeFollowRequestHook(credentials)
-        this.toogleSnackbar('Rejected request')
+        const response = await UserService.rejectFollowRequest(requestId)
+        console.log(response)
+        if (response.success) {
+          this.requestStatusFinish = true
+          this.toogleSnackbar('Rejected request')
+        }
       } catch (e) {
         console.log(e)
         this.toogleSnackbar('Failed to perform action', 'error')
       }
     },
     // TO-DO
-    async approveFollowPrivate () {
-      console.log('mixin.followPrivate ')
+    async approveFollowPrivate (requestId) {
+      console.log('mixin.followPrivate ' + requestId)
       const credentials = {
         actorId: this.id,
         targetId: this.user.userId,
@@ -130,18 +115,27 @@ export const useFollowMixin = {
       }
       console.log(credentials)
       try {
-        // const response = await UserService.postFollow(credentials)
-        // console.log(response)
-        // if (response.success) {
-        // eslint-disable-next-line no-constant-condition
-        if (true) {
-          // TO-DO MAKE BTN APPROVED
-          // this.user.following.push(this.id)
-          // this.$store.state.user.following.push(this.id)
-          // const lsUser = JSON.parse(localStorage.getItem('user'))
-          // if (lsUser.following.indexOf(this.id) === -1) lsUser.following.push(this.id)
-          // localStorage.setItem('user', JSON.stringify(lsUser))
-          this.removeFollowRequestHook(credentials)
+        console.log('calling follow with bypass credentials')
+        // NOO const response = await UserService.postFollow(credentials)
+        const response = await UserService.acceptFollowRequest(credentials, requestId)
+        console.log(response)
+        if (response.success) {
+          this.user.followers.push(this.id)
+          this.$store.state.user.followers.push(this.id)
+          const lsUser = JSON.parse(localStorage.getItem('user'))
+          if (lsUser.followers.indexOf(this.id) === -1) lsUser.followers.push(this.id)
+          localStorage.setItem('user', JSON.stringify(lsUser))
+          console.log(this.$store.state.user.followers)
+          // const userInfo = await UserService.getUserInfo(this.id)
+          // console.log('userInfo')
+          // console.log(userInfo)
+          // const obj = { id: userInfo.userId, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
+          // console.log(obj)
+          // console.log(this.followers)
+          // this.followers.push(obj)
+          this.getFollowersHook(this.$store.state.user.userId)
+          this.requestStatusFinish = true
+          this.$router.go()
           this.toogleSnackbar('Approved request')
         }
       } catch (e) {

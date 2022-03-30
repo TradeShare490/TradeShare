@@ -30,7 +30,7 @@
           />
         </div>
         <div v-else>
-          <div v-if="followers.length!=0">
+          <div v-if="followers && followers.length!=0">
             <div
               v-for="(follower, i) in followers"
               :key="i"
@@ -78,6 +78,7 @@
               :username="request.username"
               :requestblock="true"
               :is-private="request.isPrivate"
+              :request-id="request.requestId"
             />
           </div>
         </div>
@@ -135,6 +136,9 @@ export default {
     test () {
       console.log('test')
       console.log(this.followers)
+      // console.log(this.followers.length)
+      console.log(this.requests)
+      console.log(this.requests.length)
     }
   }
 }

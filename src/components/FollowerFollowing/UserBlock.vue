@@ -226,6 +226,10 @@ export default {
     isPrivate: {
       type: Boolean,
       default: false
+    },
+    requestId: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -265,7 +269,6 @@ export default {
       if (this.isPrivate) {
         console.log('this is a private acc')
         this.sendFollowRequest()
-        this.userStat.sentFollowRequest = true
         console.log(this.userStat)
       } else {
         this.follow(0)
@@ -275,10 +278,10 @@ export default {
       this.unfollow(0)
     },
     async handleConfirmFollowRequest () {
-      this.approveFollowPrivate()
+      this.approveFollowPrivate(this.requestId)
     },
     async handleRejectFollowRequest () {
-      this.rejectFollowPrivate()
+      this.rejectFollowPrivate(this.requestId)
     }
   }
 }

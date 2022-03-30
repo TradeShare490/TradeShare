@@ -263,7 +263,7 @@ export default {
       if (this.isPrivate) {
         console.log('this is a private acc')
         this.sendFollowRequest()
-        this.userStat.sentFollowRequest = true
+
         console.log(this.userStat)
       } else {
         this.follow(1)
