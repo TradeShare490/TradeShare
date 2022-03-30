@@ -111,7 +111,6 @@ export default {
       }
     },
     updateChat (conversationId, content) {
-      console.log('lmao')
       this.chats = this.chats.map((chat) => {
         if (chat.id === conversationId) {
           return { ...chat, latestMessage: content }

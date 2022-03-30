@@ -144,7 +144,6 @@ export default {
   },
   computed: {
     showData () {
-      console.log(`Private and Show: ${!this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)}`)
       return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
     }
   },

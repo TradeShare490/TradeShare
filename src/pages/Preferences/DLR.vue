@@ -137,11 +137,9 @@ export default {
   methods: {
     saveLanguage () {
       this.snackbar1 = true
-      console.log('Language saved: ' + this.selectLanguage.languageName)
     },
     saveRegion () {
       this.snackbar2 = true
-      console.log('Region saved: ' + this.selectRegion.regionName)
     }
   }
 }

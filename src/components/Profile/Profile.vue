@@ -184,7 +184,6 @@
             color="primary"
             :ripple="false"
             data-cy="message"
-            @click="message"
           >
             Send a Message
           </v-btn>
@@ -236,9 +235,6 @@ export default {
     }
   },
   methods: {
-    message () {
-      console.log('sending a message...')
-    },
     blockUser () {
       this.snackbar = true
       this.blocked = true
