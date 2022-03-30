@@ -9,7 +9,7 @@
         class="pl-4 pr-3"
       >
         <router-link
-          :to="dashboard/{id}"
+          :to="router"
           class="grey--text"
           style="text-decoration: none; font-size: 12px"
         >
