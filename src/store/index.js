@@ -32,8 +32,6 @@ export default new Vuex.Store({
   },
   actions: {
     async login ({ commit }, credentials) {
-      console.log('login')
-      console.log(credentials)
       const { data } = await axios.post('/session', credentials)
       await axios.get('/following/follows/' + data.userInfo.userId, { headers: { Authorization: `Bearer ${data.accessToken}` } })
         .then(response => {

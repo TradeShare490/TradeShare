@@ -50,7 +50,6 @@ class UserService {
   // TO-DO for private account
   /* istanbul ignore next */
   async postFollow (credentials) {
-    console.log('service.postFollow')
     try {
       const config = {
         headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
@@ -93,10 +92,7 @@ class UserService {
     return (store.state.user.following).includes(targetID)
   }
 
-  // TO-DO
-  // ADD REQUEST TO ACCOUNT
   async addFollowRequest (credentials) {
-    console.log('service.addFollowRequest ' + credentials.targetId)
     try {
       const config = {
         headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
@@ -228,7 +224,6 @@ class UserService {
 
   /* istanbul ignore next */
   async getFollowings (userId) {
-    console.log('getFOllowings ')
     const followingList = []
     let followingsData = null
     const config = {
