@@ -158,7 +158,7 @@
               </v-icon>
             </v-btn>
             <v-snackbar
-              v-model="snackbarFollow"
+              v-model="snackbarBlocked"
               :timeout="snackbarTimeout"
               :color="snackbarColor"
             >
@@ -195,6 +195,7 @@
 
 <script>
 import { useFollowMixin } from '../../hooks/useFollowMixin.js'
+import UserService from '../../services/User.service.js'
 export default {
   name: 'ProfileInfo',
   mixins: [useFollowMixin],
@@ -217,9 +218,9 @@ export default {
       userStat: { following: this.otheruser.following },
       favorite: false,
       blocked: false,
-      snackbarFollow: false,
+      snackbarBlocked: false,
+      snackbarText: 'User has been blocked',
       snackbar2: false,
-      snackbarText: 'snackbarText',
       snackbar2Text: '',
       snackbarColor: 'primary',
       snackbarTimeout: 1000,
@@ -235,9 +236,20 @@ export default {
     }
   },
   methods: {
-    blockUser () {
-      this.snackbar = true
-      this.blocked = true
+    message () {
+      console.log('sending a message...')
+    },
+    async blockUser () {
+      let success = false
+      const credentials = {
+        targetId: this.id,
+        actorId: this.user.userId
+      }
+      success = await UserService.blockUser(credentials)
+      if (success) {
+        this.snackbarBlocked = true
+        this.blocked = true
+      }
     },
     updateFavorites () {
       if (this.list.length <= 5) {

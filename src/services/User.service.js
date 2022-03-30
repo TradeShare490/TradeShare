@@ -201,6 +201,75 @@ class UserService {
     return followingList
   }
 
+  async getBlockedUsers (userID, raw = false) {
+    const blockedList = []
+    let blockedData = null
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    await axios
+      .get('/managePrivacy/blockedUsers/' + userID,
+        config)
+      .then(function (res) {
+        blockedData = res.data
+      })
+      .catch(function (err) {
+        console.log(err)
+        return null
+      })
+    if (raw) {
+      return blockedData
+    } else {
+      for (const user of blockedData) {
+        let userInfo = null
+        try {
+          userInfo = await this.getUserInfo(user)
+        } catch (err) {
+          console.error(err)
+        }
+        const obj = { id: user, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
+        blockedList.push(obj)
+      }
+      return blockedList
+    }
+  }
+
+  async unblockUser (credentials) {
+    let success = false
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    await axios
+      .post('/managePrivacy/unblock/', credentials,
+        config)
+      .then(function (res) {
+        success = res.status === 200
+      })
+      .catch(function (err) {
+        console.log(err)
+        success = false
+      })
+    return success
+  }
+
+  async blockUser (credentials) {
+    let success = false
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    await axios
+      .post('/managePrivacy/block/', credentials,
+        config)
+      .then(function (res) {
+        success = res.status === 200
+      })
+      .catch(function (err) {
+        console.log(err)
+        success = false
+      })
+    return success
+  }
+
   /* istanbul ignore next */
   async getUserInfo (userID) {
     let userProfileData = null
