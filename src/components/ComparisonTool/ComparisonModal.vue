@@ -14,7 +14,7 @@
           medium
           v-on="on"
         >
-          COMPARE RETURNS
+          COMPARE EQUITIES
         </v-btn>
       </template>
       <v-card

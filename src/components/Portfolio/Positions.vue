@@ -13,7 +13,7 @@
     >
       <template #top>
         <v-toolbar flat>
-          <v-toolbar-title>Your Positions</v-toolbar-title>
+          <v-toolbar-title>Positions</v-toolbar-title>
         </v-toolbar>
       </template>
       <template #[`item.market_value`]="{ item }">
