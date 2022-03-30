@@ -51,7 +51,7 @@
           >
             <v-card min-width="350">
               <Positions
-                :stocks-data="stocks"
+                :stocks-data="ostocks"
                 data-cy="other-dashboard-positions"
               />
             </v-card>
@@ -136,6 +136,7 @@ import Recents from '../../components/RecentTrades/Recents'
 import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
+import { useDashboardMixin } from '../../hooks/useDashboardMixin.js'
 
 export default {
   name: 'OtherDashboard',
@@ -146,26 +147,23 @@ export default {
     LineChartContainer,
     Holdings
   },
-  // mixins: [useFollowMixin],
+  mixins: [useDashboardMixin],
   data () {
     return {
       userId: this.$route.params.id,
       userInfo: null,
       info: {},
-      account: Object,
-      stocks: [],
+      // account: Object,
+      ostocks: [],
       followNum: [],
       isFollowingByUser: false,
-      activities: [],
-      holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
+      activities: []
+      // holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
     }
   },
   computed: {
     showData () {
       return !this.userInfo.isPrivate || (this.userInfo.isPrivate && this.isFollowingByUser)
-    },
-    holdingData () {
-      return this.holdingPieChartData
     }
   },
   created () {
@@ -176,7 +174,7 @@ export default {
       try {
         this.userInfo = await UserService.getUserInfo(this.userId)
         this.account = await UserService.getAccount(this.userInfo.userId)
-        this.stocks = await UserService.getPositions(this.userInfo.userId)
+        this.ostocks = await UserService.getPositions(this.userInfo.userId)
         this.followNum = await UserService.getFollowNum(this.userInfo.userId)
         this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
         this.activities = await UserService.getActivities(this.userInfo.userId)
@@ -189,8 +187,8 @@ export default {
           favorite: false,
           blocked: false
         }
-      } catch (err) {
-        console.log(err)
+      } catch (otherDashboardErr) {
+        console.log(otherDashboardErr)
       } finally {
         this.handleHoldingPieChartData()
       }
@@ -222,27 +220,6 @@ export default {
         return Math.floor(interval) === 1 ? ' a minute ago' : Math.floor(interval) + ' minutes ago'
       }
       return Math.floor(interval) === 1 ? ' a second ago' : Math.floor(interval) + ' seconds ago'
-    },
-    handleHoldingPieChartData () {
-      const sumCash = Number(this.account.cash)
-      let sumEquity = 0
-      let sumOption = 0
-      let numEquity = 0
-      let numOption = 0
-      this.stocks.forEach(stock => {
-        if (stock.asset_class.toLowerCase().includes('equity')) {
-          numEquity++
-          sumEquity += Number(stock.market_value)
-        } else if (stock.asset_class.toLowerCase().includes('option')) {
-          numOption++
-          sumOption += Number(stock.market_value)
-        }
-      })
-      this.holdingPieChartData.sumCash = sumCash
-      this.holdingPieChartData.numEquity = numEquity
-      this.holdingPieChartData.sumEquity = sumEquity
-      this.holdingPieChartData.numOption = numOption
-      this.holdingPieChartData.sumOption = sumOption
     }
   }
 }

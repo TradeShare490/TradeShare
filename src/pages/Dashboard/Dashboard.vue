@@ -139,6 +139,7 @@ import Holdings from '../../components/Dashboard/Holdings.vue'
 import MonthlyProfitLoss from '../../components/Portfolio/MonthlyProfitLoss.vue'
 import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs.vue'
 import UserService from '../../services/User.service'
+import { useDashboardMixin } from '../../hooks/useDashboardMixin.js'
 
 export default {
   name: 'DashboardPage',
@@ -150,20 +151,18 @@ export default {
     Holdings,
     MonthlyProfitLoss
   },
+  mixins: [useDashboardMixin],
   data () {
     return {
-      account: Object,
+      // account: Object,
       stocks: [],
-      allPosts: this.$store.getters.allPosts,
-      holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
+      allPosts: this.$store.getters.allPosts
+      // holdingPieChartData: { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
     }
   },
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
-    },
-    holdingData () {
-      return this.holdingPieChartData
     }
   },
   created () {
@@ -174,34 +173,12 @@ export default {
       try {
         this.account = await UserService.getAccount(this.user.userId)
         this.stocks = await UserService.getPositions(this.user.userId)
-      } catch (err) {
-        console.log(err)
+      } catch (dashboardErr) {
+        console.log(dashboardErr)
       } finally {
         this.handleHoldingPieChartData()
       }
-    },
-    handleHoldingPieChartData () {
-      const sumCash = Number(this.account.cash)
-      let sumEquity = 0
-      let sumOption = 0
-      let numEquity = 0
-      let numOption = 0
-      this.stocks.forEach(stock => {
-        if (stock.asset_class.toLowerCase().includes('equity')) {
-          numEquity++
-          sumEquity += Number(stock.market_value)
-        } else if (stock.asset_class.toLowerCase().includes('option')) {
-          numOption++
-          sumOption += Number(stock.market_value)
-        }
-      })
-      this.holdingPieChartData.sumCash = sumCash
-      this.holdingPieChartData.numEquity = numEquity
-      this.holdingPieChartData.sumEquity = sumEquity
-      this.holdingPieChartData.numOption = numOption
-      this.holdingPieChartData.sumOption = sumOption
     }
-
   }
 }
 </script>
