@@ -1,8 +1,16 @@
+import "cypress-localstorage-commands"
 Cypress.Commands.add('login', () => {
     cy.visit('http://localhost:8081/login')
     cy.get("[data-cy=email]").type('test@test.com')
     cy.get("[data-cy=password]").type('12345678')
     cy.get("[data-cy=login-button]").click()
+    // const user = {
+    //     "username": "janedoe",
+    //     "alpacaToken": "163e41d9-cccd-490a-8a05-ab473014cdfd",
+    //     "userId": "618b2883418c2006690b69be"
+    // }
+    // cy.setLocalStorage('user', user)
+
   });
 Cypress.Commands.add('signup', (firstName, lastName, email, password, passwordConfirm) => {
     cy.get("[data-cy=first-name]").type(firstName);
