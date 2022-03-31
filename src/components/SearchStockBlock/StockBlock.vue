@@ -36,7 +36,6 @@
               class="text-caption text-wrap"
               data-cy="ticker"
             >
-              Ticker:
               <v-chip
                 label
                 color="primary"
@@ -64,6 +63,7 @@
           style="border-width: 2px;"
           elevation="2"
           data-cy="more-info"
+          @click="redirect"
         >
           More Information
           <v-icon class="pl-2">
@@ -96,6 +96,11 @@ export default {
     logo: {
       type: String,
       default: require('../../assets/default_user.png')
+    }
+  },
+  methods: {
+    redirect () {
+      window.open('https://finance.yahoo.com/quote/' + this.ticker)
     }
   }
 }

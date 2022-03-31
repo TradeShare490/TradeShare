@@ -104,7 +104,7 @@
                 data-cy="follow"
                 height="32px"
                 width="110px"
-                @click="handleFollow"
+                @click="handleFollow()"
               >
                 <div class="text">
                   Follow
