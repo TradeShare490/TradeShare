@@ -235,7 +235,7 @@ export default {
       }
     },
     click () {
-      alert('You clicked the icon!')
+
     },
     conversationSelected (name, username, avatar, conversationId) {
       this.name = name
