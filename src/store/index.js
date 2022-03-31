@@ -17,7 +17,7 @@ export default new Vuex.Store({
   mutations: {
     setUserData (state, userData) {
       state.user = { accessToken: userData.accessToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
-      userData.userInfo = { accessToken: userData.accessToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
+      userData.userInfo = { accessToken: userData.accessToken, refreshToken: userData.refreshToken, following: userData.userInfo.following, followers: userData.userInfo.followers, ...userData.userInfo }
       localStorage.setItem('user', JSON.stringify(userData.userInfo))
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
       axios.defaults.headers.common['x-refresh'] = `${userData.refreshToken}`
