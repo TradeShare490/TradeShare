@@ -25,6 +25,7 @@
           :loading="isLoading"
           :items="users"
           :search-input="search"
+          item-text="name"
           class="inputfield mt-0"
           flat
           hide-no-data
@@ -39,8 +40,20 @@
           append-icon="mdi-magnify"
           solo
           data-cy="search"
-          @update:search-input="(val) => (search = val)"
-        />
+          :filter="customFilter"
+          auto-select-first
+          @click="load"
+        >
+          <template #item="data">
+            <v-list-item
+              class="text-left text-body-2"
+              data-cy="search-result"
+              @click="redirect(data)"
+            >
+              {{ data.item.name }}
+            </v-list-item>
+          </template>
+        </v-autocomplete>
       </v-col>
     </v-row>
     <v-divider class="mt-3" />
@@ -51,7 +64,7 @@
 export default {
   name: 'SearchViewBy',
   props: {
-    searchList: {
+    list: {
       type: Array,
       default: null
     }
@@ -68,19 +81,26 @@ export default {
   watch: {
     search (val) {
       this.users = []
-      val && val !== this.select && this.querySelections()
+      val && val !== this.select && this.querySelections(val)
     }
   },
   methods: {
-    querySelections (v) {
-      this.isLoading = true
-      // Simulated ajax query
-      // setTimeout(() => {
-      //   this.users = this.searchList.filter((e) => {
-      //     return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-      //   })
-      //   this.isLoading = false
-      // }, 500)
+    load () {
+      const tempArray = []
+      this.list.forEach(el => {
+        tempArray.push({ name: (el.firstname + ' ' + el.lastname).trim(), username: el.username, id: el.id })
+      })
+      this.users = tempArray
+    },
+    redirect (d) {
+      this.$router.push('/dashboard/' + d.item.id)
+    },
+    customFilter (item, queryText, itemText) {
+      const textOne = item.name.toLowerCase()
+      const textTwo = item.username.toLowerCase()
+      const searchText = queryText.toLowerCase()
+      return textOne.indexOf(searchText) > -1 ||
+          textTwo.indexOf(searchText) > -1
     }
   }
 }

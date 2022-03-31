@@ -25,7 +25,5 @@ describe("On the dashboard page, Dashboard can", () => {
     cy.get("[data-cy=holdings-cash-value]").contains(/\d/);
     cy.get("[data-cy=holdings-options-value]").should("be.visible");
     cy.get("[data-cy=holdings-options-value]").contains(/\d/);
-    cy.get("[data-cy=holdings-last-7-days]").should("be.visible");
-    cy.get("[data-cy=holdings-breakdown]").should("be.visible");
   });
 });

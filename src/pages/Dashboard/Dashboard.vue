@@ -98,20 +98,33 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="holdingData.sumCash === 0 && holdingData.numEquity === 0 && holdingData.numOption === 0">
+      <v-col
+        xs="12"
+        lg="12"
+        xl="12"
+      >
+        <Positions
+          :stocks-data="stocks"
+        />
+      </v-col>
+    </v-row>
+    <v-row v-else>
       <v-col
         xs="12"
         lg="4"
         xl="3"
       >
-        <Holdings />
+        <Holdings :holdings-data="holdingData" />
       </v-col>
       <v-col
         xs="12"
         lg="8"
         xl="9"
       >
-        <Positions :user-id="user.userId" />
+        <Positions
+          :stocks-data="stocks"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -125,6 +138,7 @@ import Holdings from '../../components/Dashboard/Holdings.vue'
 import MonthlyProfitLoss from '../../components/Portfolio/MonthlyProfitLoss.vue'
 import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs.vue'
 import UserService from '../../services/User.service'
+import { useDashboardMixin } from '../../hooks/useDashboardMixin.js'
 import { utils } from '../../services/utils'
 
 export default {
@@ -137,7 +151,7 @@ export default {
     Holdings,
     MonthlyProfitLoss
   },
-  mixins: [utils],
+  mixins: [useDashboardMixin, utils],
   data () {
     return {
       account: {
@@ -151,7 +165,8 @@ export default {
         equity: [],
         profit_lost_pct: []
       },
-      activities: []
+      activities: [],
+      stocks: []
     }
   },
   computed: {
@@ -171,11 +186,18 @@ export default {
   },
   methods: {
     async initialize () {
-      this.account = await UserService.getAccount(this.user.userId)
-      this.monthHistory = await UserService.getEquities(this.user.userId, '1M')
-      this.activities = await UserService.getActivities(this.user.userId)
-    }
+      try {
+        this.account = await UserService.getAccount(this.user.userId)
+        this.stocks = await UserService.getPositions(this.user.userId)
 
+        this.monthHistory = await UserService.getEquities(this.user.userId, '1M')
+        this.activities = await UserService.getActivities(this.user.userId)
+      } catch (dashboardErr) {
+        console.log(dashboardErr)
+      } finally {
+        this.handleHoldingPieChartData()
+      }
+    }
   }
 }
 </script>

@@ -15,10 +15,11 @@ class UserService {
   }
 
   /* istanbul ignore next */
-  async getPositions (userID) {
-    let userPortfolioData = null
+  async getPositions (userId) {
+    if (userId === undefined) return null
+    let userPortfolioData = []
     await axios
-      .get('/positions/' + userID)
+      .get('/positions/' + userId)
       .then(function (res) {
         if (res.data.status === 501) {
           return []
@@ -39,13 +40,14 @@ class UserService {
         headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
       }
       const response = await axios.post('/following/unfollow', credentials, config)
-      return response.data
+      if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
       return { success: false, message: err.response.data.message }
     }
   }
 
+  // TO-DO for private account
   /* istanbul ignore next */
   async postFollow (credentials) {
     try {
@@ -53,7 +55,7 @@ class UserService {
         headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
       }
       const response = await axios.post('/following/follow', credentials, config)
-      return response.data
+      if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
       return { success: false, message: err.response.data.message }
@@ -61,13 +63,13 @@ class UserService {
   }
 
   /* istanbul ignore next */
-  async getFollowNum (userID) {
+  async getFollowNum (userId) {
     const result = { numFollowing: 0, numFollower: 0 }
     const config = {
       headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
-      .get('/following/followers/' + userID, config)
+      .get('/following/followers/' + userId, config)
       .then(function (res) {
         result.numFollower = res.data.length
       })
@@ -75,7 +77,7 @@ class UserService {
         console.log(err)
       })
     await axios
-      .get('/following/follows/' + userID, config)
+      .get('/following/follows/' + userId, config)
       .then(function (res) {
         result.numFollowing = res.data.length
       })
@@ -87,18 +89,70 @@ class UserService {
 
   /* istanbul ignore next */
   async isFollowed (targetID) {
-    console.log('USER SERVICE ' + targetID)
     return (store.state.user.following).includes(targetID)
   }
 
+  async addFollowRequest (credentials) {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+      }
+      const response = await axios.post('/following/follow/', credentials, config)
+      if (response.status === 200) return { success: true }
+    } catch (err) {
+      console.log(err)
+      return { success: false, message: err.response.data.message }
+    }
+  }
+
+  async getFollowRequest (userId) {
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    const response = await axios.get('/following/requests/' + userId, config)
+    const requestList = []
+    for (const user of response.data) {
+      const userInfo = await this.getUserInfo(user.senderId)
+      const obj = { requestId: user.relId, id: userInfo.userId, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
+      requestList.push(obj)
+    }
+    return requestList
+  }
+
+  async acceptFollowRequest (credentials, requestId) {
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    try {
+      const response = await axios.post('/following/requests/accept/' + requestId, credentials, config)
+      if (response.status === 200) return { success: true }
+    } catch (err) {
+      console.log(err)
+      return { success: false, message: err.response.data.message }
+    }
+  }
+
+  async rejectFollowRequest (credentials, requestId) {
+    const config = {
+      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
+    }
+    try {
+      const response = await axios.post('/following/requests/decline/' + requestId, credentials, config)
+      if (response.status === 200) return { success: true }
+    } catch (err) {
+      console.log(err)
+      return { success: false, message: err.response.data.message }
+    }
+  }
+
   /* istanbul ignore next */
-  async getFollowers (userID) {
+  async getFollowers (userId) {
     let followersData = null
     const config = {
       headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
-      .get('/following/followers/' + userID, config)
+      .get('/following/followers/' + userId, config)
       .then(function (res) {
         followersData = res.data
       })
@@ -109,13 +163,13 @@ class UserService {
     const followerList = []
     for (const user of followersData) {
       const userInfo = await this.getUserInfo(user)
-      const obj = { id: user, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
+      const obj = { id: user, currentlyfollowing: false, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
       followerList.push(obj)
     }
 
     let followingsData = null
     await axios
-      .get('/following/follows/' + userID, config)
+      .get('/following/follows/' + userId, config)
       .then(function (res) {
         followingsData = res.data
       })
@@ -134,14 +188,13 @@ class UserService {
     return followerList
   }
 
-  async getFollowingsRaw (userID) {
+  async getFollowingsRaw (userId) {
     let followingsData = null
     const config = {
       headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
-      .get('/following/follows/' + userID,
-        config)
+      .get('/following/follows/' + userId, config)
       .then(function (res) {
         followingsData = res.data
       })
@@ -152,14 +205,13 @@ class UserService {
     return followingsData
   }
 
-  async getFollowersRaw (userID) {
+  async getFollowersRaw (userId) {
     let followersData = null
     const config = {
       headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
-      .get('/following/followers/' + userID,
-        config)
+      .get('/following/followers/' + userId, config)
       .then(function (res) {
         followersData = res.data
       })
@@ -171,14 +223,14 @@ class UserService {
   }
 
   /* istanbul ignore next */
-  async getFollowings (userID) {
+  async getFollowings (userId) {
     const followingList = []
     let followingsData = null
     const config = {
       headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
     }
     await axios
-      .get('/following/follows/' + userID,
+      .get('/following/follows/' + userId,
         config)
       .then(function (res) {
         followingsData = res.data
@@ -195,7 +247,7 @@ class UserService {
       } catch (err) {
         console.error(err)
       }
-      const obj = { id: user, currentlyfollowing: true, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username }
+      const obj = { id: user, currentlyfollowing: true, firstname: userInfo.firstname, lastname: userInfo.lastname, username: userInfo.username, isPrivate: userInfo.isPrivate }
       followingList.push(obj)
     }
     return followingList
@@ -271,10 +323,10 @@ class UserService {
   }
 
   /* istanbul ignore next */
-  async getUserInfo (userID) {
+  async getUserInfo (userId) {
     let userProfileData = null
     await axios
-      .get('/userInfo/' + userID)
+      .get('/userInfo/' + userId)
       .then(function (res) {
         userProfileData = res.data
       })
@@ -312,10 +364,10 @@ class UserService {
   }
 
   /* istanbul ignore next */
-  async getAccount (userID) {
+  async getAccount (userId) {
     let userAccountData = null
     await axios
-      .get('/account/' + userID)
+      .get('/account/' + userId)
       .then(function (res) {
         userAccountData = res.data.account
       })
@@ -352,18 +404,22 @@ class UserService {
       })
   }/* istanbul ignore next */
 
-  async getActivities (userID) {
-    let activities = null
+  async getActivities (userId) {
+    let fetchActivities = []
     await axios
-      .get('/activities/' + userID)
+      .get('/activities/' + userId)
       .then(function (res) {
-        activities = res.data.activities
+        if (res.data.status === 501) {
+          return []
+        } else {
+          fetchActivities = res.data.activities
+        }
       })
       .catch(function (err) {
         console.log(err)
         return null
       })
-    return activities
+    return fetchActivities
   }
 
   async togglePrivacy (userId, store, isPrivate) {

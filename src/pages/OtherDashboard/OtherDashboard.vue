@@ -8,6 +8,7 @@
         <Profile
           :otheruser="info"
           :currentlyfollowing="isFollowingByUser"
+          :is-private="info.isPrivate"
         />
       </div>
       <div v-if="showData">
@@ -21,14 +22,25 @@
               :user-id="userId"
               :user-name="userInfo.username"
               :compare-me="true"
+              data-cy="other-dashboard-equities"
             />
           </v-col>
           <v-col
+            v-if="holdingData.sumCash === 0 && holdingData.numEquity === 0 && holdingData.numOption === 0"
+            xs="12"
+            md="4"
+            lg="3"
+          />
+          <v-col
+            v-else
             xs="12"
             md="4"
             lg="3"
           >
-            <Holdings />
+            <Holdings
+              :holdings-data="holdingData"
+              data-cy="other-dashboard-holdings"
+            />
           </v-col>
         </v-row>
         <v-row>
@@ -38,7 +50,10 @@
             xl="9"
           >
             <v-card min-width="350">
-              <Positions :user-id="userId" />
+              <Positions
+                :stocks-data="ostocks"
+                data-cy="other-dashboard-positions"
+              />
             </v-card>
           </v-col>
           <v-col
@@ -68,6 +83,7 @@
                     :company="'Quantity:' + trade.qty"
                     :purchased="trade.side === 'buy'"
                     :when="timeSince(trade.transaction_time)"
+                    data-cy="other-dashboard-recents"
                   />
                 </div>
               </v-card>
@@ -131,7 +147,9 @@ import Recents from '../../components/RecentTrades/Recents'
 import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs'
 import Holdings from '../../components/Dashboard/Holdings'
 import UserService from '../../services/User.service'
+import { useDashboardMixin } from '../../hooks/useDashboardMixin.js'
 import { utils } from '../../services/utils'
+
 export default {
   name: 'OtherDashboard',
   components: {
@@ -141,7 +159,7 @@ export default {
     LineChartContainer,
     Holdings
   },
-  mixins: [utils],
+  mixins: [useDashboardMixin, utils],
   data () {
     return {
       isLoading: false,
@@ -149,7 +167,8 @@ export default {
       userId: this.$route.params.id,
       userInfo: null,
       info: {},
-      positions: [],
+      account: Object,
+      ostocks: [],
       followNum: [],
       isFollowingByUser: false,
       activities: [],
@@ -166,24 +185,31 @@ export default {
   },
   methods: {
     async initialize () {
-      this.isLoading = true
-      this.userInfo = await UserService.getUserInfo(this.userId)
-      this.positions = await UserService.getPositions(this.userInfo.userId)
-      this.followNum = await UserService.getFollowNum(this.userInfo.userId)
-      this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
-      this.activities = await UserService.getActivities(this.userInfo.userId)
-      this.blockedUsers = await UserService.getBlockedUsers(this.userInfo.userId, true)
-      this.blocked = this.blockedUsers.includes(JSON.parse(localStorage.getItem('user')).userId)
-      this.info = {
-        ...this.userInfo,
-        numFollowers: this.followNum.numFollower,
-        numFollowing: this.followNum.numFollowing,
-        following: this.isFollowingByUser,
-        date: '2021',
-        favorite: false,
-        blocked: false
+      try {
+        this.isLoading = true
+        this.userInfo = await UserService.getUserInfo(this.userId)
+        this.account = await UserService.getAccount(this.userInfo.userId)
+        this.ostocks = await UserService.getPositions(this.userInfo.userId)
+        this.followNum = await UserService.getFollowNum(this.userInfo.userId)
+        this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
+        this.activities = await UserService.getActivities(this.userInfo.userId)
+        this.blockedUsers = await UserService.getBlockedUsers(this.userInfo.userId, true)
+        this.blocked = this.blockedUsers.includes(JSON.parse(localStorage.getItem('user')).userId)
+        this.info = {
+          ...this.userInfo,
+          numFollowers: this.followNum.numFollower,
+          numFollowing: this.followNum.numFollowing,
+          following: this.isFollowingByUser,
+          date: '2021',
+          favorite: false,
+          blocked: false
+        }
+      } catch (otherDashboardErr) {
+        console.log(otherDashboardErr)
+      } finally {
+        this.handleHoldingPieChartData()
+        this.isLoading = false
       }
-      this.isLoading = false
     }
   }
 }

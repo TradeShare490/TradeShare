@@ -1,6 +1,7 @@
 <template>
   <v-card
     v-if="stocks.length > 0"
+    outlined
     min-width="350"
     data-cy="positions"
   >
@@ -52,13 +53,14 @@
 </template>
 
 <script>
-import UserService from '../../services/User.service'
 export default {
   name: 'PositionsData',
   props: {
-    userId: {
-      type: String,
-      default: ''
+    stocksData: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
   data () {
@@ -79,17 +81,19 @@ export default {
     }
   },
 
+  computed: {
+    stocksComputed () {
+      return this.stocks
+    }
+  },
+
   created () {
     this.initialize()
   },
 
   methods: {
     async initialize () {
-      try {
-        this.stocks = await UserService.getPositions(this.userId)
-      } catch (err) {
-        console.log(err)
-      }
+      this.stocks = this.stocksData
     },
 
     getDisplayNumber (number) {

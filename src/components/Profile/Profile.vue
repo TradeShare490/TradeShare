@@ -85,32 +85,48 @@
             :class="{'mb-2': $vuetify.breakpoint.mdAndDown}"
           >
             <v-btn
-              v-if="otheruser.following=== true"
+              v-if="userStat.sentFollowRequest === true"
               block
               small
               elevation="0"
               outlined
               color="primary"
               :ripple="false"
-              class="caption"
+              class="caption mr-1"
               data-cy="following"
-              @click="unfollow(1)"
+              @click="handleUnfollow"
             >
-              Following
+              Sent Request
             </v-btn>
-            <v-btn
-              v-if="otheruser.following === false"
-              block
-              small
-              elevation="0"
-              color="primary"
-              :ripple="false"
-              class="caption"
-              data-cy="follow"
-              @click="follow(1)"
-            >
-              Follow
-            </v-btn>
+            <div v-else>
+              <v-btn
+                v-if="otheruser.following=== true"
+                block
+                small
+                elevation="0"
+                outlined
+                color="primary"
+                :ripple="false"
+                class="caption"
+                data-cy="following"
+                @click="handleUnfollow"
+              >
+                Following
+              </v-btn>
+              <v-btn
+                v-if="otheruser.following === false"
+                block
+                small
+                elevation="0"
+                color="primary"
+                :ripple="false"
+                class="caption"
+                data-cy="follow"
+                @click="handleFollow"
+              >
+                Follow
+              </v-btn>
+            </div>
           </v-col>
           <v-col
             xl="2"
@@ -211,11 +227,15 @@ export default {
     image: {
       type: String,
       default: require('../../assets/default_user.png')
+    },
+    isPrivate: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      userStat: { following: this.otheruser.following },
+      userStat: { following: this.otheruser.following, sentFollowRequest: false },
       favorite: false,
       blocked: false,
       snackbarBlocked: false,
@@ -223,8 +243,7 @@ export default {
       snackbar2: false,
       snackbar2Text: '',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000,
-      list: this.$store.getters.favoriteUsers
+      snackbarTimeout: 3000
     }
   },
   computed: {
@@ -250,6 +269,13 @@ export default {
         this.snackbarBlocked = true
         this.blocked = true
       }
+    },
+    async handleFollow () {
+      if (this.isPrivate) this.sendFollowRequest()
+      else this.follow(1)
+    },
+    async handleUnfollow () {
+      this.unfollow(1)
     },
     updateFavorites () {
       if (this.list.length <= 5) {

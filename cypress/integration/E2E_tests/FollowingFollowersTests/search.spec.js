@@ -8,14 +8,9 @@ describe("On the following page, can", () => {
         `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.FOLLOWING}`
       );
     });
+    cy.wait(2000);
     cy.get("[data-cy=search]")
       .click()
-      .type("mary")
-    cy.wait(500);
-    cy.get("[data-cy=search]")
-      .type("{downarrow}")
-      .type("{downarrow}")
-      .type("{enter}");
-    // cy.get("[data-cy=search]").should("have.value", "Mary Winchester");
+      .type("ken")
   });
 });

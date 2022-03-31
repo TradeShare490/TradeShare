@@ -32,7 +32,7 @@ export default {
         datasets: [
           {
             label: 'Holdings',
-            backgroundColor: ['#2274E6', '#1E984F', '#000000'],
+            backgroundColor: ['#4054b4', '#128c1c', '#EF6C00'],
             data: [this.equities, this.cash, this.options]
           }
         ],
