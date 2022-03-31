@@ -84,8 +84,8 @@ export default {
   data: () => ({
     loaded: false,
     dataCollection: null,
-    userList: ['Mary Winchester', 'Mac Kafe'],
-    colors: ['green', 'yellow'],
+    userList: ['Mary Winchester', 'Mac Kafe', 'Siobhan', 'Kevin', 'Alya'],
+    colors: ['green', 'yellow', 'orange', 'purple', 'black'],
     users: [{ name: 'Me', color: 'primary' }],
     labels: [],
     equities: [],
