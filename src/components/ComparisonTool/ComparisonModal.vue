@@ -23,7 +23,7 @@
         data-cy="modal"
       >
         <v-card-title class="pl-0 pr-0">
-          Comparing Monthly Equity
+          Comparing Equities - Last 4 Weeks
           <v-spacer />
           <button @click="dialog = false">
             <v-icon right>
