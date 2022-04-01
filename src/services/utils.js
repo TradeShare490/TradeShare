@@ -94,7 +94,7 @@ export const utils = {
       } else if ((age.years === 0) && (age.months > 0) && (age.days === 0)) {
         ageString = age.months + monthString
       } else {
-        ageString = 'Could not calculate age!'
+        ageString = 'Unavailable'
       }
 
       return ageString
