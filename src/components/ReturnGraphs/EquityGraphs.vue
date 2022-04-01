@@ -3,10 +3,10 @@
     elevation="1"
     outlined
     min-width="350"
-    data-cy="bar-char-container"
+    data-cy="line-chart-container"
   >
     <v-card-title class="pb-1 pt-3">
-      My Equities
+      Equity History
       <v-spacer />
       <ComparisonModal
         :users="users"
@@ -84,8 +84,8 @@ export default {
   data: () => ({
     loaded: false,
     dataCollection: null,
-    userList: ['Mary Winchester', 'Mac Kafe'],
-    colors: ['green', 'yellow'],
+    userList: ['Mary Winchester', 'Mac Kafe', 'Jennie Kim', 'Kevin Nguyen', 'Gojo Satoru'],
+    colors: ['green', 'yellow', 'orange', 'purple', 'black'],
     users: [{ name: 'Me', color: 'primary' }],
     labels: [],
     equities: [],

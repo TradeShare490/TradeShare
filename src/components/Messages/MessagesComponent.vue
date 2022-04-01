@@ -93,7 +93,6 @@
                 <div :class="{ 'd-flex flex-row-reverse': msg.me }">
                   <v-menu offset-y>
                     <template #activator="{}">
-                      <!-- needed for messages to be displayed -->
                       <v-chip
                         style="
                           height: auto;
@@ -126,7 +125,6 @@
                     class="mr-2"
                     color="primary"
                     data-cy="emoji-button"
-                    @click="click"
                   >
                     insert_emoticon
                   </v-icon>
@@ -136,7 +134,6 @@
                     class="px-2"
                     color="primary"
                     data-cy="image-button"
-                    @click="click"
                   >
                     image
                   </v-icon>
@@ -234,9 +231,6 @@ export default {
         })
         this.$root.$refs.ChatMenu.updateChat(this.conversationId, content)
       }
-    },
-    click () {
-      alert('You clicked the icon!')
     },
     conversationSelected (name, username, avatar, conversationId) {
       this.name = name

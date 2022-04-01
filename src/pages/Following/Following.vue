@@ -1,15 +1,15 @@
 <template>
   <div class="container mt-0 mx-auto">
-    <SearchViewBy />
+    <SearchViewBy :list="followings" />
     <div
-      v-if="isLoading === true"
-      class="mt-7"
+      v-if="isLoadingFollowing === true"
     >
       <v-progress-circular
         :size="50"
         color="primary"
         indeterminate
         :width="7"
+        class="mt-7"
       />
     </div>
     <div v-else>
@@ -23,11 +23,11 @@
             :currentlyfollowing="following.currentlyfollowing"
             :name="`${following.firstname} ${following.lastname}`"
             :username="following.username"
-            :request="false"
+            :requestblock="false"
+            :is-private="following.isPrivate"
           />
         </div>
       </div>
-
       <div
         v-else
         class="title font-weight-black"
@@ -63,7 +63,7 @@ export default {
   data () {
     return {
       followings: [],
-      isLoading: true
+      isLoadingFollowing: true
     }
   },
   created () {

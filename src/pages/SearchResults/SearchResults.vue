@@ -46,6 +46,7 @@
           <div
             v-for="(following, i) in followings"
             :key="i"
+            data-cy="follow"
           >
             <UserBlock
               :id="following.id"
@@ -88,6 +89,8 @@
 <script>
 import UserBlock from '../../components/FollowerFollowing/UserBlock.vue'
 import StockBlock from '../../components/SearchStockBlock/StockBlock.vue'
+import axiosInstance from '../../axios/axios.v1'
+import UserService from '../../services/User.service'
 
 export default {
   name: 'SearchResults',
@@ -98,57 +101,59 @@ export default {
   data () {
     return {
       keyword: this.$route.params.keyword,
-      followings: [
-        {
-          id: '1',
-          currentlyfollowing: true,
-          firstname: 'Bob',
-          lastname: 'Dylan',
-          username: 'bobdylan009',
-          image: 'https://randomuser.me/api/portraits/men/68.jpg'
-        },
-        {
-          id: '2',
-          currentlyfollowing: true,
-          firstname: 'Bobby',
-          lastname: 'Flay',
-          username: 'bobbyflay',
-          image: 'https://randomuser.me/api/portraits/men/15.jpg'
-        }
-      ],
-      users: [
-        {
-          id: '3',
-          currentlyfollowing: false,
-          firstname: 'Bob',
-          lastname: 'Dylan',
-          username: 'bobdylan009',
-          image: 'https://randomuser.me/api/portraits/men/68.jpg'
-        },
-        {
-          id: '4',
-          currentlyfollowing: false,
-          firstname: 'Bobby',
-          lastname: 'Flay',
-          username: 'bobbyflay',
-          image: 'https://randomuser.me/api/portraits/men/15.jpg'
-        }
-      ],
-      stocks: [
-        {
-          id: '1',
-          name: 'NVIDIA Corporation',
-          ticker: 'nvda',
-          logo: require('../../assets/nvda_logo.png')
-        },
-        {
-          id: '2',
-          name: 'Identiv, Inc',
-          ticker: 'inve',
-          logo: require('../../assets/identiv_logo.png')
-        }
-      ],
+      followings: [],
+      users: [],
+      stocks: [],
       isLoading: false
+    }
+  },
+  async beforeMount () {
+    this.pullPeople()
+    this.pullCompanies()
+  },
+  methods: {
+    async pullPeople () {
+      try {
+        const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}`)
+        const list = response.data.data
+        console.log(list)
+        for (let index = 0; index < list.length; index++) {
+          const isFollowing = await UserService.isFollowed((list[index].userId))
+          const userInfo = {
+            id: list[index].userId,
+            currentlyfollowing: isFollowing,
+            firstname: list[index].firstname,
+            lastname: list[index].lastname,
+            username: list[index].username
+          }
+          if (isFollowing) {
+            this.followings.push(userInfo)
+          } else {
+            this.users.push(userInfo)
+          }
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async pullCompanies () {
+      try {
+        const response = await axiosInstance.get(`/searchRecommendations/${this.keyword}`)
+        const list = response.data.searchResult.bestMatches
+        console.log('list')
+        console.log(list)
+        for (let index = 0; index < list.length; index++) {
+          const companyInfo = {
+            id: (index + 1).toString,
+            name: list[index]['2. name'],
+            ticker: list[index]['1. symbol'],
+            logo: ''
+          }
+          this.stocks.push(companyInfo)
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

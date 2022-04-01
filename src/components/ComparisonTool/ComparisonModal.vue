@@ -14,7 +14,7 @@
           medium
           v-on="on"
         >
-          COMPARE RETURNS
+          COMPARE
         </v-btn>
       </template>
       <v-card
@@ -23,7 +23,7 @@
         data-cy="modal"
       >
         <v-card-title class="pl-0 pr-0">
-          Comparing Returns
+          Comparing Equities - Last 4 Weeks
           <v-spacer />
           <button @click="dialog = false">
             <v-icon right>
@@ -303,6 +303,21 @@ export default {
                 label: 'Mary Winchester',
                 data: [72041, 73838, 75366, 75759, 75953, 79246, 82020, 85963, 87352, 87597, 88105, 89601, 90304, 90457, 90968, 91763, 94134, 94840, 98224, 99176, 99214],
                 borderColor: 'green'
+              },
+              {
+                label: 'Jennie Kim',
+                data: [71540, 71622, 73042, 73921, 74165, 74536, 76711, 78318, 78773, 80505, 82726, 83753, 87553, 88272, 89591, 92004, 93340, 94528, 95094, 96309, 96405],
+                borderColor: 'orange'
+              },
+              {
+                label: 'Kevin Nguyen',
+                data: [71426, 71693, 72127, 73221, 74641, 75398, 77726, 78505, 79876, 81724, 82772, 85165, 86488, 87835, 90585, 91081, 91126, 91697, 91834, 94022, 96139],
+                borderColor: 'purple'
+              },
+              {
+                label: 'Gojo Satoru',
+                data: [73599, 78894, 80671, 81734, 82051, 82334, 83204, 84668, 87868, 92462, 93266, 93554, 93875, 95572, 96763, 97732, 97978, 98367, 98968, 99284, 99497],
+                borderColor: 'black'
               }
             ]
           }

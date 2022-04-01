@@ -29,7 +29,7 @@ export default {
   },
   data () {
     return {
-      noSideMenu: ['Login', 'SignUp', 'BrokerageSignUp', 'Confirm'],
+      noSideMenu: ['Login', 'SignUp', 'BrokerageSignUp', 'Confirm', 'ForgotPasswordEmail', 'ForgotPassword'],
       showPreferencesMenu: ['Preferences', 'AccountPreferences', 'NotificationsPreferences', 'PrivacySecurityPreferences', 'DLRPreferences']
     }
   },

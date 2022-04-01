@@ -16,6 +16,7 @@ import PrivacySecurityPreferences from '../pages/Preferences/PrivacySecurity'
 import DLRPreferences from '../pages/Preferences/DLR'
 import ConnectedApps from '../pages/ConnectedApps/ConnectedApps.vue'
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword'
+import ForgotPasswordEmail from '../pages/ForgotPassword/ForgotPasswordEmail'
 import Support from '../pages/Support/Support'
 import SearchResults from '../pages/SearchResults/SearchResults'
 
@@ -113,9 +114,14 @@ const routes = [
     component: Confirm
   },
   {
-    path: '/forgotpassword',
+    path: '/forgotpassword/userId=:id',
     name: 'ForgotPassword',
     component: ForgotPassword
+  },
+  {
+    path: '/forgotpasswordemail',
+    name: 'ForgotPasswordEmail',
+    component: ForgotPasswordEmail
   },
   {
     path: '/search/keyword=:keyword',
@@ -140,7 +146,7 @@ const router = new VueRouter({
   }
 })
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/', '/login', '/signup']
+  const publicPages = ['/', '/login', '/signup', '/forgotpasswordemail', '/forgotpassword/userId=:uid']
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
 

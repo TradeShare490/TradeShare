@@ -12,8 +12,8 @@
       >
         <PortfolioAnalyticsTemplate
           title="Portfolio Value"
-          :value="'$'+ account.buying_power"
-          :percent-change="-20"
+          :value="'$'+ account.portfolio_value"
+          color="red"
           icon="mdi-domain"
         />
       </v-col>
@@ -25,8 +25,8 @@
       >
         <PortfolioAnalyticsTemplate
           title="Daily Change"
-          value="+2.12%"
-          :percent-change="16"
+          :value="dailyChange + '%'"
+          color="green"
           icon="mdi-calendar-today"
         />
       </v-col>
@@ -37,9 +37,8 @@
         data-cy="goal-progress-card"
       >
         <PortfolioAnalyticsTemplate
-          title="Goal Progress"
-          value="75%"
-          progress="75"
+          title="Portfolio Age"
+          :value="getAge(account.created_at)"
           color="blue"
           icon="mdi-progress-clock"
         />
@@ -52,7 +51,7 @@
       >
         <MonthlyProfitLoss
           title="Monthly Realized P/L"
-          value="+$5,200.00"
+          :value="monthlyChange"
           :percent-change="16"
         />
       </v-col>
@@ -87,32 +86,45 @@
             <span class="blue--text">Recent Trades</span>
           </v-card-title>
           <Recents
-            v-for="trade in allPosts.slice(0, 4)"
+            v-for="trade in activities.slice(0,4)"
             :key="trade.id"
-            :image="trade.image"
-            :name="trade.name"
-            :tag="trade.tag"
-            :company="trade.company"
-            :purchased="trade.purchased"
-            :when="trade.when"
+            :image="'https://randomuser.me/api/portraits/men/1.jpg'"
+            :name="user.firstname + ' ' + user.lastname"
+            :tag="trade.symbol"
+            :company="'Quantity:' + trade.qty"
+            :purchased="trade.side === 'buy'"
+            :when="timeSince(trade.transaction_time)"
           />
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="holdingData.sumCash === 0 && holdingData.numEquity === 0 && holdingData.numOption === 0">
+      <v-col
+        xs="12"
+        lg="12"
+        xl="12"
+      >
+        <Positions
+          :stocks-data="stocks"
+        />
+      </v-col>
+    </v-row>
+    <v-row v-else>
       <v-col
         xs="12"
         lg="4"
         xl="3"
       >
-        <Holdings />
+        <Holdings :holdings-data="holdingData" />
       </v-col>
       <v-col
         xs="12"
         lg="8"
         xl="9"
       >
-        <Positions :user-id="user.userId" />
+        <Positions
+          :stocks-data="stocks"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -126,6 +138,8 @@ import Holdings from '../../components/Dashboard/Holdings.vue'
 import MonthlyProfitLoss from '../../components/Portfolio/MonthlyProfitLoss.vue'
 import LineChartContainer from '../../components/ReturnGraphs/EquityGraphs.vue'
 import UserService from '../../services/User.service'
+import { useDashboardMixin } from '../../hooks/useDashboardMixin.js'
+import { utils } from '../../services/utils'
 
 export default {
   name: 'DashboardPage',
@@ -137,15 +151,34 @@ export default {
     Holdings,
     MonthlyProfitLoss
   },
+  mixins: [useDashboardMixin, utils],
   data () {
     return {
-      account: Object,
-      allPosts: this.$store.getters.allPosts
+      account: {
+        equity: 0,
+        last_equity: 0,
+        portfolio_value: 0,
+        created_at: ''
+      },
+      allPosts: this.$store.getters.allPosts,
+      monthHistory: {
+        equity: [],
+        profit_lost_pct: []
+      },
+      activities: [],
+      stocks: []
     }
   },
   computed: {
     user () {
       return JSON.parse(localStorage.getItem('user'))
+    },
+    dailyChange () {
+      return (((this.account.equity - this.account.last_equity) * 100) / this.account.last_equity).toFixed(2).toString()
+    },
+    monthlyChange () {
+      const monthChange = (this.monthHistory.equity[0] - this.monthHistory.equity.at(-1)).toFixed(2)
+      return monthChange >= 0 ? '$' + monthChange : '-$' + Math.abs(Number(monthChange))
     }
   },
   created () {
@@ -153,9 +186,18 @@ export default {
   },
   methods: {
     async initialize () {
-      this.account = await UserService.getAccount(this.user.userId)
-    }
+      try {
+        this.account = await UserService.getAccount(this.user.userId)
+        this.stocks = await UserService.getPositions(this.user.userId)
 
+        this.monthHistory = await UserService.getEquities(this.user.userId, '1M')
+        this.activities = await UserService.getActivities(this.user.userId)
+      } catch (dashboardErr) {
+        console.log(dashboardErr)
+      } finally {
+        this.handleHoldingPieChartData()
+      }
+    }
   }
 }
 </script>

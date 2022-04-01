@@ -85,32 +85,48 @@
             :class="{'mb-2': $vuetify.breakpoint.mdAndDown}"
           >
             <v-btn
-              v-if="otheruser.following=== true"
+              v-if="userStat.sentFollowRequest === true"
               block
               small
               elevation="0"
               outlined
               color="primary"
               :ripple="false"
-              class="caption"
+              class="caption mr-1"
               data-cy="following"
-              @click="unfollow(1)"
+              @click="handleUnfollow"
             >
-              Following
+              Sent Request
             </v-btn>
-            <v-btn
-              v-if="otheruser.following === false"
-              block
-              small
-              elevation="0"
-              color="primary"
-              :ripple="false"
-              class="caption"
-              data-cy="follow"
-              @click="follow(1)"
-            >
-              Follow
-            </v-btn>
+            <div v-else>
+              <v-btn
+                v-if="otheruser.following=== true"
+                block
+                small
+                elevation="0"
+                outlined
+                color="primary"
+                :ripple="false"
+                class="caption"
+                data-cy="following"
+                @click="handleUnfollow"
+              >
+                Following
+              </v-btn>
+              <v-btn
+                v-if="otheruser.following === false"
+                block
+                small
+                elevation="0"
+                color="primary"
+                :ripple="false"
+                class="caption"
+                data-cy="follow"
+                @click="handleFollow"
+              >
+                Follow
+              </v-btn>
+            </div>
           </v-col>
           <v-col
             xl="2"
@@ -158,7 +174,7 @@
               </v-icon>
             </v-btn>
             <v-snackbar
-              v-model="snackbarFollow"
+              v-model="snackbarBlocked"
               :timeout="snackbarTimeout"
               :color="snackbarColor"
             >
@@ -195,6 +211,7 @@
 
 <script>
 import { useFollowMixin } from '../../hooks/useFollowMixin.js'
+import UserService from '../../services/User.service.js'
 export default {
   name: 'ProfileInfo',
   mixins: [useFollowMixin],
@@ -210,20 +227,23 @@ export default {
     image: {
       type: String,
       default: require('../../assets/default_user.png')
+    },
+    isPrivate: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      userStat: { following: this.otheruser.following },
+      userStat: { following: this.otheruser.following, sentFollowRequest: false },
       favorite: false,
       blocked: false,
-      snackbarFollow: false,
+      snackbarBlocked: false,
+      snackbarText: 'User has been blocked',
       snackbar2: false,
-      snackbarText: 'snackbarText',
       snackbar2Text: '',
       snackbarColor: 'primary',
-      snackbarTimeout: 1000,
-      list: this.$store.getters.favoriteUsers
+      snackbarTimeout: 3000
     }
   },
   computed: {
@@ -235,9 +255,27 @@ export default {
     }
   },
   methods: {
-    blockUser () {
-      this.snackbar = true
-      this.blocked = true
+    message () {
+      console.log('sending a message...')
+    },
+    async blockUser () {
+      let success = false
+      const credentials = {
+        targetId: this.id,
+        actorId: this.user.userId
+      }
+      success = await UserService.blockUser(credentials)
+      if (success) {
+        this.snackbarBlocked = true
+        this.blocked = true
+      }
+    },
+    async handleFollow () {
+      if (this.isPrivate) this.sendFollowRequest()
+      else this.follow(1)
+    },
+    async handleUnfollow () {
+      this.unfollow(1)
     },
     updateFavorites () {
       if (this.list.length <= 5) {
