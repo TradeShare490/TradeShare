@@ -27,9 +27,9 @@
           class="pl-3"
           @change="$vuetify.goTo(9999)"
         >
-          <v-col
-            cols="1"
-            class="pt-8"
+          <v-list-item
+            three-line
+            class="pt-2"
           >
             <v-avatar
               class="profile"
@@ -37,26 +37,30 @@
             >
               <v-img :src="avatar" />
             </v-avatar>
-          </v-col>
-          <v-col cols="6">
-            <v-card-title
-              class="text-body-1"
-              data-cy="name"
-            >
-              {{ name }}
-            </v-card-title>
-            <v-card-subtitle
-              class="text-left text--lighten-2"
-              data-cy="username"
-            >
-              {{ activeChat ? '@' : '' }}{{ username }}
-            </v-card-subtitle>
-          </v-col>
+            <v-list-item-content class="text-left pl-5">
+              <v-col
+                cols="7"
+                class="px-0 py-0"
+              >
+                <v-list-item-title
+                  class="text-body-1 px-0"
+                  data-cy="name"
+                >
+                  {{ name }}
+                </v-list-item-title>
+                <v-list-item-subtitle
+                  class="text-left text--lighten-2 px-0"
+                  data-cy="username"
+                >
+                  {{ activeChat ? '@' : '' }}{{ username }}
+                </v-list-item-subtitle>
+              </v-col>
+            </v-list-item-content>
+          </v-list-item>
         </v-row>
         <v-divider v-if="activeChat" />
         <v-responsive
           class="overflow-y-hidden fill-height"
-          height="80vh"
         >
           <v-card
             v-if="!activeChat"
@@ -77,8 +81,9 @@
           <v-card
             v-if="activeChat"
             flat
-            class="d-flex flex-column fill-height"
+            class="d-flex flex-column"
             data-cy="messages-window"
+            style="height: calc(100vh - 8.8rem)"
           >
             <v-card-text
               ref="messages"

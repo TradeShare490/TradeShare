@@ -25,68 +25,71 @@
         </v-btn>
       </v-col>
     </template>
-    <v-card class="overflow-hidden">
-      <v-row>
-        <v-col cols="1">
-          <v-icon
-            class="pt-3 pl-3"
-            @click="dialog = false"
-          >
-            close
-          </v-icon>
-        </v-col>
-        <v-col>
-          <v-card-title class="justify-center mr-10">
-            New Message
-          </v-card-title>
-        </v-col>
-      </v-row>
-      <v-container>
+    <v-card
+      class="overflow-hidden"
+      height="500px"
+    >
+      <div height="10px">
         <v-row>
-          <v-col>
-            <v-autocomplete
-              v-model="select"
-              :items="items"
-              hide-selected
-              hide-no-data
-              no-filter
-              color="primary"
-              outlined
-              label="Search..."
-              item-text="name"
-              item-value="name"
-              flat
-              append-icon="mdi-magnify"
-              multiple
-              :loading="isLoading"
-              :search-input.sync="searchInput"
-              data-cy="chat-user"
-              @input="searchInput = null"
+          <v-col cols="1">
+            <v-icon
+              class="pt-3 pl-3"
+              @click="dialog = false"
             >
-              <template #item="data">
-                <v-list-item
-                  @click="createConversation(data.item.name, data.item.username)"
-                >
-                  <v-list-item-avatar>
-                    <img
-                      :src="`https://randomuser.me/api/portraits/men/52.jpg`"
-                      :alt="altText"
-                    >
-                  </v-list-item-avatar>
-                  <v-list-item-content data-cy="list-item">
-                    <v-list-item-title>
-                      {{ data.item.name }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      @{{ data.item.username }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </template>
-            </v-autocomplete>
+              close
+            </v-icon>
+          </v-col>
+          <v-col>
+            <v-card-title class="justify-center mr-10">
+              New Message
+            </v-card-title>
           </v-col>
         </v-row>
-      </v-container>
+      </div>
+      <v-row class="px-5">
+        <v-col>
+          <v-autocomplete
+            v-model="select"
+            :items="items"
+            hide-selected
+            hide-no-data
+            no-filter
+            color="primary"
+            outlined
+            label="Search..."
+            item-text="name"
+            item-value="name"
+            flat
+            append-icon="mdi-magnify"
+            multiple
+            :loading="isLoading"
+            :search-input.sync="searchInput"
+            data-cy="chat-user"
+            @input="searchInput = null"
+          >
+            <template #item="data">
+              <v-list-item
+                @click="createConversation(data.item.name, data.item.username)"
+              >
+                <v-list-item-avatar>
+                  <img
+                    :src="`https://randomuser.me/api/portraits/men/52.jpg`"
+                    :alt="altText"
+                  >
+                </v-list-item-avatar>
+                <v-list-item-content data-cy="list-item">
+                  <v-list-item-title>
+                    {{ data.item.name }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
+                    @{{ data.item.username }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </v-autocomplete>
+        </v-col>
+      </v-row>
     </v-card>
   </v-dialog>
 </template>
