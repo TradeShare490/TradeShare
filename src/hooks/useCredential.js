@@ -17,7 +17,7 @@ export const login = async (credentials, store, router) => {
   await store
     .dispatch('login', credentials)
     .then(() => {
-      router.push({ name: 'Dashboard' })
+      window.location.href = window.location.href + '/Dashboard'
     })
     .catch(err => {
       throw err.response.data.message
