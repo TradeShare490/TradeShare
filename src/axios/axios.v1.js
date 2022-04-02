@@ -8,7 +8,7 @@ const HOST_BY_MODE = {
 const HOST = HOST_BY_MODE[process.env.NODE_ENV] || '//localhost:5000/api/v1'
 let user = localStorage.getItem('user')
 
-user = user.includes('accessToken') ? JSON.parse(user) : {}
+user = user != null && user.includes('accessToken') ? JSON.parse(user) : { accessToken: '' }
 const axiosInstance = axios.create({
   baseURL: `${HOST}`,
   headers: {
