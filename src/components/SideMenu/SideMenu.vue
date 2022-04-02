@@ -36,6 +36,7 @@
                   to="/following"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
+                  data-cy="sidebar-followings"
                 >
                   {{ followingNum + " Followings" }}
                 </router-link>
@@ -45,6 +46,7 @@
                   to="/followers"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
+                  data-cy="sidebar-followers"
                 >
                   {{ followerNum + " Followers" }}
                 </router-link>

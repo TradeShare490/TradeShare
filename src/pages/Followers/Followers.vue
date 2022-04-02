@@ -5,11 +5,17 @@
     <v-tabs
       centered
     >
-      <v-tab :ripple="false">
+      <v-tab
+        :ripple="false"
+        data-cy="followers-followers-tab"
+      >
         <em class="mdi mdi-account-multiple" />
         <span>FOLLOWERS</span>
       </v-tab>
-      <v-tab :ripple="false">
+      <v-tab
+        :ripple="false"
+        data-cy="followers-follow-requests-tab"
+      >
         <em class="mdi mdi-exclamation" />
         <span>FOLLOW REQUESTS</span>
       </v-tab>
@@ -79,6 +85,7 @@
               :requestblock="true"
               :is-private="request.isPrivate"
               :request-id="request.requestId"
+              :data-cy="`userblock-${request.username}`"
             />
           </div>
         </div>

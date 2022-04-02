@@ -31,6 +31,7 @@
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 text-xs-body-2 text-wrap font-weight-bold"
+              data-cy="basic-profile-name"
             >
               {{ otheruser.firstname }} {{ otheruser.lastname }}
             </v-list-item-title>
@@ -93,7 +94,7 @@
               color="primary"
               :ripple="false"
               class="caption mr-1"
-              data-cy="following"
+              :data-cy="`profile-sent-request-${otheruser.username}`"
               @click="handleUnfollow"
             >
               Sent Request
@@ -108,7 +109,7 @@
                 color="primary"
                 :ripple="false"
                 class="caption"
-                data-cy="following"
+                :data-cy="`profile-following-${otheruser.username}`"
                 @click="handleUnfollow"
               >
                 Following
@@ -121,7 +122,7 @@
                 color="primary"
                 :ripple="false"
                 class="caption"
-                data-cy="follow"
+                :data-cy="`profile-follow-${otheruser.username}`"
                 @click="handleFollow"
               >
                 Follow

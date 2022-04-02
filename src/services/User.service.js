@@ -16,6 +16,7 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userId) {
+    console.log('() getPositions ' + userId)
     if (userId === undefined) return null
     let userPortfolioData = []
     await axios
@@ -388,10 +389,11 @@ class UserService {
   }
 
   async getEquities (userId, period) {
-    let history = null
+    let history = []
     await axios.get('/history/' + userId + '?period=' + period)
       .then(function (res) {
-        history = res.data.history
+        if (res.status === 501) return []
+        else history = res.data.history
       })
       .catch(function (err) {
         console.log(err)

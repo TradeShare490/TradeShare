@@ -25,6 +25,7 @@
             <v-avatar
               class="profile"
               size="50"
+              :data-cy="`userblock-avatar-${username}`"
             >
               <v-img :src="image" />
             </v-avatar>
@@ -70,9 +71,9 @@
               outlined
               color="primary"
               class="btn my-3 caption font-weight-bold"
-              data-cy="following"
               height="32px"
               width="110px"
+              :data-cy="`sent-request-${username}`"
             >
               <div class="text">
                 Sent Request
@@ -86,11 +87,12 @@
                 outlined
                 color="primary"
                 class="btn my-3 caption font-weight-bold"
-                data-cy="following"
                 height="32px"
                 width="110px"
+                :data-cy="`following-${username}`"
                 @click="handleUnfollow"
               >
+                <!-- data-cy="following" -->
                 <div class="text">
                   Following
                 </div>
@@ -101,11 +103,12 @@
                 elevation="2"
                 color="primary"
                 class="btn my-3 caption font-weight-bold"
-                data-cy="follow"
                 height="32px"
                 width="110px"
+                :data-cy="`follow-${username}`"
                 @click="handleFollow"
               >
+                <!-- data-cy="follow" -->
                 <div class="text">
                   Follow
                 </div>
@@ -128,7 +131,7 @@
               elevation="2"
               color="primary"
               class="btn my-3 caption font-weight-bold"
-              data-cy="follow"
+              :data-cy="`confirm-request-${username}`"
               height="32px"
               width="110px"
               :disabled="requestStatusFinishComputed"
@@ -159,7 +162,7 @@
               color="primary"
               outlined
               class="btn my-3 caption font-weight-bold"
-              data-cy="follow"
+              :data-cy="`reject-request-${username}`"
               height="32px"
               width="110px"
               :disabled="requestStatusFinishComputed"
@@ -178,6 +181,7 @@
       v-model="snackbarFollow"
       :timeout="snackbarTimeout"
       :color="snackbarColor"
+      data-cy="userblock-snackbar"
     >
       {{ snackbarText }}
       <template #action="{ attrs }">

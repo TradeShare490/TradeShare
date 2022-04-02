@@ -9,6 +9,7 @@
           :otheruser="info"
           :currentlyfollowing="isFollowingByUser"
           :is-private="info.isPrivate"
+          cy-data="other-dashboard-profile"
         />
       </div>
       <div v-if="showData">
@@ -51,7 +52,7 @@
           >
             <v-card min-width="350">
               <Positions
-                :stocks-data="ostocks"
+                :stocks-data="stocks"
                 data-cy="other-dashboard-positions"
               />
             </v-card>
@@ -168,7 +169,7 @@ export default {
       userInfo: null,
       info: {},
       account: Object,
-      ostocks: [],
+      stocks: [],
       followNum: [],
       isFollowingByUser: false,
       activities: [],
@@ -189,7 +190,7 @@ export default {
         this.isLoading = true
         this.userInfo = await UserService.getUserInfo(this.userId)
         this.account = await UserService.getAccount(this.userInfo.userId)
-        this.ostocks = await UserService.getPositions(this.userInfo.userId)
+        this.stocks = await UserService.getPositions(this.userInfo.userId)
         this.followNum = await UserService.getFollowNum(this.userInfo.userId)
         this.isFollowingByUser = await UserService.isFollowed(this.userInfo.userId)
         this.activities = await UserService.getActivities(this.userInfo.userId)
@@ -207,7 +208,7 @@ export default {
       } catch (otherDashboardErr) {
         console.log(otherDashboardErr)
       } finally {
-        this.handleHoldingPieChartData()
+        this.handleHoldingPieChartData(this.userInfo.userId)
         this.isLoading = false
       }
     }

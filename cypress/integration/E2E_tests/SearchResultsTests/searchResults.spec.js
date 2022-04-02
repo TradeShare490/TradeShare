@@ -18,11 +18,7 @@ describe("Can", () => {
     cy.get("[data-cy=stock-name]").should("be.visible");
   });
   it("see followings and other users", () => {
-    if(cy.get("[data-cy=following]").length > 0) {
-      cy.get("[data-cy=following]").should("be.visible");
-    }
-    if(cy.get("[data-cy=follow]").length > 0) {
-      cy.get("[data-cy=follow]").should("be.visible");
-    }
+    cy.get("[data-cy=following-zhongli]").should("be.visible");
+    cy.get("[data-cy=follow-jmetertester]").should("be.visible");
   })
 })

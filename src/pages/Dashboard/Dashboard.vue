@@ -201,7 +201,7 @@ export default {
       } catch (dashboardErr) {
         console.log(dashboardErr)
       } finally {
-        this.handleHoldingPieChartData()
+        this.handleHoldingPieChartData(this.user.userId)
       }
     }
   }

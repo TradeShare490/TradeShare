@@ -88,7 +88,7 @@ export default {
   },
   data: () => ({
     loaded: false,
-    dataCollection: null,
+    dataCollection: [],
     userList: ['Mary Winchester', 'Mac Kafe', 'Jennie Kim', 'Kevin Nguyen', 'Gojo Satoru'],
     colors: ['green', 'yellow', 'orange', 'purple', 'black'],
     users: [{ name: 'Me', color: 'primary' }],
@@ -153,10 +153,12 @@ export default {
 
   beforeMount () {
     this.getHistory('intraday')
-    this.getMonthHistory()
-    this.getMyMonthHistory()
-    for (let i = 0; i < this.userList.length; i++) {
-      this.users.push({ name: this.userList[i], color: this.colors[i] })
+    if (this.dataCollection.length !== 0) {
+      this.getMonthHistory()
+      this.getMyMonthHistory()
+      for (let i = 0; i < this.userList.length; i++) {
+        this.users.push({ name: this.userList[i], color: this.colors[i] })
+      }
     }
   },
   methods: {
@@ -180,25 +182,27 @@ export default {
     },
     async getHistory (period) {
       this.dataCollection = await UserService.getEquities(this.userId, period)
-      this.equities = this.dataCollection.equity
-      switch (period) {
-        case 'intraday':
-          this.labels = this.dataCollection.timestamp.map(time => {
-            return new Date(time * 1000).toLocaleTimeString(navigator.language, {
-              hour: '2-digit',
-              minute: '2-digit'
+      if (this.dataCollection) {
+        this.equities = this.dataCollection.equity
+        switch (period) {
+          case 'intraday':
+            this.labels = this.dataCollection.timestamp.map(time => {
+              return new Date(time * 1000).toLocaleTimeString(navigator.language, {
+                hour: '2-digit',
+                minute: '2-digit'
+              })
             })
-          })
-          break
-        case '1M':
-          this.labels = this.convertDate(this.dataCollection.timestamp)
-          break
-        case '1A':
-          this.labels = this.convertDate(this.dataCollection.timestamp)
-          break
-        case 'all':
-          this.labels = this.convertDate(this.dataCollection.timestamp)
-          break
+            break
+          case '1M':
+            this.labels = this.convertDate(this.dataCollection.timestamp)
+            break
+          case '1A':
+            this.labels = this.convertDate(this.dataCollection.timestamp)
+            break
+          case 'all':
+            this.labels = this.convertDate(this.dataCollection.timestamp)
+            break
+        }
       }
     }
   }
