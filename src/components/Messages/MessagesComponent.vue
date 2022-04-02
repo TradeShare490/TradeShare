@@ -245,6 +245,7 @@ export default {
       const container = this.$refs.messages
       container.scrollTop = container.scrollHeight
     },
+    /* istanbul ignore next */
     destroyed () {
       socket.off('connect')
       socket.off('addUser')

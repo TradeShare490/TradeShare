@@ -16,6 +16,7 @@ describe("Can", () => {
     cy.get("[data-cy=logo]").should("be.visible");
     cy.get("[data-cy=ticker]").should("be.visible");
     cy.get("[data-cy=stock-name]").should("be.visible");
+    cy.get("[data-cy=more-info]").first().click()
   });
   it("see followings and other users", () => {
     cy.get("[data-cy=following-zhongli]").should("be.visible");

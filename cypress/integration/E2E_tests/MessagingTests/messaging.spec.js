@@ -31,4 +31,7 @@ describe("On the messaging page, can", () => {
       expect(str).to.equal("You clicked the icon!");
     });
   });
+  it("can send a message", () => {
+    cy.get("[data-cy=send-message]").type("hello{enter}")
+  })
 });
