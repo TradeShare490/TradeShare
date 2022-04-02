@@ -16,6 +16,5 @@ describe("Can", () => {
         cy.get("[data-cy=toggle-privacy]").click()
         cy.get("[data-cy=toggle-privacy]").click()
         cy.get("[data-cy=savePassword-btn]").click()
-        //I am questionning whether I should test unblock
   });
   })

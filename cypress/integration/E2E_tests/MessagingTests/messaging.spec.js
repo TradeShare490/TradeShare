@@ -34,4 +34,7 @@ describe("On the messaging page, can", () => {
   it("can send a message", () => {
     cy.get("[data-cy=send-message]").type("hello{enter}")
   })
+  it("can create a new conversation",()=>{
+    return 0;
+  })
 });

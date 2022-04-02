@@ -116,7 +116,6 @@ export default {
       try {
         const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}`)
         const list = response.data.data
-        console.log(list)
         for (let index = 0; index < list.length; index++) {
           const isFollowing = await UserService.isFollowed((list[index].userId))
           const userInfo = {
@@ -140,8 +139,6 @@ export default {
       try {
         const response = await axiosInstance.get(`/searchRecommendations/${this.keyword}`)
         const list = response.data.searchResult.bestMatches
-        console.log('list')
-        console.log(list)
         for (let index = 0; index < list.length; index++) {
           const companyInfo = {
             id: (index + 1).toString,

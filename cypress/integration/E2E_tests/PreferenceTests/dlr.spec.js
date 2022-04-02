@@ -15,9 +15,7 @@ describe("Can", () => {
     it("can interact with the DLR page",() => {
        // cy.get("[data-cy=region-autocomplete]").type("Canada",{force: true})
         cy.get("[data-cy=save-region-btn]").should("be.visible").click()
-        cy.get("data-cy=snack2]").should("be.visible")
         // cy.get("[data-cy=language-autocomplete]").type("French",{force: true})
         cy.get("[data-cy=save-language-btn]").should("be.visible").click()
-        cy.get("data-cy=snack1]").should("be.visible")
   })
   })
