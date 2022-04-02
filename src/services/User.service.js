@@ -36,10 +36,7 @@ class UserService {
   /* istanbul ignore next */
   async postUnfollow (credentials) {
     try {
-      const config = {
-        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-      }
-      const response = await axios.post('/following/unfollow', credentials, config)
+      const response = await axios.post('/following/unfollow', credentials)
       if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
@@ -51,10 +48,7 @@ class UserService {
   /* istanbul ignore next */
   async postFollow (credentials) {
     try {
-      const config = {
-        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-      }
-      const response = await axios.post('/following/follow', credentials, config)
+      const response = await axios.post('/following/follow', credentials)
       if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
@@ -65,11 +59,8 @@ class UserService {
   /* istanbul ignore next */
   async getFollowNum (userId) {
     const result = { numFollowing: 0, numFollower: 0 }
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .get('/following/followers/' + userId, config)
+      .get('/following/followers/' + userId)
       .then(function (res) {
         result.numFollower = res.data.length
       })
@@ -77,7 +68,7 @@ class UserService {
         console.log(err)
       })
     await axios
-      .get('/following/follows/' + userId, config)
+      .get('/following/follows/' + userId)
       .then(function (res) {
         result.numFollowing = res.data.length
       })
@@ -94,10 +85,7 @@ class UserService {
 
   async addFollowRequest (credentials) {
     try {
-      const config = {
-        headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-      }
-      const response = await axios.post('/following/follow/', credentials, config)
+      const response = await axios.post('/following/follow/', credentials)
       if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
@@ -106,10 +94,7 @@ class UserService {
   }
 
   async getFollowRequest (userId) {
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
-    const response = await axios.get('/following/requests/' + userId, config)
+    const response = await axios.get('/following/requests/' + userId)
     const requestList = []
     for (const user of response.data) {
       const userInfo = await this.getUserInfo(user.senderId)
@@ -120,11 +105,8 @@ class UserService {
   }
 
   async acceptFollowRequest (credentials, requestId) {
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     try {
-      const response = await axios.post('/following/requests/accept/' + requestId, credentials, config)
+      const response = await axios.post('/following/requests/accept/' + requestId, credentials)
       if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
@@ -133,11 +115,8 @@ class UserService {
   }
 
   async rejectFollowRequest (credentials, requestId) {
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     try {
-      const response = await axios.post('/following/requests/decline/' + requestId, credentials, config)
+      const response = await axios.post('/following/requests/decline/' + requestId, credentials)
       if (response.status === 200) return { success: true }
     } catch (err) {
       console.log(err)
@@ -148,11 +127,8 @@ class UserService {
   /* istanbul ignore next */
   async getFollowers (userId) {
     let followersData = null
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .get('/following/followers/' + userId, config)
+      .get('/following/followers/' + userId)
       .then(function (res) {
         followersData = res.data
       })
@@ -169,7 +145,7 @@ class UserService {
 
     let followingsData = null
     await axios
-      .get('/following/follows/' + userId, config)
+      .get('/following/follows/' + userId)
       .then(function (res) {
         followingsData = res.data
       })
@@ -190,11 +166,8 @@ class UserService {
 
   async getFollowingsRaw (userId) {
     let followingsData = null
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .get('/following/follows/' + userId, config)
+      .get('/following/follows/' + userId)
       .then(function (res) {
         followingsData = res.data
       })
@@ -207,11 +180,8 @@ class UserService {
 
   async getFollowersRaw (userId) {
     let followersData = null
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .get('/following/followers/' + userId, config)
+      .get('/following/followers/' + userId)
       .then(function (res) {
         followersData = res.data
       })
@@ -226,12 +196,8 @@ class UserService {
   async getFollowings (userId) {
     const followingList = []
     let followingsData = null
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .get('/following/follows/' + userId,
-        config)
+      .get('/following/follows/' + userId)
       .then(function (res) {
         followingsData = res.data
       })
@@ -256,12 +222,8 @@ class UserService {
   async getBlockedUsers (userID, raw = false) {
     const blockedList = []
     let blockedData = null
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .get('/managePrivacy/blockedUsers/' + userID,
-        config)
+      .get('/managePrivacy/blockedUsers/' + userID)
       .then(function (res) {
         blockedData = res.data
       })
@@ -288,12 +250,8 @@ class UserService {
 
   async unblockUser (credentials) {
     let success = false
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .post('/managePrivacy/unblock/', credentials,
-        config)
+      .post('/managePrivacy/unblock/', credentials)
       .then(function (res) {
         success = res.status === 200
       })
@@ -306,12 +264,8 @@ class UserService {
 
   async blockUser (credentials) {
     let success = false
-    const config = {
-      headers: { Authorization: `Bearer ${store.state.user.accessToken}` }
-    }
     await axios
-      .post('/managePrivacy/block/', credentials,
-        config)
+      .post('/managePrivacy/block/', credentials)
       .then(function (res) {
         success = res.status === 200
       })

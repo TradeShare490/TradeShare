@@ -13,11 +13,11 @@ export const signUp = async (credentials, store, router) => {
   return false
 }
 
-export const login = async (credentials, store, router) => {
+export const login = async (credentials, store, _router) => {
   await store
     .dispatch('login', credentials)
     .then(() => {
-      router.push({ name: 'Dashboard' })
+      window.location.href = window.location.href + '/dashboard'
     })
     .catch(err => {
       throw err.response.data.message
