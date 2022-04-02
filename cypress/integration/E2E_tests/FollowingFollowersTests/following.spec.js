@@ -28,65 +28,26 @@ describe("On the following page, can", () => {
   });
   it("approve and reject follow request for private account", () => {
     cy.login2();
-    cy.wait(2000);
-    cy.get("[data-cy=sidebar-followings]").click();
-    cy.wait(2000);
-    cy.get("[data-cy=following-janedoe]").click();
-    cy.wait(1000);
-    cy.get("[data-cy=follow-janedoe]").should("be.visible");
-    cy.get("[data-cy=follow-janedoe]").click();
-    cy.wait(2000);
-    cy.get("[data-cy=sent-request-janedoe]").should("be.visible");
-    cy.get("[data-cy=logout-btn]").click()
-    cy.wait(1000)
-
+    cy.unfollowAndFolloeJoeAndLogout()
     cy.login3();
-    cy.wait(2000);
-    cy.get("[data-cy=sidebar-followings]").click();
-    cy.wait(2000);
-    cy.get("[data-cy=following-janedoe]").click();
-    cy.wait(1000);
-    cy.get("[data-cy=follow-janedoe]").should("be.visible");
-    cy.get("[data-cy=follow-janedoe]").click();
-    cy.wait(2000);
-    cy.get("[data-cy=sent-request-janedoe]").should("be.visible");
-    cy.get("[data-cy=logout-btn]").click()
-    cy.wait(1000)
-
+    cy.unfollowAndFolloeJoeAndLogout()
     cy.login();
     cy.wait(2000);
     cy.get("[data-cy=sidebar-followers]").click();
     cy.wait(2000);
     cy.get("[data-cy=followers-follow-requests-tab]").click();
-
     cy.get("[data-cy=confirm-request-zhongli]").click();
-
     cy.wait(4000);
     cy.get("[data-cy=followers-follow-requests-tab]").click();
     cy.get("[data-cy=reject-request-ReserveForSearch]").click();
-
     cy.wait(1000);
     cy.login3();
-    cy.wait(2000);
-    cy.get("[data-cy=sidebar-followers]").click();
-    cy.wait(2000);
-    cy.get("[data-cy=userblock-avatar-janedoe]").click()
-    cy.wait(2000);
-    cy.get("[data-cy=profile-follow-janedoe]").should("be.visible");
-    cy.get("[data-cy=profile-follow-janedoe]").click();
-    cy.wait(2000);
-    cy.get("[data-cy=profile-sent-request-janedoe]").should("be.visible");
-    cy.get("[data-cy=logout-btn]").click()
-    cy.wait(1000)
-
+    cy.unfollowAndFolloeJoeAndLogout()
     cy.login();
     cy.wait(2000);
     cy.get("[data-cy=sidebar-followers]").click();
     cy.wait(2000);
     cy.get("[data-cy=followers-follow-requests-tab]").click();
-
     cy.get("[data-cy=confirm-request-ReserveForSearch]").click();
-    
-  
   });
 });
