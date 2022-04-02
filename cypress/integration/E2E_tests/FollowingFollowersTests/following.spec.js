@@ -8,7 +8,7 @@ describe("On the following page, can", () => {
         `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.FOLLOWING}`
       );
     });
-    cy.get("body").then(($body) => {
+    cy.get("body").then((_$body) => {
       cy.wait(3000);
       cy.get("[data-cy=following-ReserveForSearch]").click();
       cy.wait(1000);

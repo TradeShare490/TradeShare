@@ -14,7 +14,7 @@ describe("On the following page, can", () => {
       .click()
       .type("Re{enter}")
     cy.wait(2000)
-    cy.get("body").then(($body) => {
+    cy.get("body").then((_$body) => {
       cy.get("[data-cy=basic-profile-info]").should("be.visible");
       cy.get("[data-cy=basic-profile-name]").should("be.visible");
       cy.get("[data-cy=basic-profile-name]").should("contain","Reserve ForSearch");
@@ -33,7 +33,7 @@ describe("On the following page, can", () => {
       .click()
       .type("John Lee{enter}")
     cy.wait(2000)
-    cy.get("body").then(($body) => {
+    cy.get("body").then((_$body) => {
       cy.get("[data-cy=basic-profile-info]").should("be.visible");
       cy.get("[data-cy=basic-profile-name]").should("be.visible");
       cy.get("[data-cy=basic-profile-name]").should("contain","John Lee");
@@ -45,22 +45,18 @@ describe("On the following page, can", () => {
       cy.get("[data-cy=other-dashboard-positions]").should("be.visible");
       cy.get("[data-cy=other-dashboard-equities]").should("be.visible");
     })
-  });
-  it("search for a follower", () => {
-    cy.login();
-    cy.wait(2000);
+
     cy.get("[data-cy=sidebar-followers]").click();
     cy.wait(2000);
     cy.get("[data-cy=followers-followers-tab]").should("be.visible");
-    cy.wait(2000);
     cy.get("[data-cy=search]")
       .click()
-      .type("Res{enter}")
+      .type("Follower{enter}")
     cy.wait(2000)
-    cy.get("body").then(($body) => {
+    cy.get("body").then((_$body) => {
       cy.get("[data-cy=basic-profile-info]").should("be.visible");
       cy.get("[data-cy=basic-profile-name]").should("be.visible");
-      cy.get("[data-cy=basic-profile-name]").should("contain","Reserve ForSearch");
+      cy.get("[data-cy=basic-profile-name]").should("contain","Follower Search");
     })
   });
 });

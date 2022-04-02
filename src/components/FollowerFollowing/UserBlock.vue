@@ -92,7 +92,6 @@
                 :data-cy="`following-${username}`"
                 @click="handleUnfollow"
               >
-                <!-- data-cy="following" -->
                 <div class="text">
                   Following
                 </div>
@@ -108,7 +107,6 @@
                 :data-cy="`follow-${username}`"
                 @click="handleFollow"
               >
-                <!-- data-cy="follow" -->
                 <div class="text">
                   Follow
                 </div>

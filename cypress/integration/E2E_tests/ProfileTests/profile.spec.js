@@ -27,7 +27,7 @@ describe("Profile component can ", () => {
         // once a request to get settings responds, 'cy.wait' will resolve
         // cy.wait('@followOtherUser')
         cy.wait(1000); // waiting in case it requires time to update button to "following" button
-        cy.get("[data-cy=profile-following-test]").should("be.visible");; // checking that it switched the button to "following"
+        cy.get("[data-cy=profile-following-test]").should("be.visible"); // checking that it switched the button to "following"
       } else {
         cy.log('FALSE not follow')
         // cy.intercept('POST', '/api/v1/following/unfollow').as('unfollowOtherUser')
@@ -38,7 +38,7 @@ describe("Profile component can ", () => {
         // once a request to get settings responds, 'cy.wait' will resolve
         // cy.wait('@unfollowOtherUser')
         cy.wait(1000);
-        cy.get("[data-cy=profile-following-test]").should("be.visible");;
+        cy.get("[data-cy=profile-following-test]").should("be.visible");
       }
     });
   });
