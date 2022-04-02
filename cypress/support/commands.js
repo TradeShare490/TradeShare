@@ -35,6 +35,20 @@ Cypress.Commands.add('unfollowAndFolloeJoeAndLogout', () => {
   cy.get("[data-cy=logout-btn]").click()
   cy.wait(1000)
 })
+Cypress.Commands.add('searchForUser', (key, name, username) => {
+  cy.get("[data-cy=search]")
+      .click()
+      .type(`${key}{enter}`)
+  cy.wait(2000)
+  cy.get("body").then((_$body) => {
+    cy.get("[data-cy=basic-profile-info]").should("be.visible");
+    cy.get("[data-cy=basic-profile-name]").should("be.visible");
+    cy.get("[data-cy=basic-profile-name]").should("contain", username);
+    cy.get(`[data-cy=profile-following-${name}]`).should("be.visible");
+    cy.get("[data-cy=profile-num-followers]").should("be.visible");
+    cy.get("[data-cy=profile-num-following]").should("be.visible");
+  })
+})
 Cypress.Commands.add('signup', (firstName, lastName, email, password, passwordConfirm) => {
     cy.get("[data-cy=first-name]").type(firstName);
     cy.get("[data-cy=last-name]").type(lastName);
