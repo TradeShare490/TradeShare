@@ -93,6 +93,7 @@ export default {
       this.$emit('clicked', name, username, img, conversationId)
     },
     async initialize () {
+      /* istanbul ignore catch */
       try {
         this.conversations = await UserService.getConversations(JSON.parse(localStorage.getItem('user')).username)
       } catch (err) {
@@ -110,6 +111,7 @@ export default {
         })
       }
     },
+    /* istanbul ignore next */
     updateChat (conversationId, content) {
       this.chats = this.chats.map((chat) => {
         if (chat.id === conversationId) {

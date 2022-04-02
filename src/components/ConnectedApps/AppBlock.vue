@@ -157,6 +157,7 @@
 </template>
 
 <script>
+/* istanbul ignore file */
 import { useConnectAppMixin } from '../../hooks/useConnectApp.js'
 
 export default {
