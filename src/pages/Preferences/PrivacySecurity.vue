@@ -135,8 +135,8 @@
             <v-btn
               color="primary"
               :ripple="false"
-              @click="savePassword"
               data-cy="savePassword-btn"
+              @click="savePassword"
             >
               Save
             </v-btn>
