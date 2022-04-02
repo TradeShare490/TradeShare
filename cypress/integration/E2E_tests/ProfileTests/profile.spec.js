@@ -55,7 +55,8 @@ describe("Profile component can ", () => {
     cy.get("[data-cy=sidebar-Preferences]").click();
     cy.wait(2000)
     cy.get("[data-cy=preference-mdi-security]").should("be.visible");
-    cy.get("[data-cy=preference-mdi-security]").click();   
+    cy.get("[data-cy=preference-mdi-security]").click(); 
+    cy.wait(500)  
     cy.log("UNBLOCK USER")
     cy.get("[data-cy=unblock-test]").click();
     cy.get("[data-cy=toggle-privacy]").click();
