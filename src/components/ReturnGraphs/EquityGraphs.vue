@@ -150,7 +150,7 @@ export default {
       }
     }
   },
-
+  /* istanbul ignore next */
   beforeMount () {
     this.getHistory('intraday')
     if (this.dataCollection.length !== 0) {
@@ -171,11 +171,13 @@ export default {
         })
       })
     },
+    /* istanbul ignore next */
     async getMonthHistory () {
       const monthData = await UserService.getEquities(this.userId, '1M')
       this.monthEquities = monthData.equity
       this.monthTimestamps = this.convertDate(monthData.timestamp)
     },
+    /* istanbul ignore next */
     async getMyMonthHistory () {
       const monthData = await UserService.getEquities(JSON.parse(localStorage.getItem('user')).userId, '1M')
       this.myMonthEquities = monthData.equity

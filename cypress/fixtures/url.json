@@ -19,7 +19,7 @@
 	"POST":"/tradezone/@ashcoin63/1",
 	"CONNECTED_APPS":"/connected-apps",
 	"PREFERENCEACC":"/preferences/account",
-	"PREFERENCEPRI":"/preferences/privacysecurity",
+	"PREFERENCEPNS":"/preferences/privacysecurity",
 	"PREFERENCENOT":"/preferences/notifications",
 	"PREFERENCEDLR":"/preferences/dlr"
 }

@@ -10,7 +10,7 @@ describe("On the dashboard page, Dashboard can", () => {
     });
   });
   it('See the pi chart holdings', ()=>{
-    cy.wait(2000);
+    cy.wait(5000);
     cy.get("[data-cy=holdings-pi-chart]").should("be.visible")
     cy.get("[data-cy=line-chart-db]").should("be.visible")
     cy.get("[data-cy=chart-day]").click()

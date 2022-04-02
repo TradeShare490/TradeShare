@@ -40,6 +40,7 @@
             return-object
             label="Select a Language"
             class="ml-n7 mt-10"
+            data-cy="language-autocomplete"
           />
         </div>
         <v-btn
@@ -47,6 +48,7 @@
           filled
           color="primary"
           :ripple="false"
+          data-cy="save-language-btn"
           @click="saveLanguage(languages.languageName)"
         >
           Save
@@ -56,6 +58,7 @@
           :timeout="timeout"
           color="primary"
           right
+          data-cy="snack1"
         >
           {{ snackbar1Text }}
         </v-snackbar>
@@ -80,6 +83,7 @@
             return-object
             label="Select a Region"
             class="ml-n5 mt-10"
+            data-cy="region-autocomplete"
           />
         </div>
         <v-btn
@@ -87,6 +91,7 @@
           filled
           color="primary"
           :ripple="false"
+          data-cy="save-region-btn"
           @click="saveRegion(regions.regionName)"
         >
           Save
@@ -96,6 +101,7 @@
           :timeout="timeout"
           color="primary"
           right
+          data-cy="snack2"
         >
           {{ snackbar2Text }}
         </v-snackbar>

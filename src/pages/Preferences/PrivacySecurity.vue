@@ -136,6 +136,7 @@
               color="primary"
               :ripple="false"
               @click="savePassword"
+              data-cy="savePassword-btn"
             >
               Save
             </v-btn>
@@ -144,6 +145,7 @@
               :timeout="timeout"
               color="primary"
               right
+              data-cy="snackbar"
             >
               {{ snackbarText }}
             </v-snackbar>
@@ -351,6 +353,7 @@ export default {
     savePassword () {
       this.snackbar = true
     },
+    /* istanbul ignore next */
     async unblock (index) {
       const credentials = {
         targetId: this.blockedList.at(index).id,
