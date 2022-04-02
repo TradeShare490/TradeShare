@@ -66,7 +66,7 @@
         <LineChartContainer
           :user-id="user.userId"
           :user-name="user.username"
-          data-cy = "line-chart-db"
+          data-cy="line-chart-db"
         />
       </v-col>
       <v-col
@@ -118,7 +118,10 @@
         lg="4"
         xl="3"
       >
-        <Holdings :holdings-data="holdingData" data-cy="holdings-pi-chart"/>
+        <Holdings
+          :holdings-data="holdingData"
+          data-cy="holdings-pi-chart"
+        />
       </v-col>
       <v-col
         xs="12"

@@ -26,26 +26,26 @@
           fixed-tabs
         >
           <v-tab
-            @click="getHistory('intraday')"
             data-cy="chart-day"
+            @click="getHistory('intraday')"
           >
             Today
           </v-tab>
           <v-tab
-            @click="getHistory('1M')"
             data-cy="chart-month"
+            @click="getHistory('1M')"
           >
             Month
           </v-tab>
           <v-tab
-            @click="getHistory('1A')"
             data-cy="chart-year"
+            @click="getHistory('1A')"
           >
             Year
           </v-tab>
           <v-tab
-            @click="getHistory('all')"
             data-cy="chart-total"
+            @click="getHistory('all')"
           >
             Total
           </v-tab>
