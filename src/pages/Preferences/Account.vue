@@ -51,6 +51,7 @@
                 solo
                 flat
                 hide-details
+                data-cy="name-field"
               />
               <span class="caption">
                 Name can be changed once within 30 days
@@ -81,6 +82,7 @@
                 solo
                 flat
                 hide-details
+                data-cy="username-field"
               />
               <span class="caption">
                 Username can be changed once within 30 days
@@ -111,6 +113,7 @@
                 solo
                 flat
                 hide-details
+                data-cy="email-field"
               />
             </v-col>
           </v-row>
@@ -139,6 +142,7 @@
               :ripple="false"
               class="text pa-0"
               :disabled="verified"
+              data-cy="req-verif"
               @click="verify()"
             >
               Request Verification
@@ -163,6 +167,7 @@
             color="primary"
             :ripple="false"
             class="text pa-0"
+            data-cy="disable-btn"
             @click="warning(true)"
           >
             Temporarily Disable Account
@@ -178,6 +183,7 @@
             color="primary"
             :ripple="false"
             class="text pa-0"
+            data-cy="delete-btn"
             @click="warning(false)"
           >
             Delete Account
@@ -191,6 +197,7 @@
             color="primary"
             :ripple="false"
             type="submit"
+            data-cy="submit-btn"
           >
             Submit
           </v-btn>
@@ -221,6 +228,7 @@
             <v-btn
               depressed
               @click="dialog = false"
+              data-cy="cancel-btn"
             >
               Cancel
             </v-btn>
@@ -228,6 +236,7 @@
               class="ml-3"
               depressed
               color="primary"
+              data-cy="confirm-btn"
               @click="handleAction()"
             >
               Confirm
