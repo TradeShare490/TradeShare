@@ -41,6 +41,7 @@
           :value="getAge(account.created_at)"
           color="blue"
           icon="mdi-progress-clock"
+          data-cy="account-age-db"
         />
       </v-col>
       <v-col
@@ -65,6 +66,7 @@
         <LineChartContainer
           :user-id="user.userId"
           :user-name="user.username"
+          data-cy = "line-chart-db"
         />
       </v-col>
       <v-col
@@ -94,6 +96,7 @@
             :company="'Quantity:' + trade.qty"
             :purchased="trade.side === 'buy'"
             :when="timeSince(trade.transaction_time)"
+            data-cy="recent-trades-db"
           />
         </v-card>
       </v-col>
@@ -115,7 +118,7 @@
         lg="4"
         xl="3"
       >
-        <Holdings :holdings-data="holdingData" />
+        <Holdings :holdings-data="holdingData" data-cy="holdings-pi-chart"/>
       </v-col>
       <v-col
         xs="12"

@@ -16,6 +16,7 @@
         :username="userName"
         :my-equities="myMonthEquities"
         :options="options"
+        data-cy="compare-db"
       />
     </v-card-title>
 
@@ -26,21 +27,25 @@
         >
           <v-tab
             @click="getHistory('intraday')"
+            data-cy="chart-day"
           >
             Today
           </v-tab>
           <v-tab
             @click="getHistory('1M')"
+            data-cy="chart-month"
           >
             Month
           </v-tab>
           <v-tab
             @click="getHistory('1A')"
+            data-cy="chart-year"
           >
             Year
           </v-tab>
           <v-tab
             @click="getHistory('all')"
+            data-cy="chart-total"
           >
             Total
           </v-tab>

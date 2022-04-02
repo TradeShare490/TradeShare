@@ -1,15 +1,15 @@
-import "cypress-localstorage-commands"
+// import "cypress-localstorage-commands"
 Cypress.Commands.add('login', () => {
     cy.visit('http://localhost:8081/login')
     cy.get("[data-cy=email]").type('test@test.com')
     cy.get("[data-cy=password]").type('12345678')
     cy.get("[data-cy=login-button]").click()
-    localStorage.setItem('user',{
+  /* localStorage.setItem('user',{
         username: 'janedoe',
         userId: '618b2883418c2006690b69be',
         firstname: 'Jane',
         lastname: 'Doe'
-    })
+    })*/
 
   });
 Cypress.Commands.add('signup', (firstName, lastName, email, password, passwordConfirm) => {

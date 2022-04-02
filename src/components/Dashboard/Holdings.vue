@@ -134,6 +134,7 @@ export default {
     cash () {
       return Math.floor(this.holdingsData.sumCash)
     },
+    /* istanbul ignore next */
     cashDecimal () {
       return (parseFloat(this.holdingsData.sumCash - this.cash).toFixed(2)).toString().slice(-3)
     },
