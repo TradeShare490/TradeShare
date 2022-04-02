@@ -52,14 +52,15 @@ describe("On the following page, can", () => {
     cy.get("[data-cy=sidebar-followers]").click();
     cy.wait(2000);
     cy.get("[data-cy=followers-followers-tab]").should("be.visible");
+    cy.wait(2000);
     cy.get("[data-cy=search]")
       .click()
-      .type("John Lee{enter}")
+      .type("Res{enter}")
     cy.wait(2000)
     cy.get("body").then(($body) => {
       cy.get("[data-cy=basic-profile-info]").should("be.visible");
       cy.get("[data-cy=basic-profile-name]").should("be.visible");
-      cy.get("[data-cy=basic-profile-name]").should("contain","John Lee");
+      cy.get("[data-cy=basic-profile-name]").should("contain","Reserve ForSearch");
     })
   });
 });

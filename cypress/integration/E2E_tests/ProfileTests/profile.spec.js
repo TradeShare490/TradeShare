@@ -18,7 +18,7 @@ describe("Profile component can ", () => {
       if ($body.find("[data-cy=profile-follow-test]")) {
         cy.intercept('POST', '/api/v1/following/follow').as('followOtherUser')
         // checking if it is the "follow" button
-        cy.get("[data-cy=follow-test]").click();
+        cy.get("[data-cy=profile-follow-test]").click();
         // once a request to get settings responds, 'cy.wait' will resolve
         cy.wait('@followOtherUser')
         cy.wait(2000); // waiting in case it requires time to update button to "following" button
