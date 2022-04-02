@@ -227,8 +227,8 @@
             <v-spacer />
             <v-btn
               depressed
-              @click="dialog = false"
               data-cy="cancel-btn"
+              @click="dialog = false"
             >
               Cancel
             </v-btn>
@@ -284,6 +284,7 @@ export default {
       if (label === 'username') {
         return this.user.username
       }
+      /* istanbul ignore else */
       if (label === 'email') {
         return this.user.email
       } else {
@@ -305,7 +306,8 @@ export default {
       } else {
         console.log('Delete account function')
       }
-
+      /* istanbul ignore if */
+      /* istanbul ignore else */
       if (err) {
         this.snackbar2Text = 'Error occured'
         this.snackbar2 = true
