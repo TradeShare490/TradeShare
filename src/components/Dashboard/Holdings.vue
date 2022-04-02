@@ -115,6 +115,7 @@ export default {
   props: {
     holdingsData: {
       type: Object,
+      /* istanbul ignore next */
       default () {
         return { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
       }
@@ -128,6 +129,7 @@ export default {
     }
   },
   computed: {
+    /* istanbul ignore next */
     equities () {
       return this.holdingsData.numEquity
     },
