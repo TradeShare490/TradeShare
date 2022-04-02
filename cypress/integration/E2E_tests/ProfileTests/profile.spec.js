@@ -13,30 +13,19 @@ describe("Profile component can ", () => {
       cy.wait('@getOtherInfo')
     });
     cy.wait(2000)
-    // cy.get("[data-cy=userblock-avatar-test]").click()
     cy.get("body").then(($body) => {
       cy.log('CHEKING')
       cy.log($body.find("[data-cy=profile-follow-test]").length)
       if ($body.find("[data-cy=profile-follow-test]").length > 0) {
         cy.log('TRUE followed')
-        // cy.intercept('POST', '/api/v1/following/follow').as('followOtherUser')
-        // cy.get("[data-cy=profile-following-test]").click();
-        // cy.wait(1000);
-        // checking if it is the "follow" button
         cy.get("[data-cy=profile-follow-test]").click();
-        // once a request to get settings responds, 'cy.wait' will resolve
-        // cy.wait('@followOtherUser')
         cy.wait(1000); // waiting in case it requires time to update button to "following" button
         cy.get("[data-cy=profile-following-test]").should("be.visible"); // checking that it switched the button to "following"
       } else {
         cy.log('FALSE not follow')
-        // cy.intercept('POST', '/api/v1/following/unfollow').as('unfollowOtherUser')
         cy.get("[data-cy=profile-following-test]").click();
         cy.wait(1000);
-        // this means it was "following" button initially
         cy.get("[data-cy=profile-follow-test]").click();
-        // once a request to get settings responds, 'cy.wait' will resolve
-        // cy.wait('@unfollowOtherUser')
         cy.wait(1000);
         cy.get("[data-cy=profile-following-test]").should("be.visible");
       }

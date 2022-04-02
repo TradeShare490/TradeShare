@@ -5,23 +5,16 @@ Cypress.Commands.add('login', () => {
     cy.get("[data-cy=password]").type('12345678')
     cy.get("[data-cy=login-button]").click()
 });
-Cypress.Commands.add('login2', () => {
+Cypress.Commands.add('loginCustom', (username, pw) => {
   cy.visit('http://localhost:8081/login')
-  cy.get("[data-cy=email]").type('zhongli')
-  cy.get("[data-cy=password]").type('lmao1234')
-  cy.get("[data-cy=login-button]").click()
-});
-Cypress.Commands.add('login3', () => {
-  cy.visit('http://localhost:8081/login')
-  cy.get("[data-cy=email]").type('ReserveForSearch')
-  cy.get("[data-cy=password]").type('12345678')
+  cy.get("[data-cy=email]").type(username)
+  cy.get("[data-cy=password]").type(pw)
   cy.get("[data-cy=login-button]").click()
 });
 Cypress.Commands.add('unfollowAndFolloeJoeAndLogout', () => {
   cy.wait(2000);
   cy.get("[data-cy=sidebar-followers]").click();
   cy.wait(2000);
-  // [data-cy=following-janedoe]
   cy.get("body").then(($body) => {
     if ($body.find("[data-cy=following-janedoe]").length > 0) {
       cy.get("[data-cy=following-janedoe]").click();

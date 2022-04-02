@@ -27,9 +27,9 @@ describe("On the following page, can", () => {
     });
   });
   it("approve and reject follow request for private account", () => {
-    cy.login2();
+    cy.loginCustom("zhongli","lmao1234");
     cy.unfollowAndFolloeJoeAndLogout()
-    cy.login3();
+    cy.loginCustom("ReserveForSearch","12345678");
     cy.unfollowAndFolloeJoeAndLogout()
     cy.login();
     cy.wait(2000);
@@ -41,7 +41,7 @@ describe("On the following page, can", () => {
     cy.get("[data-cy=followers-follow-requests-tab]").click();
     cy.get("[data-cy=reject-request-ReserveForSearch]").click();
     cy.wait(1000);
-    cy.login3();
+    cy.loginCustom("ReserveForSearch","12345678");
     cy.unfollowAndFolloeJoeAndLogout()
     cy.login();
     cy.wait(2000);
