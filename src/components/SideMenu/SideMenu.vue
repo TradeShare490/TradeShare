@@ -76,7 +76,7 @@
                 {{ item.icon }}
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content>
+            <v-list-item-content :data-cy="`sidebar-${item.title}`">
               <v-list-item-title class="text-left">
                 {{ item.title }}
               </v-list-item-title>

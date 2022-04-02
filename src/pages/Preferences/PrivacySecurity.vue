@@ -26,6 +26,7 @@
           hide-details
           class="mt-0 mb-8"
           :ripple="false"
+          data-cy="toggle-privacy"
           @change="togglePrivacy"
         />
       </div>
@@ -199,6 +200,7 @@
                 color="primary"
                 :ripple="false"
                 class="text pa-0"
+                :data-cy="`unblock-${blocked.username}`"
                 @click="unblock(i)"
               >
                 Unblock

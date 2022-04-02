@@ -166,6 +166,7 @@
               elevation="0"
               outlined
               :ripple="false"
+              data-cy="profile-block"
               @click="blockUser()"
             >
               <v-icon

@@ -37,7 +37,10 @@
             </v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="text-left">
+            <v-list-item-title
+              class="text-left"
+              :data-cy="`preference-${item.icon}`"
+            >
               {{ item.title }}
             </v-list-item-title>
           </v-list-item-content>
