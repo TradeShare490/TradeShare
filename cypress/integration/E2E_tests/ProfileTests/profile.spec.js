@@ -43,22 +43,21 @@ describe("Profile component can ", () => {
     cy.get("[data-cy=other-dashboard-equities]").should("be.visible");
     cy.get("[data-cy=profile-block]").should("be.visible");
     cy.get("[data-cy=profile-block]").click();
+    cy.log("USER BLOCKED")
+    cy.wait(2000)
     cy.get("[data-cy=logout-btn]").click()
     cy.wait(1000)
   });
-  it("Block an user", () => {
+  it("Unblock an user", () => {
     cy.login()
     cy.wait(2000)
     cy.get("[data-cy=sidebar-Preferences]").should("be.visible");
     cy.get("[data-cy=sidebar-Preferences]").click();
     cy.wait(2000)
     cy.get("[data-cy=preference-mdi-security]").should("be.visible");
-    cy.get("[data-cy=preference-mdi-security]").click();
-    cy.get("body").then($body => {
-      if ($body.find("[data-cy=unblock-test]").length > 0) {   
-        cy.get("[data-cy=unblock-test]").click();
-      }
-    });
+    cy.get("[data-cy=preference-mdi-security]").click();   
+    cy.log("UNBLOCK USER")
+    cy.get("[data-cy=unblock-test]").click();
     cy.get("[data-cy=toggle-privacy]").click();
     cy.wait(500)
     cy.get("[data-cy=toggle-privacy]").click();
