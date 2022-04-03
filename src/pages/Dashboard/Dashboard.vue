@@ -110,7 +110,6 @@
         >
           <Positions
             :stocks-data="stocks"
-            data-cy="holdings-pi-chart"
           />
         </v-col>
       </v-row>
@@ -120,7 +119,10 @@
           lg="4"
           xl="3"
         >
-          <Holdings :holdings-data="holdingData" />
+          <Holdings
+            :holdings-data="holdingData"
+            data-cy="holdings-pi-chart"
+          />
         </v-col>
         <v-col
           xs="12"
