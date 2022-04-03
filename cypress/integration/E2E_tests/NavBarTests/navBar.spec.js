@@ -4,7 +4,7 @@ describe('NavBar can', () => {
         cy.wait(2000);
     })
     //This test might need some work as it's testing something super specific
-    it.skip('Redirect you to a Yahoo page',()=>{
+    it('Redirect you to a Yahoo page',()=>{
         cy.get("[data-cy=autocomplete-search-bar]").should("be.visible");
         cy.get("[data-cy=autocomplete-search-bar]").type("A");
         cy.get("[data-cy=autocomplete-list-item]").should("be.visible");

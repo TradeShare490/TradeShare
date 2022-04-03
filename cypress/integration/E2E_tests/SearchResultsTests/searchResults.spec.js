@@ -12,7 +12,7 @@ describe("Can", () => {
     cy.url().should("contains", 'search/keyword=j?');
     cy.get("[data-cy=keyword]").should("contain", "Search result: j");
   });
-  it.skip("see stocks", () => {
+  it("see stocks", () => {
     cy.get("[data-cy=logo]").should("be.visible");
     cy.get("[data-cy=ticker]").should("be.visible");
     cy.get("[data-cy=stock-name]").should("be.visible");

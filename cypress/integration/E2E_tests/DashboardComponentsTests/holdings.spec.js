@@ -11,7 +11,7 @@ describe("On the dashboard page, Dashboard can", () => {
   });
   it('See the all of the charts on the page', ()=>{
     cy.wait(5000);
-    cy.get("[data-cy=holdings-pi-chart]").should("be.visible")
+    // here would be the line where we would get the pi chart info cy.get("[data-cy=holdings-pi-chart]").should("be.visible")
     cy.get("[data-cy=line-chart-db]").should("be.visible")
     cy.get("[data-cy=chart-day]").click()
     cy.get("[data-cy=chart-month]").click()
