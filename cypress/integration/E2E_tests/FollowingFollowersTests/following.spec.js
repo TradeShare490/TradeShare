@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 describe("On the following page, can", () => {
-  it("unfollow a user", () => {
+  it("unfollow and follow an user", () => {
     cy.login();
     cy.wait(2000);
     cy.fixture("url").then((jsonFile) => {
@@ -8,21 +8,46 @@ describe("On the following page, can", () => {
         `${jsonFile.HOMEPAGE}:${process.env.PORT || 8081}${jsonFile.FOLLOWING}`
       );
     });
-    cy.get("body").then(($body) => {
+    cy.get("body").then((_$body) => {
       cy.wait(3000);
-      if ($body.find("[data-cy=following]").length > 0) {
-        cy.get("[data-cy=following]").click({ multiple: true });
-        cy.get("[data-cy=follow]");
-      }
+      cy.get("[data-cy=following-ReserveForSearch]").click();
+      cy.wait(1000);
+      cy.get("[data-cy=follow-ReserveForSearch]").should("be.visible");
+      cy.get("[data-cy=follow-ReserveForSearch]").click();
+      cy.wait(2000);
+      cy.get("[data-cy=following-ReserveForSearch]").should("be.visible");
+      cy.get("[data-cy=userblock-avatar-ReserveForSearch]").click()
+      cy.wait(2000);
+      cy.get("[data-cy=profile-following-ReserveForSearch]").click();
+      cy.wait(1000);
+      cy.get("[data-cy=profile-follow-ReserveForSearch]").should("be.visible");
+      cy.get("[data-cy=profile-follow-ReserveForSearch]").click();
+      cy.wait(2000);
+      cy.get("[data-cy=profile-following-ReserveForSearch]").should("be.visible");
     });
   });
-  it("follow a user", () => {
-    cy.get("body").then(($body) => {
-      cy.wait(3000);
-      if ($body.find("[data-cy=follow]").length > 0) {
-        cy.get("[data-cy=follow]").click({ multiple: true });
-        cy.get("[data-cy=following]");
-      }
-    });
+  it("approve and reject follow request for private account", () => {
+    cy.loginCustom("zhongli","lmao1234");
+    cy.unfollowAndFolloeJoeAndLogout()
+    cy.loginCustom("ReserveForSearch","12345678");
+    cy.unfollowAndFolloeJoeAndLogout()
+    cy.login();
+    cy.wait(2000);
+    cy.get("[data-cy=sidebar-followers]").click();
+    cy.wait(2000);
+    cy.get("[data-cy=followers-follow-requests-tab]").click();
+    cy.get("[data-cy=confirm-request-zhongli]").click();
+    cy.wait(4000);
+    cy.get("[data-cy=followers-follow-requests-tab]").click();
+    cy.get("[data-cy=reject-request-ReserveForSearch]").click();
+    cy.wait(1000);
+    cy.loginCustom("ReserveForSearch","12345678");
+    cy.unfollowAndFolloeJoeAndLogout()
+    cy.login();
+    cy.wait(2000);
+    cy.get("[data-cy=sidebar-followers]").click();
+    cy.wait(2000);
+    cy.get("[data-cy=followers-follow-requests-tab]").click();
+    cy.get("[data-cy=confirm-request-ReserveForSearch]").click();
   });
 });

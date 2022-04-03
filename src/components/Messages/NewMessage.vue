@@ -128,13 +128,16 @@ export default {
       await new Promise((resolve) => setTimeout(resolve, 2000))
       this.searchQueue.pop()
       if (this.searchQueue.length === 0) {
+        /* istanbul ignore if */
         if (val?.length === 0) {
           return
         }
+        /* istanbul ignore if */
         if (this.isLoading) {
           return
         }
         this.isLoading = true
+        /* istanbul ignore catch */
         axios.get(`/userInfo/?username=${val}`).then((res) => {
           this.users = res.data.data
         }).catch((err) => {
@@ -152,6 +155,7 @@ export default {
       if (name.length > 0 && username.length > 0) {
         this.dialog = false
         const checkUsername = obj => obj.username === username
+        /* istanbul ignore else */
         if (this.$root.$refs.ChatMenu.chats.some(checkUsername)) {
           const chat = this.$root.$refs.ChatMenu.chats.find((chat) => chat.username === username)
           this.$root.$refs.ChatMenu.conversationSelected(chat.name, chat.username, chat.img, chat.id)
@@ -162,7 +166,9 @@ export default {
             senderName: this.user.firstname + ' ' + this.user.lastname,
             receiverName: name
           }).then((res) => {
+            /* istanbul ignore next */
             this.$root.$refs.ChatMenu.initialize()
+            /* istanbul ignore next */
             this.$root.$refs.ChatMenu.conversationSelected(name, username, 'https://randomuser.me/api/portraits/women/17.jpg', res.data.conversation._id)
           })
         }

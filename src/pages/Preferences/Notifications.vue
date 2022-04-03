@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
-    <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'">
+    <div
+      :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'"
+      data-cy="notif-page"
+    >
       <span class="font-weight-bold d-flex justify-start mx-1 mt-3 mb-8">
         NOTIFICATIONS
       </span>

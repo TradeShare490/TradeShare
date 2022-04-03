@@ -8,6 +8,7 @@
     <v-list-item
       :key="message"
       class="pr-0"
+      data-cy="notif-list-item"
     >
       <v-list-item-avatar class="mt-6">
         <v-img :src="avatar" />
@@ -19,7 +20,10 @@
           <span class="black--text">{{ getSubject() }}</span> <span class="messageBody ">{{ message }}</span>
         </v-list-item-subtitle>
       </v-list-item-content>
-      <v-list-item-action class="pr-1">
+      <v-list-item-action
+        class="pr-1"
+        data-cy="notif-date"
+      >
         <v-list-item-action-text> {{ getDate() }}</v-list-item-action-text>
       </v-list-item-action>
     </v-list-item>

@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container
+    fluid
+    data-cy="support-page"
+  >
     <div :class="$vuetify.breakpoint.lgAndDown ? 'mx-3' : 'mx-8'">
       <span class="font-weight-bold d-flex justify-start mx-1 mt-3 mb-8">
         SUPPORT
@@ -13,9 +16,13 @@
           <v-expansion-panel
             v-for="(item, i) in faq"
             :key="i"
+            data-cy="expansion-panel"
           >
             <v-expansion-panel-header> {{ item.title }} </v-expansion-panel-header>
-            <v-expansion-panel-content class="text-left mt-5">
+            <v-expansion-panel-content
+              class="text-left mt-5"
+              data-cy="expansion panel content"
+            >
               {{ item.content }}
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -54,6 +61,7 @@
                 flat
                 hide-details
                 disabled
+                data-cy="name-text"
               />
             </v-col>
           </v-row>
@@ -81,6 +89,7 @@
                 flat
                 hide-details
                 disabled
+                data-cy="email-text"
               />
             </v-col>
           </v-row>
@@ -108,6 +117,7 @@
                   flat
                   return-object
                   label="Select a Category"
+                  data-cy="help-select"
                 />
               </div>
             </v-col>
@@ -136,6 +146,7 @@
                 hide-details
                 auto-grow
                 rows="5"
+                data-cy="message-text"
               />
             </v-col>
           </v-row>
@@ -147,6 +158,7 @@
               filled
               color="primary"
               :ripple="false"
+              data-cy="send-btn"
               @click="send"
             >
               Send
@@ -156,6 +168,7 @@
               :timeout="timeout"
               color="primary"
               right
+              data-cy="snackbar"
             >
               {{ snackbarText }}
             </v-snackbar>
@@ -218,9 +231,11 @@ export default {
         this.fullname = this.user.firstname + ' ' + this.user.lastname
         return this.fullname
       }
+      /* istanbul ignore next */
       if (label === 'username') {
         return this.user.username
       }
+      /* istanbul ignore else */
       if (label === 'email') {
         this.email = this.user.email
         return this.email

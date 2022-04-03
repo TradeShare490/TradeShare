@@ -91,6 +91,7 @@ export default {
         tempArray.push({ name: (el.firstname + ' ' + el.lastname).trim(), username: el.username, id: el.id })
       })
       this.users = tempArray
+      console.log(this.users)
     },
     redirect (d) {
       this.$router.push('/dashboard/' + d.item.id)

@@ -11,8 +11,8 @@ export const useDashboardMixin = {
     }
   },
   methods: {
-    handleHoldingPieChartData () {
-      if (this.stocks && this.stocks.length !== 0) {
+    handleHoldingPieChartData (_id) {
+      if (this.account && this.stocks && this.stocks.length !== 0) {
         const sumCash = Number(this.account.cash)
         let sumEquity = 0
         let sumOption = 0

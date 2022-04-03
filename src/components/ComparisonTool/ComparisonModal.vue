@@ -4,6 +4,7 @@
       v-model="dialog"
       width="1300"
       persistent
+      data-cy="comp-modal-db"
     >
       <template #activator="{ on, attrs }">
         <v-btn
@@ -326,7 +327,7 @@ export default {
     }
   },
   methods: {
-
+    /* istanbul ignore next */
     handleInput () {
       const today = this.getTodaysDate
       let start = ''

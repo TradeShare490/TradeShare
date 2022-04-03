@@ -36,6 +36,7 @@
                   to="/following"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
+                  data-cy="sidebar-followings"
                 >
                   {{ followingNum + " Followings" }}
                 </router-link>
@@ -45,6 +46,7 @@
                   to="/followers"
                   class="black--text font-weight-bold"
                   style="text-decoration: none; font-size: 12px"
+                  data-cy="sidebar-followers"
                 >
                   {{ followerNum + " Followers" }}
                 </router-link>
@@ -74,7 +76,7 @@
                 {{ item.icon }}
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content>
+            <v-list-item-content :data-cy="`sidebar-${item.title}`">
               <v-list-item-title class="text-left">
                 {{ item.title }}
               </v-list-item-title>

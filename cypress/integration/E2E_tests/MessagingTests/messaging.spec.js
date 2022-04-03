@@ -31,4 +31,13 @@ describe("On the messaging page, can", () => {
       expect(str).to.equal("You clicked the icon!");
     });
   });
+  it("can send a message", () => {
+    cy.get("[data-cy=send-message]").type("hello{enter}")
+  })
+  it("can create a new conversation",()=>{
+    cy.get("[data-cy=new-message]").click()
+    cy.get("[data-cy=chat-user]").type("zhongli{enter}")
+    cy.wait(5000)
+    cy.get("[data-cy=list-item]").contains("zhongli").click()
+  })
 });
