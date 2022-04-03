@@ -76,6 +76,7 @@
                 <v-btn
                   icon
                   v-bind="attrs"
+                  data-cy="notif-bell"
                   v-on="on"
                 >
                   <v-icon>mdi-bell</v-icon>

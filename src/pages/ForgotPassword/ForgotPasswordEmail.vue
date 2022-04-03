@@ -41,6 +41,7 @@
 </template>
 
 <script>
+/* istanbul ignore file */
 import axiosInstance from '../../axios/axios.v1'
 export default {
   name: 'EmailSender',

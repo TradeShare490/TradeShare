@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import UserService from '../services/User.service'
 export const useConnectAppMixin = {
   methods: {

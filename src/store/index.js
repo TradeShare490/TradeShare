@@ -58,6 +58,7 @@ export default new Vuex.Store({
     loggedIn (state) {
       return !!state.user
     },
+    /* istanbul ignore next */
     loginActivity () {
       return [
         {
@@ -76,6 +77,7 @@ export default new Vuex.Store({
         }
       ]
     },
+    /* istanbul ignore next */
     blockedUsers () {
       return [
         'userspam123',
@@ -83,6 +85,7 @@ export default new Vuex.Store({
         'userspam123456789'
       ]
     },
+    /* istanbul ignore next */
     favoriteUsers () {
       return [
         'ashcoin63',
@@ -90,6 +93,7 @@ export default new Vuex.Store({
         'timthetatman'
       ]
     },
+    /* istanbul ignore next */
     followersFollowing () {
       return [
         'Mary Winchester',

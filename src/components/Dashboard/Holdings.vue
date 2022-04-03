@@ -115,6 +115,7 @@ export default {
   props: {
     holdingsData: {
       type: Object,
+      /* istanbul ignore next */
       default () {
         return { sumCash: 0, sumEquity: 0, numEquity: 0, sumOption: 0, numOption: 0 }
       }
@@ -128,12 +129,14 @@ export default {
     }
   },
   computed: {
+    /* istanbul ignore next */
     equities () {
       return this.holdingsData.numEquity
     },
     cash () {
       return Math.floor(this.holdingsData.sumCash)
     },
+    /* istanbul ignore next */
     cashDecimal () {
       return (parseFloat(this.holdingsData.sumCash - this.cash).toFixed(2)).toString().slice(-3)
     },

@@ -3,6 +3,7 @@
 </template>
 
 <script>
+/* istanbul ignore file */
 import Confirm from '../../components/Brokerage/Confirm'
 export default {
   name: 'ConfirmVue',
