@@ -153,12 +153,10 @@ export default {
   /* istanbul ignore next */
   beforeMount () {
     this.getHistory('intraday')
-    if (this.dataCollection.length !== 0) {
-      this.getMonthHistory()
-      this.getMyMonthHistory()
-      for (let i = 0; i < this.userList.length; i++) {
-        this.users.push({ name: this.userList[i], color: this.colors[i] })
-      }
+    this.getMonthHistory()
+    this.getMyMonthHistory()
+    for (let i = 0; i < this.userList.length; i++) {
+      this.users.push({ name: this.userList[i], color: this.colors[i] })
     }
   },
   methods: {
