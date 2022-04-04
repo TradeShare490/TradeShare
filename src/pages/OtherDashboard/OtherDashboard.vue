@@ -53,7 +53,7 @@
             >
               <v-card min-width="350">
                 <Positions
-                  :stocks-data="ostocks"
+                  :stocks-data="stocks"
                   data-cy="other-dashboard-positions"
                 />
               </v-card>
