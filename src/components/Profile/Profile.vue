@@ -95,7 +95,6 @@
               :ripple="false"
               class="caption mr-1"
               :data-cy="`profile-sent-request-${otheruser.username}`"
-              @click="handleUnfollow"
             >
               Sent Request
             </v-btn>
