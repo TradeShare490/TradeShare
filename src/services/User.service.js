@@ -1,12 +1,10 @@
 import axios from '../axios/axios.v1'
-import store from '../store/index.js'
 
 class UserService {
   /* istanbul ignore next */
   async signup (credentials) {
     try {
       const { data } = await axios.post('/user', credentials)
-      // should be a good response here, but double check for sure
       return { success: data.success }
     } catch (err) {
       console.log(err)
@@ -16,7 +14,6 @@ class UserService {
 
   /* istanbul ignore next */
   async getPositions (userId) {
-    console.log('() getPositions ' + userId)
     if (userId === undefined) return null
     let userPortfolioData = []
     await axios
@@ -81,7 +78,7 @@ class UserService {
 
   /* istanbul ignore next */
   async isFollowed (targetID) {
-    return (store.state.user.following).includes(targetID)
+    return (JSON.parse(localStorage.getItem('user')).following).includes(targetID)
   }
 
   async addFollowRequest (credentials) {

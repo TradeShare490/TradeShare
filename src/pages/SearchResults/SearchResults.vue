@@ -55,6 +55,7 @@
               :username="following.username"
               :image="following.image"
               :request="false"
+              :is-private="following.isPrivate"
             />
           </div>
         </v-card>
@@ -78,6 +79,7 @@
               :username="user.username"
               :image="user.image"
               :request="false"
+              :is-private="user.isPrivate"
             />
           </div>
         </v-card>
@@ -115,15 +117,15 @@ export default {
     async pullPeople () {
       try {
         const response = await axiosInstance.get(`/userInfo/?searchQuery=${this.keyword}`)
-        const list = response.data.data
-        for (let index = 0; index < list.length; index++) {
-          const isFollowing = await UserService.isFollowed((list[index].userId))
+        for (const list of response.data.data) {
+          const isFollowing = await UserService.isFollowed((list.userId))
           const userInfo = {
-            id: list[index].userId,
+            id: list.userId,
             currentlyfollowing: isFollowing,
-            firstname: list[index].firstname,
-            lastname: list[index].lastname,
-            username: list[index].username
+            firstname: list.firstname,
+            lastname: list.lastname,
+            username: list.username,
+            isPrivate: list.isPrivate
           }
           if (isFollowing) {
             this.followings.push(userInfo)
